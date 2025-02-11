@@ -1,0 +1,108 @@
+server:
+  port: 8080
+default-db:
+  ip: 192.168.10.136
+  username: eshop
+  password: eshop123
+  type: com.atomikos.jdbc.AtomikosDataSourceBean
+spring:
+  datasource:
+    dynamic:
+      atomikos:
+        min-pool-size: 5
+        max-pool-size: 10
+        borrow-connection-timeout: 30
+        reap-timeout: 0
+        max-idle-time: 60
+        test-query: SELECT 1
+        maintenance-interval: 60
+        default-isolation-level: -1
+        max-lifetime: 60
+      primary: eshop_config #设置默认的数据源或者数据源组,默认值即为master
+      strict: false #严格匹配数据源,默认false. true未匹配到指定数据源时抛异常,false使用默认数据源
+      grace-destroy: false #是否优雅关闭数据源，默认为false，设置为true时，关闭数据源时如果数据源中还存在活跃连接，至多等待10s后强制关闭
+      datasource:
+        eshop_config:
+          url: jdbc:mysql://${default-db.ip}:3306/eshop_config?serverTimezone=Asia/Shanghai&characterEncoding=UTF-8&useSSL=false
+          username: ${default-db.username}
+          password: ${default-db.password}
+          driver-class-name: com.mysql.cj.jdbc.MysqlXADataSource # 3.2.0开始支持SPI可省略此配置
+          type: ${default-db.type}
+        eshop_depot:
+          url: jdbc:mysql://${default-db.ip}:3306/eshop_depot?serverTimezone=Asia/Shanghai&characterEncoding=UTF-8&useSSL=false
+          username: ${default-db.username}
+          password: ${default-db.password}
+          driver-class-name: com.mysql.cj.jdbc.MysqlXADataSource
+          type: ${default-db.type}
+        eshop_file:
+          url: jdbc:mysql://${default-db.ip}:3306/eshop_file?serverTimezone=Asia/Shanghai&characterEncoding=UTF-8&useSSL=false
+          username: ${default-db.username}
+          password: ${default-db.password}
+          driver-class-name: com.mysql.cj.jdbc.MysqlXADataSource
+          type: ${default-db.type}
+        eshop_finance:
+          url: jdbc:mysql://${default-db.ip}:3306/eshop_finance?serverTimezone=Asia/Shanghai&characterEncoding=UTF-8&useSSL=false
+          username: ${default-db.username}
+          password: ${default-db.password}
+          driver-class-name: com.mysql.cj.jdbc.MysqlXADataSource
+          type: ${default-db.type}
+        eshop_log:
+          url: jdbc:mysql://${default-db.ip}:3306/eshop_log?serverTimezone=Asia/Shanghai&characterEncoding=UTF-8&useSSL=false
+          username: ${default-db.username}
+          password: ${default-db.password}
+          driver-class-name: com.mysql.cj.jdbc.MysqlXADataSource
+          type: ${default-db.type}
+        eshop_logistics:
+          url: jdbc:mysql://${default-db.ip}:3306/eshop_logistics?serverTimezone=Asia/Shanghai&characterEncoding=UTF-8&useSSL=false
+          username: ${default-db.username}
+          password: ${default-db.password}
+          driver-class-name: com.mysql.cj.jdbc.MysqlXADataSource # 3.2.0开始支持SPI可省略此配置
+          type: ${default-db.type}
+        eshop_order:
+          url: jdbc:mysql://${default-db.ip}:3306/eshop_order?serverTimezone=Asia/Shanghai&characterEncoding=UTF-8&useSSL=false
+          username: ${default-db.username}
+          password: ${default-db.password}
+          driver-class-name: com.mysql.cj.jdbc.MysqlXADataSource
+          type: ${default-db.type}
+        eshop_product:
+          url: jdbc:mysql://${default-db.ip}:3306/eshop_product?serverTimezone=Asia/Shanghai&characterEncoding=UTF-8&useSSL=false
+          username: ${default-db.username}
+          password: ${default-db.password}
+          driver-class-name: com.mysql.cj.jdbc.MysqlXADataSource
+          type: ${default-db.type}
+        eshop_supply:
+          url: jdbc:mysql://${default-db.ip}:3306/eshop_supply?serverTimezone=Asia/Shanghai&characterEncoding=UTF-8&useSSL=false
+          username: ${default-db.username}
+          password: ${default-db.password}
+          driver-class-name: com.mysql.cj.jdbc.MysqlXADataSource
+          type: ${default-db.type}
+        eshop_sds:
+          url: jdbc:mysql://${default-db.ip}:3306/eshop_sds?serverTimezone=Asia/Shanghai&characterEncoding=UTF-8&useSSL=false
+          username: ${default-db.username}
+          password: ${default-db.password}
+          driver-class-name: com.mysql.cj.jdbc.MysqlXADataSource
+          type: ${default-db.type}
+        eshop_collect:
+          url: jdbc:mysql://${default-db.ip}:3306/eshop_collect?serverTimezone=Asia/Shanghai&characterEncoding=UTF-8&useSSL=false
+          username: ${default-db.username}
+          password: ${default-db.password}
+          driver-class-name: com.mysql.cj.jdbc.MysqlXADataSource
+          type: ${default-db.type}
+        eshop_ai:
+          url: jdbc:mysql://${default-db.ip}:3306/eshop_ai?serverTimezone=Asia/Shanghai&characterEncoding=UTF-8&useSSL=false
+          username: ${default-db.username}
+          password: ${default-db.password}
+          driver-class-name: com.mysql.cj.jdbc.MysqlXADataSource
+          type: ${default-db.type}
+        eshop_customer:
+          url: jdbc:mysql://${default-db.ip}:3306/eshop_customer?serverTimezone=Asia/Shanghai&characterEncoding=UTF-8&useSSL=false
+          username: ${default-db.username}
+          password: ${default-db.password}
+          driver-class-name: com.mysql.cj.jdbc.MysqlXADataSource
+          type: ${default-db.type}
+        eshop_kpi:
+          url: jdbc:mysql://${default-db.ip}:3306/eshop_kpi?serverTimezone=Asia/Shanghai&characterEncoding=UTF-8&useSSL=false
+          username: ${default-db.username}
+          password: ${default-db.password}
+          driver-class-name: com.mysql.cj.jdbc.MysqlXADataSource
+          type: ${default-db.type}
