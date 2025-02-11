@@ -5,15 +5,21 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
 /**
  * <p>
  * 岗位
  * </p>
  *
- * @author ren_chun_hui
+ * @author config
  * @since 2025-02-11
  */
+@Getter
+@Setter
+@ToString
 @TableName("tb_job")
 public class TbJob implements Serializable {
 
@@ -59,82 +65,4 @@ public class TbJob implements Serializable {
      * 更新时间
      */
     private LocalDateTime updateTime;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Byte getJobStatus() {
-        return jobStatus;
-    }
-
-    public void setJobStatus(Byte jobStatus) {
-        this.jobStatus = jobStatus;
-    }
-
-    public Integer getJobSort() {
-        return jobSort;
-    }
-
-    public void setJobSort(Integer jobSort) {
-        this.jobSort = jobSort;
-    }
-
-    public Long getCreateId() {
-        return createId;
-    }
-
-    public void setCreateId(Long createId) {
-        this.createId = createId;
-    }
-
-    public Long getUpdateId() {
-        return updateId;
-    }
-
-    public void setUpdateId(Long updateId) {
-        this.updateId = updateId;
-    }
-
-    public LocalDateTime getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(LocalDateTime createTime) {
-        this.createTime = createTime;
-    }
-
-    public LocalDateTime getUpdateTime() {
-        return updateTime;
-    }
-
-    public void setUpdateTime(LocalDateTime updateTime) {
-        this.updateTime = updateTime;
-    }
-
-    @Override
-    public String toString() {
-        return "TbJob{" +
-        ", id = " + id +
-        ", name = " + name +
-        ", jobStatus = " + jobStatus +
-        ", jobSort = " + jobSort +
-        ", createId = " + createId +
-        ", updateId = " + updateId +
-        ", createTime = " + createTime +
-        ", updateTime = " + updateTime +
-        "}";
-    }
 }

@@ -8,7 +8,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * 店铺主账户 服务类
  * </p>
  *
- * @author ren_chun_hui
+ * @author config
  * @since 2025-02-11
  */
 public interface ITbShopMainAccountService extends IService<TbShopMainAccount> {

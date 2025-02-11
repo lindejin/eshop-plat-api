@@ -4,15 +4,21 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
 /**
  * <p>
  * 店铺发货仓库
  * </p>
  *
- * @author ren_chun_hui
+ * @author config
  * @since 2025-02-11
  */
+@Getter
+@Setter
+@ToString
 @TableName("tb_shop_depot")
 public class TbShopDepot implements Serializable {
 
@@ -30,37 +36,4 @@ public class TbShopDepot implements Serializable {
      * 仓库_id
      */
     private Integer depotId;
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public Integer getShopId() {
-        return shopId;
-    }
-
-    public void setShopId(Integer shopId) {
-        this.shopId = shopId;
-    }
-
-    public Integer getDepotId() {
-        return depotId;
-    }
-
-    public void setDepotId(Integer depotId) {
-        this.depotId = depotId;
-    }
-
-    @Override
-    public String toString() {
-        return "TbShopDepot{" +
-        ", id = " + id +
-        ", shopId = " + shopId +
-        ", depotId = " + depotId +
-        "}";
-    }
 }

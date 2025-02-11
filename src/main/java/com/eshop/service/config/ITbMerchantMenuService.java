@@ -8,7 +8,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * 商户菜单信息 服务类
  * </p>
  *
- * @author ren_chun_hui
+ * @author config
  * @since 2025-02-11
  */
 public interface ITbMerchantMenuService extends IService<TbMerchantMenu> {

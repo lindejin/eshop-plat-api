@@ -8,7 +8,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * 店铺与用户(中间表) Mapper 接口
  * </p>
  *
- * @author ren_chun_hui
+ * @author config
  * @since 2025-02-11
  */
 public interface TbShopEmployeeMapper extends BaseMapper<TbShopEmployee> {

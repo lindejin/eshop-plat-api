@@ -5,15 +5,21 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
 /**
  * <p>
  * 数据词典_值
  * </p>
  *
- * @author ren_chun_hui
+ * @author config
  * @since 2025-02-11
  */
+@Getter
+@Setter
+@ToString
 @TableName("tb_data_dictionary_val")
 public class TbDataDictionaryVal implements Serializable {
 
@@ -51,73 +57,4 @@ public class TbDataDictionaryVal implements Serializable {
      * 是否已被删除(1: 是, 2: 否)
      */
     private Byte isDelete;
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public Integer getDictionaryId() {
-        return dictionaryId;
-    }
-
-    public void setDictionaryId(Integer dictionaryId) {
-        this.dictionaryId = dictionaryId;
-    }
-
-    public String getDictionaryVal() {
-        return dictionaryVal;
-    }
-
-    public void setDictionaryVal(String dictionaryVal) {
-        this.dictionaryVal = dictionaryVal;
-    }
-
-    public String getRemark() {
-        return remark;
-    }
-
-    public void setRemark(String remark) {
-        this.remark = remark;
-    }
-
-    public Integer getCreateId() {
-        return createId;
-    }
-
-    public void setCreateId(Integer createId) {
-        this.createId = createId;
-    }
-
-    public LocalDateTime getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(LocalDateTime createTime) {
-        this.createTime = createTime;
-    }
-
-    public Byte getIsDelete() {
-        return isDelete;
-    }
-
-    public void setIsDelete(Byte isDelete) {
-        this.isDelete = isDelete;
-    }
-
-    @Override
-    public String toString() {
-        return "TbDataDictionaryVal{" +
-        ", id = " + id +
-        ", dictionaryId = " + dictionaryId +
-        ", dictionaryVal = " + dictionaryVal +
-        ", remark = " + remark +
-        ", createId = " + createId +
-        ", createTime = " + createTime +
-        ", isDelete = " + isDelete +
-        "}";
-    }
 }

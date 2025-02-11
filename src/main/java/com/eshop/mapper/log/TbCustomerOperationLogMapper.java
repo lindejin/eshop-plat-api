@@ -8,7 +8,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * 客户操作日志表 Mapper 接口
  * </p>
  *
- * @author ren_chun_hui
+ * @author log
  * @since 2025-02-11
  */
 public interface TbCustomerOperationLogMapper extends BaseMapper<TbCustomerOperationLog> {

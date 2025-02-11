@@ -8,7 +8,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * 店铺发货仓库 服务类
  * </p>
  *
- * @author ren_chun_hui
+ * @author config
  * @since 2025-02-11
  */
 public interface ITbShopDepotService extends IService<TbShopDepot> {

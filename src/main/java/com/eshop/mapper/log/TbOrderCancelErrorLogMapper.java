@@ -8,7 +8,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * 取消订单操作错误日志 Mapper 接口
  * </p>
  *
- * @author ren_chun_hui
+ * @author log
  * @since 2025-02-11
  */
 public interface TbOrderCancelErrorLogMapper extends BaseMapper<TbOrderCancelErrorLog> {

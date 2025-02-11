@@ -44,36 +44,12 @@ public class AtomikosDataSourceCreator implements DataSourceCreator {
     public DataSource createDataSource(DataSourceProperty dataSourceProperty) {
         AtomikosConfig config = MERGE_CREATOR.create(atomikosConfig, dataSourceProperty.getAtomikos());
 
-
-//        AtomikosDataSourceBean xaDataSource = new AtomikosDataSourceBean();
-//
-//        xaDataSource.setXaDataSourceClassName(dataSourceProperty.getDriverClassName());
-//
-//        Properties xaProperties = new Properties();
-//        xaProperties.setProperty("url", dataSourceProperty.getUrl());
-//        xaProperties.setProperty("user", dataSourceProperty.getUsername());
-//        xaProperties.setProperty("password", dataSourceProperty.getPassword());
-//        xaDataSource.setXaProperties(xaProperties);
-//
-//        xaDataSource.setUniqueResourceName(dataSourceProperty.getPoolName());
-//        xaDataSource.setMinPoolSize(config.getMinPoolSize());
-//        xaDataSource.setMaxPoolSize(config.getMaxPoolSize());
-//        xaDataSource.setBorrowConnectionTimeout(config.getBorrowConnectionTimeout());
-//        xaDataSource.setReapTimeout(config.getReapTimeout());
-//        xaDataSource.setMaxIdleTime(config.getMaxIdleTime());
-//        xaDataSource.setTestQuery(config.getTestQuery());
-//        xaDataSource.setMaintenanceInterval(config.getMaintenanceInterval());
-//        xaDataSource.setDefaultIsolationLevel(config.getDefaultIsolationLevel());
-//        xaDataSource.setMaxLifetime(config.getMaxLifetime());
-//        return xaDataSource;
-
         MysqlXADataSource mysqlXADataSource = createMysqlXADataSource(dataSourceProperty);
         AtomikosDataSourceBean sourceBean = new AtomikosDataSourceBean();
         // 包装数据源在 P6Spy 中
         P6DataSource p6DataSource = new P6DataSource(mysqlXADataSource);
 
         sourceBean.setXaDataSource(p6DataSource);
-//        sourceBean.setXaDataSource(mysqlXADataSource);
         // 必须为数据源指定唯一标识
         sourceBean.setMinPoolSize(5);
         sourceBean.setMaxPoolSize(20);

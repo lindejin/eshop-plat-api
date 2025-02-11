@@ -4,15 +4,21 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
 /**
  * <p>
  * 角色权限表(中间表)
  * </p>
  *
- * @author ren_chun_hui
+ * @author config
  * @since 2025-02-11
  */
+@Getter
+@Setter
+@ToString
 @TableName("tb_role_detail")
 public class TbRoleDetail implements Serializable {
 
@@ -30,37 +36,4 @@ public class TbRoleDetail implements Serializable {
      * 菜单编号
      */
     private Integer menuid;
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public Integer getRoleid() {
-        return roleid;
-    }
-
-    public void setRoleid(Integer roleid) {
-        this.roleid = roleid;
-    }
-
-    public Integer getMenuid() {
-        return menuid;
-    }
-
-    public void setMenuid(Integer menuid) {
-        this.menuid = menuid;
-    }
-
-    @Override
-    public String toString() {
-        return "TbRoleDetail{" +
-        ", id = " + id +
-        ", roleid = " + roleid +
-        ", menuid = " + menuid +
-        "}";
-    }
 }

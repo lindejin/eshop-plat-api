@@ -5,15 +5,21 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
 /**
  * <p>
  * 角色表
  * </p>
  *
- * @author ren_chun_hui
+ * @author config
  * @since 2025-02-11
  */
+@Getter
+@Setter
+@ToString
 @TableName("tb_role")
 public class TbRole implements Serializable {
 
@@ -58,82 +64,4 @@ public class TbRole implements Serializable {
      * 最后一次操作员
      */
     private String oper;
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public Integer getMerchantId() {
-        return merchantId;
-    }
-
-    public void setMerchantId(Integer merchantId) {
-        this.merchantId = merchantId;
-    }
-
-    public String getRoleName() {
-        return roleName;
-    }
-
-    public void setRoleName(String roleName) {
-        this.roleName = roleName;
-    }
-
-    public Byte getStatus() {
-        return status;
-    }
-
-    public void setStatus(Byte status) {
-        this.status = status;
-    }
-
-    public LocalDateTime getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(LocalDateTime createTime) {
-        this.createTime = createTime;
-    }
-
-    public String getCreateOper() {
-        return createOper;
-    }
-
-    public void setCreateOper(String createOper) {
-        this.createOper = createOper;
-    }
-
-    public LocalDateTime getOperTime() {
-        return operTime;
-    }
-
-    public void setOperTime(LocalDateTime operTime) {
-        this.operTime = operTime;
-    }
-
-    public String getOper() {
-        return oper;
-    }
-
-    public void setOper(String oper) {
-        this.oper = oper;
-    }
-
-    @Override
-    public String toString() {
-        return "TbRole{" +
-        ", id = " + id +
-        ", merchantId = " + merchantId +
-        ", roleName = " + roleName +
-        ", status = " + status +
-        ", createTime = " + createTime +
-        ", createOper = " + createOper +
-        ", operTime = " + operTime +
-        ", oper = " + oper +
-        "}";
-    }
 }

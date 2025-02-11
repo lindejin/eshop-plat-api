@@ -16,6 +16,9 @@ public class P6SPYConfig implements MessageFormattingStrategy {
 
     @Override
     public String formatMessage(int connectionId, String now, long elapsed, String category, String prepared, String sql, String url) {
+        if (StringUtils.isBlank(url)) {
+            return "";
+        }
         StringBuffer buf = new StringBuffer();
         buf.append("执行时间：").append(now).append("\n");
         buf.append("消耗时间:").append(elapsed).append(" ms").append("\n");

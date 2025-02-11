@@ -8,7 +8,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * 数据词典_值 服务类
  * </p>
  *
- * @author ren_chun_hui
+ * @author config
  * @since 2025-02-11
  */
 public interface ITbDataDictionaryValService extends IService<TbDataDictionaryVal> {

@@ -7,7 +7,9 @@ import com.baomidou.mybatisplus.generator.engine.BeetlTemplateEngine;
 import com.baomidou.mybatisplus.generator.engine.FreemarkerTemplateEngine;
 
 import java.sql.Types;
+import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
 
 public class CodeGenerator {
 
@@ -15,7 +17,15 @@ public class CodeGenerator {
     public static String pathXml = "C:\\zit\\workspacetest\\eshop-plat-api\\src\\main\\resources\\mapper";
     public static String  packagePath = "com.eshop";
     public static void main(String[] args) {
-        create("log");
+//        List<String> list = Arrays.asList("ai", "collect", "config", "customer", "depot", "file", "finance", "gpt", "job", "kpi", "log", "logistics", "order", "product", "sds", "supply");
+        List<String> list = Arrays.asList("collect", "config", "customer", "depot", "file", "finance", "job", "kpi", "log", "logistics", "order", "product", "sds", "supply");
+
+//        List<String> list = Arrays.asList("sds");
+
+        for (String db : list) {
+            create(db);
+        }
+
     }
 
     public static void create(String db) {
@@ -24,7 +34,8 @@ public class CodeGenerator {
         String password = "eshop123";
         FastAutoGenerator.create(url, username, password)
                 .globalConfig(builder -> {
-                    builder.author("ren_chun_hui") // 设置作者
+                    builder.author(db) // 设置作者
+                            .disableOpenDir()
 //                            .enableSwagger() // 开启 swagger 模式
                             .outputDir(path); // 指定输出目录
                 })
@@ -48,10 +59,17 @@ public class CodeGenerator {
                                 .serviceImpl("service."+db+".impl")
                                 .pathInfo(Collections.singletonMap(OutputFile.xml, pathXml+"\\"+db)) // 设置mapperXml生成路径
                 )
-//                .strategyConfig(builder ->
-//                        builder.addInclude("t_simple") // 设置需要生成的表名
-//                              //  .addTablePrefix("t_", "c_") // 设置过滤表前缀
-//                )
+                .strategyConfig(builder ->
+                        builder
+                                .entityBuilder()
+                                .enableLombok() // 启用 Lombok
+                                .enableFileOverride() // 允许覆盖已生成文件
+                                .controllerBuilder().enableFileOverride() // 允许覆盖已生成文件
+                                .mapperBuilder().enableFileOverride() // 允许覆盖已生成文件
+                                .serviceBuilder().enableFileOverride() // 允许覆盖已生成文件
+//                                .addInclude("t_simple") // 设置需要生成的表名
+                              //  .addTablePrefix("t_", "c_") // 设置过滤表前缀
+                )
                 .templateEngine(new BeetlTemplateEngine()) // 使用Freemarker引擎模板，默认的是Velocity引擎模板
                 .execute();
     }

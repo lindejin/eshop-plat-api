@@ -5,15 +5,21 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
 /**
  * <p>
  * 店铺主账户
  * </p>
  *
- * @author ren_chun_hui
+ * @author config
  * @since 2025-02-11
  */
+@Getter
+@Setter
+@ToString
 @TableName("tb_shop_main_account")
 public class TbShopMainAccount implements Serializable {
 
@@ -111,181 +117,4 @@ public class TbShopMainAccount implements Serializable {
      * 删除时间
      */
     private LocalDateTime deleteTime;
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public Integer getAppId() {
-        return appId;
-    }
-
-    public void setAppId(Integer appId) {
-        this.appId = appId;
-    }
-
-    public Integer getMerchantId() {
-        return merchantId;
-    }
-
-    public void setMerchantId(Integer merchantId) {
-        this.merchantId = merchantId;
-    }
-
-    public String getPlatformCode() {
-        return platformCode;
-    }
-
-    public void setPlatformCode(String platformCode) {
-        this.platformCode = platformCode;
-    }
-
-    public String getMainAccountId() {
-        return mainAccountId;
-    }
-
-    public void setMainAccountId(String mainAccountId) {
-        this.mainAccountId = mainAccountId;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Byte getTokenFlag() {
-        return tokenFlag;
-    }
-
-    public void setTokenFlag(Byte tokenFlag) {
-        this.tokenFlag = tokenFlag;
-    }
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public LocalDateTime getExpiresTime() {
-        return expiresTime;
-    }
-
-    public void setExpiresTime(LocalDateTime expiresTime) {
-        this.expiresTime = expiresTime;
-    }
-
-    public String getParamStaticJson() {
-        return paramStaticJson;
-    }
-
-    public void setParamStaticJson(String paramStaticJson) {
-        this.paramStaticJson = paramStaticJson;
-    }
-
-    public String getParamDynamicJson() {
-        return paramDynamicJson;
-    }
-
-    public void setParamDynamicJson(String paramDynamicJson) {
-        this.paramDynamicJson = paramDynamicJson;
-    }
-
-    public Integer getCreateOperId() {
-        return createOperId;
-    }
-
-    public void setCreateOperId(Integer createOperId) {
-        this.createOperId = createOperId;
-    }
-
-    public LocalDateTime getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(LocalDateTime createTime) {
-        this.createTime = createTime;
-    }
-
-    public Integer getUpdateOperId() {
-        return updateOperId;
-    }
-
-    public void setUpdateOperId(Integer updateOperId) {
-        this.updateOperId = updateOperId;
-    }
-
-    public LocalDateTime getUpdateTime() {
-        return updateTime;
-    }
-
-    public void setUpdateTime(LocalDateTime updateTime) {
-        this.updateTime = updateTime;
-    }
-
-    public Byte getIsDelete() {
-        return isDelete;
-    }
-
-    public void setIsDelete(Byte isDelete) {
-        this.isDelete = isDelete;
-    }
-
-    public Long getDeleteUserId() {
-        return deleteUserId;
-    }
-
-    public void setDeleteUserId(Long deleteUserId) {
-        this.deleteUserId = deleteUserId;
-    }
-
-    public LocalDateTime getDeleteTime() {
-        return deleteTime;
-    }
-
-    public void setDeleteTime(LocalDateTime deleteTime) {
-        this.deleteTime = deleteTime;
-    }
-
-    @Override
-    public String toString() {
-        return "TbShopMainAccount{" +
-        ", id = " + id +
-        ", appId = " + appId +
-        ", merchantId = " + merchantId +
-        ", platformCode = " + platformCode +
-        ", mainAccountId = " + mainAccountId +
-        ", name = " + name +
-        ", tokenFlag = " + tokenFlag +
-        ", userName = " + userName +
-        ", password = " + password +
-        ", expiresTime = " + expiresTime +
-        ", paramStaticJson = " + paramStaticJson +
-        ", paramDynamicJson = " + paramDynamicJson +
-        ", createOperId = " + createOperId +
-        ", createTime = " + createTime +
-        ", updateOperId = " + updateOperId +
-        ", updateTime = " + updateTime +
-        ", isDelete = " + isDelete +
-        ", deleteUserId = " + deleteUserId +
-        ", deleteTime = " + deleteTime +
-        "}";
-    }
 }

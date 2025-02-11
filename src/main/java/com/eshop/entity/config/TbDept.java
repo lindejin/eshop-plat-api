@@ -5,15 +5,21 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
 /**
  * <p>
  * 部门
  * </p>
  *
- * @author ren_chun_hui
+ * @author config
  * @since 2025-02-11
  */
+@Getter
+@Setter
+@ToString
 @TableName("tb_dept")
 public class TbDept implements Serializable {
 
@@ -74,109 +80,4 @@ public class TbDept implements Serializable {
      * 更新时间
      */
     private LocalDateTime updateTime;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Long getPid() {
-        return pid;
-    }
-
-    public void setPid(Long pid) {
-        this.pid = pid;
-    }
-
-    public Integer getSubCount() {
-        return subCount;
-    }
-
-    public void setSubCount(Integer subCount) {
-        this.subCount = subCount;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Integer getDeptSort() {
-        return deptSort;
-    }
-
-    public void setDeptSort(Integer deptSort) {
-        this.deptSort = deptSort;
-    }
-
-    public Byte getDeptStatus() {
-        return deptStatus;
-    }
-
-    public void setDeptStatus(Byte deptStatus) {
-        this.deptStatus = deptStatus;
-    }
-
-    public Long getCompanyId() {
-        return companyId;
-    }
-
-    public void setCompanyId(Long companyId) {
-        this.companyId = companyId;
-    }
-
-    public Long getCreateId() {
-        return createId;
-    }
-
-    public void setCreateId(Long createId) {
-        this.createId = createId;
-    }
-
-    public Long getUpdateId() {
-        return updateId;
-    }
-
-    public void setUpdateId(Long updateId) {
-        this.updateId = updateId;
-    }
-
-    public LocalDateTime getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(LocalDateTime createTime) {
-        this.createTime = createTime;
-    }
-
-    public LocalDateTime getUpdateTime() {
-        return updateTime;
-    }
-
-    public void setUpdateTime(LocalDateTime updateTime) {
-        this.updateTime = updateTime;
-    }
-
-    @Override
-    public String toString() {
-        return "TbDept{" +
-        ", id = " + id +
-        ", pid = " + pid +
-        ", subCount = " + subCount +
-        ", name = " + name +
-        ", deptSort = " + deptSort +
-        ", deptStatus = " + deptStatus +
-        ", companyId = " + companyId +
-        ", createId = " + createId +
-        ", updateId = " + updateId +
-        ", createTime = " + createTime +
-        ", updateTime = " + updateTime +
-        "}";
-    }
 }

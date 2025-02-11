@@ -5,15 +5,18 @@ import com.eshop.mapper.log.TbOrderErrLogMapper;
 import com.eshop.service.log.ITbOrderErrLogService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
+import com.baomidou.dynamic.datasource.annotation.DS;
 
 /**
  * <p>
  * 订单错误日志 服务实现类
  * </p>
  *
- * @author ren_chun_hui
+ * @author log
+ * @since 2025-02-11
  * @since 2025-02-11
  */
+@DS("eshop_log")
 @Service
 public class TbOrderErrLogServiceImpl extends ServiceImpl<TbOrderErrLogMapper, TbOrderErrLog> implements ITbOrderErrLogService {
 

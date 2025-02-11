@@ -8,6 +8,7 @@ default-db:
 spring:
   datasource:
     dynamic:
+      p6spy: true
       atomikos:
         min-pool-size: 5
         max-pool-size: 10
@@ -26,7 +27,7 @@ spring:
           url: jdbc:mysql://${default-db.ip}:3306/eshop_config?serverTimezone=Asia/Shanghai&characterEncoding=UTF-8&useSSL=false
           username: ${default-db.username}
           password: ${default-db.password}
-          driver-class-name: com.mysql.cj.jdbc.MysqlXADataSource # 3.2.0开始支持SPI可省略此配置
+          driver-class-name: com.mysql.cj.jdbc.MysqlXADataSource
           type: ${default-db.type}
         eshop_depot:
           url: jdbc:mysql://${default-db.ip}:3306/eshop_depot?serverTimezone=Asia/Shanghai&characterEncoding=UTF-8&useSSL=false

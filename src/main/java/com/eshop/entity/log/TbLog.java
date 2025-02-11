@@ -5,15 +5,21 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
 /**
  * <p>
  * 
  * </p>
  *
- * @author ren_chun_hui
+ * @author log
  * @since 2025-02-11
  */
+@Getter
+@Setter
+@ToString
 @TableName("tb_log")
 public class TbLog implements Serializable {
 
@@ -51,73 +57,4 @@ public class TbLog implements Serializable {
      * 创建时间Unix格式
      */
     private Integer timeCreatedUnix;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Integer getCompanyId() {
-        return companyId;
-    }
-
-    public void setCompanyId(Integer companyId) {
-        this.companyId = companyId;
-    }
-
-    public Byte getType() {
-        return type;
-    }
-
-    public void setType(Byte type) {
-        this.type = type;
-    }
-
-    public Integer getSourceId() {
-        return sourceId;
-    }
-
-    public void setSourceId(Integer sourceId) {
-        this.sourceId = sourceId;
-    }
-
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
-    }
-
-    public LocalDateTime getTimeCreated() {
-        return timeCreated;
-    }
-
-    public void setTimeCreated(LocalDateTime timeCreated) {
-        this.timeCreated = timeCreated;
-    }
-
-    public Integer getTimeCreatedUnix() {
-        return timeCreatedUnix;
-    }
-
-    public void setTimeCreatedUnix(Integer timeCreatedUnix) {
-        this.timeCreatedUnix = timeCreatedUnix;
-    }
-
-    @Override
-    public String toString() {
-        return "TbLog{" +
-        ", id = " + id +
-        ", companyId = " + companyId +
-        ", type = " + type +
-        ", sourceId = " + sourceId +
-        ", content = " + content +
-        ", timeCreated = " + timeCreated +
-        ", timeCreatedUnix = " + timeCreatedUnix +
-        "}";
-    }
 }

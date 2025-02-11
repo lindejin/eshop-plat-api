@@ -8,7 +8,7 @@ import org.springframework.stereotype.Controller;
  * 角色岗位(中间表) 前端控制器
  * </p>
  *
- * @author ren_chun_hui
+ * @author config
  * @since 2025-02-11
  */
 @Controller

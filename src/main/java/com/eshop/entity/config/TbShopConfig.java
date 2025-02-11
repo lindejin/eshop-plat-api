@@ -4,15 +4,21 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
 /**
  * <p>
  * 店铺配置表
  * </p>
  *
- * @author ren_chun_hui
+ * @author config
  * @since 2025-02-11
  */
+@Getter
+@Setter
+@ToString
 @TableName("tb_shop_config")
 public class TbShopConfig implements Serializable {
 
@@ -50,73 +56,4 @@ public class TbShopConfig implements Serializable {
      * 是否自动审核订单(1: 是, 2: 否)
      */
     private Byte isAutomaticHandle;
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public Integer getShopId() {
-        return shopId;
-    }
-
-    public void setShopId(Integer shopId) {
-        this.shopId = shopId;
-    }
-
-    public String getIossNo() {
-        return iossNo;
-    }
-
-    public void setIossNo(String iossNo) {
-        this.iossNo = iossNo;
-    }
-
-    public String getVatNum() {
-        return vatNum;
-    }
-
-    public void setVatNum(String vatNum) {
-        this.vatNum = vatNum;
-    }
-
-    public String getLanguage() {
-        return language;
-    }
-
-    public void setLanguage(String language) {
-        this.language = language;
-    }
-
-    public Integer getDepotId() {
-        return depotId;
-    }
-
-    public void setDepotId(Integer depotId) {
-        this.depotId = depotId;
-    }
-
-    public Byte getIsAutomaticHandle() {
-        return isAutomaticHandle;
-    }
-
-    public void setIsAutomaticHandle(Byte isAutomaticHandle) {
-        this.isAutomaticHandle = isAutomaticHandle;
-    }
-
-    @Override
-    public String toString() {
-        return "TbShopConfig{" +
-        ", id = " + id +
-        ", shopId = " + shopId +
-        ", iossNo = " + iossNo +
-        ", vatNum = " + vatNum +
-        ", language = " + language +
-        ", depotId = " + depotId +
-        ", isAutomaticHandle = " + isAutomaticHandle +
-        "}";
-    }
 }

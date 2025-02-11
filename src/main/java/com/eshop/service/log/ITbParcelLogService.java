@@ -8,7 +8,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * 包裹日志 服务类
  * </p>
  *
- * @author ren_chun_hui
+ * @author log
  * @since 2025-02-11
  */
 public interface ITbParcelLogService extends IService<TbParcelLog> {

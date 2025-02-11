@@ -8,7 +8,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * 店铺主账户 Mapper 接口
  * </p>
  *
- * @author ren_chun_hui
+ * @author config
  * @since 2025-02-11
  */
 public interface TbShopMainAccountMapper extends BaseMapper<TbShopMainAccount> {

@@ -2,11 +2,8 @@ package com.eshop.mapper;
 
 import com.eshop.entity.config.TbShop;
 import com.eshop.entity.log.TbShopAuthLog;
-import com.eshop.mapper.config.TbShopMapper;
-import com.eshop.mapper.log.TbShopAuthLogMapper;
 import com.eshop.service.config.ITbShopService;
 import com.eshop.service.log.ITbShopAuthLogService;
-import com.eshop.util.platform.api.service.order.shopee.ShopeeOrderCall;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 

@@ -8,7 +8,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * 平台 服务类
  * </p>
  *
- * @author ren_chun_hui
+ * @author config
  * @since 2025-02-11
  */
 public interface ITbPlatformService extends IService<TbPlatform> {

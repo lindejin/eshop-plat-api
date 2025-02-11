@@ -8,7 +8,7 @@ import org.springframework.stereotype.Controller;
  * 消息操作日志表 前端控制器
  * </p>
  *
- * @author ren_chun_hui
+ * @author log
  * @since 2025-02-11
  */
 @Controller

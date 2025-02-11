@@ -5,15 +5,21 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
 /**
  * <p>
  * 店铺与用户(中间表)
  * </p>
  *
- * @author ren_chun_hui
+ * @author config
  * @since 2025-02-11
  */
+@Getter
+@Setter
+@ToString
 @TableName("tb_shop_employee")
 public class TbShopEmployee implements Serializable {
 
@@ -48,73 +54,4 @@ public class TbShopEmployee implements Serializable {
      * 创建人
      */
     private Integer createOperId;
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public Integer getTbShopId() {
-        return tbShopId;
-    }
-
-    public void setTbShopId(Integer tbShopId) {
-        this.tbShopId = tbShopId;
-    }
-
-    public Integer getEmployeeId() {
-        return employeeId;
-    }
-
-    public void setEmployeeId(Integer employeeId) {
-        this.employeeId = employeeId;
-    }
-
-    public String getEmployeeName() {
-        return employeeName;
-    }
-
-    public void setEmployeeName(String employeeName) {
-        this.employeeName = employeeName;
-    }
-
-    public Byte getEmployeeType() {
-        return employeeType;
-    }
-
-    public void setEmployeeType(Byte employeeType) {
-        this.employeeType = employeeType;
-    }
-
-    public LocalDateTime getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(LocalDateTime createTime) {
-        this.createTime = createTime;
-    }
-
-    public Integer getCreateOperId() {
-        return createOperId;
-    }
-
-    public void setCreateOperId(Integer createOperId) {
-        this.createOperId = createOperId;
-    }
-
-    @Override
-    public String toString() {
-        return "TbShopEmployee{" +
-        ", id = " + id +
-        ", tbShopId = " + tbShopId +
-        ", employeeId = " + employeeId +
-        ", employeeName = " + employeeName +
-        ", employeeType = " + employeeType +
-        ", createTime = " + createTime +
-        ", createOperId = " + createOperId +
-        "}";
-    }
 }

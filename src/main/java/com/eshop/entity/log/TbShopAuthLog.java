@@ -5,15 +5,21 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
 /**
  * <p>
  * 
  * </p>
  *
- * @author ren_chun_hui
+ * @author log
  * @since 2025-02-11
  */
+@Getter
+@Setter
+@ToString
 @TableName("tb_shop_auth_log")
 public class TbShopAuthLog implements Serializable {
 
@@ -51,73 +57,4 @@ public class TbShopAuthLog implements Serializable {
      * 运行时间
      */
     private LocalDateTime operateTime;
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public Integer getShopId() {
-        return shopId;
-    }
-
-    public void setShopId(Integer shopId) {
-        this.shopId = shopId;
-    }
-
-    public String getShopName() {
-        return shopName;
-    }
-
-    public void setShopName(String shopName) {
-        this.shopName = shopName;
-    }
-
-    public String getOperateProperty() {
-        return operateProperty;
-    }
-
-    public void setOperateProperty(String operateProperty) {
-        this.operateProperty = operateProperty;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public String getOperator() {
-        return operator;
-    }
-
-    public void setOperator(String operator) {
-        this.operator = operator;
-    }
-
-    public LocalDateTime getOperateTime() {
-        return operateTime;
-    }
-
-    public void setOperateTime(LocalDateTime operateTime) {
-        this.operateTime = operateTime;
-    }
-
-    @Override
-    public String toString() {
-        return "TbShopAuthLog{" +
-        ", id = " + id +
-        ", shopId = " + shopId +
-        ", shopName = " + shopName +
-        ", operateProperty = " + operateProperty +
-        ", description = " + description +
-        ", operator = " + operator +
-        ", operateTime = " + operateTime +
-        "}";
-    }
 }

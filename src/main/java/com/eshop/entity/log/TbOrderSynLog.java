@@ -5,15 +5,21 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
 /**
  * <p>
  * 订单（订单号为单位）异常运行日志
  * </p>
  *
- * @author ren_chun_hui
+ * @author log
  * @since 2025-02-11
  */
+@Getter
+@Setter
+@ToString
 @TableName("tb_order_syn_log")
 public class TbOrderSynLog implements Serializable {
 
@@ -61,91 +67,4 @@ public class TbOrderSynLog implements Serializable {
      * 运行时间
      */
     private LocalDateTime operateTime;
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getOrderNo() {
-        return orderNo;
-    }
-
-    public void setOrderNo(String orderNo) {
-        this.orderNo = orderNo;
-    }
-
-    public Integer getShopId() {
-        return shopId;
-    }
-
-    public void setShopId(Integer shopId) {
-        this.shopId = shopId;
-    }
-
-    public Integer getShopownerId() {
-        return shopownerId;
-    }
-
-    public void setShopownerId(Integer shopownerId) {
-        this.shopownerId = shopownerId;
-    }
-
-    public String getOperateProperty() {
-        return operateProperty;
-    }
-
-    public void setOperateProperty(String operateProperty) {
-        this.operateProperty = operateProperty;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public String getExceptionLog() {
-        return exceptionLog;
-    }
-
-    public void setExceptionLog(String exceptionLog) {
-        this.exceptionLog = exceptionLog;
-    }
-
-    public String getOperator() {
-        return operator;
-    }
-
-    public void setOperator(String operator) {
-        this.operator = operator;
-    }
-
-    public LocalDateTime getOperateTime() {
-        return operateTime;
-    }
-
-    public void setOperateTime(LocalDateTime operateTime) {
-        this.operateTime = operateTime;
-    }
-
-    @Override
-    public String toString() {
-        return "TbOrderSynLog{" +
-        ", id = " + id +
-        ", orderNo = " + orderNo +
-        ", shopId = " + shopId +
-        ", shopownerId = " + shopownerId +
-        ", operateProperty = " + operateProperty +
-        ", description = " + description +
-        ", exceptionLog = " + exceptionLog +
-        ", operator = " + operator +
-        ", operateTime = " + operateTime +
-        "}";
-    }
 }

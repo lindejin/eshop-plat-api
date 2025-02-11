@@ -8,7 +8,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * 刊登记录 Mapper 接口
  * </p>
  *
- * @author ren_chun_hui
+ * @author log
  * @since 2025-02-11
  */
 public interface TbPublishLogMapper extends BaseMapper<TbPublishLog> {

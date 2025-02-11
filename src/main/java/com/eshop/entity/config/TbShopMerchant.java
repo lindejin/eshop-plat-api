@@ -5,15 +5,21 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
 /**
  * <p>
  * 平台商户信息表
  * </p>
  *
- * @author ren_chun_hui
+ * @author config
  * @since 2025-02-11
  */
+@Getter
+@Setter
+@ToString
 @TableName("tb_shop_merchant")
 public class TbShopMerchant implements Serializable {
 
@@ -106,172 +112,4 @@ public class TbShopMerchant implements Serializable {
      * 平台应用_id
      */
     private Integer appId;
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public Integer getMerchantId() {
-        return merchantId;
-    }
-
-    public void setMerchantId(Integer merchantId) {
-        this.merchantId = merchantId;
-    }
-
-    public Integer getMainAccountId() {
-        return mainAccountId;
-    }
-
-    public void setMainAccountId(Integer mainAccountId) {
-        this.mainAccountId = mainAccountId;
-    }
-
-    public String getPlatformCode() {
-        return platformCode;
-    }
-
-    public void setPlatformCode(String platformCode) {
-        this.platformCode = platformCode;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Byte getTokenFlag() {
-        return tokenFlag;
-    }
-
-    public void setTokenFlag(Byte tokenFlag) {
-        this.tokenFlag = tokenFlag;
-    }
-
-    public LocalDateTime getExpiresTime() {
-        return expiresTime;
-    }
-
-    public void setExpiresTime(LocalDateTime expiresTime) {
-        this.expiresTime = expiresTime;
-    }
-
-    public String getParamStaticJson() {
-        return paramStaticJson;
-    }
-
-    public void setParamStaticJson(String paramStaticJson) {
-        this.paramStaticJson = paramStaticJson;
-    }
-
-    public String getParamDynamicJson() {
-        return paramDynamicJson;
-    }
-
-    public void setParamDynamicJson(String paramDynamicJson) {
-        this.paramDynamicJson = paramDynamicJson;
-    }
-
-    public Integer getCreateOperId() {
-        return createOperId;
-    }
-
-    public void setCreateOperId(Integer createOperId) {
-        this.createOperId = createOperId;
-    }
-
-    public LocalDateTime getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(LocalDateTime createTime) {
-        this.createTime = createTime;
-    }
-
-    public Integer getUpdateOperId() {
-        return updateOperId;
-    }
-
-    public void setUpdateOperId(Integer updateOperId) {
-        this.updateOperId = updateOperId;
-    }
-
-    public LocalDateTime getUpdateTime() {
-        return updateTime;
-    }
-
-    public void setUpdateTime(LocalDateTime updateTime) {
-        this.updateTime = updateTime;
-    }
-
-    public Byte getIsDelete() {
-        return isDelete;
-    }
-
-    public void setIsDelete(Byte isDelete) {
-        this.isDelete = isDelete;
-    }
-
-    public Long getDeleteUserId() {
-        return deleteUserId;
-    }
-
-    public void setDeleteUserId(Long deleteUserId) {
-        this.deleteUserId = deleteUserId;
-    }
-
-    public LocalDateTime getDeleteTime() {
-        return deleteTime;
-    }
-
-    public void setDeleteTime(LocalDateTime deleteTime) {
-        this.deleteTime = deleteTime;
-    }
-
-    public String getPlatformShopMerchantId() {
-        return platformShopMerchantId;
-    }
-
-    public void setPlatformShopMerchantId(String platformShopMerchantId) {
-        this.platformShopMerchantId = platformShopMerchantId;
-    }
-
-    public Integer getAppId() {
-        return appId;
-    }
-
-    public void setAppId(Integer appId) {
-        this.appId = appId;
-    }
-
-    @Override
-    public String toString() {
-        return "TbShopMerchant{" +
-        ", id = " + id +
-        ", merchantId = " + merchantId +
-        ", mainAccountId = " + mainAccountId +
-        ", platformCode = " + platformCode +
-        ", name = " + name +
-        ", tokenFlag = " + tokenFlag +
-        ", expiresTime = " + expiresTime +
-        ", paramStaticJson = " + paramStaticJson +
-        ", paramDynamicJson = " + paramDynamicJson +
-        ", createOperId = " + createOperId +
-        ", createTime = " + createTime +
-        ", updateOperId = " + updateOperId +
-        ", updateTime = " + updateTime +
-        ", isDelete = " + isDelete +
-        ", deleteUserId = " + deleteUserId +
-        ", deleteTime = " + deleteTime +
-        ", platformShopMerchantId = " + platformShopMerchantId +
-        ", appId = " + appId +
-        "}";
-    }
 }

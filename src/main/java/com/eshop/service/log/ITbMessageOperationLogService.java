@@ -8,7 +8,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * 消息操作日志表 服务类
  * </p>
  *
- * @author ren_chun_hui
+ * @author log
  * @since 2025-02-11
  */
 public interface ITbMessageOperationLogService extends IService<TbMessageOperationLog> {

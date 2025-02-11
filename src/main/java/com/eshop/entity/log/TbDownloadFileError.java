@@ -5,15 +5,21 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
 /**
  * <p>
  * 文件下载失败记录
  * </p>
  *
- * @author ren_chun_hui
+ * @author log
  * @since 2025-02-11
  */
+@Getter
+@Setter
+@ToString
 @TableName("tb_download_file_error")
 public class TbDownloadFileError implements Serializable {
 
@@ -56,82 +62,4 @@ public class TbDownloadFileError implements Serializable {
      * 是否已下载(1: 是, 2: 否)
      */
     private Byte isDownload;
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getJoinCode() {
-        return joinCode;
-    }
-
-    public void setJoinCode(String joinCode) {
-        this.joinCode = joinCode;
-    }
-
-    public Byte getJoinType() {
-        return joinType;
-    }
-
-    public void setJoinType(Byte joinType) {
-        this.joinType = joinType;
-    }
-
-    public String getDownloadUrl() {
-        return downloadUrl;
-    }
-
-    public void setDownloadUrl(String downloadUrl) {
-        this.downloadUrl = downloadUrl;
-    }
-
-    public String getStoragePath() {
-        return storagePath;
-    }
-
-    public void setStoragePath(String storagePath) {
-        this.storagePath = storagePath;
-    }
-
-    public Integer getGamesLost() {
-        return gamesLost;
-    }
-
-    public void setGamesLost(Integer gamesLost) {
-        this.gamesLost = gamesLost;
-    }
-
-    public LocalDateTime getLoseTime() {
-        return loseTime;
-    }
-
-    public void setLoseTime(LocalDateTime loseTime) {
-        this.loseTime = loseTime;
-    }
-
-    public Byte getIsDownload() {
-        return isDownload;
-    }
-
-    public void setIsDownload(Byte isDownload) {
-        this.isDownload = isDownload;
-    }
-
-    @Override
-    public String toString() {
-        return "TbDownloadFileError{" +
-        ", id = " + id +
-        ", joinCode = " + joinCode +
-        ", joinType = " + joinType +
-        ", downloadUrl = " + downloadUrl +
-        ", storagePath = " + storagePath +
-        ", gamesLost = " + gamesLost +
-        ", loseTime = " + loseTime +
-        ", isDownload = " + isDownload +
-        "}";
-    }
 }

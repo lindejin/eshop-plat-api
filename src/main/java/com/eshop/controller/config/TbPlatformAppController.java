@@ -8,7 +8,7 @@ import org.springframework.stereotype.Controller;
  * 平台应用 前端控制器
  * </p>
  *
- * @author ren_chun_hui
+ * @author config
  * @since 2025-02-11
  */
 @Controller

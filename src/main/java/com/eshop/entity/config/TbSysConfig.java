@@ -5,15 +5,21 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
 /**
  * <p>
  * 参数配置表
  * </p>
  *
- * @author ren_chun_hui
+ * @author config
  * @since 2025-02-11
  */
+@Getter
+@Setter
+@ToString
 @TableName("tb_sys_config")
 public class TbSysConfig implements Serializable {
 
@@ -76,118 +82,4 @@ public class TbSysConfig implements Serializable {
      * 更新者
      */
     private String updateBy;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getConfigName() {
-        return configName;
-    }
-
-    public void setConfigName(String configName) {
-        this.configName = configName;
-    }
-
-    public String getConfigKey() {
-        return configKey;
-    }
-
-    public void setConfigKey(String configKey) {
-        this.configKey = configKey;
-    }
-
-    public String getConfigValue() {
-        return configValue;
-    }
-
-    public void setConfigValue(String configValue) {
-        this.configValue = configValue;
-    }
-
-    public Byte getConfigType() {
-        return configType;
-    }
-
-    public void setConfigType(Byte configType) {
-        this.configType = configType;
-    }
-
-    public String getCreateBy() {
-        return createBy;
-    }
-
-    public void setCreateBy(String createBy) {
-        this.createBy = createBy;
-    }
-
-    public LocalDateTime getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(LocalDateTime createTime) {
-        this.createTime = createTime;
-    }
-
-    public String getRemark() {
-        return remark;
-    }
-
-    public void setRemark(String remark) {
-        this.remark = remark;
-    }
-
-    public Byte getIsActive() {
-        return isActive;
-    }
-
-    public void setIsActive(Byte isActive) {
-        this.isActive = isActive;
-    }
-
-    public String getCategory() {
-        return category;
-    }
-
-    public void setCategory(String category) {
-        this.category = category;
-    }
-
-    public LocalDateTime getUpdateTime() {
-        return updateTime;
-    }
-
-    public void setUpdateTime(LocalDateTime updateTime) {
-        this.updateTime = updateTime;
-    }
-
-    public String getUpdateBy() {
-        return updateBy;
-    }
-
-    public void setUpdateBy(String updateBy) {
-        this.updateBy = updateBy;
-    }
-
-    @Override
-    public String toString() {
-        return "TbSysConfig{" +
-        ", id = " + id +
-        ", configName = " + configName +
-        ", configKey = " + configKey +
-        ", configValue = " + configValue +
-        ", configType = " + configType +
-        ", createBy = " + createBy +
-        ", createTime = " + createTime +
-        ", remark = " + remark +
-        ", isActive = " + isActive +
-        ", category = " + category +
-        ", updateTime = " + updateTime +
-        ", updateBy = " + updateBy +
-        "}";
-    }
 }

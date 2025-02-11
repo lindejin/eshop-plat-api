@@ -6,15 +6,21 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
 /**
  * <p>
  * 商户信息
  * </p>
  *
- * @author ren_chun_hui
+ * @author config
  * @since 2025-02-11
  */
+@Getter
+@Setter
+@ToString
 @TableName("tb_merchant")
 public class TbMerchant implements Serializable {
 
@@ -97,154 +103,4 @@ public class TbMerchant implements Serializable {
      * 删除时间
      */
     private LocalDateTime deleteTime;
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getMerchantName() {
-        return merchantName;
-    }
-
-    public void setMerchantName(String merchantName) {
-        this.merchantName = merchantName;
-    }
-
-    public Integer getLevelId() {
-        return levelId;
-    }
-
-    public void setLevelId(Integer levelId) {
-        this.levelId = levelId;
-    }
-
-    public Byte getMerchantStatus() {
-        return merchantStatus;
-    }
-
-    public void setMerchantStatus(Byte merchantStatus) {
-        this.merchantStatus = merchantStatus;
-    }
-
-    public BigDecimal getBalance() {
-        return balance;
-    }
-
-    public void setBalance(BigDecimal balance) {
-        this.balance = balance;
-    }
-
-    public BigDecimal getFrozenBalance() {
-        return frozenBalance;
-    }
-
-    public void setFrozenBalance(BigDecimal frozenBalance) {
-        this.frozenBalance = frozenBalance;
-    }
-
-    public Long getIntegral() {
-        return integral;
-    }
-
-    public void setIntegral(Long integral) {
-        this.integral = integral;
-    }
-
-    public String getRelationName() {
-        return relationName;
-    }
-
-    public void setRelationName(String relationName) {
-        this.relationName = relationName;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public String getRemark() {
-        return remark;
-    }
-
-    public void setRemark(String remark) {
-        this.remark = remark;
-    }
-
-    public Integer getCreatorId() {
-        return creatorId;
-    }
-
-    public void setCreatorId(Integer creatorId) {
-        this.creatorId = creatorId;
-    }
-
-    public LocalDateTime getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(LocalDateTime createTime) {
-        this.createTime = createTime;
-    }
-
-    public Byte getIsDelete() {
-        return isDelete;
-    }
-
-    public void setIsDelete(Byte isDelete) {
-        this.isDelete = isDelete;
-    }
-
-    public Integer getDeleteId() {
-        return deleteId;
-    }
-
-    public void setDeleteId(Integer deleteId) {
-        this.deleteId = deleteId;
-    }
-
-    public LocalDateTime getDeleteTime() {
-        return deleteTime;
-    }
-
-    public void setDeleteTime(LocalDateTime deleteTime) {
-        this.deleteTime = deleteTime;
-    }
-
-    @Override
-    public String toString() {
-        return "TbMerchant{" +
-        ", id = " + id +
-        ", merchantName = " + merchantName +
-        ", levelId = " + levelId +
-        ", merchantStatus = " + merchantStatus +
-        ", balance = " + balance +
-        ", frozenBalance = " + frozenBalance +
-        ", integral = " + integral +
-        ", relationName = " + relationName +
-        ", phone = " + phone +
-        ", address = " + address +
-        ", remark = " + remark +
-        ", creatorId = " + creatorId +
-        ", createTime = " + createTime +
-        ", isDelete = " + isDelete +
-        ", deleteId = " + deleteId +
-        ", deleteTime = " + deleteTime +
-        "}";
-    }
 }
