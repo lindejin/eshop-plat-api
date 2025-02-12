@@ -16,6 +16,7 @@ public class PlatformAppClientUtilsTest {
 
     @Resource
     private PlatformAppClientUtils platformAppClientUtils;
+
     @Resource
     private ITbShopService shopService;
     /**
