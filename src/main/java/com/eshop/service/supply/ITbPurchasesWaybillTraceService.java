@@ -9,7 +9,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * </p>
  *
  * @author supply
- * @since 2025-02-11
+ * @since 2025-02-12
  */
 public interface ITbPurchasesWaybillTraceService extends IService<TbPurchasesWaybillTrace> {
 

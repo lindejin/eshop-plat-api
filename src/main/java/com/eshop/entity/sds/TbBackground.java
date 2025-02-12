@@ -5,7 +5,7 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import java.util.Date;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -16,7 +16,7 @@ import lombok.ToString;
  * </p>
  *
  * @author sds
- * @since 2025-02-11
+ * @since 2025-02-12
  */
 @Getter
 @Setter
@@ -27,17 +27,17 @@ public class TbBackground implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @TableId(value = "id", type = IdType.AUTO)
-    private Integer id;
+    private Long id;
 
     /**
      * 商户_id
      */
-    private Integer merchantId;
+    private Long merchantId;
 
     /**
      * 背景分类_id
      */
-    private Integer classifyId;
+    private Long classifyId;
 
     /**
      * 背景名称
@@ -47,7 +47,7 @@ public class TbBackground implements Serializable {
     /**
      * 文件库_id
      */
-    private Integer fileId;
+    private Long fileId;
 
     /**
      * 背景宽度(px)
@@ -62,7 +62,7 @@ public class TbBackground implements Serializable {
     /**
      * 背景大小(字节 / b)
      */
-    private Integer backgroundSize;
+    private Long backgroundSize;
 
     /**
      * 是否共享(1: 是, 2:否)
@@ -77,12 +77,12 @@ public class TbBackground implements Serializable {
     /**
      * 创建人id
      */
-    private Integer createId;
+    private Long createId;
 
     /**
      * 创建时间
      */
-    private LocalDateTime createTime;
+    private Date createTime;
 
     /**
      * 是否已被删除(1: 是, 2: 否)
@@ -92,5 +92,5 @@ public class TbBackground implements Serializable {
     /**
      * 删除时间
      */
-    private LocalDateTime deleteTime;
+    private Date deleteTime;
 }

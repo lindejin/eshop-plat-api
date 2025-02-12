@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
-import java.time.LocalDateTime;
+import java.util.Date;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -15,7 +15,7 @@ import lombok.ToString;
  * </p>
  *
  * @author order
- * @since 2025-02-11
+ * @since 2025-02-12
  */
 @Getter
 @Setter
@@ -26,12 +26,12 @@ public class TbShipmentPaper implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @TableId(value = "id", type = IdType.AUTO)
-    private Integer id;
+    private Long id;
 
     /**
      * 主表ID
      */
-    private Integer majorId;
+    private Long majorId;
 
     /**
      * 平台纸张号码
@@ -56,7 +56,7 @@ public class TbShipmentPaper implements Serializable {
     /**
      * 送仓箱数
      */
-    private Integer warehouseBoxCount;
+    private Long warehouseBoxCount;
 
     /**
      * pdf_size
@@ -71,17 +71,17 @@ public class TbShipmentPaper implements Serializable {
     /**
      * file_id
      */
-    private Integer fileId;
+    private Long fileId;
 
     /**
      * 创建人
      */
-    private Integer creatorId;
+    private Long creatorId;
 
     /**
      * 创建时间
      */
-    private LocalDateTime createTime;
+    private Date createTime;
 
     /**
      * 扩展字段1

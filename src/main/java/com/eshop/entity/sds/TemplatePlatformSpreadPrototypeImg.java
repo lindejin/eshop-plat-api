@@ -14,7 +14,7 @@ import lombok.ToString;
  * </p>
  *
  * @author sds
- * @since 2025-02-11
+ * @since 2025-02-12
  */
 @Getter
 @Setter
@@ -28,22 +28,22 @@ public class TemplatePlatformSpreadPrototypeImg implements Serializable {
      * 主键id
      */
     @TableId(value = "id", type = IdType.AUTO)
-    private Integer id;
+    private Long id;
 
     /**
      * 模板id
      */
-    private Integer templateId;
+    private Long templateId;
 
     /**
      * 样机id
      */
-    private Integer prototypeId;
+    private Long prototypeId;
 
     /**
      * 图片id
      */
-    private Integer imgId;
+    private Long imgId;
 
     /**
      * 图片排序

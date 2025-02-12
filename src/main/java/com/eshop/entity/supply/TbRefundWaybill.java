@@ -5,7 +5,7 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import java.util.Date;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -16,7 +16,7 @@ import lombok.ToString;
  * </p>
  *
  * @author supply
- * @since 2025-02-11
+ * @since 2025-02-12
  */
 @Getter
 @Setter
@@ -27,7 +27,7 @@ public class TbRefundWaybill implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @TableId(value = "id", type = IdType.AUTO)
-    private Integer id;
+    private Long id;
 
     /**
      * 订单编号
@@ -47,12 +47,12 @@ public class TbRefundWaybill implements Serializable {
     /**
      * 发货时间
      */
-    private LocalDateTime deliverTime;
+    private Date deliverTime;
 
     /**
      * 收货时间
      */
-    private LocalDateTime receivingTime;
+    private Date receivingTime;
 
     /**
      * 付款方式(1:预付,2:到付,3:月结)

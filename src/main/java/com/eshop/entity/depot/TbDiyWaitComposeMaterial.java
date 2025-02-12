@@ -14,7 +14,7 @@ import lombok.ToString;
  * </p>
  *
  * @author depot
- * @since 2025-02-11
+ * @since 2025-02-12
  */
 @Getter
 @Setter
@@ -25,12 +25,12 @@ public class TbDiyWaitComposeMaterial implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @TableId(value = "id", type = IdType.AUTO)
-    private Integer id;
+    private Long id;
 
     /**
      * diy商品待合成列表id
      */
-    private Integer dwcsId;
+    private Long dwcsId;
 
     /**
      * 素材sku编码

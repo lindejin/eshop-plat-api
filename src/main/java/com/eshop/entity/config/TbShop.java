@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
-import java.time.LocalDateTime;
+import java.util.Date;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -15,7 +15,7 @@ import lombok.ToString;
  * </p>
  *
  * @author config
- * @since 2025-02-11
+ * @since 2025-02-12
  */
 @Getter
 @Setter
@@ -26,12 +26,12 @@ public class TbShop implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @TableId(value = "id", type = IdType.AUTO)
-    private Integer id;
+    private Long id;
 
     /**
      * 商户_id
      */
-    private Integer merchantId;
+    private Long merchantId;
 
     /**
      * 平台编码
@@ -46,7 +46,7 @@ public class TbShop implements Serializable {
     /**
      * 店铺商户ID
      */
-    private Integer shopMerchantId;
+    private Long shopMerchantId;
 
     /**
      * 店铺类型(1: 跨境店, 2: 本土店3.跨境子店铺)
@@ -56,7 +56,7 @@ public class TbShop implements Serializable {
     /**
      * 平台应用_id
      */
-    private Integer appId;
+    private Long appId;
 
     /**
      * 店铺类型(1.普通/半托管 2.全托管)
@@ -66,7 +66,7 @@ public class TbShop implements Serializable {
     /**
      * 店铺所属国家(本土店国家必选)
      */
-    private Integer countryId;
+    private Long countryId;
 
     /**
      * 店铺名称
@@ -96,7 +96,7 @@ public class TbShop implements Serializable {
     /**
      * 过期时间
      */
-    private LocalDateTime expiresTime;
+    private Date expiresTime;
 
     /**
      * 调用参数_静态_空值
@@ -111,22 +111,22 @@ public class TbShop implements Serializable {
     /**
      * 创建人
      */
-    private Integer createOperId;
+    private Long createOperId;
 
     /**
      * 创建时间
      */
-    private LocalDateTime createTime;
+    private Date createTime;
 
     /**
      * 修改人
      */
-    private Integer updateOperId;
+    private Long updateOperId;
 
     /**
      * 修改时间
      */
-    private LocalDateTime updateTime;
+    private Date updateTime;
 
     /**
      * 逻辑删除字段(1: 删除, 2: 未删除)
@@ -141,7 +141,7 @@ public class TbShop implements Serializable {
     /**
      * 删除时间
      */
-    private LocalDateTime deleteTime;
+    private Date deleteTime;
 
     /**
      * 货币类型

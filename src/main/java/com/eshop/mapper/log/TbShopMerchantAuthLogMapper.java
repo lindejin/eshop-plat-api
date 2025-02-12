@@ -9,7 +9,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * </p>
  *
  * @author log
- * @since 2025-02-11
+ * @since 2025-02-12
  */
 public interface TbShopMerchantAuthLogMapper extends BaseMapper<TbShopMerchantAuthLog> {
 

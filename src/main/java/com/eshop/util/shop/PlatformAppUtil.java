@@ -1,7 +1,7 @@
-package com.eshop.api.modules.util.shop;
+package com.eshop.util.shop;
 
-import com.eshop.db.config.service.PlatformAppService;
-import com.eshop.modal.modal.eshop_config.TbPlatformApp;
+import com.eshop.entity.config.TbPlatformApp;
+import com.eshop.service.config.ITbPlatformAppService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
@@ -13,7 +13,7 @@ import javax.annotation.Resource;
 public class PlatformAppUtil {
 
     @Resource
-    private PlatformAppService platformAppService;
+    private ITbPlatformAppService platformAppService;
 
     /**
      * 获取应用静态变量
@@ -21,7 +21,7 @@ public class PlatformAppUtil {
     public String getAppParamJson(Long appId) {
         TbPlatformApp tbPlatformApp = null;
         try {
-            tbPlatformApp = platformAppService.selectOneByProperty(TbPlatformApp::getId, appId);
+            tbPlatformApp = platformAppService.getById(appId);
         } catch (Exception e) {
             throw new RuntimeException("查询应用参数异常:" + appId);
         }

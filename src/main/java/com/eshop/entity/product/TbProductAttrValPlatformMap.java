@@ -14,7 +14,7 @@ import lombok.ToString;
  * </p>
  *
  * @author product
- * @since 2025-02-11
+ * @since 2025-02-12
  */
 @Getter
 @Setter
@@ -25,12 +25,12 @@ public class TbProductAttrValPlatformMap implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @TableId(value = "id", type = IdType.AUTO)
-    private Integer id;
+    private Long id;
 
     /**
      * 属性Id
      */
-    private Integer attrId;
+    private Long attrId;
 
     /**
      * 属性名称
@@ -40,7 +40,7 @@ public class TbProductAttrValPlatformMap implements Serializable {
     /**
      * 属性值id
      */
-    private Integer attrValId;
+    private Long attrValId;
 
     /**
      * 属性值名称(存属性值名称,不是自定义值)

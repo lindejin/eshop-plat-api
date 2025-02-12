@@ -5,7 +5,7 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import java.util.Date;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -16,7 +16,7 @@ import lombok.ToString;
  * </p>
  *
  * @author sds
- * @since 2025-02-11
+ * @since 2025-02-12
  */
 @Getter
 @Setter
@@ -27,12 +27,12 @@ public class CommonProductSku implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @TableId(value = "id", type = IdType.AUTO)
-    private Integer id;
+    private Long id;
 
     /**
      * 主表_id
      */
-    private Integer productId;
+    private Long productId;
 
     /**
      * sku_编码
@@ -42,7 +42,7 @@ public class CommonProductSku implements Serializable {
     /**
      * 属性值图片_id
      */
-    private Integer fileImgId;
+    private Long fileImgId;
 
     /**
      * 销售单价($)
@@ -62,20 +62,20 @@ public class CommonProductSku implements Serializable {
     /**
      * 创建人
      */
-    private Integer createId;
+    private Long createId;
 
     /**
      * 创建时间
      */
-    private LocalDateTime createTime;
+    private Date createTime;
 
     /**
      * 修改人
      */
-    private Integer updateId;
+    private Long updateId;
 
     /**
      * 修改时间
      */
-    private LocalDateTime updateTime;
+    private Date updateTime;
 }

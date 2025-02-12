@@ -5,7 +5,7 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import java.util.Date;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -16,7 +16,7 @@ import lombok.ToString;
  * </p>
  *
  * @author order
- * @since 2025-02-11
+ * @since 2025-02-12
  */
 @Getter
 @Setter
@@ -27,7 +27,7 @@ public class TbOrderRefunds implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @TableId(value = "id", type = IdType.AUTO)
-    private Integer id;
+    private Long id;
 
     /**
      * 订单号
@@ -52,17 +52,17 @@ public class TbOrderRefunds implements Serializable {
     /**
      * 退款原因(对应投诉类型二级分类)
      */
-    private Integer refundsCauseId;
+    private Long refundsCauseId;
 
     /**
      * 平台退款状态
      */
-    private Integer platformRefundsStatus;
+    private Long platformRefundsStatus;
 
     /**
      * 平台退款类型
      */
-    private Integer platformRefundsType;
+    private Long platformRefundsType;
 
     /**
      * 平台退款流水号
@@ -77,12 +77,12 @@ public class TbOrderRefunds implements Serializable {
     /**
      * 退款发起时间
      */
-    private LocalDateTime createDate;
+    private Date createDate;
 
     /**
      * 退款完成时间
      */
-    private LocalDateTime completeDate;
+    private Date completeDate;
 
     /**
      * 备注
@@ -92,12 +92,12 @@ public class TbOrderRefunds implements Serializable {
     /**
      * 处理人_id
      */
-    private Integer disposeId;
+    private Long disposeId;
 
     /**
      * 处理时间
      */
-    private LocalDateTime disposeDate;
+    private Date disposeDate;
 
     /**
      * 处理状态 (1待处理,2已处理)

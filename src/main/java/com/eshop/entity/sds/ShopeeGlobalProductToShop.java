@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
-import java.time.LocalDateTime;
+import java.util.Date;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -15,7 +15,7 @@ import lombok.ToString;
  * </p>
  *
  * @author sds
- * @since 2025-02-11
+ * @since 2025-02-12
  */
 @Getter
 @Setter
@@ -29,12 +29,12 @@ public class ShopeeGlobalProductToShop implements Serializable {
      * 自增id
      */
     @TableId(value = "id", type = IdType.AUTO)
-    private Integer id;
+    private Long id;
 
     /**
      * 商品id
      */
-    private Integer productId;
+    private Long productId;
 
     /**
      * 产品编码
@@ -44,7 +44,7 @@ public class ShopeeGlobalProductToShop implements Serializable {
     /**
      * 模版Id
      */
-    private Integer templateId;
+    private Long templateId;
 
     /**
      * 类目id
@@ -54,12 +54,12 @@ public class ShopeeGlobalProductToShop implements Serializable {
     /**
      * 店铺商户id
      */
-    private Integer shopMerchantId;
+    private Long shopMerchantId;
 
     /**
      * 店铺id
      */
-    private Integer shopId;
+    private Long shopId;
 
     /**
      * 产品名称
@@ -84,7 +84,7 @@ public class ShopeeGlobalProductToShop implements Serializable {
     /**
      * 刊登时间
      */
-    private LocalDateTime publishTime;
+    private Date publishTime;
 
     /**
      * 刊登失败原因
@@ -114,22 +114,22 @@ public class ShopeeGlobalProductToShop implements Serializable {
     /**
      * 创建人
      */
-    private Integer createId;
+    private Long createId;
 
     /**
      * 创建人
      */
-    private Integer updateId;
+    private Long updateId;
 
     /**
      * 创建时间
      */
-    private LocalDateTime createTime;
+    private Date createTime;
 
     /**
      * 修改时间
      */
-    private LocalDateTime updateTime;
+    private Date updateTime;
 
     /**
      * 全球产品任务id

@@ -2,7 +2,7 @@ package com.eshop.entity.depot;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
-import java.time.LocalDateTime;
+import java.util.Date;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -13,7 +13,7 @@ import lombok.ToString;
  * </p>
  *
  * @author depot
- * @since 2025-02-11
+ * @since 2025-02-12
  */
 @Getter
 @Setter
@@ -31,17 +31,17 @@ public class TbPendingParcelView implements Serializable {
     /**
      * 商户_id
      */
-    private Integer merchantId;
+    private Long merchantId;
 
     /**
      * 店铺id
      */
-    private Integer shopId;
+    private Long shopId;
 
     /**
      * 平台id
      */
-    private Integer platformId;
+    private Long platformId;
 
     /**
      * 订单号
@@ -56,12 +56,12 @@ public class TbPendingParcelView implements Serializable {
     /**
      * 物流方式/物流渠道
      */
-    private Integer logisticsModeId;
+    private Long logisticsModeId;
 
     /**
      * 付款时间
      */
-    private LocalDateTime orderTime;
+    private Date orderTime;
 
     /**
      * 库存sku编号
@@ -71,7 +71,7 @@ public class TbPendingParcelView implements Serializable {
     /**
      * 数量
      */
-    private Integer number;
+    private Long number;
 
     /**
      * 包裹备注

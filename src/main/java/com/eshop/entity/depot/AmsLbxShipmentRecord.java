@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
-import java.time.LocalDateTime;
+import java.util.Date;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -15,7 +15,7 @@ import lombok.ToString;
  * </p>
  *
  * @author depot
- * @since 2025-02-11
+ * @since 2025-02-12
  */
 @Getter
 @Setter
@@ -36,7 +36,7 @@ public class AmsLbxShipmentRecord implements Serializable {
     /**
      * 签收时间
      */
-    private LocalDateTime signInTime;
+    private Date signInTime;
 
     /**
      * 签收操作人
@@ -46,7 +46,7 @@ public class AmsLbxShipmentRecord implements Serializable {
     /**
      * 配送时间
      */
-    private LocalDateTime deliveryTime;
+    private Date deliveryTime;
 
     /**
      * 配送操作人
@@ -56,7 +56,7 @@ public class AmsLbxShipmentRecord implements Serializable {
     /**
      * 完成时间
      */
-    private LocalDateTime completionTime;
+    private Date completionTime;
 
     /**
      * 完成操作人

@@ -9,7 +9,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * </p>
  *
  * @author kpi
- * @since 2025-02-11
+ * @since 2025-02-12
  */
 public interface IKpiMemberGmvService extends IService<KpiMemberGmv> {
 

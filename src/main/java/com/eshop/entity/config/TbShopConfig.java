@@ -14,7 +14,7 @@ import lombok.ToString;
  * </p>
  *
  * @author config
- * @since 2025-02-11
+ * @since 2025-02-12
  */
 @Getter
 @Setter
@@ -25,12 +25,12 @@ public class TbShopConfig implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @TableId(value = "id", type = IdType.AUTO)
-    private Integer id;
+    private Long id;
 
     /**
      * 店铺_id
      */
-    private Integer shopId;
+    private Long shopId;
 
     /**
      * ioss税号（欧盟税号）
@@ -50,7 +50,7 @@ public class TbShopConfig implements Serializable {
     /**
      * 发货仓库
      */
-    private Integer depotId;
+    private Long depotId;
 
     /**
      * 是否自动审核订单(1: 是, 2: 否)

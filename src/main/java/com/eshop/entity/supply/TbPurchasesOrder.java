@@ -5,7 +5,7 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import java.util.Date;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -16,7 +16,7 @@ import lombok.ToString;
  * </p>
  *
  * @author supply
- * @since 2025-02-11
+ * @since 2025-02-12
  */
 @Getter
 @Setter
@@ -27,7 +27,7 @@ public class TbPurchasesOrder implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @TableId(value = "id", type = IdType.AUTO)
-    private Integer id;
+    private Long id;
 
     /**
      * 采购单号
@@ -37,7 +37,7 @@ public class TbPurchasesOrder implements Serializable {
     /**
      * 商户_id
      */
-    private Integer merchantId;
+    private Long merchantId;
 
     /**
      * 第三方单号
@@ -47,22 +47,22 @@ public class TbPurchasesOrder implements Serializable {
     /**
      * 供应商id
      */
-    private Integer providerId;
+    private Long providerId;
 
     /**
      * 供应商收款账号id
      */
-    private Integer receiptId;
+    private Long receiptId;
 
     /**
      * 仓库id
      */
-    private Integer depotId;
+    private Long depotId;
 
     /**
      * 关联的备货单
      */
-    private Integer prepareId;
+    private Long prepareId;
 
     /**
      * 订单类型(1:缺货采购,2:备货采购)
@@ -97,12 +97,12 @@ public class TbPurchasesOrder implements Serializable {
     /**
      * 付款时间
      */
-    private LocalDateTime paymentTime;
+    private Date paymentTime;
 
     /**
      * 订单完成时间
      */
-    private LocalDateTime finishTime;
+    private Date finishTime;
 
     /**
      * 账号流水编号
@@ -137,10 +137,10 @@ public class TbPurchasesOrder implements Serializable {
     /**
      * 下单人
      */
-    private Integer createrId;
+    private Long createrId;
 
     /**
      * 下单时间
      */
-    private LocalDateTime createTime;
+    private Date createTime;
 }

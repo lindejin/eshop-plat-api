@@ -15,7 +15,7 @@ import lombok.ToString;
  * </p>
  *
  * @author sds
- * @since 2025-02-11
+ * @since 2025-02-12
  */
 @Getter
 @Setter
@@ -26,17 +26,17 @@ public class TemplateLogistics implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @TableId(value = "id", type = IdType.AUTO)
-    private Integer id;
+    private Long id;
 
     /**
      * 模版Id
      */
-    private Integer templateId;
+    private Long templateId;
 
     /**
      * 大小 ID
      */
-    private Integer sizeId;
+    private Long sizeId;
 
     /**
      * 运费
@@ -51,7 +51,7 @@ public class TemplateLogistics implements Serializable {
     /**
      * 频道的 ID
      */
-    private Integer logisticId;
+    private Long logisticId;
 
     /**
      * 是否为买家支付运费（0.否 1.是）

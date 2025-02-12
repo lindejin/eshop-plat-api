@@ -5,7 +5,7 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import java.util.Date;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -16,7 +16,7 @@ import lombok.ToString;
  * </p>
  *
  * @author supply
- * @since 2025-02-11
+ * @since 2025-02-12
  */
 @Getter
 @Setter
@@ -27,7 +27,7 @@ public class TbRefundOrder implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @TableId(value = "id", type = IdType.AUTO)
-    private Integer id;
+    private Long id;
 
     /**
      * 退货单号
@@ -37,12 +37,12 @@ public class TbRefundOrder implements Serializable {
     /**
      * 供应商_id
      */
-    private Integer providerId;
+    private Long providerId;
 
     /**
      * 仓库_id
      */
-    private Integer depotId;
+    private Long depotId;
 
     /**
      * 采购单编号
@@ -87,35 +87,35 @@ public class TbRefundOrder implements Serializable {
     /**
      * 退货员_id
      */
-    private Integer coordinatorId;
+    private Long coordinatorId;
 
     /**
      * 退货时间
      */
-    private LocalDateTime refundTime;
+    private Date refundTime;
 
     /**
      * 退货审核人_id
      */
-    private Integer auditorId;
+    private Long auditorId;
 
     /**
      * 退货审核时间
      */
-    private LocalDateTime auditorTime;
+    private Date auditorTime;
 
     /**
      * 出库员_id
      */
-    private Integer storekeeperId;
+    private Long storekeeperId;
 
     /**
      * 出库时间
      */
-    private LocalDateTime storekeeperTime;
+    private Date storekeeperTime;
 
     /**
      * 退货凭证Id
      */
-    private Integer voucherImgId;
+    private Long voucherImgId;
 }

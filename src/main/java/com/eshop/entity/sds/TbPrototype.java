@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
-import java.time.LocalDateTime;
+import java.util.Date;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -15,7 +15,7 @@ import lombok.ToString;
  * </p>
  *
  * @author sds
- * @since 2025-02-11
+ * @since 2025-02-12
  */
 @Getter
 @Setter
@@ -26,7 +26,7 @@ public class TbPrototype implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @TableId(value = "id", type = IdType.AUTO)
-    private Integer id;
+    private Long id;
 
     /**
      * spu编码
@@ -36,7 +36,7 @@ public class TbPrototype implements Serializable {
     /**
      * 供应链商品id
      */
-    private Integer scmProductId;
+    private Long scmProductId;
 
     /**
      * 样机名称
@@ -46,7 +46,7 @@ public class TbPrototype implements Serializable {
     /**
      * 类目_id
      */
-    private Integer categoryId;
+    private Long categoryId;
 
     /**
      * 模特状态(1: 未上线, 2: 已上线)
@@ -66,17 +66,17 @@ public class TbPrototype implements Serializable {
     /**
      * 外部产品id
      */
-    private Integer rawId;
+    private Long rawId;
 
     /**
      * 创建人id
      */
-    private Integer createId;
+    private Long createId;
 
     /**
      * 创建时间
      */
-    private LocalDateTime createTime;
+    private Date createTime;
 
     /**
      * 是否已被删除(1: 是, 2: 否)
@@ -86,10 +86,10 @@ public class TbPrototype implements Serializable {
     /**
      * 修改人
      */
-    private Integer updateId;
+    private Long updateId;
 
     /**
      * 修改时间
      */
-    private LocalDateTime updateTime;
+    private Date updateTime;
 }

@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
-import java.time.LocalDateTime;
+import java.util.Date;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -15,7 +15,7 @@ import lombok.ToString;
  * </p>
  *
  * @author config
- * @since 2025-02-11
+ * @since 2025-02-12
  */
 @Getter
 @Setter
@@ -39,7 +39,7 @@ public class TbDept implements Serializable {
     /**
      * 子部门数目
      */
-    private Integer subCount;
+    private Long subCount;
 
     /**
      * 名称
@@ -49,7 +49,7 @@ public class TbDept implements Serializable {
     /**
      * 排序
      */
-    private Integer deptSort;
+    private Long deptSort;
 
     /**
      * 状态
@@ -74,10 +74,10 @@ public class TbDept implements Serializable {
     /**
      * 创建日期
      */
-    private LocalDateTime createTime;
+    private Date createTime;
 
     /**
      * 更新时间
      */
-    private LocalDateTime updateTime;
+    private Date updateTime;
 }

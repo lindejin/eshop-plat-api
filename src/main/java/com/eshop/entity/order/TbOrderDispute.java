@@ -5,7 +5,7 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import java.util.Date;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -16,7 +16,7 @@ import lombok.ToString;
  * </p>
  *
  * @author order
- * @since 2025-02-11
+ * @since 2025-02-12
  */
 @Getter
 @Setter
@@ -27,7 +27,7 @@ public class TbOrderDispute implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @TableId(value = "id", type = IdType.AUTO)
-    private Integer id;
+    private Long id;
 
     /**
      * 订单编号
@@ -42,7 +42,7 @@ public class TbOrderDispute implements Serializable {
     /**
      * 平台纠纷状态
      */
-    private Integer platformDisputeStatus;
+    private Long platformDisputeStatus;
 
     /**
      * 是否为高风险(1: 是, 2: 否)
@@ -67,7 +67,7 @@ public class TbOrderDispute implements Serializable {
     /**
      * 投诉原因(树结构字段纠纷原因, 值为三级分类)
      */
-    private Integer disputeCauseId;
+    private Long disputeCauseId;
 
     /**
      * 投诉原因描述
@@ -77,32 +77,32 @@ public class TbOrderDispute implements Serializable {
     /**
      * 处理方式(词典id: 2)
      */
-    private Integer processModeId;
+    private Long processModeId;
 
     /**
      * 纠纷开启时间
      */
-    private LocalDateTime disputeOpenDate;
+    private Date disputeOpenDate;
 
     /**
      * 纠纷关闭时间
      */
-    private LocalDateTime disputeCloseDate;
+    private Date disputeCloseDate;
 
     /**
      * 入账时间
      */
-    private LocalDateTime inAccountDate;
+    private Date inAccountDate;
 
     /**
      * 交易取消时间
      */
-    private LocalDateTime cancelDate;
+    private Date cancelDate;
 
     /**
      * 买家确认收货时间
      */
-    private LocalDateTime buyerConfirmDate;
+    private Date buyerConfirmDate;
 
     /**
      * 备注
@@ -112,10 +112,10 @@ public class TbOrderDispute implements Serializable {
     /**
      * 处理人_id
      */
-    private Integer disposeId;
+    private Long disposeId;
 
     /**
      * 处理时间
      */
-    private LocalDateTime disposeDate;
+    private Date disposeDate;
 }

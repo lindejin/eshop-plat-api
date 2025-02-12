@@ -14,7 +14,7 @@ import lombok.ToString;
  * </p>
  *
  * @author product
- * @since 2025-02-11
+ * @since 2025-02-12
  */
 @Getter
 @Setter
@@ -25,7 +25,7 @@ public class WmsCategory implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @TableId(value = "id", type = IdType.AUTO)
-    private Integer id;
+    private Long id;
 
     /**
      * wms类目Id
@@ -45,7 +45,7 @@ public class WmsCategory implements Serializable {
     /**
      * 目录级别(1:一级目录,2:级目录,3:三级目录,4:四级目录)
      */
-    private Integer level;
+    private Long level;
 
     /**
      * 是否叶子节点(1: 是, 2:不是)
@@ -55,5 +55,5 @@ public class WmsCategory implements Serializable {
     /**
      * 排序
      */
-    private Integer sortValue;
+    private Long sortValue;
 }

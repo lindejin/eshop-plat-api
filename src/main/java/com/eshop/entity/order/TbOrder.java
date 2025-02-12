@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
-import java.time.LocalDateTime;
+import java.util.Date;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -15,7 +15,7 @@ import lombok.ToString;
  * </p>
  *
  * @author order
- * @since 2025-02-11
+ * @since 2025-02-12
  */
 @Getter
 @Setter
@@ -26,7 +26,7 @@ public class TbOrder implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @TableId(value = "id", type = IdType.AUTO)
-    private Integer id;
+    private Long id;
 
     /**
      * 订单号
@@ -36,7 +36,7 @@ public class TbOrder implements Serializable {
     /**
      * 商户_id
      */
-    private Integer merchantId;
+    private Long merchantId;
 
     /**
      * 交易号
@@ -46,7 +46,7 @@ public class TbOrder implements Serializable {
     /**
      * 平台id
      */
-    private Integer platformId;
+    private Long platformId;
 
     /**
      * 平台名称
@@ -56,7 +56,7 @@ public class TbOrder implements Serializable {
     /**
      * 店铺id
      */
-    private Integer shopId;
+    private Long shopId;
 
     /**
      * 店铺名称
@@ -76,32 +76,32 @@ public class TbOrder implements Serializable {
     /**
      * 订单时间/下单时间
      */
-    private LocalDateTime orderTime;
+    private Date orderTime;
 
     /**
      * 付款时间
      */
-    private LocalDateTime paymentTime;
+    private Date paymentTime;
 
     /**
      * 店长/负责人_id
      */
-    private Integer shopownerId;
+    private Long shopownerId;
 
     /**
      * 发货时间
      */
-    private LocalDateTime deliverTime;
+    private Date deliverTime;
 
     /**
      * 交货截止时间
      */
-    private LocalDateTime deliveryDeadlineTime;
+    private Date deliveryDeadlineTime;
 
     /**
      * 平台订单状态
      */
-    private Integer platformOrderStatus;
+    private Long platformOrderStatus;
 
     /**
      * 平台留言/买家留言
@@ -136,7 +136,7 @@ public class TbOrder implements Serializable {
     /**
      * 请款时间
      */
-    private LocalDateTime requestFundsTime;
+    private Date requestFundsTime;
 
     /**
      * 平台订单类型

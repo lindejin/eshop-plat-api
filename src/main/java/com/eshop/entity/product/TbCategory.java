@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
-import java.time.LocalDateTime;
+import java.util.Date;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -15,7 +15,7 @@ import lombok.ToString;
  * </p>
  *
  * @author product
- * @since 2025-02-11
+ * @since 2025-02-12
  */
 @Getter
 @Setter
@@ -26,12 +26,12 @@ public class TbCategory implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @TableId(value = "id", type = IdType.AUTO)
-    private Integer id;
+    private Long id;
 
     /**
      * 父类目id
      */
-    private Integer parentId;
+    private Long parentId;
 
     /**
      * 类目名称
@@ -56,12 +56,12 @@ public class TbCategory implements Serializable {
     /**
      * 外部id
      */
-    private Integer rawId;
+    private Long rawId;
 
     /**
      * 外部父id
      */
-    private Integer rawParentId;
+    private Long rawParentId;
 
     /**
      * 备注
@@ -71,12 +71,12 @@ public class TbCategory implements Serializable {
     /**
      * 创建人id
      */
-    private Integer creatorId;
+    private Long creatorId;
 
     /**
      * 创建时间
      */
-    private LocalDateTime createTime;
+    private Date createTime;
 
     /**
      * 是否已被删除(1: 是, 2: 否)
@@ -86,5 +86,5 @@ public class TbCategory implements Serializable {
     /**
      * 删除时间
      */
-    private LocalDateTime deleteTime;
+    private Date deleteTime;
 }

@@ -14,7 +14,7 @@ import lombok.ToString;
  * </p>
  *
  * @author product
- * @since 2025-02-11
+ * @since 2025-02-12
  */
 @Getter
 @Setter
@@ -25,12 +25,12 @@ public class DhProductPackage implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @TableId(value = "id", type = IdType.AUTO)
-    private Integer id;
+    private Long id;
 
     /**
      * 商品id
      */
-    private Integer productId;
+    private Long productId;
 
     /**
      * 产品销售单位id
@@ -40,7 +40,7 @@ public class DhProductPackage implements Serializable {
     /**
      * 按包卖时每包产品数量(按包卖时数量大于等于2，不按包卖时数量为1)
      */
-    private Integer packingQuantity;
+    private Long packingQuantity;
 
     /**
      * 产品包装后重量(以KG为单位)

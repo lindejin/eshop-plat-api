@@ -14,7 +14,7 @@ import lombok.ToString;
  * </p>
  *
  * @author sds
- * @since 2025-02-11
+ * @since 2025-02-12
  */
 @Getter
 @Setter
@@ -25,17 +25,17 @@ public class CommonProductImg implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @TableId(value = "id", type = IdType.AUTO)
-    private Integer id;
+    private Long id;
 
     /**
      * 主表_id
      */
-    private Integer productId;
+    private Long productId;
 
     /**
      * 图片_id
      */
-    private Integer fileImgId;
+    private Long fileImgId;
 
     /**
      * 图片类型(1: 商品图, 2: 尺码图)

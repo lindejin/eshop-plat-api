@@ -14,7 +14,7 @@ import lombok.ToString;
  * </p>
  *
  * @author product
- * @since 2025-02-11
+ * @since 2025-02-12
  */
 @Getter
 @Setter
@@ -25,12 +25,12 @@ public class DhProductImg implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @TableId(value = "id", type = IdType.AUTO)
-    private Integer id;
+    private Long id;
 
     /**
      * 商品id
      */
-    private Integer productId;
+    private Long productId;
 
     /**
      * 图片来源(3=Googleshopping推广图片,其他数值=其他来源；示例值：3;)
@@ -50,7 +50,7 @@ public class DhProductImg implements Serializable {
     /**
      * 文件库ID
      */
-    private Integer imgId;
+    private Long imgId;
 
     /**
      * 排序(序号为一的为主图)

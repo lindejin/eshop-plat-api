@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
-import java.time.LocalDate;
+import java.util.Date;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -15,7 +15,7 @@ import lombok.ToString;
  * </p>
  *
  * @author depot
- * @since 2025-02-11
+ * @since 2025-02-12
  */
 @Getter
 @Setter
@@ -26,17 +26,17 @@ public class TbStockDailys implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @TableId(value = "id", type = IdType.AUTO)
-    private Integer id;
+    private Long id;
 
     /**
      * 日期
      */
-    private LocalDate date;
+    private Date date;
 
     /**
      * 库存主表_id
      */
-    private Integer stockId;
+    private Long stockId;
 
     /**
      * 库存sku编号
@@ -46,5 +46,5 @@ public class TbStockDailys implements Serializable {
     /**
      * 入库数量
      */
-    private Integer stockInCount;
+    private Long stockInCount;
 }

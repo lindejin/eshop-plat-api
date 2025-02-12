@@ -14,7 +14,7 @@ import lombok.ToString;
  * </p>
  *
  * @author sds
- * @since 2025-02-11
+ * @since 2025-02-12
  */
 @Getter
 @Setter
@@ -25,17 +25,17 @@ public class TemuProductImg implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @TableId(value = "id", type = IdType.AUTO)
-    private Integer id;
+    private Long id;
 
     /**
      * 商品id
      */
-    private Integer productId;
+    private Long productId;
 
     /**
      * 平台图片ID
      */
-    private Integer fileImgId;
+    private Long fileImgId;
 
     /**
      * 场景类型： 1:货品轮播图, 2:多语言轮播图, 3:外包装图片,  4:素材图, 5:SKC轮播图, 6:SKC多语言轮播图
@@ -55,7 +55,7 @@ public class TemuProductImg implements Serializable {
     /**
      * 商品skcId
      */
-    private Integer productSkcId;
+    private Long productSkcId;
 
     /**
      * temu平台图片Id

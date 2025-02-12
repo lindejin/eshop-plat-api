@@ -1,4 +1,4 @@
-package com.eshop.util.shop;
+package com.eshop.util.shop.vo;
 
 import lombok.Getter;
 import lombok.Setter;

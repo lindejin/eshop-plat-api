@@ -5,7 +5,7 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import java.util.Date;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -16,7 +16,7 @@ import lombok.ToString;
  * </p>
  *
  * @author sds
- * @since 2025-02-11
+ * @since 2025-02-12
  */
 @Getter
 @Setter
@@ -30,12 +30,12 @@ public class AeTpProduct implements Serializable {
      * 自增id
      */
     @TableId(value = "id", type = IdType.AUTO)
-    private Integer id;
+    private Long id;
 
     /**
      * 模版id
      */
-    private Integer templateId;
+    private Long templateId;
 
     /**
      * 类目id
@@ -45,7 +45,7 @@ public class AeTpProduct implements Serializable {
     /**
      * 店铺id
      */
-    private Integer shopId;
+    private Long shopId;
 
     /**
      * 资质信息
@@ -55,7 +55,7 @@ public class AeTpProduct implements Serializable {
     /**
      * 欧盟责任人id
      */
-    private Integer msrEuId;
+    private Long msrEuId;
 
     /**
      * json结构的字符串，商品扩展字段
@@ -70,7 +70,7 @@ public class AeTpProduct implements Serializable {
     /**
      * 批发最小数量 。取值范围2-100000。批发最小数量和批发折扣需同时有值或无值。
      */
-    private Integer bulkOrder;
+    private Long bulkOrder;
 
     /**
      * jsonArray格式的分国家定价规则数据。
@@ -85,7 +85,7 @@ public class AeTpProduct implements Serializable {
     /**
      * 这个产品需要关联的产品分组ID. 只能关联一个产品分组，如果想关联多个产品分组，请使用api.setGroups接口。
      */
-    private Integer groupId;
+    private Long groupId;
 
     /**
      * 商品原发locale，标记商品的发布初始locale，用于标记初始发布语种
@@ -110,7 +110,7 @@ public class AeTpProduct implements Serializable {
     /**
      * 商品单位 (存储单位编号) 100000000:袋 (bag/bags)
      */
-    private Integer productUnit;
+    private Long productUnit;
 
     /**
      * 库存扣减策略，总共有2种：下单减库存(place_order_withhold)和支付减库存(payment_success_deduct)。
@@ -140,22 +140,22 @@ public class AeTpProduct implements Serializable {
     /**
      * 创建人
      */
-    private Integer createId;
+    private Long createId;
 
     /**
      * 创建时间
      */
-    private LocalDateTime createTime;
+    private Date createTime;
 
     /**
      * 修改人
      */
-    private Integer updateId;
+    private Long updateId;
 
     /**
      * 修改时间
      */
-    private LocalDateTime updateTime;
+    private Date updateTime;
 
     /**
      * 托管状态 1.无状态 2.半托管状态  3.半托管状态

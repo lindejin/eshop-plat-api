@@ -5,7 +5,7 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import java.util.Date;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -16,7 +16,7 @@ import lombok.ToString;
  * </p>
  *
  * @author sds
- * @since 2025-02-11
+ * @since 2025-02-12
  */
 @Getter
 @Setter
@@ -30,7 +30,7 @@ public class ShopeeProduct implements Serializable {
      * 自增id
      */
     @TableId(value = "id", type = IdType.AUTO)
-    private Integer id;
+    private Long id;
 
     /**
      * 产品编码
@@ -40,7 +40,7 @@ public class ShopeeProduct implements Serializable {
     /**
      * 模版Id
      */
-    private Integer templateId;
+    private Long templateId;
 
     /**
      * 类目id
@@ -55,7 +55,7 @@ public class ShopeeProduct implements Serializable {
     /**
      * 模板尺码表id(三方平台的)
      */
-    private Integer templateSizeChartId;
+    private Long templateSizeChartId;
 
     /**
      * 模板尺码表图片id(三方平台的)
@@ -65,17 +65,17 @@ public class ShopeeProduct implements Serializable {
     /**
      * 模板尺码表图片id(erp系统)
      */
-    private Integer sizeImgId;
+    private Long sizeImgId;
 
     /**
      * 店铺商户id
      */
-    private Integer shopMerchantId;
+    private Long shopMerchantId;
 
     /**
      * 店铺id
      */
-    private Integer shopId;
+    private Long shopId;
 
     /**
      * 产品id
@@ -100,7 +100,7 @@ public class ShopeeProduct implements Serializable {
     /**
      * 品牌id(类目属性冗余过来，这个必填)
      */
-    private Integer brandId;
+    private Long brandId;
 
     /**
      * 品牌名称(类目属性冗余过来，这个必填)
@@ -110,7 +110,7 @@ public class ShopeeProduct implements Serializable {
     /**
      * 尺码ID
      */
-    private Integer sizeId;
+    private Long sizeId;
 
     /**
      * 产品价格
@@ -125,7 +125,7 @@ public class ShopeeProduct implements Serializable {
     /**
      * 产品备货数量
      */
-    private Integer inventory;
+    private Long inventory;
 
     /**
      * 此字段仅适用于印度尼西亚和马来西亚的本地卖家。使用此字段可确定产品是否为危险产品。0 表示非危险品，1 表示危险品。有关更多信息，请访问市场相应的卖家教育中心。)
@@ -155,12 +155,12 @@ public class ShopeeProduct implements Serializable {
     /**
      * 商品是否为预购商品(0.否  1.是)
      */
-    private Integer isPreOrder;
+    private Long isPreOrder;
 
     /**
      * 保证发货订单的天数
      */
-    private Integer daysToShip;
+    private Long daysToShip;
 
     /**
      * 产品刊登错误信息
@@ -170,7 +170,7 @@ public class ShopeeProduct implements Serializable {
     /**
      * 刊登时间
      */
-    private LocalDateTime publishTime;
+    private Date publishTime;
 
     /**
      * 刊登失败原因
@@ -215,20 +215,20 @@ public class ShopeeProduct implements Serializable {
     /**
      * 创建人
      */
-    private Integer createId;
+    private Long createId;
 
     /**
      * 创建人
      */
-    private Integer updateId;
+    private Long updateId;
 
     /**
      * 创建时间
      */
-    private LocalDateTime createTime;
+    private Date createTime;
 
     /**
      * 修改时间
      */
-    private LocalDateTime updateTime;
+    private Date updateTime;
 }

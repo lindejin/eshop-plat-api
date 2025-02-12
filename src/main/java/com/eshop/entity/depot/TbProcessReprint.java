@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
-import java.time.LocalDateTime;
+import java.util.Date;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -15,7 +15,7 @@ import lombok.ToString;
  * </p>
  *
  * @author depot
- * @since 2025-02-11
+ * @since 2025-02-12
  */
 @Getter
 @Setter
@@ -26,17 +26,17 @@ public class TbProcessReprint implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @TableId(value = "id", type = IdType.AUTO)
-    private Integer id;
+    private Long id;
 
     /**
      * 加工成品主键id
      */
-    private Integer processSkuId;
+    private Long processSkuId;
 
     /**
      * 仓库_id
      */
-    private Integer depotId;
+    private Long depotId;
 
     /**
      * 批次号
@@ -71,22 +71,22 @@ public class TbProcessReprint implements Serializable {
     /**
      * 创建人_id
      */
-    private Integer createrId;
+    private Long createrId;
 
     /**
      * 创建时间
      */
-    private LocalDateTime createTime;
+    private Date createTime;
 
     /**
      * 补打操作人_id
      */
-    private Integer reprintOperatorId;
+    private Long reprintOperatorId;
 
     /**
      * 补打时间
      */
-    private LocalDateTime reprintTime;
+    private Date reprintTime;
 
     /**
      * 是否删除(1: 是, 2: 否)
@@ -96,5 +96,5 @@ public class TbProcessReprint implements Serializable {
     /**
      * 删除时间
      */
-    private LocalDateTime deleteTime;
+    private Date deleteTime;
 }

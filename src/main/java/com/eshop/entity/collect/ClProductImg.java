@@ -14,7 +14,7 @@ import lombok.ToString;
  * </p>
  *
  * @author collect
- * @since 2025-02-11
+ * @since 2025-02-12
  */
 @Getter
 @Setter
@@ -25,12 +25,12 @@ public class ClProductImg implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @TableId(value = "id", type = IdType.AUTO)
-    private Integer id;
+    private Long id;
 
     /**
      * 产品id
      */
-    private Integer productId;
+    private Long productId;
 
     /**
      * 产品编码
@@ -40,7 +40,7 @@ public class ClProductImg implements Serializable {
     /**
      * 文件库ID
      */
-    private Integer imgId;
+    private Long imgId;
 
     /**
      * 文件类型(1:商品主图)
@@ -50,7 +50,7 @@ public class ClProductImg implements Serializable {
     /**
      * 原图片_id
      */
-    private Integer rawImgId;
+    private Long rawImgId;
 
     /**
      * 排序

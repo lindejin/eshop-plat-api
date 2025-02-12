@@ -14,7 +14,7 @@ import lombok.ToString;
  * </p>
  *
  * @author sds
- * @since 2025-02-11
+ * @since 2025-02-12
  */
 @Getter
 @Setter
@@ -25,17 +25,17 @@ public class TemuTpVideo implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @TableId(value = "id", type = IdType.AUTO)
-    private Integer id;
+    private Long id;
 
     /**
      * 模版id
      */
-    private Integer productId;
+    private Long productId;
 
     /**
      * 文件库ID
      */
-    private Integer fileVideoId;
+    private Long fileVideoId;
 
     /**
      * 排序(序号为一的为主图)

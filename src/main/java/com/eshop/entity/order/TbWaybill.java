@@ -5,7 +5,7 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import java.util.Date;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -16,7 +16,7 @@ import lombok.ToString;
  * </p>
  *
  * @author order
- * @since 2025-02-11
+ * @since 2025-02-12
  */
 @Getter
 @Setter
@@ -27,7 +27,7 @@ public class TbWaybill implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @TableId(value = "id", type = IdType.AUTO)
-    private Integer id;
+    private Long id;
 
     /**
      * 包裹号
@@ -42,7 +42,7 @@ public class TbWaybill implements Serializable {
     /**
      * 仓库id
      */
-    private Integer depotId;
+    private Long depotId;
 
     /**
      * 买家自选物流
@@ -57,7 +57,7 @@ public class TbWaybill implements Serializable {
     /**
      * 物流方式/物流渠道
      */
-    private Integer logisticsModeId;
+    private Long logisticsModeId;
 
     /**
      * 内部单号
@@ -87,7 +87,7 @@ public class TbWaybill implements Serializable {
     /**
      * 包材_id
      */
-    private Integer packingId;
+    private Long packingId;
 
     /**
      * 包材费
@@ -152,12 +152,12 @@ public class TbWaybill implements Serializable {
     /**
      * 运单号上传至平台时间
      */
-    private LocalDateTime uploadTime;
+    private Date uploadTime;
 
     /**
      * 出库时间
      */
-    private LocalDateTime outboundTime;
+    private Date outboundTime;
 
     /**
      * 包裹备注

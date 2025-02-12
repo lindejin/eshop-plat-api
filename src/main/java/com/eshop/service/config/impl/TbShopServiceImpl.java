@@ -13,8 +13,8 @@ import com.baomidou.dynamic.datasource.annotation.DS;
  * </p>
  *
  * @author config
- * @since 2025-02-11
- * @since 2025-02-11
+ * @since 2025-02-12
+ * @since 2025-02-12
  */
 @DS("eshop_config")
 @Service

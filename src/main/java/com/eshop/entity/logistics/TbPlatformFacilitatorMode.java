@@ -14,7 +14,7 @@ import lombok.ToString;
  * </p>
  *
  * @author logistics
- * @since 2025-02-11
+ * @since 2025-02-12
  */
 @Getter
 @Setter
@@ -25,15 +25,15 @@ public class TbPlatformFacilitatorMode implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @TableId(value = "id", type = IdType.AUTO)
-    private Integer id;
+    private Long id;
 
     /**
      * 物流方式_id
      */
-    private Integer modeId;
+    private Long modeId;
 
     /**
      * 平台认可物流_id
      */
-    private Integer transportId;
+    private Long transportId;
 }

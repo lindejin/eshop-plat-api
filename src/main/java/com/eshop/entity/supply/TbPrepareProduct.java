@@ -5,7 +5,7 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import java.util.Date;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -16,7 +16,7 @@ import lombok.ToString;
  * </p>
  *
  * @author supply
- * @since 2025-02-11
+ * @since 2025-02-12
  */
 @Getter
 @Setter
@@ -27,7 +27,7 @@ public class TbPrepareProduct implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @TableId(value = "id", type = IdType.AUTO)
-    private Integer id;
+    private Long id;
 
     /**
      * 备货单号
@@ -37,12 +37,12 @@ public class TbPrepareProduct implements Serializable {
     /**
      * 商户_id
      */
-    private Integer merchantId;
+    private Long merchantId;
 
     /**
      * 仓库id
      */
-    private Integer depotId;
+    private Long depotId;
 
     /**
      * 备货计划名称
@@ -52,7 +52,7 @@ public class TbPrepareProduct implements Serializable {
     /**
      * 供应商_id
      */
-    private Integer supplierId;
+    private Long supplierId;
 
     /**
      * 备货类型(1: 常规备货)
@@ -77,22 +77,22 @@ public class TbPrepareProduct implements Serializable {
     /**
      * 创建人
      */
-    private Integer createrId;
+    private Long createrId;
 
     /**
      * 创建时间
      */
-    private LocalDateTime createTime;
+    private Date createTime;
 
     /**
      * 审核人
      */
-    private Integer auditorId;
+    private Long auditorId;
 
     /**
      * 审核时间
      */
-    private LocalDateTime auditorTime;
+    private Date auditorTime;
 
     /**
      * 备注
@@ -107,5 +107,5 @@ public class TbPrepareProduct implements Serializable {
     /**
      * 删除时间
      */
-    private LocalDateTime deleteTime;
+    private Date deleteTime;
 }

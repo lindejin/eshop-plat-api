@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
-import java.time.LocalDateTime;
+import java.util.Date;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -15,7 +15,7 @@ import lombok.ToString;
  * </p>
  *
  * @author job
- * @since 2025-02-11
+ * @since 2025-02-12
  */
 @Getter
 @Setter
@@ -31,12 +31,12 @@ public class XxlJobLog implements Serializable {
     /**
      * 执行器主键ID
      */
-    private Integer jobGroup;
+    private Long jobGroup;
 
     /**
      * 任务，主键ID
      */
-    private Integer jobId;
+    private Long jobId;
 
     /**
      * 执行器地址，本次执行的地址
@@ -61,17 +61,17 @@ public class XxlJobLog implements Serializable {
     /**
      * 失败重试次数
      */
-    private Integer executorFailRetryCount;
+    private Long executorFailRetryCount;
 
     /**
      * 调度-时间
      */
-    private LocalDateTime triggerTime;
+    private Date triggerTime;
 
     /**
      * 调度-结果
      */
-    private Integer triggerCode;
+    private Long triggerCode;
 
     /**
      * 调度-日志
@@ -81,12 +81,12 @@ public class XxlJobLog implements Serializable {
     /**
      * 执行-时间
      */
-    private LocalDateTime handleTime;
+    private Date handleTime;
 
     /**
      * 执行-状态
      */
-    private Integer handleCode;
+    private Long handleCode;
 
     /**
      * 执行-日志

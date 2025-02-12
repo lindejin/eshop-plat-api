@@ -5,7 +5,7 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import java.util.Date;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -16,7 +16,7 @@ import lombok.ToString;
  * </p>
  *
  * @author finance
- * @since 2025-02-11
+ * @since 2025-02-12
  */
 @Getter
 @Setter
@@ -27,12 +27,12 @@ public class TbMerchantFlowingWater implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @TableId(value = "id", type = IdType.AUTO)
-    private Integer id;
+    private Long id;
 
     /**
      * 商户id
      */
-    private Integer merchantId;
+    private Long merchantId;
 
     /**
      * 流水类型(1: 收入, 2: 支出)
@@ -67,10 +67,10 @@ public class TbMerchantFlowingWater implements Serializable {
     /**
      * 创建人id
      */
-    private Integer creatorId;
+    private Long creatorId;
 
     /**
      * 创建时间
      */
-    private LocalDateTime createTime;
+    private Date createTime;
 }

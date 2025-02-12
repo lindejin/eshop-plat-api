@@ -14,7 +14,7 @@ import lombok.ToString;
  * </p>
  *
  * @author product
- * @since 2025-02-11
+ * @since 2025-02-12
  */
 @Getter
 @Setter
@@ -25,12 +25,12 @@ public class TbProductPlatform implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @TableId(value = "id", type = IdType.AUTO)
-    private Integer id;
+    private Long id;
 
     /**
      * 主库商品id
      */
-    private Integer mianProductId;
+    private Long mianProductId;
 
     /**
      * 平台编码
@@ -40,5 +40,5 @@ public class TbProductPlatform implements Serializable {
     /**
      * 平台商品id
      */
-    private Integer platformProductId;
+    private Long platformProductId;
 }

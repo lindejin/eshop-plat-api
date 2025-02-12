@@ -14,7 +14,7 @@ import lombok.ToString;
  * </p>
  *
  * @author product
- * @since 2025-02-11
+ * @since 2025-02-12
  */
 @Getter
 @Setter
@@ -25,12 +25,12 @@ public class DhSkuInven implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @TableId(value = "id", type = IdType.AUTO)
-    private Integer id;
+    private Long id;
 
     /**
      * 商品sku_id
      */
-    private Integer skuId;
+    private Long skuId;
 
     /**
      * 产品备货地址编码(必须在itemSkuList[].itemSkuInvenList[].inventoryLocation中。示例值：CN)
@@ -45,7 +45,7 @@ public class DhSkuInven implements Serializable {
     /**
      * 有备货时，备货地址下sku的备货数量
      */
-    private Integer skuInventoryQty;
+    private Long skuInventoryQty;
 
     /**
      * 是否可销售(0 不可销售1 可销售, 示例值：1)

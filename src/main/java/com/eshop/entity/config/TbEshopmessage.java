@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
-import java.time.LocalDateTime;
+import java.util.Date;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -15,7 +15,7 @@ import lombok.ToString;
  * </p>
  *
  * @author config
- * @since 2025-02-11
+ * @since 2025-02-12
  */
 @Getter
 @Setter
@@ -26,7 +26,7 @@ public class TbEshopmessage implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @TableId(value = "id", type = IdType.AUTO)
-    private Integer id;
+    private Long id;
 
     /**
      * 标题
@@ -46,12 +46,12 @@ public class TbEshopmessage implements Serializable {
     /**
      * 有效期
      */
-    private LocalDateTime expiryTime;
+    private Date expiryTime;
 
     /**
      * 角色
      */
-    private Integer roleId;
+    private Long roleId;
 
     /**
      * 是否开启,1:开启, 2:关闭
@@ -61,12 +61,12 @@ public class TbEshopmessage implements Serializable {
     /**
      * 创建时间
      */
-    private LocalDateTime createTime;
+    private Date createTime;
 
     /**
      * 创建人Id
      */
-    private Integer createOperId;
+    private Long createOperId;
 
     /**
      * 是否置顶,1:置顶,2:不置顶

@@ -14,7 +14,7 @@ import lombok.ToString;
  * </p>
  *
  * @author depot
- * @since 2025-02-11
+ * @since 2025-02-12
  */
 @Getter
 @Setter
@@ -25,17 +25,17 @@ public class TbDepotShelf implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @TableId(value = "id", type = IdType.AUTO)
-    private Integer id;
+    private Long id;
 
     /**
      * 父节点id
      */
-    private Integer parentId;
+    private Long parentId;
 
     /**
      * 仓库id
      */
-    private Integer depotId;
+    private Long depotId;
 
     /**
      * 节点code
@@ -50,7 +50,7 @@ public class TbDepotShelf implements Serializable {
     /**
      * 可用仓位数量
      */
-    private Integer availableAmount;
+    private Long availableAmount;
 
     /**
      * 表示是几级目录

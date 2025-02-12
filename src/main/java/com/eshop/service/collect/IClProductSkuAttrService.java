@@ -9,7 +9,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * </p>
  *
  * @author collect
- * @since 2025-02-11
+ * @since 2025-02-12
  */
 public interface IClProductSkuAttrService extends IService<ClProductSkuAttr> {
 

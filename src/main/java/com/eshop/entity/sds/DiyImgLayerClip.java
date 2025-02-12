@@ -14,7 +14,7 @@ import lombok.ToString;
  * </p>
  *
  * @author sds
- * @since 2025-02-11
+ * @since 2025-02-12
  */
 @Getter
 @Setter
@@ -25,17 +25,17 @@ public class DiyImgLayerClip implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @TableId(value = "id", type = IdType.AUTO)
-    private Integer id;
+    private Long id;
 
     /**
      * 图库主键id
      */
-    private Integer diyImgId;
+    private Long diyImgId;
 
     /**
      * 图层id
      */
-    private Integer layerId;
+    private Long layerId;
 
     /**
      * 定位名称

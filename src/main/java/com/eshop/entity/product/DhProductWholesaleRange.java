@@ -14,7 +14,7 @@ import lombok.ToString;
  * </p>
  *
  * @author product
- * @since 2025-02-11
+ * @since 2025-02-12
  */
 @Getter
 @Setter
@@ -25,12 +25,12 @@ public class DhProductWholesaleRange implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @TableId(value = "id", type = IdType.AUTO)
-    private Integer id;
+    private Long id;
 
     /**
      * 商品id
      */
-    private Integer productId;
+    private Long productId;
 
     /**
      * 折扣率(折扣百分比，如卖家想设置产品折扣率为95折，则该入参参数应输入为0.05；示例值：0.05)
@@ -40,5 +40,5 @@ public class DhProductWholesaleRange implements Serializable {
     /**
      * 折扣限制数量
      */
-    private Integer startQty;
+    private Long startQty;
 }

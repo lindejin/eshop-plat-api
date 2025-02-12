@@ -14,7 +14,7 @@ import lombok.ToString;
  * </p>
  *
  * @author product
- * @since 2025-02-11
+ * @since 2025-02-12
  */
 @Getter
 @Setter
@@ -25,7 +25,7 @@ public class TbProductSkuAttr implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @TableId(value = "id", type = IdType.AUTO)
-    private Integer id;
+    private Long id;
 
     /**
      * 商品sku
@@ -40,7 +40,7 @@ public class TbProductSkuAttr implements Serializable {
     /**
      * sku属性id
      */
-    private Integer attrId;
+    private Long attrId;
 
     /**
      * 属性名称
@@ -50,7 +50,7 @@ public class TbProductSkuAttr implements Serializable {
     /**
      * sku属性值id
      */
-    private Integer attrValId;
+    private Long attrValId;
 
     /**
      * 属性值

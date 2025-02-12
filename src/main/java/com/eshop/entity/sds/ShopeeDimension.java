@@ -15,7 +15,7 @@ import lombok.ToString;
  * </p>
  *
  * @author sds
- * @since 2025-02-11
+ * @since 2025-02-12
  */
 @Getter
 @Setter
@@ -26,12 +26,12 @@ public class ShopeeDimension implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @TableId(value = "id", type = IdType.AUTO)
-    private Integer id;
+    private Long id;
 
     /**
      * 商品sku_id
      */
-    private Integer productId;
+    private Long productId;
 
     /**
      * 产品sku编码
@@ -41,17 +41,17 @@ public class ShopeeDimension implements Serializable {
     /**
      * 包装高度，单位为厘米
      */
-    private Integer packageHeight;
+    private Long packageHeight;
 
     /**
      * 包装长度，单位为厘米
      */
-    private Integer packageLength;
+    private Long packageLength;
 
     /**
      * 包装宽度，单位为厘米
      */
-    private Integer packageWidth;
+    private Long packageWidth;
 
     /**
      * 重量

@@ -5,7 +5,7 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import java.util.Date;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -16,7 +16,7 @@ import lombok.ToString;
  * </p>
  *
  * @author order
- * @since 2025-02-11
+ * @since 2025-02-12
  */
 @Getter
 @Setter
@@ -27,7 +27,7 @@ public class TbShipmentTask implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @TableId(value = "id", type = IdType.AUTO)
-    private Integer id;
+    private Long id;
 
     /**
      * 揽货批次号
@@ -47,7 +47,7 @@ public class TbShipmentTask implements Serializable {
     /**
      * 平台id
      */
-    private Integer platformId;
+    private Long platformId;
 
     /**
      * 渠道id
@@ -57,12 +57,12 @@ public class TbShipmentTask implements Serializable {
     /**
      * 店铺id
      */
-    private Integer shopId;
+    private Long shopId;
 
     /**
      * 订单总数
      */
-    private Integer orderTotal;
+    private Long orderTotal;
 
     /**
      * 批次重量
@@ -87,17 +87,17 @@ public class TbShipmentTask implements Serializable {
     /**
      * 上传成功数
      */
-    private Integer uploadSuccessCount;
+    private Long uploadSuccessCount;
 
     /**
      * 上传失败数
      */
-    private Integer uploadFailCount;
+    private Long uploadFailCount;
 
     /**
      * 订单类型 4.ae全托管jit 5.ae全托管cf
      */
-    private Integer orderType;
+    private Long orderType;
 
     /**
      * 发货单号
@@ -107,17 +107,17 @@ public class TbShipmentTask implements Serializable {
     /**
      * 创建人
      */
-    private Integer creatorId;
+    private Long creatorId;
 
     /**
      * 创建时间
      */
-    private LocalDateTime createTime;
+    private Date createTime;
 
     /**
      * file_id
      */
-    private Integer fileId;
+    private Long fileId;
 
     /**
      * 扩展字段1
@@ -142,10 +142,10 @@ public class TbShipmentTask implements Serializable {
     /**
      * 删除人
      */
-    private Integer deleteId;
+    private Long deleteId;
 
     /**
      * 删除时间
      */
-    private LocalDateTime deleteTime;
+    private Date deleteTime;
 }

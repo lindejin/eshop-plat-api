@@ -14,7 +14,7 @@ import lombok.ToString;
  * </p>
  *
  * @author product
- * @since 2025-02-11
+ * @since 2025-02-12
  */
 @Getter
 @Setter
@@ -28,7 +28,7 @@ public class TbProductSkuGift implements Serializable {
      * 主键自增
      */
     @TableId(value = "id", type = IdType.AUTO)
-    private Integer id;
+    private Long id;
 
     /**
      * sku编码（主商品）
@@ -43,7 +43,7 @@ public class TbProductSkuGift implements Serializable {
     /**
      * 图片id（赠品）
      */
-    private Integer skuImgId;
+    private Long skuImgId;
 
     /**
      * 商品中文名（赠品）
@@ -58,5 +58,5 @@ public class TbProductSkuGift implements Serializable {
     /**
      * 赠品数量（赠品）
      */
-    private Integer giftNum;
+    private Long giftNum;
 }

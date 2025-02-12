@@ -14,7 +14,7 @@ import lombok.ToString;
  * </p>
  *
  * @author product
- * @since 2025-02-11
+ * @since 2025-02-12
  */
 @Getter
 @Setter
@@ -25,17 +25,17 @@ public class DhProductAttrGroup implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @TableId(value = "id", type = IdType.AUTO)
-    private Integer id;
+    private Long id;
 
     /**
      * 商品id
      */
-    private Integer productId;
+    private Long productId;
 
     /**
      * 属性Id
      */
-    private Integer attrId;
+    private Long attrId;
 
     /**
      * 兼容性属性值中文名称
@@ -45,7 +45,7 @@ public class DhProductAttrGroup implements Serializable {
     /**
      * 属性值id
      */
-    private Integer attrValId;
+    private Long attrValId;
 
     /**
      * 兼容性属性值英文名称

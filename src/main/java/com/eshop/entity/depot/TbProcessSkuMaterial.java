@@ -14,7 +14,7 @@ import lombok.ToString;
  * </p>
  *
  * @author depot
- * @since 2025-02-11
+ * @since 2025-02-12
  */
 @Getter
 @Setter
@@ -25,17 +25,17 @@ public class TbProcessSkuMaterial implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @TableId(value = "id", type = IdType.AUTO)
-    private Integer id;
+    private Long id;
 
     /**
      * 加工sku_id
      */
-    private Integer processSkuId;
+    private Long processSkuId;
 
     /**
      * 素材_id
      */
-    private Integer materialId;
+    private Long materialId;
 
     /**
      * 素材sku编码

@@ -1,10 +1,10 @@
-package com.eshop.api.modules.util.shop.app;
+package com.eshop.util.shop.app;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.eshop.modal.entry.api.marketplace.auth.vo.PlatformTokenVO;
+import com.eshop.util.shop.vo.PlatformTokenVO;
 import com.eshop.util.platform.api.structure.tiktok.dto.TikTokAppClientDTO;
-import com.eshop.util.platform.utils.shop.ShopCacheUtils;
+import com.eshop.util.shop.cache.ShopCacheUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;

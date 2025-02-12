@@ -5,7 +5,7 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import java.util.Date;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -16,7 +16,7 @@ import lombok.ToString;
  * </p>
  *
  * @author supply
- * @since 2025-02-11
+ * @since 2025-02-12
  */
 @Getter
 @Setter
@@ -27,7 +27,7 @@ public class TbOrderPayment implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @TableId(value = "id", type = IdType.AUTO)
-    private Integer id;
+    private Long id;
 
     /**
      * 付款单号
@@ -42,7 +42,7 @@ public class TbOrderPayment implements Serializable {
     /**
      * 付款银行账户id
      */
-    private Integer paymentBankId;
+    private Long paymentBankId;
 
     /**
      * 付款方式(1:现款,2:支付宝,3:微信)
@@ -52,27 +52,27 @@ public class TbOrderPayment implements Serializable {
     /**
      * 供应商id
      */
-    private Integer supplierId;
+    private Long supplierId;
 
     /**
      * 申请人
      */
-    private Integer petitionerId;
+    private Long petitionerId;
 
     /**
      * 申请时间
      */
-    private LocalDateTime petitionerTime;
+    private Date petitionerTime;
 
     /**
      * 审核人_id
      */
-    private Integer auditorId;
+    private Long auditorId;
 
     /**
      * 审核时间
      */
-    private LocalDateTime auditorTime;
+    private Date auditorTime;
 
     /**
      * 应付金额
@@ -87,12 +87,12 @@ public class TbOrderPayment implements Serializable {
     /**
      * 付款人
      */
-    private Integer paymentPersonId;
+    private Long paymentPersonId;
 
     /**
      * 付款时间
      */
-    private LocalDateTime paymentTime;
+    private Date paymentTime;
 
     /**
      * 付款信息是否作废(1:正常,2:已作废)

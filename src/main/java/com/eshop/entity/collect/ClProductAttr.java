@@ -14,7 +14,7 @@ import lombok.ToString;
  * </p>
  *
  * @author collect
- * @since 2025-02-11
+ * @since 2025-02-12
  */
 @Getter
 @Setter
@@ -25,12 +25,12 @@ public class ClProductAttr implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @TableId(value = "id", type = IdType.AUTO)
-    private Integer id;
+    private Long id;
 
     /**
      * 产品id
      */
-    private Integer productId;
+    private Long productId;
 
     /**
      * 产品编码
@@ -40,7 +40,7 @@ public class ClProductAttr implements Serializable {
     /**
      * 属性Id
      */
-    private Integer attrId;
+    private Long attrId;
 
     /**
      * 产品属性名称 (英文)

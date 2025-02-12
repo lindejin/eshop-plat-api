@@ -15,7 +15,7 @@ import lombok.ToString;
  * </p>
  *
  * @author depot
- * @since 2025-02-11
+ * @since 2025-02-12
  */
 @Getter
 @Setter
@@ -26,7 +26,7 @@ public class TbOutboundDetail implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @TableId(value = "id", type = IdType.AUTO)
-    private Integer id;
+    private Long id;
 
     /**
      * 出库单号
@@ -61,5 +61,5 @@ public class TbOutboundDetail implements Serializable {
     /**
      * 出库数量
      */
-    private Integer storageQuantity;
+    private Long storageQuantity;
 }

@@ -14,7 +14,7 @@ import lombok.ToString;
  * </p>
  *
  * @author file
- * @since 2025-02-11
+ * @since 2025-02-12
  */
 @Getter
 @Setter
@@ -25,7 +25,7 @@ public class FileGrouping implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @TableId(value = "id", type = IdType.AUTO)
-    private Integer id;
+    private Long id;
 
     /**
      * 是否为固定分组(1:是, 2:否)
@@ -40,7 +40,7 @@ public class FileGrouping implements Serializable {
     /**
      * 父分组id(值为0的话说明是最顶层分组)
      */
-    private Integer parentId;
+    private Long parentId;
 
     /**
      * 备注

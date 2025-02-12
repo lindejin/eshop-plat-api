@@ -14,7 +14,7 @@ import lombok.ToString;
  * </p>
  *
  * @author order
- * @since 2025-02-11
+ * @since 2025-02-12
  */
 @Getter
 @Setter
@@ -25,9 +25,9 @@ public class TbOrderWaybill implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @TableId(value = "id", type = IdType.AUTO)
-    private Integer id;
+    private Long id;
 
-    private Integer orderId;
+    private Long orderId;
 
-    private Integer waybillId;
+    private Long waybillId;
 }

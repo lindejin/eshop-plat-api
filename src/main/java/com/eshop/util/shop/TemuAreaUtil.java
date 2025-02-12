@@ -1,6 +1,5 @@
-package com.eshop.api.modules.util.shop;
+package com.eshop.util.shop;
 
-import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.List;
 

@@ -5,7 +5,7 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import java.util.Date;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -16,7 +16,7 @@ import lombok.ToString;
  * </p>
  *
  * @author sds
- * @since 2025-02-11
+ * @since 2025-02-12
  */
 @Getter
 @Setter
@@ -30,17 +30,17 @@ public class AeProductSkuTutelagePrice implements Serializable {
      * 自增id
      */
     @TableId(value = "id", type = IdType.AUTO)
-    private Integer id;
+    private Long id;
 
     /**
      * 产品id
      */
-    private Integer productId;
+    private Long productId;
 
     /**
      * 产品sku主键id
      */
-    private Integer skuId;
+    private Long skuId;
 
     /**
      * 产品skuCode
@@ -60,7 +60,7 @@ public class AeProductSkuTutelagePrice implements Serializable {
     /**
      * 半托管-JIT库存
      */
-    private Integer halfTubeInventory;
+    private Long halfTubeInventory;
 
     /**
      * 仓库编码
@@ -70,7 +70,7 @@ public class AeProductSkuTutelagePrice implements Serializable {
     /**
      * 		SKU货品id
      */
-    private Integer scItemId;
+    private Long scItemId;
 
     /**
      * SKU货品编码
@@ -80,20 +80,20 @@ public class AeProductSkuTutelagePrice implements Serializable {
     /**
      * 创建人
      */
-    private Integer createId;
+    private Long createId;
 
     /**
      * 创建时间
      */
-    private LocalDateTime createTime;
+    private Date createTime;
 
     /**
      * 修改人
      */
-    private Integer updateId;
+    private Long updateId;
 
     /**
      * 修改时间
      */
-    private LocalDateTime updateTime;
+    private Date updateTime;
 }

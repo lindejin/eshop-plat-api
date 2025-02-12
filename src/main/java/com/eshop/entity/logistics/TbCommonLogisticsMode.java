@@ -14,7 +14,7 @@ import lombok.ToString;
  * </p>
  *
  * @author logistics
- * @since 2025-02-11
+ * @since 2025-02-12
  */
 @Getter
 @Setter
@@ -25,12 +25,12 @@ public class TbCommonLogisticsMode implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @TableId(value = "id", type = IdType.AUTO)
-    private Integer id;
+    private Long id;
 
     /**
      * 共用_物流服务商(一对多)
      */
-    private Integer facilitatorId;
+    private Long facilitatorId;
 
     /**
      * 渠道名称/物流名称

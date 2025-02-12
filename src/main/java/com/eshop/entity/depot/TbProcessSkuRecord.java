@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
-import java.time.LocalDateTime;
+import java.util.Date;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -15,7 +15,7 @@ import lombok.ToString;
  * </p>
  *
  * @author depot
- * @since 2025-02-11
+ * @since 2025-02-12
  */
 @Getter
 @Setter
@@ -26,50 +26,50 @@ public class TbProcessSkuRecord implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @TableId(value = "id", type = IdType.AUTO)
-    private Integer id;
+    private Long id;
 
     /**
      * 加工sku_id
      */
-    private Integer processSkuId;
+    private Long processSkuId;
 
     /**
      * 材料配货人_id
      */
-    private Integer materialDistributorId;
+    private Long materialDistributorId;
 
     /**
      * 配货时间
      */
-    private LocalDateTime distributionTime;
+    private Date distributionTime;
 
     /**
      * 印花打印人_id
      */
-    private Integer printedById;
+    private Long printedById;
 
     /**
      * 打印时间
      */
-    private LocalDateTime printTime;
+    private Date printTime;
 
     /**
      * 分拣人
      */
-    private Integer sorterId;
+    private Long sorterId;
 
     /**
      * 分拣时间
      */
-    private LocalDateTime sorterTime;
+    private Date sorterTime;
 
     /**
      * 印花入库人
      */
-    private Integer printingDepositorId;
+    private Long printingDepositorId;
 
     /**
      * 印花入库时间
      */
-    private LocalDateTime depositorTime;
+    private Date depositorTime;
 }

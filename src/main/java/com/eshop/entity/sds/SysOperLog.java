@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
-import java.time.LocalDateTime;
+import java.util.Date;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -15,7 +15,7 @@ import lombok.ToString;
  * </p>
  *
  * @author sds
- * @since 2025-02-11
+ * @since 2025-02-12
  */
 @Getter
 @Setter
@@ -39,7 +39,7 @@ public class SysOperLog implements Serializable {
     /**
      * 业务类型（0其它 1新增 2修改 3删除）
      */
-    private Integer businessType;
+    private Long businessType;
 
     /**
      * 方法名称
@@ -54,7 +54,7 @@ public class SysOperLog implements Serializable {
     /**
      * 操作类别（0其它 1后台用户 2手机端用户）
      */
-    private Integer operatorType;
+    private Long operatorType;
 
     /**
      * 操作人员
@@ -94,7 +94,7 @@ public class SysOperLog implements Serializable {
     /**
      * 操作状态（0正常 1异常）
      */
-    private Integer status;
+    private Long status;
 
     /**
      * 错误消息
@@ -104,7 +104,7 @@ public class SysOperLog implements Serializable {
     /**
      * 操作时间
      */
-    private LocalDateTime operTime;
+    private Date operTime;
 
     /**
      * 消耗时间

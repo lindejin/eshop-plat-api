@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
-import java.time.LocalDateTime;
+import java.util.Date;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -15,7 +15,7 @@ import lombok.ToString;
  * </p>
  *
  * @author log
- * @since 2025-02-11
+ * @since 2025-02-12
  */
 @Getter
 @Setter
@@ -26,7 +26,7 @@ public class TbInventoryLog implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @TableId(value = "id", type = IdType.AUTO)
-    private Integer id;
+    private Long id;
 
     /**
      * 盘点计划编号
@@ -46,7 +46,7 @@ public class TbInventoryLog implements Serializable {
     /**
      * 操作人
      */
-    private Integer operatorId;
+    private Long operatorId;
 
     /**
      * 操作人id
@@ -56,5 +56,5 @@ public class TbInventoryLog implements Serializable {
     /**
      * 运行时间
      */
-    private LocalDateTime operateTime;
+    private Date operateTime;
 }

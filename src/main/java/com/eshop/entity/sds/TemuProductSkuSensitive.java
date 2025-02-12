@@ -14,7 +14,7 @@ import lombok.ToString;
  * </p>
  *
  * @author sds
- * @since 2025-02-11
+ * @since 2025-02-12
  */
 @Getter
 @Setter
@@ -25,17 +25,17 @@ public class TemuProductSkuSensitive implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @TableId(value = "id", type = IdType.AUTO)
-    private Integer id;
+    private Long id;
 
     /**
      * 商品id
      */
-    private Integer productId;
+    private Long productId;
 
     /**
      * skuId
      */
-    private Integer productSkuId;
+    private Long productSkuId;
 
     /**
      * 敏感类型(多个逗号,隔开): 110001:纯电, 120001:内电, 130001:磁性, 140001:液体, 150001:粉末, 160001:膏体, 170001:刀具 

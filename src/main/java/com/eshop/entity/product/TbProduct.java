@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
-import java.time.LocalDateTime;
+import java.util.Date;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -15,7 +15,7 @@ import lombok.ToString;
  * </p>
  *
  * @author product
- * @since 2025-02-11
+ * @since 2025-02-12
  */
 @Getter
 @Setter
@@ -26,7 +26,7 @@ public class TbProduct implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @TableId(value = "id", type = IdType.AUTO)
-    private Integer id;
+    private Long id;
 
     /**
      * spu编码
@@ -36,27 +36,27 @@ public class TbProduct implements Serializable {
     /**
      * 商户_id
      */
-    private Integer merchantId;
+    private Long merchantId;
 
     /**
      * 类目id
      */
-    private Integer categoryId;
+    private Long categoryId;
 
     /**
      * 商品分类id
      */
-    private Integer classifyId;
+    private Long classifyId;
 
     /**
      * 供应链商品_id
      */
-    private Integer scmProductId;
+    private Long scmProductId;
 
     /**
      * 样机_id
      */
-    private Integer prototypeId;
+    private Long prototypeId;
 
     /**
      * 数据来源类型(1: 主库录入, 2: 表格导入, 3: 第三方平台录入, 4: diy导入, 5: 自动合成)
@@ -71,22 +71,22 @@ public class TbProduct implements Serializable {
     /**
      * 仓库id
      */
-    private Integer depotId;
+    private Long depotId;
 
     /**
      * 商品品牌id
      */
-    private Integer brandId;
+    private Long brandId;
 
     /**
      * 包材id
      */
-    private Integer packingId;
+    private Long packingId;
 
     /**
      * 开发员id
      */
-    private Integer developerId;
+    private Long developerId;
 
     /**
      * 是否共享(1: 是, 2:否)
@@ -101,22 +101,22 @@ public class TbProduct implements Serializable {
     /**
      * 创建人id
      */
-    private Integer creatorId;
+    private Long creatorId;
 
     /**
      * 创建时间
      */
-    private LocalDateTime createTime;
+    private Date createTime;
 
     /**
      * 最后修改人id
      */
-    private Integer lastUpdateId;
+    private Long lastUpdateId;
 
     /**
      * 最后修改时间
      */
-    private LocalDateTime lastUpdateTime;
+    private Date lastUpdateTime;
 
     /**
      * 是否已被删除(1: 是, 2: 否)
@@ -126,5 +126,5 @@ public class TbProduct implements Serializable {
     /**
      * 删除时间
      */
-    private LocalDateTime deleteTime;
+    private Date deleteTime;
 }

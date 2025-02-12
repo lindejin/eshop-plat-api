@@ -14,7 +14,7 @@ import lombok.ToString;
  * </p>
  *
  * @author logistics
- * @since 2025-02-11
+ * @since 2025-02-12
  */
 @Getter
 @Setter
@@ -25,20 +25,20 @@ public class TbLogisticsMailAddress implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @TableId(value = "id", type = IdType.AUTO)
-    private Integer id;
+    private Long id;
 
     /**
      * 物流方式
      */
-    private Integer logisticsModeId;
+    private Long logisticsModeId;
 
     /**
      * 寄件英文地址
      */
-    private Integer mailAddressEnId;
+    private Long mailAddressEnId;
 
     /**
      * 寄件中文地址
      */
-    private Integer mailAddressCnId;
+    private Long mailAddressCnId;
 }

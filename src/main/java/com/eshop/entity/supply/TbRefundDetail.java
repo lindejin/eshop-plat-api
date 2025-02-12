@@ -15,7 +15,7 @@ import lombok.ToString;
  * </p>
  *
  * @author supply
- * @since 2025-02-11
+ * @since 2025-02-12
  */
 @Getter
 @Setter
@@ -26,7 +26,7 @@ public class TbRefundDetail implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @TableId(value = "id", type = IdType.AUTO)
-    private Integer id;
+    private Long id;
 
     /**
      * 退货单号
@@ -56,7 +56,7 @@ public class TbRefundDetail implements Serializable {
     /**
      * 退货数量
      */
-    private Integer refundAmount;
+    private Long refundAmount;
 
     /**
      * 小计(单价 * 数量)

@@ -14,7 +14,7 @@ import lombok.ToString;
  * </p>
  *
  * @author product
- * @since 2025-02-11
+ * @since 2025-02-12
  */
 @Getter
 @Setter
@@ -25,27 +25,27 @@ public class DhCategoryAttrVal implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @TableId(value = "id", type = IdType.AUTO)
-    private Integer id;
+    private Long id;
 
     /**
      * 属性Id(自定义属性，属性值id为从1向上累加也可不填;品牌属性值默认为99;与对应的类目属性值ID一致)
      */
-    private Integer attrId;
+    private Long attrId;
 
     /**
      * 产品线属性值编号
      */
-    private Integer attrValId;
+    private Long attrValId;
 
     /**
      * 发布类目属性编号
      */
-    private Integer catePubAttrId;
+    private Long catePubAttrId;
 
     /**
      * 属性值主键
      */
-    private Integer catePubAttrValId;
+    private Long catePubAttrValId;
 
     /**
      * 属性值英文

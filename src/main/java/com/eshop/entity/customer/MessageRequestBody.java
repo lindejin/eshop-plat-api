@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
-import java.time.LocalDateTime;
+import java.util.Date;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -15,7 +15,7 @@ import lombok.ToString;
  * </p>
  *
  * @author customer
- * @since 2025-02-11
+ * @since 2025-02-12
  */
 @Getter
 @Setter
@@ -26,7 +26,7 @@ public class MessageRequestBody implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @TableId(value = "id", type = IdType.AUTO)
-    private Integer id;
+    private Long id;
 
     /**
      * 运行属性/运行描述
@@ -36,7 +36,7 @@ public class MessageRequestBody implements Serializable {
     /**
      * 平台_id
      */
-    private Integer platformId;
+    private Long platformId;
 
     /**
      * 平台请求参数
@@ -56,10 +56,10 @@ public class MessageRequestBody implements Serializable {
     /**
      * 请求日期
      */
-    private LocalDateTime requestTime;
+    private Date requestTime;
 
     /**
      * 请求人
      */
-    private Integer requestId;
+    private Long requestId;
 }

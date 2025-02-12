@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
-import java.time.LocalDateTime;
+import java.util.Date;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -15,7 +15,7 @@ import lombok.ToString;
  * </p>
  *
  * @author job
- * @since 2025-02-11
+ * @since 2025-02-12
  */
 @Getter
 @Setter
@@ -26,18 +26,18 @@ public class XxlJobInfo implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @TableId(value = "id", type = IdType.AUTO)
-    private Integer id;
+    private Long id;
 
     /**
      * 执行器主键ID
      */
-    private Integer jobGroup;
+    private Long jobGroup;
 
     private String jobDesc;
 
-    private LocalDateTime addTime;
+    private Date addTime;
 
-    private LocalDateTime updateTime;
+    private Date updateTime;
 
     /**
      * 作者
@@ -87,12 +87,12 @@ public class XxlJobInfo implements Serializable {
     /**
      * 任务执行超时时间，单位秒
      */
-    private Integer executorTimeout;
+    private Long executorTimeout;
 
     /**
      * 失败重试次数
      */
-    private Integer executorFailRetryCount;
+    private Long executorFailRetryCount;
 
     /**
      * GLUE类型
@@ -112,7 +112,7 @@ public class XxlJobInfo implements Serializable {
     /**
      * GLUE更新时间
      */
-    private LocalDateTime glueUpdatetime;
+    private Date glueUpdatetime;
 
     /**
      * 子任务ID，多个逗号分隔

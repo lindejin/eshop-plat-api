@@ -14,7 +14,7 @@ import lombok.ToString;
  * </p>
  *
  * @author order
- * @since 2025-02-11
+ * @since 2025-02-12
  */
 @Getter
 @Setter
@@ -28,15 +28,15 @@ public class TbWaybillResendVoucher implements Serializable {
      * 主键
      */
     @TableId(value = "id", type = IdType.AUTO)
-    private Integer id;
+    private Long id;
 
     /**
      * 重发包裹审批记录Id
      */
-    private Integer waybillResendId;
+    private Long waybillResendId;
 
     /**
      * 图片Id
      */
-    private Integer voucherImgId;
+    private Long voucherImgId;
 }

@@ -5,7 +5,7 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import java.util.Date;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -16,7 +16,7 @@ import lombok.ToString;
  * </p>
  *
  * @author sds
- * @since 2025-02-11
+ * @since 2025-02-12
  */
 @Getter
 @Setter
@@ -27,7 +27,7 @@ public class SdsTurnoff implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @TableId(value = "id", type = IdType.AUTO)
-    private Integer id;
+    private Long id;
 
     /**
      * sds成品id
@@ -47,12 +47,12 @@ public class SdsTurnoff implements Serializable {
     /**
      * sds产品id
      */
-    private Integer productId;
+    private Long productId;
 
     /**
      * 分类id
      */
-    private Integer categoryId;
+    private Long categoryId;
 
     /**
      * 产品名称
@@ -62,7 +62,7 @@ public class SdsTurnoff implements Serializable {
     /**
      * sds产品母体id
      */
-    private Integer productParentId;
+    private Long productParentId;
 
     /**
      * 素材名称
@@ -102,10 +102,10 @@ public class SdsTurnoff implements Serializable {
     /**
      * 创建时间
      */
-    private LocalDateTime createTime;
+    private Date createTime;
 
     /**
      * 修改时间
      */
-    private LocalDateTime updateTime;
+    private Date updateTime;
 }

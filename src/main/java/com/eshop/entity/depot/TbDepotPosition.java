@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
-import java.time.LocalDateTime;
+import java.util.Date;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -15,7 +15,7 @@ import lombok.ToString;
  * </p>
  *
  * @author depot
- * @since 2025-02-11
+ * @since 2025-02-12
  */
 @Getter
 @Setter
@@ -26,12 +26,12 @@ public class TbDepotPosition implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @TableId(value = "id", type = IdType.AUTO)
-    private Integer id;
+    private Long id;
 
     /**
      * 仓库id
      */
-    private Integer depotId;
+    private Long depotId;
 
     /**
      * 仓位编号
@@ -41,7 +41,7 @@ public class TbDepotPosition implements Serializable {
     /**
      * 仓位序号
      */
-    private Integer positionNo;
+    private Long positionNo;
 
     /**
      * 是否已放商品(1:是; 2:否)
@@ -51,22 +51,22 @@ public class TbDepotPosition implements Serializable {
     /**
      * 区域_id
      */
-    private Integer areaId;
+    private Long areaId;
 
     /**
      * 货架_id
      */
-    private Integer shelfId;
+    private Long shelfId;
 
     /**
      * 货架层_id
      */
-    private Integer tierId;
+    private Long tierId;
 
     /**
      * 行业_id
      */
-    private Integer industryId;
+    private Long industryId;
 
     /**
      * 仓位距离(1:远, 2: 近)
@@ -81,22 +81,22 @@ public class TbDepotPosition implements Serializable {
     /**
      * 创建人id
      */
-    private Integer createrId;
+    private Long createrId;
 
     /**
      * 创建时间
      */
-    private LocalDateTime createTime;
+    private Date createTime;
 
     /**
      * 最后修改人id
      */
-    private Integer lastUpdateId;
+    private Long lastUpdateId;
 
     /**
      * 最后修改时间
      */
-    private LocalDateTime lastUpdateTime;
+    private Date lastUpdateTime;
 
     /**
      * 库存sku编号 (有值表示永久绑定)
@@ -106,12 +106,12 @@ public class TbDepotPosition implements Serializable {
     /**
      * 列
      */
-    private Integer columnIndex;
+    private Long columnIndex;
 
     /**
      * 层
      */
-    private Integer rowIndex;
+    private Long rowIndex;
 
     /**
      * 仓位类型(1.普通 2.虚拟)

@@ -9,7 +9,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * </p>
  *
  * @author sds
- * @since 2025-02-11
+ * @since 2025-02-12
  */
 public interface ScmProductCartonValMapper extends BaseMapper<ScmProductCartonVal> {
 

@@ -14,7 +14,7 @@ import lombok.ToString;
  * </p>
  *
  * @author depot
- * @since 2025-02-11
+ * @since 2025-02-12
  */
 @Getter
 @Setter
@@ -25,7 +25,7 @@ public class TbQualityControlDetail implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @TableId(value = "id", type = IdType.AUTO)
-    private Integer id;
+    private Long id;
 
     /**
      * 质检单号
@@ -50,7 +50,7 @@ public class TbQualityControlDetail implements Serializable {
     /**
      * 异常原因
      */
-    private Integer errorCauseId;
+    private Long errorCauseId;
 
     /**
      * 备注

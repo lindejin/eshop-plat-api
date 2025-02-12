@@ -1,14 +1,13 @@
-package com.eshop.api.modules.util.shop.app;
+package com.eshop.util.shop.app;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.eshop.modal.entry.api.marketplace.auth.vo.PlatformMerchantTokenVO;
-import com.eshop.modal.entry.api.marketplace.auth.vo.PlatformTokenVO;
+import com.eshop.util.shop.vo.PlatformMerchantTokenVO;
+import com.eshop.util.shop.vo.PlatformTokenVO;
 import com.eshop.util.platform.api.structure.shopee.dto.ShopeeAppClientDTO;
-import com.eshop.util.platform.utils.merchant.ShopMerchantCacheUtils;
-import com.eshop.util.platform.utils.shop.ShopCacheUtils;
+import com.eshop.util.shop.cache.ShopCacheUtils;
+import com.eshop.util.shop.cache.ShopMerchantCacheUtils;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;

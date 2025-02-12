@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
-import java.time.LocalDateTime;
+import java.util.Date;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -15,7 +15,7 @@ import lombok.ToString;
  * </p>
  *
  * @author config
- * @since 2025-02-11
+ * @since 2025-02-12
  */
 @Getter
 @Setter
@@ -26,7 +26,7 @@ public class TbExchangeRate implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @TableId(value = "id", type = IdType.AUTO)
-    private Integer id;
+    private Long id;
 
     /**
      * 货币类型
@@ -51,22 +51,22 @@ public class TbExchangeRate implements Serializable {
     /**
      * 创建人id
      */
-    private Integer createrId;
+    private Long createrId;
 
     /**
      * 创建时间
      */
-    private LocalDateTime createTime;
+    private Date createTime;
 
     /**
      * 最后修改人id
      */
-    private Integer lastUpdateId;
+    private Long lastUpdateId;
 
     /**
      * 最后修改时间
      */
-    private LocalDateTime lastUpdateTime;
+    private Date lastUpdateTime;
 
     /**
      * 货币符号

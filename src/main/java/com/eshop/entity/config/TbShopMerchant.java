@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
-import java.time.LocalDateTime;
+import java.util.Date;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -15,7 +15,7 @@ import lombok.ToString;
  * </p>
  *
  * @author config
- * @since 2025-02-11
+ * @since 2025-02-12
  */
 @Getter
 @Setter
@@ -26,17 +26,17 @@ public class TbShopMerchant implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @TableId(value = "id", type = IdType.AUTO)
-    private Integer id;
+    private Long id;
 
     /**
      * 商户Id
      */
-    private Integer merchantId;
+    private Long merchantId;
 
     /**
      * 主账号Id
      */
-    private Integer mainAccountId;
+    private Long mainAccountId;
 
     /**
      * 平台编码
@@ -56,7 +56,7 @@ public class TbShopMerchant implements Serializable {
     /**
      * 过期时间
      */
-    private LocalDateTime expiresTime;
+    private Date expiresTime;
 
     /**
      * 调用参数_静态_空值
@@ -71,22 +71,22 @@ public class TbShopMerchant implements Serializable {
     /**
      * 创建人
      */
-    private Integer createOperId;
+    private Long createOperId;
 
     /**
      * 创建时间
      */
-    private LocalDateTime createTime;
+    private Date createTime;
 
     /**
      * 修改人
      */
-    private Integer updateOperId;
+    private Long updateOperId;
 
     /**
      * 修改时间
      */
-    private LocalDateTime updateTime;
+    private Date updateTime;
 
     /**
      * 逻辑删除字段(1: 删除, 2: 未删除)
@@ -101,7 +101,7 @@ public class TbShopMerchant implements Serializable {
     /**
      * 删除时间
      */
-    private LocalDateTime deleteTime;
+    private Date deleteTime;
 
     /**
      * 平台商户Id
@@ -111,5 +111,5 @@ public class TbShopMerchant implements Serializable {
     /**
      * 平台应用_id
      */
-    private Integer appId;
+    private Long appId;
 }

@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
-import java.time.LocalDateTime;
+import java.util.Date;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -15,7 +15,7 @@ import lombok.ToString;
  * </p>
  *
  * @author order
- * @since 2025-02-11
+ * @since 2025-02-12
  */
 @Getter
 @Setter
@@ -26,7 +26,7 @@ public class TbWaybillFaceSheetTask implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @TableId(value = "id", type = IdType.AUTO)
-    private Integer id;
+    private Long id;
 
     /**
      * 包裹号
@@ -36,7 +36,7 @@ public class TbWaybillFaceSheetTask implements Serializable {
     /**
      * 物流方式
      */
-    private Integer modeId;
+    private Long modeId;
 
     /**
      * 运单号/货运单号
@@ -61,17 +61,17 @@ public class TbWaybillFaceSheetTask implements Serializable {
     /**
      * 下载时间
      */
-    private LocalDateTime downloadTime;
+    private Date downloadTime;
 
     /**
      * 创建人
      */
-    private Integer createrId;
+    private Long createrId;
 
     /**
      * 创建时间
      */
-    private LocalDateTime createTime;
+    private Date createTime;
 
     /**
      * 是否删除(1: 是, 2:否)
@@ -81,12 +81,12 @@ public class TbWaybillFaceSheetTask implements Serializable {
     /**
      * 删除人
      */
-    private Integer deleteId;
+    private Long deleteId;
 
     /**
      * 删除时间
      */
-    private LocalDateTime deleteTime;
+    private Date deleteTime;
 
     /**
      * 是否被下载(1: 是, 2:否)

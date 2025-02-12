@@ -5,7 +5,7 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import java.util.Date;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -16,7 +16,7 @@ import lombok.ToString;
  * </p>
  *
  * @author depot
- * @since 2025-02-11
+ * @since 2025-02-12
  */
 @Getter
 @Setter
@@ -27,12 +27,12 @@ public class TbStockDetail implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @TableId(value = "id", type = IdType.AUTO)
-    private Integer id;
+    private Long id;
 
     /**
      * 库存主表_id
      */
-    private Integer stockId;
+    private Long stockId;
 
     /**
      * 库存sku编号
@@ -47,7 +47,7 @@ public class TbStockDetail implements Serializable {
     /**
      * 供应商_id
      */
-    private Integer supplierId;
+    private Long supplierId;
 
     /**
      * 商品状态(1:还在库存,2:已出库存,3:非常规出库存，-1:冻结)
@@ -62,22 +62,22 @@ public class TbStockDetail implements Serializable {
     /**
      * 入库人_id
      */
-    private Integer storagePersonId;
+    private Long storagePersonId;
 
     /**
      * 入库时间
      */
-    private LocalDateTime storageTime;
+    private Date storageTime;
 
     /**
      * 出库人_id
      */
-    private Integer outboundPersonId;
+    private Long outboundPersonId;
 
     /**
      * 出库时间
      */
-    private LocalDateTime outboundTime;
+    private Date outboundTime;
 
     /**
      * 备注

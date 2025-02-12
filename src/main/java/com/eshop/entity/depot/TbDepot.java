@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
-import java.time.LocalDateTime;
+import java.util.Date;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -15,7 +15,7 @@ import lombok.ToString;
  * </p>
  *
  * @author depot
- * @since 2025-02-11
+ * @since 2025-02-12
  */
 @Getter
 @Setter
@@ -26,7 +26,7 @@ public class TbDepot implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @TableId(value = "id", type = IdType.AUTO)
-    private Integer id;
+    private Long id;
 
     /**
      * 仓库名称
@@ -51,7 +51,7 @@ public class TbDepot implements Serializable {
     /**
      * 寄件地址
      */
-    private Integer mailId;
+    private Long mailId;
 
     /**
      * 联系人
@@ -66,7 +66,7 @@ public class TbDepot implements Serializable {
     /**
      * 邮编
      */
-    private Integer postcode;
+    private Long postcode;
 
     /**
      * 国家
@@ -101,22 +101,22 @@ public class TbDepot implements Serializable {
     /**
      * 创建人id
      */
-    private Integer createrId;
+    private Long createrId;
 
     /**
      * 创建时间
      */
-    private LocalDateTime createTime;
+    private Date createTime;
 
     /**
      * 最后修改人id
      */
-    private Integer lastUpdateId;
+    private Long lastUpdateId;
 
     /**
      * 最后修改时间
      */
-    private LocalDateTime lastUpdateTime;
+    private Date lastUpdateTime;
 
     /**
      * 是否已被删除(1: 是, 2: 否)
@@ -126,17 +126,17 @@ public class TbDepot implements Serializable {
     /**
      * 删除时间
      */
-    private LocalDateTime deleteTime;
+    private Date deleteTime;
 
     /**
      * 国家id
      */
-    private Integer countryId;
+    private Long countryId;
 
     /**
      * 快递投递类型1:送货到快递站,2:上门取件
      */
-    private Integer deliveryType;
+    private Long deliveryType;
 
     /**
      * 语言

@@ -14,7 +14,7 @@ import lombok.ToString;
  * </p>
  *
  * @author sds
- * @since 2025-02-11
+ * @since 2025-02-12
  */
 @Getter
 @Setter
@@ -25,12 +25,12 @@ public class ShopeeProductSpecsAttrVal implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @TableId(value = "id", type = IdType.AUTO)
-    private Integer id;
+    private Long id;
 
     /**
      * 商品id
      */
-    private Integer productId;
+    private Long productId;
 
     /**
      * 产品编码
@@ -40,7 +40,7 @@ public class ShopeeProductSpecsAttrVal implements Serializable {
     /**
      * 规格属性id
      */
-    private Integer attrId;
+    private Long attrId;
 
     /**
      * 层级(最多两层)
@@ -60,5 +60,5 @@ public class ShopeeProductSpecsAttrVal implements Serializable {
     /**
      * 属性图片
      */
-    private Integer imgId;
+    private Long imgId;
 }

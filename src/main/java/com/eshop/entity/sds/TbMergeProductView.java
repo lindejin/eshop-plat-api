@@ -12,7 +12,7 @@ import lombok.ToString;
  * </p>
  *
  * @author sds
- * @since 2025-02-11
+ * @since 2025-02-12
  */
 @Getter
 @Setter
@@ -22,7 +22,7 @@ public class TbMergeProductView implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    private Integer id;
+    private Long id;
 
     /**
      * spu编码
@@ -32,12 +32,12 @@ public class TbMergeProductView implements Serializable {
     /**
      * 类目id
      */
-    private Integer categoryId;
+    private Long categoryId;
 
     /**
      * 商品分类id
      */
-    private Integer classifyId;
+    private Long classifyId;
 
     /**
      * 数据来源类型(1: 主库录入, 2: 表格导入, 3: 第三方平台录入, 4: diy导入, 5: 自动合成)
@@ -52,22 +52,22 @@ public class TbMergeProductView implements Serializable {
     /**
      * 仓库id
      */
-    private Integer depotId;
+    private Long depotId;
 
     /**
      * 商品品牌id
      */
-    private Integer brandId;
+    private Long brandId;
 
     /**
      * 包材id
      */
-    private Integer packingId;
+    private Long packingId;
 
     /**
      * 开发员id
      */
-    private Integer developerId;
+    private Long developerId;
 
     /**
      * 原spu
@@ -77,5 +77,5 @@ public class TbMergeProductView implements Serializable {
     /**
      * 创建人id
      */
-    private Integer creatorId;
+    private Long creatorId;
 }

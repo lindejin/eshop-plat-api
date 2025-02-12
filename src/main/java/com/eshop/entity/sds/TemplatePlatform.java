@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
-import java.time.LocalDateTime;
+import java.util.Date;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -15,7 +15,7 @@ import lombok.ToString;
  * </p>
  *
  * @author sds
- * @since 2025-02-11
+ * @since 2025-02-12
  */
 @Getter
 @Setter
@@ -26,7 +26,7 @@ public class TemplatePlatform implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @TableId(value = "id", type = IdType.AUTO)
-    private Integer id;
+    private Long id;
 
     /**
      * 平台编码
@@ -41,12 +41,12 @@ public class TemplatePlatform implements Serializable {
     /**
      * 主库类目
      */
-    private Integer tbCategoryId;
+    private Long tbCategoryId;
 
     /**
      * 供应链商品id
      */
-    private Integer scmProductId;
+    private Long scmProductId;
 
     /**
      * 背景ids(a,b,c)
@@ -71,12 +71,12 @@ public class TemplatePlatform implements Serializable {
     /**
      * 店铺id
      */
-    private Integer shopId;
+    private Long shopId;
 
     /**
      * 店铺商户id
      */
-    private Integer shopMerchantId;
+    private Long shopMerchantId;
 
     /**
      * 1.铺货模版 2.精品模版 3.关键词模板 4.标题关键词 5.详情关键词模板 6.三点描述关键词模板 7.五点描述关键词模板 8.采集模板
@@ -86,7 +86,7 @@ public class TemplatePlatform implements Serializable {
     /**
      * 变种比例
      */
-    private Integer proportion;
+    private Long proportion;
 
     /**
      * 标题是否翻译 1.翻译 0.不翻译(默认)
@@ -96,17 +96,17 @@ public class TemplatePlatform implements Serializable {
     /**
      * 最大上刊数量
      */
-    private Integer maxPrintCount;
+    private Long maxPrintCount;
 
     /**
      * 每天最大刊登量
      */
-    private Integer dayMaxPublishNumber;
+    private Long dayMaxPublishNumber;
 
     /**
      * 每次刊登数量
      */
-    private Integer perTimePublishNumber;
+    private Long perTimePublishNumber;
 
     /**
      * 是否支持定制（0:不支持,1:支持）
@@ -116,7 +116,7 @@ public class TemplatePlatform implements Serializable {
     /**
      * 定制图片
      */
-    private Integer customImgId;
+    private Long customImgId;
 
     /**
      * 备注
@@ -131,20 +131,20 @@ public class TemplatePlatform implements Serializable {
     /**
      * 创建者
      */
-    private Integer createId;
+    private Long createId;
 
     /**
      * 更新者
      */
-    private Integer updateId;
+    private Long updateId;
 
     /**
      * 创建日期
      */
-    private LocalDateTime createTime;
+    private Date createTime;
 
     /**
      * 更新时间
      */
-    private LocalDateTime updateTime;
+    private Date updateTime;
 }

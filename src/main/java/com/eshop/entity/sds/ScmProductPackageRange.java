@@ -15,7 +15,7 @@ import lombok.ToString;
  * </p>
  *
  * @author sds
- * @since 2025-02-11
+ * @since 2025-02-12
  */
 @Getter
 @Setter
@@ -26,22 +26,22 @@ public class ScmProductPackageRange implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @TableId(value = "id", type = IdType.AUTO)
-    private Integer id;
+    private Long id;
 
     /**
      * 供应链商品id
      */
-    private Integer scmProductId;
+    private Long scmProductId;
 
     /**
      * 仓库_id
      */
-    private Integer depotId;
+    private Long depotId;
 
     /**
      * 阶梯数量
      */
-    private Integer startQt;
+    private Long startQt;
 
     /**
      * 包材阶梯费用

@@ -9,7 +9,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * </p>
  *
  * @author collect
- * @since 2025-02-11
+ * @since 2025-02-12
  */
 public interface ClProductPackageMapper extends BaseMapper<ClProductPackage> {
 

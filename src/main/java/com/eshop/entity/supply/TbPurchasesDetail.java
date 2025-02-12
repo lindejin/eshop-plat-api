@@ -15,7 +15,7 @@ import lombok.ToString;
  * </p>
  *
  * @author supply
- * @since 2025-02-11
+ * @since 2025-02-12
  */
 @Getter
 @Setter
@@ -26,7 +26,7 @@ public class TbPurchasesDetail implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @TableId(value = "id", type = IdType.AUTO)
-    private Integer id;
+    private Long id;
 
     /**
      * 采购单号
@@ -36,7 +36,7 @@ public class TbPurchasesDetail implements Serializable {
     /**
      * 缺货批次_id
      */
-    private Integer stockoutId;
+    private Long stockoutId;
 
     /**
      * sku编号
@@ -56,22 +56,22 @@ public class TbPurchasesDetail implements Serializable {
     /**
      * 采购数量
      */
-    private Integer purchaseAmount;
+    private Long purchaseAmount;
 
     /**
      * 入库数量
      */
-    private Integer storageAmount;
+    private Long storageAmount;
 
     /**
      * 已退数量
      */
-    private Integer refundAmount;
+    private Long refundAmount;
 
     /**
      * 损耗量
      */
-    private Integer lossAmount;
+    private Long lossAmount;
 
     /**
      * 采购单价

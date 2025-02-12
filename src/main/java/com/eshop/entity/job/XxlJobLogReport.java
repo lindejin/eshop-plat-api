@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
-import java.time.LocalDateTime;
+import java.util.Date;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -15,7 +15,7 @@ import lombok.ToString;
  * </p>
  *
  * @author job
- * @since 2025-02-11
+ * @since 2025-02-12
  */
 @Getter
 @Setter
@@ -26,27 +26,27 @@ public class XxlJobLogReport implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @TableId(value = "id", type = IdType.AUTO)
-    private Integer id;
+    private Long id;
 
     /**
      * 调度-时间
      */
-    private LocalDateTime triggerDay;
+    private Date triggerDay;
 
     /**
      * 运行中-日志数量
      */
-    private Integer runningCount;
+    private Long runningCount;
 
     /**
      * 执行成功-日志数量
      */
-    private Integer sucCount;
+    private Long sucCount;
 
     /**
      * 执行失败-日志数量
      */
-    private Integer failCount;
+    private Long failCount;
 
-    private LocalDateTime updateTime;
+    private Date updateTime;
 }

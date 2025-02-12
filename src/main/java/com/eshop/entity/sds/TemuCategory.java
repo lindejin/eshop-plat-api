@@ -14,7 +14,7 @@ import lombok.ToString;
  * </p>
  *
  * @author sds
- * @since 2025-02-11
+ * @since 2025-02-12
  */
 @Getter
 @Setter
@@ -25,7 +25,7 @@ public class TemuCategory implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @TableId(value = "id", type = IdType.AUTO)
-    private Integer id;
+    private Long id;
 
     /**
      * 类目id
@@ -40,12 +40,12 @@ public class TemuCategory implements Serializable {
     /**
      * 类目层级
      */
-    private Integer catLevel;
+    private Long catLevel;
 
     /**
      * 类目类型，0：未分类，1：服饰类
      */
-    private Integer catType;
+    private Long catType;
 
     /**
      * 父类目id

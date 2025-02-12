@@ -14,7 +14,7 @@ import lombok.ToString;
  * </p>
  *
  * @author sds
- * @since 2025-02-11
+ * @since 2025-02-12
  */
 @Getter
 @Setter
@@ -25,17 +25,17 @@ public class ScmProductAttrVal implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @TableId(value = "id", type = IdType.AUTO)
-    private Integer id;
+    private Long id;
 
     /**
      * 供应链商品_id
      */
-    private Integer scmProductId;
+    private Long scmProductId;
 
     /**
      * 属性_id
      */
-    private Integer attrId;
+    private Long attrId;
 
     /**
      * 属性值
@@ -45,7 +45,7 @@ public class ScmProductAttrVal implements Serializable {
     /**
      * 属性值图片_id
      */
-    private Integer fileImgId;
+    private Long fileImgId;
 
     /**
      * 色彩码值(#ffffff)

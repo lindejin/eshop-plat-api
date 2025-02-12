@@ -14,7 +14,7 @@ import lombok.ToString;
  * </p>
  *
  * @author sds
- * @since 2025-02-11
+ * @since 2025-02-12
  */
 @Getter
 @Setter
@@ -25,17 +25,17 @@ public class TemuTpProductFile implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @TableId(value = "id", type = IdType.AUTO)
-    private Integer id;
+    private Long id;
 
     /**
      * 商品模板Id
      */
-    private Integer productId;
+    private Long productId;
 
     /**
      * SKC色块图 Id	SKC色块图Id
      */
-    private Integer colorImageUrlId;
+    private Long colorImageUrlId;
 
     /**
      * 文件类型: 1:敏感品转普证明文件 ,2:货品说明书文件
@@ -45,7 +45,7 @@ public class TemuTpProductFile implements Serializable {
     /**
      * 文件Id
      */
-    private Integer fileId;
+    private Long fileId;
 
     /**
      * 文件名称

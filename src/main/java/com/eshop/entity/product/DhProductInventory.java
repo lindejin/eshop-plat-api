@@ -14,7 +14,7 @@ import lombok.ToString;
  * </p>
  *
  * @author product
- * @since 2025-02-11
+ * @since 2025-02-12
  */
 @Getter
 @Setter
@@ -25,12 +25,12 @@ public class DhProductInventory implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @TableId(value = "id", type = IdType.AUTO)
-    private Integer id;
+    private Long id;
 
     /**
      * 商品id
      */
-    private Integer productId;
+    private Long productId;
 
     /**
      * 产品备货地(示例值：CN)
@@ -40,7 +40,7 @@ public class DhProductInventory implements Serializable {
     /**
      * 产品备货数量(备货状态为有备货时必填，设置该值时，与产品中可销售的SKU之和一致)
      */
-    private Integer inventoryQty;
+    private Long inventoryQty;
 
     /**
      * 扣减库存类型(备货状态为有备货时必填。1-下单扣减库存；2-支付完成扣减库存，默认是1。示例值：1)

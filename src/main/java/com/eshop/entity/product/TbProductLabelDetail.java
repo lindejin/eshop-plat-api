@@ -14,7 +14,7 @@ import lombok.ToString;
  * </p>
  *
  * @author product
- * @since 2025-02-11
+ * @since 2025-02-12
  */
 @Getter
 @Setter
@@ -25,15 +25,15 @@ public class TbProductLabelDetail implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @TableId(value = "id", type = IdType.AUTO)
-    private Integer id;
+    private Long id;
 
     /**
      * 商品_id
      */
-    private Integer productId;
+    private Long productId;
 
     /**
      * 商品标签_id
      */
-    private Integer productLabelId;
+    private Long productLabelId;
 }

@@ -14,7 +14,7 @@ import lombok.ToString;
  * </p>
  *
  * @author sds
- * @since 2025-02-11
+ * @since 2025-02-12
  */
 @Getter
 @Setter
@@ -25,12 +25,12 @@ public class ScmProductCarton implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @TableId(value = "id", type = IdType.AUTO)
-    private Integer id;
+    private Long id;
 
     /**
      * 供应链商品id
      */
-    private Integer scmProductId;
+    private Long scmProductId;
 
     /**
      * 包装/纸箱 名称
@@ -55,5 +55,5 @@ public class ScmProductCarton implements Serializable {
     /**
      * 纸箱图片展示文件_id
      */
-    private Integer fileId;
+    private Long fileId;
 }

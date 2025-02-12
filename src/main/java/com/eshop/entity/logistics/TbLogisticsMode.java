@@ -5,7 +5,7 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import java.util.Date;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -16,7 +16,7 @@ import lombok.ToString;
  * </p>
  *
  * @author logistics
- * @since 2025-02-11
+ * @since 2025-02-12
  */
 @Getter
 @Setter
@@ -27,17 +27,17 @@ public class TbLogisticsMode implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @TableId(value = "id", type = IdType.AUTO)
-    private Integer id;
+    private Long id;
 
     /**
      * 物流服务商(一对多)
      */
-    private Integer facilitatorId;
+    private Long facilitatorId;
 
     /**
      * 回邮地址id
      */
-    private Integer mailingId;
+    private Long mailingId;
 
     /**
      * 渠道名称/物流方式名称
@@ -62,7 +62,7 @@ public class TbLogisticsMode implements Serializable {
     /**
      * 运单过期时间(天)
      */
-    private Integer waybillNoExpirationTime;
+    private Long waybillNoExpirationTime;
 
     /**
      * 查询地址
@@ -102,12 +102,12 @@ public class TbLogisticsMode implements Serializable {
     /**
      * 最后修改人id
      */
-    private Integer lastUpdateId;
+    private Long lastUpdateId;
 
     /**
      * 最后修改时间
      */
-    private LocalDateTime lastUpdateTime;
+    private Date lastUpdateTime;
 
     /**
      * 申报类型,1:虚拟申报,2:实际重量申报

@@ -15,7 +15,7 @@ import lombok.ToString;
  * </p>
  *
  * @author product
- * @since 2025-02-11
+ * @since 2025-02-12
  */
 @Getter
 @Setter
@@ -26,9 +26,9 @@ public class TbCategoryAdditionalAttr implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @TableId(value = "id", type = IdType.AUTO)
-    private Integer id;
+    private Long id;
 
-    private Integer categoryId;
+    private Long categoryId;
 
     /**
      * 海关编码
@@ -63,5 +63,5 @@ public class TbCategoryAdditionalAttr implements Serializable {
     /**
      * 包材id
      */
-    private Integer packingId;
+    private Long packingId;
 }

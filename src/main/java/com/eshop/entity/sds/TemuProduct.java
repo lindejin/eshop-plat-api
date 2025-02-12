@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
-import java.time.LocalDateTime;
+import java.util.Date;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -15,7 +15,7 @@ import lombok.ToString;
  * </p>
  *
  * @author sds
- * @since 2025-02-11
+ * @since 2025-02-12
  */
 @Getter
 @Setter
@@ -29,7 +29,7 @@ public class TemuProduct implements Serializable {
      * 自增id
      */
     @TableId(value = "id", type = IdType.AUTO)
-    private Integer id;
+    private Long id;
 
     /**
      * 产品编码
@@ -39,7 +39,7 @@ public class TemuProduct implements Serializable {
     /**
      * 模版id
      */
-    private Integer templateId;
+    private Long templateId;
 
     /**
      * 类目id
@@ -104,7 +104,7 @@ public class TemuProduct implements Serializable {
     /**
      * 发品渠道
      */
-    private Integer addProductChannelType;
+    private Long addProductChannelType;
 
     /**
      * 模特Id
@@ -114,7 +114,7 @@ public class TemuProduct implements Serializable {
     /**
      * 模特试穿心得  1:舒适,2:紧身,3:宽松
      */
-    private Integer tryOnResult;
+    private Long tryOnResult;
 
     /**
      * 模特试穿尺码名称
@@ -129,7 +129,7 @@ public class TemuProduct implements Serializable {
     /**
      * 店铺Id
      */
-    private Integer shopId;
+    private Long shopId;
 
     /**
      * 商品类型1.半托 2.全托
@@ -139,7 +139,7 @@ public class TemuProduct implements Serializable {
     /**
      * 站点Id
      */
-    private Integer siteId;
+    private Long siteId;
 
     /**
      * 站点名称
@@ -149,27 +149,27 @@ public class TemuProduct implements Serializable {
     /**
      * 创建人
      */
-    private Integer createId;
+    private Long createId;
 
     /**
      * 创建时间
      */
-    private LocalDateTime createTime;
+    private Date createTime;
 
     /**
      * 修改人
      */
-    private Integer updateId;
+    private Long updateId;
 
     /**
      * 修改时间
      */
-    private LocalDateTime updateTime;
+    private Date updateTime;
 
     /**
      * 刊登时间
      */
-    private LocalDateTime publicTime;
+    private Date publicTime;
 
     /**
      * 是否已被删除(1: 是, 2: 否)
@@ -184,7 +184,7 @@ public class TemuProduct implements Serializable {
     /**
      * 素材图
      */
-    private Integer materialImgId;
+    private Long materialImgId;
 
     /**
      * 尺码表Id

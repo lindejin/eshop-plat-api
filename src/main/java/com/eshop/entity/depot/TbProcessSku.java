@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
-import java.time.LocalDateTime;
+import java.util.Date;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -15,7 +15,7 @@ import lombok.ToString;
  * </p>
  *
  * @author depot
- * @since 2025-02-11
+ * @since 2025-02-12
  */
 @Getter
 @Setter
@@ -26,12 +26,12 @@ public class TbProcessSku implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @TableId(value = "id", type = IdType.AUTO)
-    private Integer id;
+    private Long id;
 
     /**
      * 商户_id
      */
-    private Integer merchantId;
+    private Long merchantId;
 
     /**
      * 批次号
@@ -66,7 +66,7 @@ public class TbProcessSku implements Serializable {
     /**
      * 仓库_id
      */
-    private Integer depotId;
+    private Long depotId;
 
     /**
      * 款式sku编码
@@ -86,12 +86,12 @@ public class TbProcessSku implements Serializable {
     /**
      * pp_id
      */
-    private Integer ppId;
+    private Long ppId;
 
     /**
      * ppp_id
      */
-    private Integer pppId;
+    private Long pppId;
 
     /**
      * 素材序号
@@ -101,12 +101,12 @@ public class TbProcessSku implements Serializable {
     /**
      * 创建人id
      */
-    private Integer createrId;
+    private Long createrId;
 
     /**
      * 创建时间
      */
-    private LocalDateTime createTime;
+    private Date createTime;
 
     /**
      * 是否已被删除(1: 是, 2: 否)
@@ -116,7 +116,7 @@ public class TbProcessSku implements Serializable {
     /**
      * 删除时间
      */
-    private LocalDateTime deleteTime;
+    private Date deleteTime;
 
     /**
      * 是否成品匹配(1: 是, 2: 否)

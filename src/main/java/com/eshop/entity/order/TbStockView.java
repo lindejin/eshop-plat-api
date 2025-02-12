@@ -13,7 +13,7 @@ import lombok.ToString;
  * </p>
  *
  * @author order
- * @since 2025-02-11
+ * @since 2025-02-12
  */
 @Getter
 @Setter
@@ -23,12 +23,12 @@ public class TbStockView implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    private Integer id;
+    private Long id;
 
     /**
      * 仓库id
      */
-    private Integer depotId;
+    private Long depotId;
 
     /**
      * 仓位编码
@@ -48,27 +48,27 @@ public class TbStockView implements Serializable {
     /**
      * 库存数量
      */
-    private Integer inventoryQuantity;
+    private Long inventoryQuantity;
 
     /**
      * 缺货数量
      */
-    private Integer stockoutQuantity;
+    private Long stockoutQuantity;
 
     /**
      * 采购中数量
      */
-    private Integer purchaseQuantity;
+    private Long purchaseQuantity;
 
     /**
      * 待处理数量
      */
-    private Integer pendingQuantity;
+    private Long pendingQuantity;
 
     /**
      * 冻结数量
      */
-    private Integer freezeQuantity;
+    private Long freezeQuantity;
 
     /**
      * 最低采购单价

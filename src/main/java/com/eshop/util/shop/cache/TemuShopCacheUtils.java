@@ -1,8 +1,9 @@
-package com.eshop.util.shop;
+package com.eshop.util.shop.cache;
 
 import com.alibaba.fastjson.JSONObject;
 import com.eshop.util.RedisUtils;
 import com.eshop.util.constants.ConstantsRedisKey;
+import com.eshop.util.shop.vo.PlatformTokenVO;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
 

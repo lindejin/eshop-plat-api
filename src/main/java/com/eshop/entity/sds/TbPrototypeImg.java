@@ -15,7 +15,7 @@ import lombok.ToString;
  * </p>
  *
  * @author sds
- * @since 2025-02-11
+ * @since 2025-02-12
  */
 @Getter
 @Setter
@@ -26,17 +26,17 @@ public class TbPrototypeImg implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @TableId(value = "id", type = IdType.AUTO)
-    private Integer id;
+    private Long id;
 
     /**
      * 样机id
      */
-    private Integer prototypeId;
+    private Long prototypeId;
 
     /**
      * 文件库_id
      */
-    private Integer imgId;
+    private Long imgId;
 
     /**
      * 是否合成背景(1: 是, 否)
@@ -46,7 +46,7 @@ public class TbPrototypeImg implements Serializable {
     /**
      * 背景图_id
      */
-    private Integer maskImgId;
+    private Long maskImgId;
 
     /**
      * 文件名称

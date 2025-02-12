@@ -2,6 +2,7 @@ package com.eshop.util;
 
 import com.baomidou.mybatisplus.generator.FastAutoGenerator;
 import com.baomidou.mybatisplus.generator.config.OutputFile;
+import com.baomidou.mybatisplus.generator.config.rules.DateType;
 import com.baomidou.mybatisplus.generator.config.rules.DbColumnType;
 import com.baomidou.mybatisplus.generator.engine.BeetlTemplateEngine;
 import com.baomidou.mybatisplus.generator.engine.FreemarkerTemplateEngine;
@@ -36,8 +37,11 @@ public class CodeGenerator {
                 .globalConfig(builder -> {
                     builder.author(db) // 设置作者
                             .disableOpenDir()
+                            // 时间策略
+                            .dateType(DateType.ONLY_DATE)
 //                            .enableSwagger() // 开启 swagger 模式
                             .outputDir(path); // 指定输出目录
+
                 })
                 .dataSourceConfig(builder ->
                         builder.typeConvertHandler((globalConfig, typeRegistry, metaInfo) -> {
@@ -45,6 +49,10 @@ public class CodeGenerator {
                             if (typeCode == Types.SMALLINT) {
                                 // 自定义类型转换
                                 return DbColumnType.INTEGER;
+                            }
+                            if (typeCode == Types.INTEGER) {
+                                // 自定义类型转换
+                                return DbColumnType.LONG;
                             }
                             return typeRegistry.getColumnType(metaInfo);
                         })

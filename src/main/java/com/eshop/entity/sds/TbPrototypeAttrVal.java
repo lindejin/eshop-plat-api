@@ -14,7 +14,7 @@ import lombok.ToString;
  * </p>
  *
  * @author sds
- * @since 2025-02-11
+ * @since 2025-02-12
  */
 @Getter
 @Setter
@@ -25,12 +25,12 @@ public class TbPrototypeAttrVal implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @TableId(value = "id", type = IdType.AUTO)
-    private Integer id;
+    private Long id;
 
     /**
      * 属性_id
      */
-    private Integer attrId;
+    private Long attrId;
 
     /**
      * 属性名称
@@ -40,5 +40,5 @@ public class TbPrototypeAttrVal implements Serializable {
     /**
      * 属性值图片_id
      */
-    private Integer imgId;
+    private Long imgId;
 }

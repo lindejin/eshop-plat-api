@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
-import java.time.LocalDateTime;
+import java.util.Date;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -15,7 +15,7 @@ import lombok.ToString;
  * </p>
  *
  * @author supply
- * @since 2025-02-11
+ * @since 2025-02-12
  */
 @Getter
 @Setter
@@ -26,12 +26,12 @@ public class TbSupplierReceipt implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @TableId(value = "id", type = IdType.AUTO)
-    private Integer id;
+    private Long id;
 
     /**
      * 供应商_id
      */
-    private Integer supplierId;
+    private Long supplierId;
 
     /**
      * 收款账号类型(1: 银行卡, 2: 1688, 3: 微信, 4: 支付宝, 5: QQ, 6: 拼多多, 7: 其他)
@@ -46,7 +46,7 @@ public class TbSupplierReceipt implements Serializable {
     /**
      * 收款二维码图片id (二维码跟收款账号必填其一)
      */
-    private Integer imgId;
+    private Long imgId;
 
     /**
      * 是否为默认收款信息(1: 是, 2: 否)
@@ -66,5 +66,5 @@ public class TbSupplierReceipt implements Serializable {
     /**
      * 删除时间
      */
-    private LocalDateTime deleteTime;
+    private Date deleteTime;
 }

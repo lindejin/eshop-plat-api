@@ -14,7 +14,7 @@ import lombok.ToString;
  * </p>
  *
  * @author config
- * @since 2025-02-11
+ * @since 2025-02-12
  */
 @Getter
 @Setter
@@ -25,12 +25,12 @@ public class TbShopMerchantConfig implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @TableId(value = "id", type = IdType.AUTO)
-    private Integer id;
+    private Long id;
 
     /**
      * 店铺商户_id
      */
-    private Integer shopMerchantId;
+    private Long shopMerchantId;
 
     /**
      * ioss税号（欧盟税号）
@@ -45,7 +45,7 @@ public class TbShopMerchantConfig implements Serializable {
     /**
      * 每天最大刊登量
      */
-    private Integer dayMaxPublishNumber;
+    private Long dayMaxPublishNumber;
 
     /**
      * 语言
@@ -55,7 +55,7 @@ public class TbShopMerchantConfig implements Serializable {
     /**
      * 发货仓库
      */
-    private Integer depotId;
+    private Long depotId;
 
     /**
      * 是否自动审核订单(1: 是, 2: 否)

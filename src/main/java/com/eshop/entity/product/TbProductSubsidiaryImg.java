@@ -14,7 +14,7 @@ import lombok.ToString;
  * </p>
  *
  * @author product
- * @since 2025-02-11
+ * @since 2025-02-12
  */
 @Getter
 @Setter
@@ -25,7 +25,7 @@ public class TbProductSubsidiaryImg implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @TableId(value = "id", type = IdType.AUTO)
-    private Integer id;
+    private Long id;
 
     /**
      * spu编码
@@ -35,12 +35,12 @@ public class TbProductSubsidiaryImg implements Serializable {
     /**
      * 原图_id(文件表)
      */
-    private Integer rawImgId;
+    private Long rawImgId;
 
     /**
      * 附属图_id(文件表)
      */
-    private Integer subsidiaryImgId;
+    private Long subsidiaryImgId;
 
     /**
      * 附属类型(1: spu图, 2: 属性图/sku图, 3: 详情图)

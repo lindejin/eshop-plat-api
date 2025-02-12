@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
-import java.time.LocalDateTime;
+import java.util.Date;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -15,7 +15,7 @@ import lombok.ToString;
  * </p>
  *
  * @author depot
- * @since 2025-02-11
+ * @since 2025-02-12
  */
 @Getter
 @Setter
@@ -64,7 +64,7 @@ public class AmsLbxShipment implements Serializable {
     /**
      * lbx箱子数量
      */
-    private Integer boxQuantity;
+    private Long boxQuantity;
 
     /**
      * 货物状态 1.待签收 2.待配送 3.完成配送    4.部分签收 5 部分配送 6.配送退回
@@ -89,7 +89,7 @@ public class AmsLbxShipment implements Serializable {
     /**
      * 创建时间
      */
-    private LocalDateTime createTime;
+    private Date createTime;
 
     /**
      * 更新者
@@ -99,7 +99,7 @@ public class AmsLbxShipment implements Serializable {
     /**
      * 更新时间
      */
-    private LocalDateTime updateTime;
+    private Date updateTime;
 
     /**
      * 是否删除(1删除、2未删除)
@@ -109,5 +109,5 @@ public class AmsLbxShipment implements Serializable {
     /**
      * 签收箱数
      */
-    private Integer signBoxs;
+    private Long signBoxs;
 }

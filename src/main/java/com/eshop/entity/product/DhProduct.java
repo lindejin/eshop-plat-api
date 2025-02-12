@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
-import java.time.LocalDateTime;
+import java.util.Date;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -15,7 +15,7 @@ import lombok.ToString;
  * </p>
  *
  * @author product
- * @since 2025-02-11
+ * @since 2025-02-12
  */
 @Getter
 @Setter
@@ -26,19 +26,19 @@ public class DhProduct implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @TableId(value = "id", type = IdType.AUTO)
-    private Integer id;
+    private Long id;
 
     /**
      * 产品编码
      */
     private String spuCode;
 
-    private Integer templateId;
+    private Long templateId;
 
     /**
      * 店铺id(0: 从库id,其他: 店铺id)
      */
-    private Integer shopId;
+    private Long shopId;
 
     /**
      * 类目id
@@ -68,7 +68,7 @@ public class DhProduct implements Serializable {
     /**
      * 产品有效期(有效期以天为单位：14,30,90),默认:90
      */
-    private Integer vaildDay;
+    private Long vaildDay;
 
     /**
      * 商品定制服务(1，定制logo，2，定制包装，3，定制外形，4，定制颜色，5，定制尺寸，6，定制款式。例如：定制logo和包装 示例值：1,2(用英文逗号隔开)	)
@@ -98,7 +98,7 @@ public class DhProduct implements Serializable {
     /**
      * 刊登时间
      */
-    private LocalDateTime publishTime;
+    private Date publishTime;
 
     /**
      * 敦煌商品编码
@@ -118,12 +118,12 @@ public class DhProduct implements Serializable {
     /**
      * 创建人id
      */
-    private Integer creatorId;
+    private Long creatorId;
 
     /**
      * 创建时间
      */
-    private LocalDateTime createTime;
+    private Date createTime;
 
     /**
      * 是否已被删除(1: 是, 2: 否)

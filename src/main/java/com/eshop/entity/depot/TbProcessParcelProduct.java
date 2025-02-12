@@ -15,7 +15,7 @@ import lombok.ToString;
  * </p>
  *
  * @author depot
- * @since 2025-02-11
+ * @since 2025-02-12
  */
 @Getter
 @Setter
@@ -26,7 +26,7 @@ public class TbProcessParcelProduct implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @TableId(value = "id", type = IdType.AUTO)
-    private Integer id;
+    private Long id;
 
     /**
      * 包裹号
@@ -36,7 +36,7 @@ public class TbProcessParcelProduct implements Serializable {
     /**
      * sku_id
      */
-    private Integer skuId;
+    private Long skuId;
 
     /**
      * sku编码

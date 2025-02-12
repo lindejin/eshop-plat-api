@@ -14,7 +14,7 @@ import lombok.ToString;
  * </p>
  *
  * @author sds
- * @since 2025-02-11
+ * @since 2025-02-12
  */
 @Getter
 @Setter
@@ -28,12 +28,12 @@ public class TemuTpProduct implements Serializable {
      * 自增id
      */
     @TableId(value = "id", type = IdType.AUTO)
-    private Integer id;
+    private Long id;
 
     /**
      * 模版id
      */
-    private Integer templateId;
+    private Long templateId;
 
     /**
      * 平台类目id
@@ -98,7 +98,7 @@ public class TemuTpProduct implements Serializable {
     /**
      * 发品渠道
      */
-    private Integer addProductChannelType;
+    private Long addProductChannelType;
 
     /**
      * 模版类型 1.半托 2.全托
@@ -118,7 +118,7 @@ public class TemuTpProduct implements Serializable {
     /**
      * 模特试穿心得  1:舒适,2:紧身,3:宽松
      */
-    private Integer tryOnResult;
+    private Long tryOnResult;
 
     /**
      * 模特试穿尺码名称
@@ -133,7 +133,7 @@ public class TemuTpProduct implements Serializable {
     /**
      * 站点Id
      */
-    private Integer siteId;
+    private Long siteId;
 
     /**
      * 站点名称

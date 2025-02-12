@@ -14,7 +14,7 @@ import lombok.ToString;
  * </p>
  *
  * @author product
- * @since 2025-02-11
+ * @since 2025-02-12
  */
 @Getter
 @Setter
@@ -25,7 +25,7 @@ public class DhProductTemplate implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @TableId(value = "id", type = IdType.AUTO)
-    private Integer id;
+    private Long id;
 
     /**
      * spu编码(系统)
@@ -95,12 +95,12 @@ public class DhProductTemplate implements Serializable {
     /**
      * 备货数量
      */
-    private Integer inventoryNumber;
+    private Long inventoryNumber;
 
     /**
      * 备货期(天)
      */
-    private Integer leadingTime;
+    private Long leadingTime;
 
     /**
      * 服务模板

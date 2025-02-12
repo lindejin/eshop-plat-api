@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
-import java.time.LocalDateTime;
+import java.util.Date;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -15,7 +15,7 @@ import lombok.ToString;
  * </p>
  *
  * @author product
- * @since 2025-02-11
+ * @since 2025-02-12
  */
 @Getter
 @Setter
@@ -26,7 +26,7 @@ public class TbProductTemplate implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @TableId(value = "id", type = IdType.AUTO)
-    private Integer id;
+    private Long id;
 
     /**
      * 产品id(sds成品)
@@ -41,12 +41,12 @@ public class TbProductTemplate implements Serializable {
     /**
      * 虾皮模版id
      */
-    private Integer templateId;
+    private Long templateId;
 
     /**
      * 主库(tbProductId)
      */
-    private Integer spuId;
+    private Long spuId;
 
     /**
      * 主库成品(spuCode)
@@ -56,15 +56,15 @@ public class TbProductTemplate implements Serializable {
     /**
      * 虾皮成品id
      */
-    private Integer shopeeId;
+    private Long shopeeId;
 
     /**
      * 主库erp-类目
      */
-    private Integer tbCategoryId;
+    private Long tbCategoryId;
 
     /**
      * 创建日期
      */
-    private LocalDateTime createTime;
+    private Date createTime;
 }

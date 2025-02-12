@@ -14,7 +14,7 @@ import lombok.ToString;
  * </p>
  *
  * @author product
- * @since 2025-02-11
+ * @since 2025-02-12
  */
 @Getter
 @Setter
@@ -25,12 +25,12 @@ public class DhProductInvenLocation implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @TableId(value = "id", type = IdType.AUTO)
-    private Integer id;
+    private Long id;
 
     /**
      * 商品id
      */
-    private Integer productId;
+    private Long productId;
 
     /**
      * 产品备货地址编码
@@ -40,10 +40,10 @@ public class DhProductInvenLocation implements Serializable {
     /**
      * 备货期(以天为单位，有备货的产品备货期小于等于4个工作日) 示例值：30
      */
-    private Integer leadingTime;
+    private Long leadingTime;
 
     /**
      * 产品备货地址排序(第几个备货地址，示例值：1 第1个)
      */
-    private Integer sortVal;
+    private Long sortVal;
 }

@@ -5,7 +5,7 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import java.util.Date;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -16,7 +16,7 @@ import lombok.ToString;
  * </p>
  *
  * @author sds
- * @since 2025-02-11
+ * @since 2025-02-12
  */
 @Getter
 @Setter
@@ -27,12 +27,12 @@ public class TbMaterialDetail implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @TableId(value = "id", type = IdType.AUTO)
-    private Integer id;
+    private Long id;
 
     /**
      * 素材主表id
      */
-    private Integer mainMaterialId;
+    private Long mainMaterialId;
 
     /**
      * sku编码
@@ -42,7 +42,7 @@ public class TbMaterialDetail implements Serializable {
     /**
      * 文件库_id
      */
-    private Integer fileId;
+    private Long fileId;
 
     /**
      * 素材来源(1: 直接上传, 2: 裁剪)
@@ -62,7 +62,7 @@ public class TbMaterialDetail implements Serializable {
     /**
      * 素材大小(字节 / b)
      */
-    private Integer materialSize;
+    private Long materialSize;
 
     /**
      * 可合并颜色
@@ -72,12 +72,12 @@ public class TbMaterialDetail implements Serializable {
     /**
      * 创建人id
      */
-    private Integer createId;
+    private Long createId;
 
     /**
      * 创建时间
      */
-    private LocalDateTime createTime;
+    private Date createTime;
 
     /**
      * 是否已被删除(1: 是, 2: 否)
@@ -87,5 +87,5 @@ public class TbMaterialDetail implements Serializable {
     /**
      * 删除时间
      */
-    private LocalDateTime deleteTime;
+    private Date deleteTime;
 }

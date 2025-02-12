@@ -12,7 +12,7 @@ import lombok.ToString;
  * </p>
  *
  * @author config
- * @since 2025-02-11
+ * @since 2025-02-12
  */
 @Getter
 @Setter
@@ -22,17 +22,17 @@ public class TbMenufunc implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    private Integer id;
+    private Long id;
 
     /**
      * 父目录编号
      */
-    private Integer parentid;
+    private Long parentid;
 
     /**
      * 一级目录编号
      */
-    private Integer homeid;
+    private Long homeid;
 
     /**
      * 目录名称

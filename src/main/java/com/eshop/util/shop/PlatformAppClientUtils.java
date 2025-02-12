@@ -1,16 +1,16 @@
-package com.eshop.api.modules.util.shop;
+package com.eshop.util.shop;
 
-import com.eshop.api.modules.util.shop.app.*;
-import com.eshop.db.config.service.ShopMainAccountService;
-import com.eshop.db.config.service.ShopMerchantService;
-import com.eshop.modal.modal.eshop_config.TbShop;
-import com.eshop.modal.modal.eshop_config.TbShopMainAccount;
-import com.eshop.modal.modal.eshop_config.TbShopMerchant;
+import com.eshop.entity.config.TbShop;
+import com.eshop.entity.config.TbShopMainAccount;
+import com.eshop.entity.config.TbShopMerchant;
+import com.eshop.service.config.ITbShopMainAccountService;
+import com.eshop.service.config.ITbShopMerchantService;
 import com.eshop.util.platform.api.structure.aliexpress.dto.AeAppClientDTO;
 import com.eshop.util.platform.api.structure.dhgate.dto.DhAppClientDTO;
 import com.eshop.util.platform.api.structure.shopee.dto.ShopeeAppClientDTO;
 import com.eshop.util.platform.api.structure.temu.dto.TemuAppClientDTO;
 import com.eshop.util.platform.api.structure.tiktok.dto.TikTokAppClientDTO;
+import com.eshop.util.shop.app.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
@@ -42,10 +42,10 @@ public class PlatformAppClientUtils {
     private PlatformAppUtil platformAppUtil;
 
     @Resource
-    private ShopMainAccountService shopMainAccountService;
+    private ITbShopMainAccountService shopMainAccountService;
 
     @Resource
-    private ShopMerchantService shopMerchantService;
+    private ITbShopMerchantService shopMerchantService;
 
     @Resource
     private TemuAppClientUtils temuAppClientUtils;
@@ -88,9 +88,6 @@ public class PlatformAppClientUtils {
 
     /**
      * 获取shopee app client dto
-     *
-     * @param shopMerchantDO
-     * @return
      */
     public ShopeeAppClientDTO getShopeeAppClientDTO(TbShopMerchant shopMerchantDO) {
         Long shopMerchantId = shopMerchantDO.getId();
@@ -101,8 +98,8 @@ public class PlatformAppClientUtils {
 
     public String getAppParamJson(Long shopMerchantId) {
         try {
-            TbShopMerchant tbShopMerchant = shopMerchantService.selectOneByProperty(TbShopMerchant::getId, shopMerchantId);
-            TbShopMainAccount tbShopMainAccount = shopMainAccountService.selectOneByProperty(TbShopMainAccount::getId, tbShopMerchant.getMainAccountId());
+            TbShopMerchant tbShopMerchant = shopMerchantService.getById(shopMerchantId);
+            TbShopMainAccount tbShopMainAccount = shopMainAccountService.getById( tbShopMerchant.getMainAccountId());
             return platformAppUtil.getAppParamJson(tbShopMainAccount.getAppId());
         } catch (Exception e) {
             throw new RuntimeException(e);

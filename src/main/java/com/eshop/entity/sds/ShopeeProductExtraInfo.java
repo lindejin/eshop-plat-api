@@ -5,7 +5,7 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import java.util.Date;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -16,7 +16,7 @@ import lombok.ToString;
  * </p>
  *
  * @author sds
- * @since 2025-02-11
+ * @since 2025-02-12
  */
 @Getter
 @Setter
@@ -27,7 +27,7 @@ public class ShopeeProductExtraInfo implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @TableId(value = "id", type = IdType.AUTO)
-    private Integer id;
+    private Long id;
 
     /**
      * itemId
@@ -37,17 +37,17 @@ public class ShopeeProductExtraInfo implements Serializable {
     /**
      * 销售额
      */
-    private Integer salesRevenue;
+    private Long salesRevenue;
 
     /**
      * 访客数
      */
-    private Integer visitorCount;
+    private Long visitorCount;
 
     /**
      * 订单量
      */
-    private Integer orderQuantity;
+    private Long orderQuantity;
 
     /**
      * 转化率
@@ -57,22 +57,22 @@ public class ShopeeProductExtraInfo implements Serializable {
     /**
      * 购买用户数
      */
-    private Integer numOfPurchasingUsers;
+    private Long numOfPurchasingUsers;
 
     /**
      * 访问用户数
      */
-    private Integer numOfVisitingUsers;
+    private Long numOfVisitingUsers;
 
     /**
      * 页面浏览量
      */
-    private Integer pageViews;
+    private Long pageViews;
 
     /**
      * 加购数
      */
-    private Integer additionalPurchases;
+    private Long additionalPurchases;
 
     /**
      * 加购率
@@ -82,12 +82,12 @@ public class ShopeeProductExtraInfo implements Serializable {
     /**
      * 买家数
      */
-    private Integer numberOfBuyers;
+    private Long numberOfBuyers;
 
     /**
      * 商品评价数
      */
-    private Integer numOfProductReviews;
+    private Long numOfProductReviews;
 
     /**
      * 产品点击率
@@ -97,25 +97,25 @@ public class ShopeeProductExtraInfo implements Serializable {
     /**
      * 点击数据
      */
-    private Integer clickOnData;
+    private Long clickOnData;
 
     /**
      * 展示次数
      */
-    private Integer displayFrequency;
+    private Long displayFrequency;
 
     /**
      * 创建时间
      */
-    private Integer createId;
+    private Long createId;
 
     /**
      * 创建时间
      */
-    private LocalDateTime createTime;
+    private Date createTime;
 
     /**
      * 修改时间
      */
-    private LocalDateTime updateTime;
+    private Date updateTime;
 }

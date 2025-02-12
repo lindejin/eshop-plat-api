@@ -1,4 +1,4 @@
-package top.tangyh.basic.cache.utils;
+package com.eshop.util;
 
 import cn.hutool.core.convert.Convert;
 import cn.hutool.extra.spring.SpringUtil;

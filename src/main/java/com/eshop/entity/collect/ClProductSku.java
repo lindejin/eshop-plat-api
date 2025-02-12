@@ -15,7 +15,7 @@ import lombok.ToString;
  * </p>
  *
  * @author collect
- * @since 2025-02-11
+ * @since 2025-02-12
  */
 @Getter
 @Setter
@@ -26,12 +26,12 @@ public class ClProductSku implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @TableId(value = "id", type = IdType.AUTO)
-    private Integer id;
+    private Long id;
 
     /**
      * 产品id
      */
-    private Integer productId;
+    private Long productId;
 
     /**
      * spu编码
@@ -56,7 +56,7 @@ public class ClProductSku implements Serializable {
     /**
      * 图片id
      */
-    private Integer imgId;
+    private Long imgId;
 
     /**
      * 成本价
@@ -71,7 +71,7 @@ public class ClProductSku implements Serializable {
     /**
      * 库存
      */
-    private Integer inventory;
+    private Long inventory;
 
     /**
      * 是否可销售(1;可销售. -1: 不可销售, 2:补货中)

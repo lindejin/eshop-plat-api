@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
-import java.time.LocalDateTime;
+import java.util.Date;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -15,7 +15,7 @@ import lombok.ToString;
  * </p>
  *
  * @author depot
- * @since 2025-02-11
+ * @since 2025-02-12
  */
 @Getter
 @Setter
@@ -26,7 +26,7 @@ public class TbInventoryDetail implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @TableId(value = "id", type = IdType.AUTO)
-    private Integer id;
+    private Long id;
 
     /**
      * 盘点编号
@@ -56,12 +56,12 @@ public class TbInventoryDetail implements Serializable {
     /**
      * 盘点明细扫描人
      */
-    private Integer scanningId;
+    private Long scanningId;
 
     /**
      * 盘点明细扫描时间
      */
-    private LocalDateTime scanningTime;
+    private Date scanningTime;
 
     /**
      * 备注

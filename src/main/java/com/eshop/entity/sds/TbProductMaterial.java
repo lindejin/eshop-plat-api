@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
-import java.time.LocalDateTime;
+import java.util.Date;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -15,7 +15,7 @@ import lombok.ToString;
  * </p>
  *
  * @author sds
- * @since 2025-02-11
+ * @since 2025-02-12
  */
 @Getter
 @Setter
@@ -26,17 +26,17 @@ public class TbProductMaterial implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @TableId(value = "id", type = IdType.AUTO)
-    private Integer id;
+    private Long id;
 
     /**
      * 供应链商品id
      */
-    private Integer scmProductId;
+    private Long scmProductId;
 
     /**
      * 样机_id
      */
-    private Integer prototypeId;
+    private Long prototypeId;
 
     /**
      * 外部任务id
@@ -46,12 +46,12 @@ public class TbProductMaterial implements Serializable {
     /**
      * 外部任务同步状态（0未同步 1已同步）
      */
-    private Integer synStatus;
+    private Long synStatus;
 
     /**
      * 外部任务创建时间
      */
-    private LocalDateTime taskCreateTime;
+    private Date taskCreateTime;
 
     /**
      * 成品_id
@@ -61,12 +61,12 @@ public class TbProductMaterial implements Serializable {
     /**
      * 素材id
      */
-    private Integer materialId;
+    private Long materialId;
 
     /**
      * 背景_id
      */
-    private Integer backgroundId;
+    private Long backgroundId;
 
     /**
      * 数据来源类型(4: 手动合成, 5: 自动合成)
@@ -91,5 +91,5 @@ public class TbProductMaterial implements Serializable {
     /**
      * 主商品_id(款式)
      */
-    private Integer productId;
+    private Long productId;
 }

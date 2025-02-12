@@ -14,7 +14,7 @@ import lombok.ToString;
  * </p>
  *
  * @author sds
- * @since 2025-02-11
+ * @since 2025-02-12
  */
 @Getter
 @Setter
@@ -25,12 +25,12 @@ public class TkProductImg implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @TableId(value = "id", type = IdType.AUTO)
-    private Integer id;
+    private Long id;
 
     /**
      * 商品id
      */
-    private Integer productId;
+    private Long productId;
 
     /**
      * 图片ID(tk平台)
@@ -45,7 +45,7 @@ public class TkProductImg implements Serializable {
     /**
      * 文件库图片ID
      */
-    private Integer fileImgId;
+    private Long fileImgId;
 
     /**
      * 场景类型： 1.“产品图像” 2.“描述图像” 3.“属性图像” 4.“认证图像” 5.“尺寸图表图像”

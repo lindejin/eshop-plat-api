@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
-import java.time.LocalDateTime;
+import java.util.Date;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -15,7 +15,7 @@ import lombok.ToString;
  * </p>
  *
  * @author depot
- * @since 2025-02-11
+ * @since 2025-02-12
  */
 @Getter
 @Setter
@@ -26,7 +26,7 @@ public class TbParcelReplace implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @TableId(value = "id", type = IdType.AUTO)
-    private Integer id;
+    private Long id;
 
     /**
      * 订单号
@@ -46,7 +46,7 @@ public class TbParcelReplace implements Serializable {
     /**
      * 物流方式(原)
      */
-    private Integer rawModeId;
+    private Long rawModeId;
 
     /**
      * 包裹号(新)
@@ -61,7 +61,7 @@ public class TbParcelReplace implements Serializable {
     /**
      * 物流方式(新)
      */
-    private Integer newModeId;
+    private Long newModeId;
 
     /**
      * 替换原因
@@ -71,12 +71,12 @@ public class TbParcelReplace implements Serializable {
     /**
      * 替换人id
      */
-    private Integer replacePersonId;
+    private Long replacePersonId;
 
     /**
      * 替换时间
      */
-    private LocalDateTime replaceTime;
+    private Date replaceTime;
 
     /**
      * 替换状态(1:已替换,2:未替换)

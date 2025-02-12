@@ -15,7 +15,7 @@ import lombok.ToString;
  * </p>
  *
  * @author sds
- * @since 2025-02-11
+ * @since 2025-02-12
  */
 @Getter
 @Setter
@@ -26,22 +26,22 @@ public class TemplateWholesale implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @TableId(value = "id", type = IdType.AUTO)
-    private Integer id;
+    private Long id;
 
     /**
      * 模版_id
      */
-    private Integer templateId;
+    private Long templateId;
 
     /**
      * 此层的最小计数
      */
-    private Integer minCount;
+    private Long minCount;
 
     /**
      * 此层的最大计数
      */
-    private Integer maxCount;
+    private Long maxCount;
 
     /**
      * 价格

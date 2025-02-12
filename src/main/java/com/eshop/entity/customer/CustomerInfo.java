@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
-import java.time.LocalDateTime;
+import java.util.Date;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -15,7 +15,7 @@ import lombok.ToString;
  * </p>
  *
  * @author customer
- * @since 2025-02-11
+ * @since 2025-02-12
  */
 @Getter
 @Setter
@@ -26,12 +26,12 @@ public class CustomerInfo implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @TableId(value = "id", type = IdType.AUTO)
-    private Integer id;
+    private Long id;
 
     /**
      * 平台_id
      */
-    private Integer platformId;
+    private Long platformId;
 
     /**
      * 平台上的客户ID
@@ -46,12 +46,12 @@ public class CustomerInfo implements Serializable {
     /**
      * 平台地址id
      */
-    private Integer platformAddressId;
+    private Long platformAddressId;
 
     /**
      * 客户分类
      */
-    private Integer customerCategoryId;
+    private Long customerCategoryId;
 
     /**
      * 数据来源类型(1: 订单2:站内信3:人工创建)
@@ -66,20 +66,20 @@ public class CustomerInfo implements Serializable {
     /**
      * 创建者
      */
-    private Integer createId;
+    private Long createId;
 
     /**
      * 更新者
      */
-    private Integer updateId;
+    private Long updateId;
 
     /**
      * 创建时间
      */
-    private LocalDateTime createTime;
+    private Date createTime;
 
     /**
      * 更新时间
      */
-    private LocalDateTime updateTime;
+    private Date updateTime;
 }

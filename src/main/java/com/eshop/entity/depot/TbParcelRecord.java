@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
-import java.time.LocalDateTime;
+import java.util.Date;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -15,7 +15,7 @@ import lombok.ToString;
  * </p>
  *
  * @author depot
- * @since 2025-02-11
+ * @since 2025-02-12
  */
 @Getter
 @Setter
@@ -26,7 +26,7 @@ public class TbParcelRecord implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @TableId(value = "id", type = IdType.AUTO)
-    private Integer id;
+    private Long id;
 
     /**
      * 包裹号
@@ -36,42 +36,42 @@ public class TbParcelRecord implements Serializable {
     /**
      * 配货人
      */
-    private Integer allocationId;
+    private Long allocationId;
 
     /**
      * 配货时间
      */
-    private LocalDateTime allocationTime;
+    private Date allocationTime;
 
     /**
      * 复核人
      */
-    private Integer reviewId;
+    private Long reviewId;
 
     /**
      * 复核时间
      */
-    private LocalDateTime reviewTime;
+    private Date reviewTime;
 
     /**
      * 打包称重人
      */
-    private Integer packId;
+    private Long packId;
 
     /**
      * 打包称重时间
      */
-    private LocalDateTime packTime;
+    private Date packTime;
 
     /**
      * 出库人
      */
-    private Integer outboundId;
+    private Long outboundId;
 
     /**
      * 出库时间
      */
-    private LocalDateTime outboundTime;
+    private Date outboundTime;
 
     /**
      * 包裹类型(1:单品,2:多品)

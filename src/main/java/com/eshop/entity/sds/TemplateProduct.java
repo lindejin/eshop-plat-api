@@ -15,7 +15,7 @@ import lombok.ToString;
  * </p>
  *
  * @author sds
- * @since 2025-02-11
+ * @since 2025-02-12
  */
 @Getter
 @Setter
@@ -29,12 +29,12 @@ public class TemplateProduct implements Serializable {
      * 自增id
      */
     @TableId(value = "id", type = IdType.AUTO)
-    private Integer id;
+    private Long id;
 
     /**
      * 模版id
      */
-    private Integer templateId;
+    private Long templateId;
 
     /**
      * 类目id
@@ -49,12 +49,12 @@ public class TemplateProduct implements Serializable {
     /**
      * 模板尺码表id(三方平台的)
      */
-    private Integer templateSizeChartId;
+    private Long templateSizeChartId;
 
     /**
      * 模板尺码表id(erp系统)
      */
-    private Integer sizeImgId;
+    private Long sizeImgId;
 
     /**
      * 产品名称
@@ -84,7 +84,7 @@ public class TemplateProduct implements Serializable {
     /**
      * 产品备货数量
      */
-    private Integer inventory;
+    private Long inventory;
 
     /**
      * 此字段仅适用于印度尼西亚和马来西亚的本地卖家。使用此字段可确定产品是否为危险产品。0 表示非危险品，1 表示危险品。有关更多信息，请访问市场相应的卖家教育中心。)
@@ -114,22 +114,22 @@ public class TemplateProduct implements Serializable {
     /**
      * 商品是否为预购商品(0.否  1.是)
      */
-    private Integer isPreOrder;
+    private Long isPreOrder;
 
     /**
      * 保证发货订单的天数
      */
-    private Integer daysToShip;
+    private Long daysToShip;
 
     /**
      * 尺码ID
      */
-    private Integer sizeId;
+    private Long sizeId;
 
     /**
      * 品牌ID
      */
-    private Integer brandId;
+    private Long brandId;
 
     /**
      * 品牌名称

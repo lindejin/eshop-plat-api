@@ -5,7 +5,7 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import java.util.Date;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -16,7 +16,7 @@ import lombok.ToString;
  * </p>
  *
  * @author order
- * @since 2025-02-11
+ * @since 2025-02-12
  */
 @Getter
 @Setter
@@ -27,7 +27,7 @@ public class TkOrderCostDetail implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @TableId(value = "id", type = IdType.AUTO)
-    private Integer id;
+    private Long id;
 
     /**
      * 订单号
@@ -57,7 +57,7 @@ public class TkOrderCostDetail implements Serializable {
     /**
      * 结算时间
      */
-    private LocalDateTime statementTime;
+    private Date statementTime;
 
     /**
      * 总结算金额
@@ -269,7 +269,7 @@ public class TkOrderCostDetail implements Serializable {
     /**
      * 同步时间
      */
-    private LocalDateTime syncTime;
+    private Date syncTime;
 
     /**
      * 商品退款金额

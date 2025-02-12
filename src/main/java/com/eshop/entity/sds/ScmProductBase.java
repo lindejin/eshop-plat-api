@@ -14,7 +14,7 @@ import lombok.ToString;
  * </p>
  *
  * @author sds
- * @since 2025-02-11
+ * @since 2025-02-12
  */
 @Getter
 @Setter
@@ -25,12 +25,12 @@ public class ScmProductBase implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @TableId(value = "id", type = IdType.AUTO)
-    private Integer id;
+    private Long id;
 
     /**
      * 供应链商品id
      */
-    private Integer scmProductId;
+    private Long scmProductId;
 
     /**
      * 商品中文名称
@@ -55,10 +55,10 @@ public class ScmProductBase implements Serializable {
     /**
      * 视频_id
      */
-    private Integer fileVideoId;
+    private Long fileVideoId;
 
     /**
      * 预计发货时效(小时)
      */
-    private Integer deliveryTime;
+    private Long deliveryTime;
 }

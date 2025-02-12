@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
-import java.time.LocalDateTime;
+import java.util.Date;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -15,7 +15,7 @@ import lombok.ToString;
  * </p>
  *
  * @author sds
- * @since 2025-02-11
+ * @since 2025-02-12
  */
 @Getter
 @Setter
@@ -26,12 +26,12 @@ public class SdsCategory implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @TableId(value = "id", type = IdType.AUTO)
-    private Integer id;
+    private Long id;
 
     /**
      * sds-平台分类id
      */
-    private Integer categoryId;
+    private Long categoryId;
 
     /**
      * 分类名称
@@ -41,7 +41,7 @@ public class SdsCategory implements Serializable {
     /**
      * 分类父id
      */
-    private Integer parentId;
+    private Long parentId;
 
     /**
      * 是否叶子类目（1：是， 0：不是）
@@ -51,5 +51,5 @@ public class SdsCategory implements Serializable {
     /**
      * 创建时间
      */
-    private LocalDateTime createTime;
+    private Date createTime;
 }

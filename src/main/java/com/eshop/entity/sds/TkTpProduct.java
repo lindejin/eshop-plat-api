@@ -15,7 +15,7 @@ import lombok.ToString;
  * </p>
  *
  * @author sds
- * @since 2025-02-11
+ * @since 2025-02-12
  */
 @Getter
 @Setter
@@ -29,12 +29,12 @@ public class TkTpProduct implements Serializable {
      * 自增id
      */
     @TableId(value = "id", type = IdType.AUTO)
-    private Integer id;
+    private Long id;
 
     /**
      * 模版id
      */
-    private Integer templateId;
+    private Long templateId;
 
     /**
      * 类目id
@@ -74,17 +74,17 @@ public class TkTpProduct implements Serializable {
     /**
      * 包装高度，单位为厘米
      */
-    private Integer packageHeight;
+    private Long packageHeight;
 
     /**
      * 包装长度，单位为厘米
      */
-    private Integer packageLength;
+    private Long packageLength;
 
     /**
      * 包装宽度，单位为厘米
      */
-    private Integer packageWidth;
+    private Long packageWidth;
 
     /**
      * 封装尺寸单位
@@ -99,7 +99,7 @@ public class TkTpProduct implements Serializable {
     /**
      * 默认sku库存
      */
-    private Integer availableStock;
+    private Long availableStock;
 
     /**
      * 是否打开货到付款(1.是 2.否)

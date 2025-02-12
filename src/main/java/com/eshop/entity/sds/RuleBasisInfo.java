@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
-import java.time.LocalDateTime;
+import java.util.Date;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -15,7 +15,7 @@ import lombok.ToString;
  * </p>
  *
  * @author sds
- * @since 2025-02-11
+ * @since 2025-02-12
  */
 @Getter
 @Setter
@@ -29,7 +29,7 @@ public class RuleBasisInfo implements Serializable {
      * id
      */
     @TableId(value = "id", type = IdType.AUTO)
-    private Integer id;
+    private Long id;
 
     /**
      * 名称
@@ -39,12 +39,12 @@ public class RuleBasisInfo implements Serializable {
     /**
      * 结果等级
      */
-    private Integer level;
+    private Long level;
 
     /**
      * 策略类型1.线上 2.线下
      */
-    private Integer policyType;
+    private Long policyType;
 
     /**
      * 结果内容
@@ -54,27 +54,27 @@ public class RuleBasisInfo implements Serializable {
     /**
      * 处置方案(枚举)
      */
-    private Integer disposalPlan;
+    private Long disposalPlan;
 
     /**
      * 创建人
      */
-    private Integer createId;
+    private Long createId;
 
     /**
      * 创建时间
      */
-    private LocalDateTime createTime;
+    private Date createTime;
 
     /**
      * 修改人
      */
-    private Integer updateId;
+    private Long updateId;
 
     /**
      * 修改时间
      */
-    private LocalDateTime updateTime;
+    private Date updateTime;
 
     /**
      * 是否已被删除(1: 是, 2: 否)

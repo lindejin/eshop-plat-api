@@ -15,7 +15,7 @@ import lombok.ToString;
  * </p>
  *
  * @author order
- * @since 2025-02-11
+ * @since 2025-02-12
  */
 @Getter
 @Setter
@@ -26,7 +26,7 @@ public class TbOrderProducts implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @TableId(value = "id", type = IdType.AUTO)
-    private Integer id;
+    private Long id;
 
     /**
      * 订单编号
@@ -56,7 +56,7 @@ public class TbOrderProducts implements Serializable {
     /**
      * 店铺sku商品图片
      */
-    private Integer skuImgId;
+    private Long skuImgId;
 
     /**
      * 店铺sku编号
@@ -91,12 +91,12 @@ public class TbOrderProducts implements Serializable {
     /**
      * 数量
      */
-    private Integer number;
+    private Long number;
 
     /**
      * 订单数量
      */
-    private Integer orderNumber;
+    private Long orderNumber;
 
     /**
      * 商品单价
@@ -116,7 +116,7 @@ public class TbOrderProducts implements Serializable {
     /**
      * 仓库id
      */
-    private Integer depotId;
+    private Long depotId;
 
     /**
      * 商品skuid

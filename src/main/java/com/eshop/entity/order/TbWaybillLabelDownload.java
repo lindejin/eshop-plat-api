@@ -14,7 +14,7 @@ import lombok.ToString;
  * </p>
  *
  * @author order
- * @since 2025-02-11
+ * @since 2025-02-12
  */
 @Getter
 @Setter
@@ -28,17 +28,17 @@ public class TbWaybillLabelDownload implements Serializable {
      * 主键id
      */
     @TableId(value = "id", type = IdType.AUTO)
-    private Integer id;
+    private Long id;
 
     /**
      * 平台id
      */
-    private Integer platformId;
+    private Long platformId;
 
     /**
      * 店铺id
      */
-    private Integer shopId;
+    private Long shopId;
 
     /**
      * 订单编号
@@ -53,7 +53,7 @@ public class TbWaybillLabelDownload implements Serializable {
     /**
      * 物流方式
      */
-    private Integer modeId;
+    private Long modeId;
 
     /**
      * 运单编号(货运单号)
@@ -63,7 +63,7 @@ public class TbWaybillLabelDownload implements Serializable {
     /**
      * 下载状态（1等待 2待创建面单 3创建完成 4下载面单 5.完成）	
      */
-    private Integer downloadStatus;
+    private Long downloadStatus;
 
     /**
      * 扩展字段1

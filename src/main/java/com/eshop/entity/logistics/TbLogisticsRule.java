@@ -5,7 +5,7 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import java.util.Date;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -16,7 +16,7 @@ import lombok.ToString;
  * </p>
  *
  * @author logistics
- * @since 2025-02-11
+ * @since 2025-02-12
  */
 @Getter
 @Setter
@@ -30,22 +30,22 @@ public class TbLogisticsRule implements Serializable {
      * 规则ID，主键
      */
     @TableId(value = "id", type = IdType.AUTO)
-    private Integer id;
+    private Long id;
 
     /**
      * 平台
      */
-    private Integer platformId;
+    private Long platformId;
 
     /**
      * 物流方式
      */
-    private Integer logisticsModeId;
+    private Long logisticsModeId;
 
     /**
      * 优先级
      */
-    private Integer priority;
+    private Long priority;
 
     /**
      * 最大重量
@@ -80,7 +80,7 @@ public class TbLogisticsRule implements Serializable {
     /**
      * 创建时间
      */
-    private LocalDateTime createTime;
+    private Date createTime;
 
     /**
      * 更新者
@@ -90,7 +90,7 @@ public class TbLogisticsRule implements Serializable {
     /**
      * 更新时间
      */
-    private LocalDateTime updateTime;
+    private Date updateTime;
 
     /**
      * 备注

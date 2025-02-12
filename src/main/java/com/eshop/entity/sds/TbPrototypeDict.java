@@ -14,7 +14,7 @@ import lombok.ToString;
  * </p>
  *
  * @author sds
- * @since 2025-02-11
+ * @since 2025-02-12
  */
 @Getter
 @Setter
@@ -25,25 +25,25 @@ public class TbPrototypeDict implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @TableId(value = "id", type = IdType.AUTO)
-    private Integer id;
+    private Long id;
 
     /**
      * 样机_id
      */
-    private Integer prototypeId;
+    private Long prototypeId;
 
     /**
      * 词典_id
      */
-    private Integer dictId;
+    private Long dictId;
 
     /**
      * 词典值_id
      */
-    private Integer dictValId;
+    private Long dictValId;
 
     /**
      * 款式商品_id
      */
-    private Integer styleProductId;
+    private Long styleProductId;
 }

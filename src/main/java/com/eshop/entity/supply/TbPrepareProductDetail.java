@@ -15,7 +15,7 @@ import lombok.ToString;
  * </p>
  *
  * @author supply
- * @since 2025-02-11
+ * @since 2025-02-12
  */
 @Getter
 @Setter
@@ -26,12 +26,12 @@ public class TbPrepareProductDetail implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @TableId(value = "id", type = IdType.AUTO)
-    private Integer id;
+    private Long id;
 
     /**
      * 备货单_id
      */
-    private Integer prepareId;
+    private Long prepareId;
 
     /**
      * sku编码
@@ -46,7 +46,7 @@ public class TbPrepareProductDetail implements Serializable {
     /**
      * 备货数量
      */
-    private Integer prepareAmount;
+    private Long prepareAmount;
 
     /**
      * 采购单价

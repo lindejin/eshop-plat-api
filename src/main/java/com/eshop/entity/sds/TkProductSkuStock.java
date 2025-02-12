@@ -14,7 +14,7 @@ import lombok.ToString;
  * </p>
  *
  * @author sds
- * @since 2025-02-11
+ * @since 2025-02-12
  */
 @Getter
 @Setter
@@ -25,17 +25,17 @@ public class TkProductSkuStock implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @TableId(value = "id", type = IdType.AUTO)
-    private Integer id;
+    private Long id;
 
     /**
      * 商品id
      */
-    private Integer productId;
+    private Long productId;
 
     /**
      * 产品sku_id
      */
-    private Integer skuId;
+    private Long skuId;
 
     /**
      * 仓库id
@@ -45,5 +45,5 @@ public class TkProductSkuStock implements Serializable {
     /**
      * 可用库存
      */
-    private Integer availableStock;
+    private Long availableStock;
 }

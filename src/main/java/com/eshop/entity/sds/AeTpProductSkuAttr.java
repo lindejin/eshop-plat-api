@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
-import java.time.LocalDateTime;
+import java.util.Date;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -15,7 +15,7 @@ import lombok.ToString;
  * </p>
  *
  * @author sds
- * @since 2025-02-11
+ * @since 2025-02-12
  */
 @Getter
 @Setter
@@ -29,17 +29,17 @@ public class AeTpProductSkuAttr implements Serializable {
      * 自增id
      */
     @TableId(value = "id", type = IdType.AUTO)
-    private Integer id;
+    private Long id;
 
     /**
      * 产品id
      */
-    private Integer productId;
+    private Long productId;
 
     /**
      * 产品sku主键id
      */
-    private Integer skuId;
+    private Long skuId;
 
     /**
      * 产品skuCode
@@ -49,12 +49,12 @@ public class AeTpProductSkuAttr implements Serializable {
     /**
      * sku属性id-ERP
      */
-    private Integer attrId;
+    private Long attrId;
 
     /**
      * sku属性值id-ERP
      */
-    private Integer attrValId;
+    private Long attrValId;
 
     /**
      * sku自定义图片，女装类目色卡图。图片格式只允许jpg、png、jpeg这3种格式
@@ -69,20 +69,20 @@ public class AeTpProductSkuAttr implements Serializable {
     /**
      * 创建人
      */
-    private Integer createId;
+    private Long createId;
 
     /**
      * 创建时间
      */
-    private LocalDateTime createTime;
+    private Date createTime;
 
     /**
      * 修改人
      */
-    private Integer updateId;
+    private Long updateId;
 
     /**
      * 修改时间
      */
-    private LocalDateTime updateTime;
+    private Date updateTime;
 }

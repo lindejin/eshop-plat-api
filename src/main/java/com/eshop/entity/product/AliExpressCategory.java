@@ -14,7 +14,7 @@ import lombok.ToString;
  * </p>
  *
  * @author product
- * @since 2025-02-11
+ * @since 2025-02-12
  */
 @Getter
 @Setter
@@ -25,19 +25,19 @@ public class AliExpressCategory implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @TableId(value = "id", type = IdType.AUTO)
-    private Integer id;
+    private Long id;
 
     /**
      * 商品目录编号
      */
-    private Integer categoryId;
+    private Long categoryId;
 
     /**
      * 父目录编号
 如果为第一级目录时为0
 
      */
-    private Integer parentId;
+    private Long parentId;
 
     /**
      * 目录中文名

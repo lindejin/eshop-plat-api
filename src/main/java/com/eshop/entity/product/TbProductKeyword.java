@@ -14,7 +14,7 @@ import lombok.ToString;
  * </p>
  *
  * @author product
- * @since 2025-02-11
+ * @since 2025-02-12
  */
 @Getter
 @Setter
@@ -25,17 +25,17 @@ public class TbProductKeyword implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @TableId(value = "id", type = IdType.AUTO)
-    private Integer id;
+    private Long id;
 
     /**
      * 关键词组id
      */
-    private Integer wordId;
+    private Long wordId;
 
     /**
      * 分组id
      */
-    private Integer groupId;
+    private Long groupId;
 
     /**
      * 关键词
