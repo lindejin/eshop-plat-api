@@ -1,6 +1,6 @@
 package com.eshop.logistics.service;
 
-import com.eshop.logistics.annotation.StrategyKey;
+import com.eshop.annotation.StrategyKey;
 import org.springframework.stereotype.Service;
 
 @Service

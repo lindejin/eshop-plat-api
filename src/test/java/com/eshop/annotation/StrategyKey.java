@@ -1,4 +1,4 @@
-package com.eshop.logistics.annotation;
+package com.eshop.annotation;
 
 import java.lang.annotation.*;
 
