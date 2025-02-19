@@ -34,6 +34,8 @@ public class TemuAppClientDTO {
             envUrl = ENV_EU;
         } else if ("US".equals(location)) {
             envUrl = ENV_US;
+        } else if ("GL".equals(location)) {
+            envUrl = ENV_GL;
         }
         return envUrl;
     }
@@ -58,4 +60,7 @@ public class TemuAppClientDTO {
     private static final String ENV_EU = "https://openapi-b-eu.temu.com/openapi/router";
     //测试环境 EU	无	http://openapi-b-eu.temudemo.com/openapi/router
     private static final String ENV_EU_TEST = "http://openapi-b-eu.temudemo.com/openapi/router";
+
+    //正式环境 GL	无	https://us.vogocmerp.com/global/openapi/router
+    private static final String ENV_GL = "https://us.vogocmerp.com/global/openapi/router";
 }

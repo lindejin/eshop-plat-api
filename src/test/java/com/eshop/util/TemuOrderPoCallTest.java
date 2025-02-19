@@ -52,4 +52,17 @@ public class TemuOrderPoCallTest {
         TemuOrderPoLogisticsCompaniesGetRespVO respVO = temuOrderPoCallService.logisticsCompaniesGet(us, params);
         System.out.println(JSON.toJSONString(respVO));
     }
+
+    /**
+     * 指定店铺id 获取temu店铺物流商
+     */
+    @Test
+    void getOrderShippingInfo() throws Exception {
+        TbShop shopDO = shopService.getById(1722L);
+        TemuAppClientDTO us = platformAppClientUtils.getTemuAppClientDTO(shopDO, "GL");
+        JSONObject params = new JSONObject();
+        params.put("parentOrderSn", "PO-100-09998279782950932");
+        String respBody = temuOrderPoCall.getOrderShippingInfo(us, params);
+        System.out.println(respBody);
+    }
 }
