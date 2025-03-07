@@ -1,7 +1,6 @@
 package com.eshop.sync;
 
 import com.alibaba.fastjson.JSONObject;
-import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.eshop.entity.log.TbOrderLog;
 import com.eshop.entity.order.TbOrder;
@@ -78,6 +77,9 @@ public class OrderSyncTest2 {
                 ));
         Date date = new Date();
         List<WayBillContact> wayBillContactList = new ArrayList<>();
+
+        List<Long> errIds = new ArrayList<>();
+
         for (TbWaybillSynErr tbWaybillSynErr : waybillSynErrList) {
             Long parcelNo = tbWaybillSynErr.getParcelNo();
             String waybillNo = tbWaybillSynErr.getWaybillNo();
@@ -90,12 +92,13 @@ public class OrderSyncTest2 {
             Long shopId = tbOrder.getShopId();
             TbWaybillSynRecord tbWaybillSynRecord = synRecordMap.get(orderNo + "||" + waybillNo);
             if (tbWaybillSynRecord != null) {
-                TbWaybillSynErr synErrParam = new TbWaybillSynErr();
-                synErrParam.setOrderNo(orderNo);
-                synErrParam.setParcelNo(parcelNo);
-                synErrParam.setWaybillNo(waybillNo);
+//                TbWaybillSynErr synErrParam = new TbWaybillSynErr();
+//                synErrParam.setOrderNo(orderNo);
+//                synErrParam.setParcelNo(parcelNo);
+//                synErrParam.setWaybillNo(waybillNo);
                 //删除错误日志
-                updateIsDeleteByOrderNoWaybill(synErrParam);
+                errIds.add(tbWaybillSynErr.getId());
+//                updateIsDeleteByOrderNoWaybill(synErrParam);
                 continue;
             }
 
@@ -123,6 +126,10 @@ public class OrderSyncTest2 {
                 }
             }
         }
+        if (CollectionUtils.isNotEmpty(errIds)) {
+            updateErr(errIds);
+        }
+
         if (CollectionUtils.isNotEmpty(wayBillContactList)) {
             for (WayBillContact wayBillContact : wayBillContactList) {
                 String orderNo = wayBillContact.getOrderNo();
@@ -194,5 +201,35 @@ public class OrderSyncTest2 {
 
         // 执行更新
         return iTbWaybillSynErrService.update(updateWrapper);
+    }
+
+    public boolean updateErr(List<Long> errIds) {
+        if (CollectionUtils.isEmpty(errIds)) {
+            return false;
+        }
+        // 每批次处理200条数据
+        int batchSize = 200;
+        boolean result = true;
+
+        // 分批处理数据
+        for (int i = 0; i < errIds.size(); i += batchSize) {
+            // 获取当前批次的结束索引
+            int endIndex = Math.min(i + batchSize, errIds.size());
+            // 获取当前批次的id列表
+            List<Long> batchIds = errIds.subList(i, endIndex);
+
+            // 构造更新条件
+            UpdateWrapper<TbWaybillSynErr> updateWrapper = new UpdateWrapper<>();
+            updateWrapper
+                    .in("id", batchIds)   // ids匹配
+                    .set("is_delete", 1); // 更新 is_delete 字段为 1（已删除）
+
+            // 执行更新，如果有一批失败则返回false
+            if (!iTbWaybillSynErrService.update(updateWrapper)) {
+                result = false;
+            }
+        }
+
+        return result;
     }
 }
