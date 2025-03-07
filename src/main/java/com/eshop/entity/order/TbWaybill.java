@@ -16,7 +16,7 @@ import lombok.ToString;
  * </p>
  *
  * @author order
- * @since 2025-02-12
+ * @since 2025-03-07
  */
 @Getter
 @Setter
@@ -38,11 +38,6 @@ public class TbWaybill implements Serializable {
      * 运单号/货运单号
      */
     private String waybillNo;
-
-    /**
-     * 仓库id
-     */
-    private Long depotId;
 
     /**
      * 买家自选物流
@@ -115,7 +110,7 @@ public class TbWaybill implements Serializable {
     private Byte shipmentType;
 
     /**
-     * 包裹类型(1: 初始包裹,2:拆包包裹,3 重发包裹,4:寄样包裹)
+     * 包裹类型(1: 初始包裹,2:拆包包裹,3 重发包裹)
      */
     private Byte parcelType;
 

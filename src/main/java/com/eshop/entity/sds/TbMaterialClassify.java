@@ -15,7 +15,7 @@ import lombok.ToString;
  * </p>
  *
  * @author sds
- * @since 2025-02-12
+ * @since 2025-03-07
  */
 @Getter
 @Setter
@@ -29,11 +29,6 @@ public class TbMaterialClassify implements Serializable {
     private Long id;
 
     /**
-     * 商户_id
-     */
-    private Long merchantId;
-
-    /**
      * 父分类id
      */
     private Long parentId;
@@ -42,21 +37,6 @@ public class TbMaterialClassify implements Serializable {
      * 父分类名称
      */
     private String classifyName;
-
-    /**
-     * 分类类型(1: 私有, 2: 公有)
-     */
-    private Byte copyrightType;
-
-    /**
-     * 外部id
-     */
-    private Long thirdPartyId;
-
-    /**
-     * 外部父id
-     */
-    private Long thirdPartyParentId;
 
     /**
      * 创建人id

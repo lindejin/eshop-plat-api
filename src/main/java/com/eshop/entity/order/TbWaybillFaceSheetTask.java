@@ -15,7 +15,7 @@ import lombok.ToString;
  * </p>
  *
  * @author order
- * @since 2025-02-12
+ * @since 2025-03-07
  */
 @Getter
 @Setter
@@ -49,7 +49,7 @@ public class TbWaybillFaceSheetTask implements Serializable {
     private String downloadUrl;
 
     /**
-     * 下载参数(使用Json格式)
+     * 下载参数
      */
     private String downloadParams;
 
@@ -87,9 +87,4 @@ public class TbWaybillFaceSheetTask implements Serializable {
      * 删除时间
      */
     private Date deleteTime;
-
-    /**
-     * 是否被下载(1: 是, 2:否)
-     */
-    private Byte isFileDownloaded;
 }

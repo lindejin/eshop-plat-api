@@ -15,7 +15,7 @@ import lombok.ToString;
  * </p>
  *
  * @author log
- * @since 2025-02-12
+ * @since 2025-03-07
  */
 @Getter
 @Setter
@@ -29,7 +29,7 @@ public class TbProductSynLog implements Serializable {
     private Long id;
 
     /**
-     * 平台商品spu	商品spu
+     * 平台商品spu	
      */
     private String spuCode;
 

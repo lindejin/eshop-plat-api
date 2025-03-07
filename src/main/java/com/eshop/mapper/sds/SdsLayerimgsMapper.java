@@ -5,11 +5,11 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**
  * <p>
- * sds-图片素材(产品 + 图片= 成品)	该表暂时没用，数据存储在tb_material等相关表 Mapper 接口
+ * sds-图片素材(产品 + 图片= 成品) Mapper 接口
  * </p>
  *
  * @author sds
- * @since 2025-02-12
+ * @since 2025-03-07
  */
 public interface SdsLayerimgsMapper extends BaseMapper<SdsLayerimgs> {
 

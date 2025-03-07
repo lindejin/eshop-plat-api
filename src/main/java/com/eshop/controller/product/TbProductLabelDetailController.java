@@ -5,11 +5,11 @@ import org.springframework.stereotype.Controller;
 
 /**
  * <p>
- * 产品-标签详情 前端控制器
+ *  前端控制器
  * </p>
  *
  * @author product
- * @since 2025-02-12
+ * @since 2025-03-07
  */
 @Controller
 @RequestMapping("/tbProductLabelDetail")

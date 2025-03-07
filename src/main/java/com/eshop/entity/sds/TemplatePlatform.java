@@ -15,7 +15,7 @@ import lombok.ToString;
  * </p>
  *
  * @author sds
- * @since 2025-02-12
+ * @since 2025-03-07
  */
 @Getter
 @Setter
@@ -39,29 +39,14 @@ public class TemplatePlatform implements Serializable {
     private String catePubId;
 
     /**
-     * 主库类目
-     */
-    private Long tbCategoryId;
-
-    /**
-     * 供应链商品id
-     */
-    private Long scmProductId;
-
-    /**
-     * 背景ids(a,b,c)
+     * 背景id(a,b,c)
      */
     private String backgroupIds;
 
     /**
-     * 素材分类ids(a,b,c)
+     * 素材id(a,b,c)
      */
     private String materialClassifyIds;
-
-    /**
-     * 样机ids(a,b,c)
-     */
-    private String prototypeIds;
 
     /**
      * 模板名称
@@ -74,49 +59,14 @@ public class TemplatePlatform implements Serializable {
     private Long shopId;
 
     /**
-     * 店铺商户id
-     */
-    private Long shopMerchantId;
-
-    /**
-     * 1.铺货模版 2.精品模版 3.关键词模板 4.标题关键词 5.详情关键词模板 6.三点描述关键词模板 7.五点描述关键词模板 8.采集模板
-     */
-    private Byte type;
-
-    /**
      * 变种比例
      */
     private Long proportion;
 
     /**
-     * 标题是否翻译 1.翻译 0.不翻译(默认)
-     */
-    private Byte titleTranslate;
-
-    /**
      * 最大上刊数量
      */
     private Long maxPrintCount;
-
-    /**
-     * 每天最大刊登量
-     */
-    private Long dayMaxPublishNumber;
-
-    /**
-     * 每次刊登数量
-     */
-    private Long perTimePublishNumber;
-
-    /**
-     * 是否支持定制（0:不支持,1:支持）
-     */
-    private String custom;
-
-    /**
-     * 定制图片
-     */
-    private Long customImgId;
 
     /**
      * 备注

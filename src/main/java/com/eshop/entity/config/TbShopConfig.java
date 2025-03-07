@@ -14,7 +14,7 @@ import lombok.ToString;
  * </p>
  *
  * @author config
- * @since 2025-02-12
+ * @since 2025-03-07
  */
 @Getter
 @Setter
@@ -43,17 +43,12 @@ public class TbShopConfig implements Serializable {
     private String vatNum;
 
     /**
+     * 每天最大刊登量
+     */
+    private Long dayMaxPublishNumber;
+
+    /**
      * 语言
      */
     private String language;
-
-    /**
-     * 发货仓库
-     */
-    private Long depotId;
-
-    /**
-     * 是否自动审核订单(1: 是, 2: 否)
-     */
-    private Byte isAutomaticHandle;
 }

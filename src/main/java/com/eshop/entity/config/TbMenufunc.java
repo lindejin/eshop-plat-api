@@ -12,7 +12,7 @@ import lombok.ToString;
  * </p>
  *
  * @author config
- * @since 2025-02-12
+ * @since 2025-03-07
  */
 @Getter
 @Setter
@@ -40,19 +40,9 @@ public class TbMenufunc implements Serializable {
     private String menuName;
 
     /**
-     * 目录名称
-     */
-    private String menuKey;
-
-    /**
      * 父目录名称
      */
     private String parentMenuName;
-
-    /**
-     * 父目录名称
-     */
-    private String parentMenuKey;
 
     /**
      * 访问连接

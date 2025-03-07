@@ -16,7 +16,7 @@ import lombok.ToString;
  * </p>
  *
  * @author supply
- * @since 2025-02-12
+ * @since 2025-03-07
  */
 @Getter
 @Setter
@@ -33,11 +33,6 @@ public class TbPurchasesOrder implements Serializable {
      * 采购单号
      */
     private Long purchaseNo;
-
-    /**
-     * 商户_id
-     */
-    private Long merchantId;
 
     /**
      * 第三方单号
@@ -73,11 +68,6 @@ public class TbPurchasesOrder implements Serializable {
      * 采购单状态(1:待发货,2:待收货,3:部分收货,4.已完成,5:已作废)
      */
     private Byte orderStatus;
-
-    /**
-     * 是否推送wms(1:已推送,2:未推送)
-     */
-    private Byte isPushWms;
 
     /**
      * 付款状态(1:待申请付款,2:待财务审核,3:待付款,4:已付款,5:审核不通过)

@@ -15,7 +15,7 @@ import lombok.ToString;
  * </p>
  *
  * @author depot
- * @since 2025-02-12
+ * @since 2025-03-07
  */
 @Getter
 @Setter
@@ -37,11 +37,6 @@ public class TbDepot implements Serializable {
      * 是否启用(1:启用,2:停用)
      */
     private Byte depotStatus;
-
-    /**
-     * wms系统租户与仓库绑定记录的Id,就是def_tenant_depot表的Id
-     */
-    private Long wmsDepotId;
 
     /**
      * 仓库类型(1: 常规发货仓库, 2: 无需采购发货仓库)
@@ -127,19 +122,4 @@ public class TbDepot implements Serializable {
      * 删除时间
      */
     private Date deleteTime;
-
-    /**
-     * 国家id
-     */
-    private Long countryId;
-
-    /**
-     * 快递投递类型1:送货到快递站,2:上门取件
-     */
-    private Long deliveryType;
-
-    /**
-     * 语言
-     */
-    private String language;
 }

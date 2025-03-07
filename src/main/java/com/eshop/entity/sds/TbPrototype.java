@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Date;
 import lombok.Getter;
 import lombok.Setter;
@@ -15,7 +16,7 @@ import lombok.ToString;
  * </p>
  *
  * @author sds
- * @since 2025-02-12
+ * @since 2025-03-07
  */
 @Getter
 @Setter
@@ -34,11 +35,6 @@ public class TbPrototype implements Serializable {
     private String spuCode;
 
     /**
-     * 供应链商品id
-     */
-    private Long scmProductId;
-
-    /**
      * 样机名称
      */
     private String prototypeName;
@@ -49,24 +45,29 @@ public class TbPrototype implements Serializable {
     private Long categoryId;
 
     /**
-     * 模特状态(1: 未上线, 2: 已上线)
+     * 成本价
      */
-    private Byte prototypeStatus;
+    private BigDecimal costPrice;
 
     /**
-     * 样机类型(1: 精品模特, 2: 铺货模特, 3: sds模特)
+     * 最大合成数量
      */
-    private Byte prototypeType;
+    private Long maxSyntheticNumber;
+
+    /**
+     * 词典_id(api绘画)
+     */
+    private Long dictId;
+
+    /**
+     * 素材分类_id
+     */
+    private Long classifyId;
 
     /**
      * 文本描述
      */
     private String textDescribe;
-
-    /**
-     * 外部产品id
-     */
-    private Long rawId;
 
     /**
      * 创建人id
@@ -82,11 +83,6 @@ public class TbPrototype implements Serializable {
      * 是否已被删除(1: 是, 2: 否)
      */
     private Byte isDelete;
-
-    /**
-     * 修改人
-     */
-    private Long updateId;
 
     /**
      * 修改时间

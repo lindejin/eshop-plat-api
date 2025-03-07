@@ -14,7 +14,7 @@ import lombok.ToString;
  * </p>
  *
  * @author depot
- * @since 2025-02-12
+ * @since 2025-03-07
  */
 @Getter
 @Setter
@@ -61,14 +61,4 @@ public class TbProcessSkuMaterial implements Serializable {
      * 定位名称
      */
     private String locationName;
-
-    /**
-     * 是否扫描完成(1.是 2.否)
-     */
-    private Byte isScan;
-
-    /**
-     * 是否有库存(1.是 2.否)
-     */
-    private Byte isInStock;
 }

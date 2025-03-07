@@ -15,7 +15,7 @@ import lombok.ToString;
  * </p>
  *
  * @author sds
- * @since 2025-02-12
+ * @since 2025-03-07
  */
 @Getter
 @Setter
@@ -35,6 +35,11 @@ public class TemplateDict implements Serializable {
      * 字典名称
      */
     private String name;
+
+    /**
+     * 1.shopee模版详情 2.shopee背景词 3.shopee爆款词 4.shopee背景属性 5.tk模版详情 6.tk背景词 7.tk爆款词
+     */
+    private Byte type;
 
     /**
      * 描述

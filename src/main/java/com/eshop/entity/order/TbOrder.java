@@ -15,7 +15,7 @@ import lombok.ToString;
  * </p>
  *
  * @author order
- * @since 2025-02-12
+ * @since 2025-03-07
  */
 @Getter
 @Setter
@@ -64,12 +64,12 @@ public class TbOrder implements Serializable {
     private String shopName;
 
     /**
-     * 订单状态(-1.已作废,1.待审,2.待处理,3.配货中,4.已发货,5.已完成,6.部分发货,7:等待配货,8:待重审,9.未付款)
+     * 订单状态(-1.已作废,1.待审,2.待处理,3.配货中,4.已发货,5.已完成,6.部分发货,7:等待配货,8:待重审)
      */
     private Byte orderStatus;
 
     /**
-     * 订单类型(1.普通订单,2.推广订单,3.海外发货订单,4.ae全托管jit,5.ae全托管仓发)
+     * 订单类型(1.普通订单,2.推广订单,3.海外发货订单)
      */
     private Byte orderType;
 
@@ -137,9 +137,4 @@ public class TbOrder implements Serializable {
      * 请款时间
      */
     private Date requestFundsTime;
-
-    /**
-     * 平台订单类型
-     */
-    private String platformOrderType;
 }

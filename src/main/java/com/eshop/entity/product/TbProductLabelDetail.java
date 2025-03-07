@@ -10,11 +10,11 @@ import lombok.ToString;
 
 /**
  * <p>
- * 产品-标签详情
+ * 
  * </p>
  *
  * @author product
- * @since 2025-02-12
+ * @since 2025-03-07
  */
 @Getter
 @Setter

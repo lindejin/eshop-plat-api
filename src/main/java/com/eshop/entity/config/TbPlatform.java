@@ -4,7 +4,6 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
-import java.util.Date;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -15,7 +14,7 @@ import lombok.ToString;
  * </p>
  *
  * @author config
- * @since 2025-02-12
+ * @since 2025-03-07
  */
 @Getter
 @Setter
@@ -49,17 +48,12 @@ public class TbPlatform implements Serializable {
     private String apiPath;
 
     /**
-     * 创建人id
+     * 调用参数_静态_空值
      */
-    private Long creatorId;
+    private String paramStaticJson;
 
     /**
-     * 创建时间
+     * 调用参数_动态_空值
      */
-    private Date createTime;
-
-    /**
-     * 是否已被删除(1: 是, 2: 否)
-     */
-    private Byte isDelete;
+    private String paramDynamicJson;
 }

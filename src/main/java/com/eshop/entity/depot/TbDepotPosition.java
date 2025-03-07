@@ -15,7 +15,7 @@ import lombok.ToString;
  * </p>
  *
  * @author depot
- * @since 2025-02-12
+ * @since 2025-03-07
  */
 @Getter
 @Setter
@@ -102,19 +102,4 @@ public class TbDepotPosition implements Serializable {
      * 库存sku编号 (有值表示永久绑定)
      */
     private String productSku;
-
-    /**
-     * 列
-     */
-    private Long columnIndex;
-
-    /**
-     * 层
-     */
-    private Long rowIndex;
-
-    /**
-     * 仓位类型(1.普通 2.虚拟)
-     */
-    private Byte positionType;
 }

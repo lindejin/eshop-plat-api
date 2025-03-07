@@ -9,7 +9,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * </p>
  *
  * @author depot
- * @since 2025-02-12
+ * @since 2025-03-07
  */
 public interface ITbFlexibleCustomizeMaterialDetailService extends IService<TbFlexibleCustomizeMaterialDetail> {
 

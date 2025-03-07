@@ -15,7 +15,7 @@ import lombok.ToString;
  * </p>
  *
  * @author product
- * @since 2025-02-12
+ * @since 2025-03-07
  */
 @Getter
 @Setter
@@ -49,17 +49,7 @@ public class TbProduct implements Serializable {
     private Long classifyId;
 
     /**
-     * 供应链商品_id
-     */
-    private Long scmProductId;
-
-    /**
-     * 样机_id
-     */
-    private Long prototypeId;
-
-    /**
-     * 数据来源类型(1: 主库录入, 2: 表格导入, 3: 第三方平台录入, 4: diy导入, 5: 自动合成)
+     * 数据来源类型(1: 主库录入, 2: 表格导入, 3: 第三方平台录入, 4: diy导入)
      */
     private Byte sourceType;
 

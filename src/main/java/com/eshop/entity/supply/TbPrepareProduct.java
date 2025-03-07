@@ -16,7 +16,7 @@ import lombok.ToString;
  * </p>
  *
  * @author supply
- * @since 2025-02-12
+ * @since 2025-03-07
  */
 @Getter
 @Setter
@@ -40,11 +40,6 @@ public class TbPrepareProduct implements Serializable {
     private Long merchantId;
 
     /**
-     * 仓库id
-     */
-    private Long depotId;
-
-    /**
      * 备货计划名称
      */
     private String prepareName;
@@ -63,11 +58,6 @@ public class TbPrepareProduct implements Serializable {
      * 备货单状态(-1: 驳回,1: 待申请, 2: 待审核, 3: 已审核)
      */
     private Byte prepareStatus;
-
-    /**
-     * 是否推送wms(1:已推送,2:未推送)
-     */
-    private Byte isPushWms;
 
     /**
      * 商品总费用

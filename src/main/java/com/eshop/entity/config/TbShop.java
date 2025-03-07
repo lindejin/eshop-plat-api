@@ -15,7 +15,7 @@ import lombok.ToString;
  * </p>
  *
  * @author config
- * @since 2025-02-12
+ * @since 2025-03-07
  */
 @Getter
 @Setter
@@ -29,11 +29,6 @@ public class TbShop implements Serializable {
     private Long id;
 
     /**
-     * 商户_id
-     */
-    private Long merchantId;
-
-    /**
      * 平台编码
      */
     private String platformCode;
@@ -44,29 +39,9 @@ public class TbShop implements Serializable {
     private String platformShopId;
 
     /**
-     * 店铺商户ID
+     * 商户_id
      */
-    private Long shopMerchantId;
-
-    /**
-     * 店铺类型(1: 跨境店, 2: 本土店3.跨境子店铺)
-     */
-    private Byte shopType;
-
-    /**
-     * 平台应用_id
-     */
-    private Long appId;
-
-    /**
-     * 店铺类型(1.普通/半托管 2.全托管)
-     */
-    private Byte platformShopType;
-
-    /**
-     * 店铺所属国家(本土店国家必选)
-     */
-    private Long countryId;
+    private Long merchantId;
 
     /**
      * 店铺名称
@@ -97,6 +72,16 @@ public class TbShop implements Serializable {
      * 过期时间
      */
     private Date expiresTime;
+
+    /**
+     * ioss税号（欧盟税号）
+     */
+    private String iossNo;
+
+    /**
+     * vat税号
+     */
+    private String vatNum;
 
     /**
      * 调用参数_静态_空值
@@ -144,7 +129,7 @@ public class TbShop implements Serializable {
     private Date deleteTime;
 
     /**
-     * 货币类型
+     * 店铺所属国家(TikTok店铺必须指定)
      */
-    private String currencyType;
+    private Long countryId;
 }

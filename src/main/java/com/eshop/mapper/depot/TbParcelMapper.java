@@ -9,7 +9,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * </p>
  *
  * @author depot
- * @since 2025-02-12
+ * @since 2025-03-07
  */
 public interface TbParcelMapper extends BaseMapper<TbParcel> {
 

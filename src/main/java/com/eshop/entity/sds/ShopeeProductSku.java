@@ -15,7 +15,7 @@ import lombok.ToString;
  * </p>
  *
  * @author sds
- * @since 2025-02-12
+ * @since 2025-03-07
  */
 @Getter
 @Setter
@@ -47,11 +47,6 @@ public class ShopeeProductSku implements Serializable {
      * 产品sku的modelId
      */
     private Long modelId;
-
-    /**
-     * 产品sku的modelId
-     */
-    private Long modelGlId;
 
     /**
      * 价格

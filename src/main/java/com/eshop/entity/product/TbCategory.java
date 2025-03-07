@@ -15,7 +15,7 @@ import lombok.ToString;
  * </p>
  *
  * @author product
- * @since 2025-02-12
+ * @since 2025-03-07
  */
 @Getter
 @Setter
@@ -52,16 +52,6 @@ public class TbCategory implements Serializable {
      * 是否叶子节点(1: 是, 2:不是)
      */
     private Byte isLeaf;
-
-    /**
-     * 外部id
-     */
-    private Long rawId;
-
-    /**
-     * 外部父id
-     */
-    private Long rawParentId;
 
     /**
      * 备注

@@ -15,7 +15,7 @@ import lombok.ToString;
  * </p>
  *
  * @author sds
- * @since 2025-02-12
+ * @since 2025-03-07
  */
 @Getter
 @Setter
@@ -67,7 +67,7 @@ public class TkTpProduct implements Serializable {
     private String brandName;
 
     /**
-     * 描述
+     * 描述-需要确认大小
      */
     private String description;
 
@@ -120,9 +120,4 @@ public class TkTpProduct implements Serializable {
      * 仓库名称
      */
     private String warehouseName;
-
-    /**
-     * 模版类型 1.普通 2.跨境
-     */
-    private Byte templateType;
 }

@@ -15,7 +15,7 @@ import lombok.ToString;
  * </p>
  *
  * @author sds
- * @since 2025-02-12
+ * @since 2025-03-07
  */
 @Getter
 @Setter
@@ -32,16 +32,6 @@ public class TbPrototypeImgClip implements Serializable {
      * 样机图片_id
      */
     private Long prototypeImgId;
-
-    /**
-     * 定位名称
-     */
-    private String clipName;
-
-    /**
-     * 定位颜色
-     */
-    private String clipColor;
 
     /**
      * 定位宽度px

@@ -15,7 +15,7 @@ import lombok.ToString;
  * </p>
  *
  * @author product
- * @since 2025-02-12
+ * @since 2025-03-07
  */
 @Getter
 @Setter
@@ -51,7 +51,7 @@ public class TbCategoryPlatform implements Serializable {
     /**
      * 操作人id
      */
-    private Long operId;
+    private Byte operId;
 
     /**
      * 操作时间

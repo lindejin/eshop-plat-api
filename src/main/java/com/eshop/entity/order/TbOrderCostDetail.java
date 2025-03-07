@@ -15,7 +15,7 @@ import lombok.ToString;
  * </p>
  *
  * @author order
- * @since 2025-02-12
+ * @since 2025-03-07
  */
 @Getter
 @Setter
@@ -37,11 +37,6 @@ public class TbOrderCostDetail implements Serializable {
      * 货币类型
      */
     private String currency;
-
-    /**
-     * 买家付款方式
-     */
-    private String paymentMethod;
 
     /**
      * 商品总售价
@@ -79,11 +74,6 @@ public class TbOrderCostDetail implements Serializable {
     private BigDecimal packingFee;
 
     /**
-     * 平台服务费
-     */
-    private BigDecimal serviceFee;
-
-    /**
      * 平台佣金费
      */
     private BigDecimal platformCost;
@@ -99,9 +89,9 @@ public class TbOrderCostDetail implements Serializable {
     private BigDecimal advertisingRate;
 
     /**
-     * 平台优惠卷
+     * 推广费/测评费(刷单费)
      */
-    private BigDecimal platformCoupon;
+    private BigDecimal promotionExpenses;
 
     /**
      * 店铺优惠劵
@@ -109,19 +99,9 @@ public class TbOrderCostDetail implements Serializable {
     private BigDecimal shopCoupon;
 
     /**
-     * 推广费/测评费(刷单费)
-     */
-    private BigDecimal promotionExpenses;
-
-    /**
      * 其他支出
      */
     private BigDecimal otherExpenses;
-
-    /**
-     * 买方付款金额
-     */
-    private BigDecimal buyerPaymentAmount;
 
     /**
      * 退款金额
@@ -132,9 +112,4 @@ public class TbOrderCostDetail implements Serializable {
      * 增补费用
      */
     private BigDecimal supplementCost;
-
-    /**
-     * 订单平台收入
-     */
-    private BigDecimal orderPlatformRevenue;
 }

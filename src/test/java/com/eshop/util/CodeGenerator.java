@@ -14,23 +14,24 @@ import java.util.List;
 
 public class CodeGenerator {
 
-    public static String path = "C:\\zit\\workspacetest\\eshop-plat-api\\src\\main\\java";
-    public static String pathXml = "C:\\zit\\workspacetest\\eshop-plat-api\\src\\main\\resources\\mapper";
+    public static String path = "C:\\zit\\workspace_test\\eshop-plat-api\\src\\main\\java";
+    public static String pathXml = "C:\\zit\\workspace_test\\eshop-plat-api\\src\\main\\resources\\mapper";
     public static String  packagePath = "com.eshop";
     public static void main(String[] args) {
 //        List<String> list = Arrays.asList("ai", "collect", "config", "customer", "depot", "file", "finance", "gpt", "job", "kpi", "log", "logistics", "order", "product", "sds", "supply");
         List<String> list = Arrays.asList("collect", "config", "customer", "depot", "file", "finance", "job", "kpi", "log", "logistics", "order", "product", "sds", "supply");
-
-//        List<String> list = Arrays.asList("sds");
-
         for (String db : list) {
-            create(db);
+            try {
+                create(db);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
 
     }
 
     public static void create(String db) {
-        String url = "jdbc:mysql://192.168.10.136:3306/eshop_" + db + "?serverTimezone=Asia/Shanghai&characterEncoding=UTF-8&useSSL=false";
+        String url = "jdbc:mysql://192.168.10.239:3306/eshop_" + db + "?serverTimezone=Asia/Shanghai&characterEncoding=UTF-8&useSSL=false";
         String username = "eshop";
         String password = "eshop123";
         FastAutoGenerator.create(url, username, password)

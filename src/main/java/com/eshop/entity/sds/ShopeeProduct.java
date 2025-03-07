@@ -16,7 +16,7 @@ import lombok.ToString;
  * </p>
  *
  * @author sds
- * @since 2025-02-12
+ * @since 2025-03-07
  */
 @Getter
 @Setter
@@ -48,31 +48,6 @@ public class ShopeeProduct implements Serializable {
     private String catePubId;
 
     /**
-     * 模版尺码类型(1.三方模版 2.尺码图片)
-     */
-    private Byte sizeType;
-
-    /**
-     * 模板尺码表id(三方平台的)
-     */
-    private Long templateSizeChartId;
-
-    /**
-     * 模板尺码表图片id(三方平台的)
-     */
-    private String imageSizeChartId;
-
-    /**
-     * 模板尺码表图片id(erp系统)
-     */
-    private Long sizeImgId;
-
-    /**
-     * 店铺商户id
-     */
-    private Long shopMerchantId;
-
-    /**
      * 店铺id
      */
     private Long shopId;
@@ -81,11 +56,6 @@ public class ShopeeProduct implements Serializable {
      * 产品id
      */
     private Long itemId;
-
-    /**
-     * 全球产品id
-     */
-    private Long itemGlobalId;
 
     /**
      * 产品名称
@@ -101,11 +71,6 @@ public class ShopeeProduct implements Serializable {
      * 品牌id(类目属性冗余过来，这个必填)
      */
     private Long brandId;
-
-    /**
-     * 品牌名称(类目属性冗余过来，这个必填)
-     */
-    private String brandName;
 
     /**
      * 尺码ID
@@ -148,7 +113,7 @@ public class ShopeeProduct implements Serializable {
     private String conditionVal;
 
     /**
-     * 描述
+     * 描述-需要确认大小
      */
     private String description;
 
@@ -161,11 +126,6 @@ public class ShopeeProduct implements Serializable {
      * 保证发货订单的天数
      */
     private Long daysToShip;
-
-    /**
-     * 产品刊登错误信息
-     */
-    private String printErrMsg;
 
     /**
      * 刊登时间
@@ -193,42 +153,7 @@ public class ShopeeProduct implements Serializable {
     private Byte isPublish;
 
     /**
-     * 是否执行过刊登 0.未执行过(默认) 1.执行过
-     */
-    private Byte isExecutedPublish;
-
-    /**
      * 是否已被删除(1: 是, 2: 否)
      */
     private Byte isDelete;
-
-    /**
-     * 产品类型 1.普通 2.跨境 3.铺货
-     */
-    private Byte productType;
-
-    /**
-     * 仓库id 字符类型
-     */
-    private String locationId;
-
-    /**
-     * 创建人
-     */
-    private Long createId;
-
-    /**
-     * 创建人
-     */
-    private Long updateId;
-
-    /**
-     * 创建时间
-     */
-    private Date createTime;
-
-    /**
-     * 修改时间
-     */
-    private Date updateTime;
 }

@@ -15,7 +15,7 @@ import lombok.ToString;
  * </p>
  *
  * @author sds
- * @since 2025-02-12
+ * @since 2025-03-07
  */
 @Getter
 @Setter
@@ -42,21 +42,6 @@ public class TemplateProduct implements Serializable {
     private String catePubId;
 
     /**
-     * 模版尺码类型(1.三方模版 2.尺码图片)
-     */
-    private Byte sizeType;
-
-    /**
-     * 模板尺码表id(三方平台的)
-     */
-    private Long templateSizeChartId;
-
-    /**
-     * 模板尺码表id(erp系统)
-     */
-    private Long sizeImgId;
-
-    /**
      * 产品名称
      */
     private String itemName;
@@ -67,14 +52,9 @@ public class TemplateProduct implements Serializable {
     private String itemStatus;
 
     /**
-     * 产品区间价格最小值
+     * 产品价格
      */
-    private BigDecimal originalPriceMin;
-
-    /**
-     * 产品价格价格最大值
-     */
-    private BigDecimal originalPriceMax;
+    private BigDecimal originalPrice;
 
     /**
      * 单价折扣
@@ -107,7 +87,7 @@ public class TemplateProduct implements Serializable {
     private String conditionVal;
 
     /**
-     * 描述
+     * 描述-需要确认大小
      */
     private String description;
 
@@ -135,14 +115,4 @@ public class TemplateProduct implements Serializable {
      * 品牌名称
      */
     private String brandName;
-
-    /**
-     * 产品类型 1.普通 2.跨境
-     */
-    private Byte productType;
-
-    /**
-     * 仓库id 字符类型
-     */
-    private String locationId;
 }

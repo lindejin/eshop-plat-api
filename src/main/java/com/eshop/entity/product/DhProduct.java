@@ -15,7 +15,7 @@ import lombok.ToString;
  * </p>
  *
  * @author product
- * @since 2025-02-12
+ * @since 2025-03-07
  */
 @Getter
 @Setter
@@ -33,7 +33,10 @@ public class DhProduct implements Serializable {
      */
     private String spuCode;
 
-    private Long templateId;
+    /**
+     * 商户_id
+     */
+    private Long merchantId;
 
     /**
      * 店铺id(0: 从库id,其他: 店铺id)
@@ -44,11 +47,6 @@ public class DhProduct implements Serializable {
      * 类目id
      */
     private String catePubId;
-
-    /**
-     * 1.铺货产品 2.精品产品
-     */
-    private Byte type;
 
     /**
      * 产品运费模板id

@@ -15,7 +15,7 @@ import lombok.ToString;
  * </p>
  *
  * @author order
- * @since 2025-02-12
+ * @since 2025-03-07
  */
 @Getter
 @Setter
@@ -47,11 +47,6 @@ public class TbOrderProducts implements Serializable {
      * 平台sku_id
      */
     private Long platformSkuId;
-
-    /**
-     * 平台sku_index
-     */
-    private Long platformSkuIndex;
 
     /**
      * 店铺sku商品图片
@@ -94,11 +89,6 @@ public class TbOrderProducts implements Serializable {
     private Long number;
 
     /**
-     * 订单数量
-     */
-    private Long orderNumber;
-
-    /**
      * 商品单价
      */
     private BigDecimal unitPrice;
@@ -122,14 +112,4 @@ public class TbOrderProducts implements Serializable {
      * 商品skuid
      */
     private Long productSkuId;
-
-    /**
-     * 扩展使用（当业务支持一个PO单多个相同sc_item_id场景使用)
-     */
-    private Long poLineId;
-
-    /**
-     * 是否定制品，0-否，1-是
-     */
-    private Byte isCustomProduct;
 }

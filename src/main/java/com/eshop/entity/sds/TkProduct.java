@@ -16,7 +16,7 @@ import lombok.ToString;
  * </p>
  *
  * @author sds
- * @since 2025-02-12
+ * @since 2025-03-07
  */
 @Getter
 @Setter
@@ -128,11 +128,6 @@ public class TkProduct implements Serializable {
     private String outerProductId;
 
     /**
-     * 产品刊登错误信息
-     */
-    private String printErrMsg;
-
-    /**
      * 用于错误跟踪的 API 请求的标识符
      */
     private String requestId;
@@ -141,11 +136,6 @@ public class TkProduct implements Serializable {
      * 是否已刊登到店铺1: 是, 2: 否 3.仍需手动重新刊登
      */
     private Byte isPublish;
-
-    /**
-     * 是否执行过刊登 0.未执行过(默认) 1.执行过
-     */
-    private Byte isExecutedPublish;
 
     /**
      * 是否已被删除(1: 是, 2: 否)
@@ -176,14 +166,4 @@ public class TkProduct implements Serializable {
      * 修改时间
      */
     private Date updateTime;
-
-    /**
-     * 商品类型(1:普通,2:全球)
-     */
-    private Byte productType;
-
-    /**
-     * 全球商品是否发布(1:已发布,2:未发布)
-     */
-    private Byte publishStatus;
 }

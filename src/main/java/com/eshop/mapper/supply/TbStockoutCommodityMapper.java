@@ -9,7 +9,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * </p>
  *
  * @author supply
- * @since 2025-02-12
+ * @since 2025-03-07
  */
 public interface TbStockoutCommodityMapper extends BaseMapper<TbStockoutCommodity> {
 

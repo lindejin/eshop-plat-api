@@ -15,7 +15,7 @@ import lombok.ToString;
  * </p>
  *
  * @author depot
- * @since 2025-02-12
+ * @since 2025-03-07
  */
 @Getter
 @Setter
@@ -72,19 +72,4 @@ public class TbProcessTask implements Serializable {
      * 创建时间
      */
     private Date createTime;
-
-    /**
-     * 是否打印素材图片(1.是 2.否)
-     */
-    private Byte isPrintMaterialImage;
-
-    /**
-     * 是否打印素材item(1.是 2.否)
-     */
-    private Byte isPrintMaterialItem;
-
-    /**
-     * 是否打印运单号(1.是 2.否)
-     */
-    private Byte isPrintWaybill;
 }

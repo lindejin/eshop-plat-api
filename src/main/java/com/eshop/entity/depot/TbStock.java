@@ -15,7 +15,7 @@ import lombok.ToString;
  * </p>
  *
  * @author depot
- * @since 2025-02-12
+ * @since 2025-03-07
  */
 @Getter
 @Setter
@@ -87,9 +87,4 @@ public class TbStock implements Serializable {
      * 备注
      */
     private String remark;
-
-    /**
-     * 产品类型(1:默认,2:素材,3:供应链,4:成品)
-     */
-    private Byte productType;
 }

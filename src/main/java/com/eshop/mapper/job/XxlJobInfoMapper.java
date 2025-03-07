@@ -9,7 +9,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * </p>
  *
  * @author job
- * @since 2025-02-12
+ * @since 2025-03-07
  */
 public interface XxlJobInfoMapper extends BaseMapper<XxlJobInfo> {
 

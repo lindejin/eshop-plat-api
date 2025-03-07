@@ -15,7 +15,7 @@ import lombok.ToString;
  * </p>
  *
  * @author config
- * @since 2025-02-12
+ * @since 2025-03-07
  */
 @Getter
 @Setter
@@ -32,11 +32,6 @@ public class TbEshopmessage implements Serializable {
      * 标题
      */
     private String name;
-
-    /**
-     * 模块
-     */
-    private String module;
 
     /**
      * 内容

@@ -16,7 +16,7 @@ import lombok.ToString;
  * </p>
  *
  * @author depot
- * @since 2025-02-12
+ * @since 2025-03-07
  */
 @Getter
 @Setter
@@ -70,7 +70,7 @@ public class TbProcessParcel implements Serializable {
     private Byte parcelType;
 
     /**
-     * 包裹状态(-1: 已取消,-2:已退件,1: 待配货,2: 待复核,3: 已出库,4: 加工中,5:已复核)
+     * 包裹状态(-1: 已取消,1: 待配货,2: 待复核,3: 已出库,4: 加工中)
      */
     private Byte parcelStatus;
 
@@ -80,7 +80,7 @@ public class TbProcessParcel implements Serializable {
     private Long smallBasketCode;
 
     /**
-     * 包裹重量(g)
+     * 包裹重量
      */
     private Double parcelWeight;
 
@@ -93,26 +93,6 @@ public class TbProcessParcel implements Serializable {
      * 包裹成本价
      */
     private BigDecimal parcelCost;
-
-    /**
-     * 包材费
-     */
-    private BigDecimal packingFee;
-
-    /**
-     * 虚拟篮子编号
-     */
-    private Long virtualBasketNo;
-
-    /**
-     * 是否优先配货 (1:是 2:否)
-     */
-    private Byte priorityDistribution;
-
-    /**
-     * 平台最迟发货时间
-     */
-    private Date deliveryDeadlineTime;
 
     /**
      * 备注
@@ -138,19 +118,4 @@ public class TbProcessParcel implements Serializable {
      * 删除时间
      */
     private Date deleteTime;
-
-    /**
-     * 物流方式/物流渠道
-     */
-    private Long logisticsModeId;
-
-    /**
-     * 面单序号
-     */
-    private Long pdfIndex;
-
-    /**
-     * 排序字段
-     */
-    private Long sort;
 }

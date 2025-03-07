@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Date;
 import lombok.Getter;
 import lombok.Setter;
@@ -15,7 +16,7 @@ import lombok.ToString;
  * </p>
  *
  * @author sds
- * @since 2025-02-12
+ * @since 2025-03-07
  */
 @Getter
 @Setter
@@ -29,32 +30,17 @@ public class TbMaterial implements Serializable {
     private Long id;
 
     /**
-     * 商户_id
-     */
-    private Long merchantId;
-
-    /**
-     * 素材编码
-     */
-    private String spuCode;
-
-    /**
      * 素材分类_id
      */
     private Long classifyId;
 
     /**
-     * 素材类型(1: 图片, 2: 视频)
+     * 文件库_id
      */
-    private Byte materialType;
+    private Long materialImgId;
 
     /**
-     * 分类类型(1: 私有, 2: 公有)
-     */
-    private Byte copyrightType;
-
-    /**
-     * 素材名称
+     * 素材文件名称
      */
     private String materialName;
 
@@ -64,9 +50,19 @@ public class TbMaterial implements Serializable {
     private String materialRemark;
 
     /**
-     * 第三方_id
+     * 素材宽度(px)
      */
-    private Long thirdPartyId;
+    private BigDecimal materialWidth;
+
+    /**
+     * 素材高度(px)
+     */
+    private BigDecimal materialHeight;
+
+    /**
+     * 素材大小(字节 / b)
+     */
+    private Long materialSize;
 
     /**
      * 创建人id

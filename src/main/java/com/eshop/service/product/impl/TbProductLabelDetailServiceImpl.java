@@ -9,12 +9,12 @@ import com.baomidou.dynamic.datasource.annotation.DS;
 
 /**
  * <p>
- * 产品-标签详情 服务实现类
+ *  服务实现类
  * </p>
  *
  * @author product
- * @since 2025-02-12
- * @since 2025-02-12
+ * @since 2025-03-07
+ * @since 2025-03-07
  */
 @DS("eshop_product")
 @Service

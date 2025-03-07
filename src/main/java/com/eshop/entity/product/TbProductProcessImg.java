@@ -14,7 +14,7 @@ import lombok.ToString;
  * </p>
  *
  * @author product
- * @since 2025-02-12
+ * @since 2025-03-07
  */
 @Getter
 @Setter
@@ -36,11 +36,6 @@ public class TbProductProcessImg implements Serializable {
      * 定位名称
      */
     private String locationName;
-
-    /**
-     * 定位颜色
-     */
-    private String locationColor;
 
     /**
      * 效果图_id

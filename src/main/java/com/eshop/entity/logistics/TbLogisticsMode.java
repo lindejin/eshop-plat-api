@@ -16,7 +16,7 @@ import lombok.ToString;
  * </p>
  *
  * @author logistics
- * @since 2025-02-12
+ * @since 2025-03-07
  */
 @Getter
 @Setter
@@ -118,9 +118,4 @@ public class TbLogisticsMode implements Serializable {
      * 是否计算预估运费（1.是 2.否）
      */
     private Byte isCountFreightFee;
-
-    /**
-     * 快递投递类型1:送货到快递站,2:上门取件
-     */
-    private Byte deliveryType;
 }

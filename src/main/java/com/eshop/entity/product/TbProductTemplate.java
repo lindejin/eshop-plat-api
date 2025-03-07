@@ -15,7 +15,7 @@ import lombok.ToString;
  * </p>
  *
  * @author product
- * @since 2025-02-12
+ * @since 2025-03-07
  */
 @Getter
 @Setter
@@ -32,11 +32,6 @@ public class TbProductTemplate implements Serializable {
      * 产品id(sds成品)
      */
     private String productId;
-
-    /**
-     * 产品类型1.柔性定制产品 2.普通产品 3.采集产品
-     */
-    private Byte productType;
 
     /**
      * 虾皮模版id

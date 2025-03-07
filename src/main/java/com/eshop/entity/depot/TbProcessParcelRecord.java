@@ -15,7 +15,7 @@ import lombok.ToString;
  * </p>
  *
  * @author depot
- * @since 2025-02-12
+ * @since 2025-03-07
  */
 @Getter
 @Setter
@@ -72,24 +72,4 @@ public class TbProcessParcelRecord implements Serializable {
      * 取消时间
      */
     private Date cancelTime;
-
-    /**
-     * 揽收人
-     */
-    private Long collectionId;
-
-    /**
-     * 揽收时间
-     */
-    private Date collectionTime;
-
-    /**
-     * 复核员
-     */
-    private Long verifyById;
-
-    /**
-     * 复核时间点
-     */
-    private Date verifyTime;
 }

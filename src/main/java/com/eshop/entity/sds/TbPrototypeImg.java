@@ -15,7 +15,7 @@ import lombok.ToString;
  * </p>
  *
  * @author sds
- * @since 2025-02-12
+ * @since 2025-03-07
  */
 @Getter
 @Setter
@@ -37,11 +37,6 @@ public class TbPrototypeImg implements Serializable {
      * 文件库_id
      */
     private Long imgId;
-
-    /**
-     * 是否合成背景(1: 是, 否)
-     */
-    private Byte isSynthesisBackground;
 
     /**
      * 背景图_id
@@ -67,9 +62,4 @@ public class TbPrototypeImg implements Serializable {
      * 图片高度px
      */
     private BigDecimal imgHeight;
-
-    /**
-     * 排序
-     */
-    private Byte sort;
 }

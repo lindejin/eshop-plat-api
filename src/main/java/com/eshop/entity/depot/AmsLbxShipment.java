@@ -15,7 +15,7 @@ import lombok.ToString;
  * </p>
  *
  * @author depot
- * @since 2025-02-12
+ * @since 2025-03-07
  */
 @Getter
 @Setter
@@ -50,11 +50,6 @@ public class AmsLbxShipment implements Serializable {
      * 运单号
      */
     private String waybillNo;
-
-    /**
-     * 快递公司
-     */
-    private String expressCompany;
 
     /**
      * LBX编号
@@ -105,9 +100,4 @@ public class AmsLbxShipment implements Serializable {
      * 是否删除(1删除、2未删除)
      */
     private Byte deleted;
-
-    /**
-     * 签收箱数
-     */
-    private Long signBoxs;
 }

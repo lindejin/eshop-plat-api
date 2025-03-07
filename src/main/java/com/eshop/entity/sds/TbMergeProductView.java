@@ -12,7 +12,7 @@ import lombok.ToString;
  * </p>
  *
  * @author sds
- * @since 2025-02-12
+ * @since 2025-03-07
  */
 @Getter
 @Setter
@@ -40,7 +40,7 @@ public class TbMergeProductView implements Serializable {
     private Long classifyId;
 
     /**
-     * 数据来源类型(1: 主库录入, 2: 表格导入, 3: 第三方平台录入, 4: diy导入, 5: 自动合成)
+     * 数据来源类型(1: 主库录入, 2: 表格导入, 3: 第三方平台录入, 4: diy导入)
      */
     private Byte sourceType;
 

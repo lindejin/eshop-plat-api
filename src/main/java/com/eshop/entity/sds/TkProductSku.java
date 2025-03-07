@@ -16,7 +16,7 @@ import lombok.ToString;
  * </p>
  *
  * @author sds
- * @since 2025-02-12
+ * @since 2025-03-07
  */
 @Getter
 @Setter
@@ -103,9 +103,4 @@ public class TkProductSku implements Serializable {
      * 修改时间
      */
     private Date updateTime;
-
-    /**
-     * TK平台SkuId
-     */
-    private String platformSkuId;
 }

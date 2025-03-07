@@ -9,12 +9,12 @@ import com.baomidou.dynamic.datasource.annotation.DS;
 
 /**
  * <p>
- * sds-图片素材(产品 + 图片= 成品)	该表暂时没用，数据存储在tb_material等相关表 服务实现类
+ * sds-图片素材(产品 + 图片= 成品) 服务实现类
  * </p>
  *
  * @author sds
- * @since 2025-02-12
- * @since 2025-02-12
+ * @since 2025-03-07
+ * @since 2025-03-07
  */
 @DS("eshop_sds")
 @Service

@@ -15,7 +15,7 @@ import lombok.ToString;
  * </p>
  *
  * @author product
- * @since 2025-02-12
+ * @since 2025-03-07
  */
 @Getter
 @Setter
@@ -42,11 +42,6 @@ public class TbProductSku implements Serializable {
      * 商品sku图片
      */
     private Long skuImgId;
-
-    /**
-     * 商品skubarcode图片id
-     */
-    private Long skuBarcodeImgId;
 
     /**
      * 重量

@@ -14,7 +14,7 @@ import lombok.ToString;
  * </p>
  *
  * @author sds
- * @since 2025-02-12
+ * @since 2025-03-07
  */
 @Getter
 @Setter
@@ -41,9 +41,4 @@ public class TemplateImg implements Serializable {
      * 排序(序号为一的为主图)
      */
     private Byte sort;
-
-    /**
-     * 类型 1.固定图
-     */
-    private Byte type;
 }
