@@ -39,7 +39,7 @@ public class ITbWaybillSynErrServiceTest {
         LambdaQueryWrapper<TbWaybillSynErr> qw = new LambdaQueryWrapper<>();
         qw.eq(TbWaybillSynErr::getIsDelete, 2);
         //Date synTime 指定时间范围 2025.01.01 - 2025.03.08
-        qw.between(TbWaybillSynErr::getSynTime, "2025.01.01", "2025.03.08");
+//        qw.between(TbWaybillSynErr::getSynTime, "2025.01.01", "2025.03.08");
         //根据id正序排序
         qw.orderByAsc(TbWaybillSynErr::getId);
 
