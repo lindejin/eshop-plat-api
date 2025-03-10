@@ -38,3 +38,16 @@ WHERE EXISTS (
 # 删除自己创建的订单
 DELETE FROM tb_waybill_syn_err
 WHERE order_no LIKE '9000000%';
+
+# 删除速卖通平台错误
+DELETE FROM tb_waybill_syn_err
+WHERE platform_id = 3;
+
+# 删除订单 订单作废
+DELETE FROM tb_waybill_syn_err
+WHERE EXISTS (
+    SELECT 1
+    FROM tb_order
+    WHERE tb_order.order_no = tb_waybill_syn_err.order_no
+      AND tb_order.order_status = -1
+);
