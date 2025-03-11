@@ -190,9 +190,21 @@ public class OrderSyncTest3 {
                     if (CollectionUtils.isNotEmpty(orderDeliveryList)) {
                         for (OrderVO.OrderDelivery orderDelivery : orderDeliveryList) {
                             String deliveryNo = orderDelivery.getDeliveryNo();
+                            String newDeliveryNo = orderDelivery.getNewDeliveryNo();
                             //输出订单号和对应的运单号
                             System.out.println("订单号：" + orderNo + ",运单号：" + deliveryNo);
                             if (deliveryNo != null && deliveryNo.equals(waybillNo)) {
+                                WayBillContact contact = new WayBillContact();
+                                contact.setOrderNo(orderNo);
+                                contact.setParcelNo(parcelNo);
+                                contact.setWaybillNo(waybillNo);
+                                contact.setPlatformId(tbOrder.getPlatformId());
+                                contact.setSynId(1L);
+                                synchronized (wayBillContactList) {
+                                    wayBillContactList.add(contact);
+                                }
+                                break;
+                            }else if (newDeliveryNo != null && newDeliveryNo.equals(waybillNo)) {
                                 WayBillContact contact = new WayBillContact();
                                 contact.setOrderNo(orderNo);
                                 contact.setParcelNo(parcelNo);
