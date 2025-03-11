@@ -4,6 +4,9 @@ import com.eshop.util.generator.ShopeeVOGenerator;
 
 public class ShopeeVOGeneratorTest {
     public static void main(String[] args) {
+        //使用技巧
+        //进去页面把api接口 拷贝出来 保存到json文件 一键生成json
+        //https://open.shopee.com/documents/v2/v2.order.get_order_detail?module=94&type=1
         try {
             // 设置输入JSON文件路径
             String jsonFilePath = "F:\\shopeeOrderDetail.json";
