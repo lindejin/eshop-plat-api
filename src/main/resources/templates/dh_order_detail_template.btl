@@ -1,0 +1,34 @@
+package ${package_name};
+
+import lombok.Getter;
+import lombok.Setter;
+
+import java.util.List;
+
+@Getter
+@Setter
+public class ${class_name} {
+
+    <% for(field in fields) { %>
+    /**
+     * ${field.description}
+     */
+    private ${field.type} ${field.name};
+
+    <% } %>
+
+    <% for(inner_class in inner_classes) { %>
+    @Getter
+    @Setter
+    public static class ${inner_class.name} {
+        <% for(field in inner_class.fields) { %>
+        /**
+         * ${field.description}
+         */
+        private ${field.type} ${field.name};
+
+        <% } %>
+    }
+
+    <% } %>
+}
