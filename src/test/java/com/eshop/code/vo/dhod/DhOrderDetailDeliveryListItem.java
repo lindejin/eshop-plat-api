@@ -1,4 +1,4 @@
-package com.eshop.code.vo;
+package com.eshop.code.vo.dhod;
 
 import lombok.Getter;
 import lombok.Setter;
