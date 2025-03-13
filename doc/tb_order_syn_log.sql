@@ -13,3 +13,16 @@ where o.order_no is not null
 DELETE FROM `eshop_log`.`tb_order_syn_log`
 WHERE `exception_log` LIKE '%交货截止时间为0%'
 LIMIT 1000;
+
+
+
+# 批量删除
+DELETE FROM `eshop_log`.`tb_order_syn_log`
+WHERE `exception_log` LIKE '%未付款%'
+    LIMIT 1000;
+
+
+# 批量删除
+DELETE FROM `eshop_log`.`tb_order_syn_log`
+WHERE `exception_log` LIKE '%未支付%'
+    LIMIT 1000;
