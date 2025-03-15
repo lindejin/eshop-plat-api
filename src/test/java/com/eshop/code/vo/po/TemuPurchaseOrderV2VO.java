@@ -61,18 +61,6 @@ public class TemuPurchaseOrderV2VO {
     @Setter
     public static class SubOrderForSupplierListItem {
         /**
-         * 说明:null
-         * 是否必填:false
-         * 类型标识:6，类型:object
-         */
-        private TemuPurchaseOrderV2SubOrderForSupplierItem SubOrderForSupplierItem;
-
-    }
-
-    @Getter
-    @Setter
-    public static class TemuPurchaseOrderV2SubOrderForSupplierItem {
-        /**
          * 说明:母订单号（原始采购母单号）
          * 是否必填:false
          * 类型标识:4，类型:string
@@ -372,18 +360,6 @@ public class TemuPurchaseOrderV2VO {
     @Setter
     public static class SkuQuantityDetailListItem {
         /**
-         * 说明:null
-         * 是否必填:false
-         * 类型标识:6，类型:object
-         */
-        private TemuPurchaseOrderV2SkuQuantityDetailItem SkuQuantityDetailItem;
-
-    }
-
-    @Getter
-    @Setter
-    public static class TemuPurchaseOrderV2SkuQuantityDetailItem {
-        /**
          * 说明:货币类型(参考 ISO 4217)  CNY-人民币 USD-美元
          * 是否必填:false
          * 类型标识:4，类型:string
@@ -585,7 +561,7 @@ public class TemuPurchaseOrderV2VO {
          * 是否必填:false
          * 类型标识:6，类型:object
          */
-        private TemuPurchaseOrderV2ProcessTypeVO processTypeVO;
+        private TemuPurchaseOrderV2SkuQuantityTotalInfoProcessTypeVO processTypeVO;
 
         /**
          * 说明:尺码名称
@@ -654,19 +630,33 @@ public class TemuPurchaseOrderV2VO {
 
     @Getter
     @Setter
-    public static class LackOrSoldOutTagListItem {
+    public static class TemuPurchaseOrderV2SkuQuantityTotalInfoProcessTypeVO {
         /**
-         * 说明:null
+         * 说明:工艺类型名称
          * 是否必填:false
-         * 类型标识:6，类型:object
+         * 类型标识:4，类型:string
          */
-        private TemuPurchaseOrderV2LackOrSoldOutTagItem LackOrSoldOutTagItem;
+        private String processTypeDesc;
+
+        /**
+         * 说明:一级工艺名称
+         * 是否必填:false
+         * 类型标识:4，类型:string
+         */
+        private String firstProcessTypeDesc;
+
+        /**
+         * 说明:二级工艺
+         * 是否必填:false
+         * 类型标识:8，类型:list
+         */
+        private List<String> secondProcessTypeDesc;
 
     }
 
     @Getter
     @Setter
-    public static class TemuPurchaseOrderV2LackOrSoldOutTagItem {
+    public static class LackOrSoldOutTagListItem {
         /**
          * 说明:是否缺货
          * 是否必填:false
@@ -696,18 +686,6 @@ public class TemuPurchaseOrderV2VO {
         /**
          * 说明:null
          * 是否必填:false
-         * 类型标识:6，类型:object
-         */
-        private TemuPurchaseOrderV2SkuLackItemItem SkuLackItemItem;
-
-    }
-
-    @Getter
-    @Setter
-    public static class TemuPurchaseOrderV2SkuLackItemItem {
-        /**
-         * 说明:null
-         * 是否必填:false
          * 类型标识:4，类型:string
          */
         private String skuDisplay;
@@ -717,18 +695,6 @@ public class TemuPurchaseOrderV2VO {
     @Getter
     @Setter
     public static class SkuQcRejectItemListItem {
-        /**
-         * 说明:null
-         * 是否必填:false
-         * 类型标识:6，类型:object
-         */
-        private TemuPurchaseOrderV2SkuQcRejectItemItem SkuQcRejectItemItem;
-
-    }
-
-    @Getter
-    @Setter
-    public static class TemuPurchaseOrderV2SkuQcRejectItemItem {
         /**
          * 说明:null
          * 是否必填:false

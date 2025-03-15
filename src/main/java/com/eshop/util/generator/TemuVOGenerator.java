@@ -42,7 +42,7 @@ public class TemuVOGenerator {
         // 解析response_params
         for (int i = 0; i < requestParamJson.size(); i++) {
             JSONObject param = requestParamJson.getJSONObject(i);
-            processParam(rootName,className,param, fields, innerClasses, "");
+            processParam(rootName,className,"",param, fields, innerClasses, "");
         }
 
         templateData.put("fields", fields);
@@ -87,7 +87,7 @@ public class TemuVOGenerator {
         // 解析response_params
         for (int i = 0; i < requestParamJson.size(); i++) {
             JSONObject param = requestParamJson.getJSONObject(i);
-            processParam(rootName,className,param, fields, innerClasses, "");
+            processParam(rootName,className,"",param, fields, innerClasses, "");
         }
 
         templateData.put("fields", fields);
@@ -114,7 +114,7 @@ public class TemuVOGenerator {
         }
     }
 
-    private static void processParam(String rootName,String parentName,JSONObject param, List<Map<String, Object>> fields,
+    private static void processParam(String rootName,String parentName,String pName,JSONObject param, List<Map<String, Object>> fields,
             List<Map<String, Object>> innerClasses, String prefix) {
         Integer paramType = param.getInteger("paramType");
         String paramName = param.getString("paramName");
@@ -123,9 +123,9 @@ public class TemuVOGenerator {
         JSONArray openParamList = param.getJSONArray("openParamList");
         String type = getParamTypeName(paramType);
 
-        if ("$item".equals(paramName)) {
-            paramName = capitalize2(parentName);
-        }
+//        if ("$item".equals(paramName)) {
+//            paramName = capitalize2(parentName);
+//        }
 //        if(type.equals("object")){
 //            paramName = capitalize(parentName) +capitalize(paramName);
 //        }
@@ -158,11 +158,13 @@ public class TemuVOGenerator {
                 innerClass.put("fields", innerFields);
                 innerClasses.add(innerClass);
 
+                pName = name;
+
                 // 处理子字段
                 JSONArray children = param.getJSONArray("openParamList");
                 if (children != null) {
                     for (int i = 0; i < children.size(); i++) {
-                        processParam(rootName,innerClassName,children.getJSONObject(i), innerFields, innerClasses,
+                        processParam(rootName,innerClassName,pName,children.getJSONObject(i), innerFields, innerClasses,
                                 prefix + innerClassName + ".");
                     }
                 }
@@ -176,11 +178,42 @@ public class TemuVOGenerator {
                 field.put("description", description);
                 fields.add(field);
             }
+        } else if (type.equals("object") && "$item".equals(name)) {
+            // 处理对象类型
+//            String innerClassName = capitalize(name);
+            // 处理对象类型
+//            if ("processTypeVO".equals(name)){
+//                System.out.println(11);
+//            }
+//            String innerClassName = capitalize(rootName)+capitalize(pName)+capitalize(name);
+//            Map<String, Object> field = new HashMap<>();
+//            field.put("type", innerClassName);
+//            field.put("name", name);
+//            field.put("description", description);
+//            fields.add(field);
+
+            // 创建内部类 lastMap
+            Map<String, Object> innerClass =   innerClasses.get(innerClasses.size() - 1);
+            List<Map<String, Object>> innerFields = (List<Map<String, Object>>)innerClass.get("fields");
+
+            pName = name;
+            String innerClassName = name;
+            // 处理子字段
+            JSONArray children = param.getJSONArray("openParamList");
+            if (children != null) {
+                for (int i = 0; i < children.size(); i++) {
+                    processParam(rootName,innerClassName,pName,children.getJSONObject(i), innerFields, innerClasses,
+                            prefix + innerClassName + ".");
+                }
+            }
         } else if (type.equals("object")) {
             // 处理对象类型
 //            String innerClassName = capitalize(name);
             // 处理对象类型
-            String innerClassName = capitalize(rootName)+capitalize(name);
+            if ("processTypeVO".equals(name)){
+                System.out.println(11);
+            }
+            String innerClassName = capitalize(rootName)+capitalize(pName)+capitalize(name);
             Map<String, Object> field = new HashMap<>();
             field.put("type", innerClassName);
             field.put("name", name);
@@ -194,11 +227,13 @@ public class TemuVOGenerator {
             innerClass.put("fields", innerFields);
             innerClasses.add(innerClass);
 
+            pName = name;
+
             // 处理子字段
             JSONArray children = param.getJSONArray("openParamList");
             if (children != null) {
                 for (int i = 0; i < children.size(); i++) {
-                    processParam(rootName,innerClassName,children.getJSONObject(i), innerFields, innerClasses,
+                    processParam(rootName,innerClassName,pName,children.getJSONObject(i), innerFields, innerClasses,
                             prefix + innerClassName + ".");
                 }
             }
@@ -215,6 +250,9 @@ public class TemuVOGenerator {
     private static String capitalize(String str) {
         if (str == null || str.isEmpty()) {
             return str;
+        }
+        if ("$item".equals(str)){
+            return "";
         }
 
         if (str.equals("string")) return "String";
