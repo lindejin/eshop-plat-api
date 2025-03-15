@@ -1,0 +1,1154 @@
+{
+    "success": true,
+    "errorCode": 1000000,
+    "errorMsg": null,
+    "result": {
+        "id": 110477283380,
+        "name": "bg.purchaseorderv2.get",
+        "desc": "采购单查询v2",
+        "type": 1,
+        "directoryName": "文档中心/API文档/备货及发货API组",
+        "status": 2,
+        "createTime": 1731306247772,
+        "updateTime": 1731306247772,
+        "directoryId": 877379616150,
+        "parentId": 877361450876,
+        "interfaceDocument": {
+            "interfaceType": "bg.purchaseorderv2.get",
+            "interfaceName": "采购单查询v2",
+            "lastUpdatedTime": 1734509886234,
+            "interfaceDesc": "查询卖家的备货单列表",
+            "requestUrl": "/openapi/router",
+            "commonRequestParam": [
+                {
+                    "paramType": 4,
+                    "paramName": "type",
+                    "required": true,
+                    "desc": "API接口名, 形如:bg.*",
+                    "openParamList": null
+                },
+                {
+                    "paramType": 4,
+                    "paramName": "app_key",
+                    "required": true,
+                    "desc": "已创建成功的应用标志",
+                    "openParamList": null
+                },
+                {
+                    "paramType": 4,
+                    "paramName": "timestamp",
+                    "required": true,
+                    "desc": "时间戳，格式为UNIX时间（秒） ，长度10位，当前时间-300秒<=入参时间<=当前时间+300秒",
+                    "openParamList": null
+                },
+                {
+                    "paramType": 4,
+                    "paramName": "sign",
+                    "required": true,
+                    "desc": "API入参参数签名，签名值根据如下算法给出计算过程",
+                    "openParamList": null
+                },
+                {
+                    "paramType": 4,
+                    "paramName": "data_type",
+                    "required": false,
+                    "desc": "请求返回的数据格式，可选参数固定为JSON",
+                    "openParamList": null
+                },
+                {
+                    "paramType": 4,
+                    "paramName": "access_token",
+                    "required": true,
+                    "desc": "用户授权令牌access_token，卖家中心—授权管理，申请授权生成",
+                    "openParamList": null
+                },
+                {
+                    "paramType": 4,
+                    "paramName": "version",
+                    "required": true,
+                    "desc": "API版本，默认为V1，无要求不传此参数",
+                    "openParamList": null
+                }
+            ],
+            "requestParam": [
+                {
+                    "paramType": 1,
+                    "paramName": "purchaseTimeTo",
+                    "required": false,
+                    "desc": "下单时间-结束：毫秒",
+                    "openParamList": null
+                },
+                {
+                    "paramType": 8,
+                    "paramName": "productSkcIdList",
+                    "required": false,
+                    "desc": "skc列表",
+                    "openParamList": [
+                        {
+                            "paramType": 1,
+                            "paramName": "$item",
+                            "required": false,
+                            "desc": null,
+                            "openParamList": null
+                        }
+                    ]
+                },
+                {
+                    "paramType": 1,
+                    "paramName": "expectLatestArrivalTimeFrom",
+                    "required": false,
+                    "desc": "要求最晚到达时间-开始（时间戳 单位：毫秒）",
+                    "openParamList": null
+                },
+                {
+                    "paramType": 8,
+                    "paramName": "originalPurchaseOrderSnList",
+                    "required": false,
+                    "desc": "母订单号列表",
+                    "openParamList": [
+                        {
+                            "paramType": 4,
+                            "paramName": "$item",
+                            "required": false,
+                            "desc": null,
+                            "openParamList": null
+                        }
+                    ]
+                },
+                {
+                    "paramType": 8,
+                    "paramName": "deliverOrArrivalDelayStatusList",
+                    "required": false,
+                    "desc": "发货或者到货逾期状态 101-发货即将逾期，102-发货已逾期，201-到货即将逾期，202-到货已逾期",
+                    "openParamList": [
+                        {
+                            "paramType": 1,
+                            "paramName": "$item",
+                            "required": false,
+                            "desc": null,
+                            "openParamList": null
+                        }
+                    ]
+                },
+                {
+                    "paramType": 1,
+                    "paramName": "pageSize",
+                    "required": true,
+                    "desc": "每页记录数,范围[1,500]",
+                    "openParamList": null
+                },
+                {
+                    "paramType": 5,
+                    "paramName": "isDelayArrival",
+                    "required": false,
+                    "desc": "是否延迟到货",
+                    "openParamList": null
+                },
+                {
+                    "paramType": 8,
+                    "paramName": "lackOrSoldOutTagList",
+                    "required": false,
+                    "desc": "标签：1-含缺货SKU；2-含售罄SKU",
+                    "openParamList": [
+                        {
+                            "paramType": 1,
+                            "paramName": "$item",
+                            "required": false,
+                            "desc": null,
+                            "openParamList": null
+                        }
+                    ]
+                },
+                {
+                    "paramType": 1,
+                    "paramName": "qcReject",
+                    "required": false,
+                    "desc": "创单时是否存在质检不合格sku，0-不存在 1-存在",
+                    "openParamList": null
+                },
+                {
+                    "paramType": 5,
+                    "paramName": "isSystemAutoPurchaseSource",
+                    "required": false,
+                    "desc": "是否系统下单 是-系统自动下单 否-其他",
+                    "openParamList": null
+                },
+                {
+                    "paramType": 5,
+                    "paramName": "isFirst",
+                    "required": false,
+                    "desc": "是否首单 0-否 1-是",
+                    "openParamList": null
+                },
+                {
+                    "paramType": 1,
+                    "paramName": "purchaseStockType",
+                    "required": false,
+                    "desc": "是否是JIT备货， 0-普通，1-JIT备货",
+                    "openParamList": null
+                },
+                {
+                    "paramType": 1,
+                    "paramName": "pageNo",
+                    "required": true,
+                    "desc": "页号， 从1开始",
+                    "openParamList": null
+                },
+                {
+                    "paramType": 5,
+                    "paramName": "isDelayDeliver",
+                    "required": false,
+                    "desc": "是否延迟发货",
+                    "openParamList": null
+                },
+                {
+                    "paramType": 8,
+                    "paramName": "warehouseGroupIdList",
+                    "required": false,
+                    "desc": "备货仓组列表",
+                    "openParamList": [
+                        {
+                            "paramType": 1,
+                            "paramName": "$item",
+                            "required": false,
+                            "desc": null,
+                            "openParamList": null
+                        }
+                    ]
+                },
+                {
+                    "paramType": 8,
+                    "paramName": "subPurchaseOrderSnList",
+                    "required": false,
+                    "desc": "订单号（采购子单号）",
+                    "openParamList": [
+                        {
+                            "paramType": 4,
+                            "paramName": "$item",
+                            "required": false,
+                            "desc": null,
+                            "openParamList": null
+                        }
+                    ]
+                },
+                {
+                    "paramType": 1,
+                    "paramName": "customizationType",
+                    "required": false,
+                    "desc": "定制类型,0-文字，1-图片. 可选值含义说明:[0:文字;1:图片;]",
+                    "openParamList": null
+                },
+                {
+                    "paramType": 1,
+                    "paramName": "productLabelCodeStyle",
+                    "required": false,
+                    "desc": "筛选的商品条码样式，0-全选，1-旧样式，2-新样式",
+                    "openParamList": null
+                },
+                {
+                    "paramType": 5,
+                    "paramName": "isCloseJit",
+                    "required": false,
+                    "desc": "是否JIT转备货",
+                    "openParamList": null
+                },
+                {
+                    "paramType": 1,
+                    "paramName": "skuLackSnapshot",
+                    "required": false,
+                    "desc": "创单时是否存在缺货sku，0-不存在 1-存在",
+                    "openParamList": null
+                },
+                {
+                    "paramType": 1,
+                    "paramName": "settlementType",
+                    "required": false,
+                    "desc": "结算类型 0-非vmi(采购) 1-vmi(备货)",
+                    "openParamList": null
+                },
+                {
+                    "paramType": 4,
+                    "paramName": "supplierName",
+                    "required": false,
+                    "desc": "店铺名称",
+                    "openParamList": null
+                },
+                {
+                    "paramType": 8,
+                    "paramName": "productSnList",
+                    "required": false,
+                    "desc": "货号列表",
+                    "openParamList": [
+                        {
+                            "paramType": 4,
+                            "paramName": "$item",
+                            "required": false,
+                            "desc": null,
+                            "openParamList": null
+                        }
+                    ]
+                },
+                {
+                    "paramType": 1,
+                    "paramName": "purchaseTimeFrom",
+                    "required": false,
+                    "desc": "下单时间-开始：毫秒",
+                    "openParamList": null
+                },
+                {
+                    "paramType": 1,
+                    "paramName": "urgencyType",
+                    "required": false,
+                    "desc": "是否紧急 0-否 1-是",
+                    "openParamList": null
+                },
+                {
+                    "paramType": 8,
+                    "paramName": "sourceList",
+                    "required": false,
+                    "desc": "下单来源，0-运营下单，1-卖家下单，9999-平台下单",
+                    "openParamList": [
+                        {
+                            "paramType": 1,
+                            "paramName": "$item",
+                            "required": false,
+                            "desc": null,
+                            "openParamList": null
+                        }
+                    ]
+                },
+                {
+                    "paramType": 8,
+                    "paramName": "deliverOrderSnList",
+                    "required": false,
+                    "desc": "发货单号列表",
+                    "openParamList": [
+                        {
+                            "paramType": 4,
+                            "paramName": "$item",
+                            "required": false,
+                            "desc": null,
+                            "openParamList": null
+                        }
+                    ]
+                },
+                {
+                    "paramType": 1,
+                    "paramName": "expectLatestDeliverTimeTo",
+                    "required": false,
+                    "desc": "要求最晚发货时间-结束（时间戳 单位：毫秒）",
+                    "openParamList": null
+                },
+                {
+                    "paramType": 1,
+                    "paramName": "expectLatestDeliverTimeFrom",
+                    "required": false,
+                    "desc": "要求最晚发货时间-开始（时间戳 单位：毫秒）",
+                    "openParamList": null
+                },
+                {
+                    "paramType": 8,
+                    "paramName": "supplierIdList",
+                    "required": false,
+                    "desc": "店铺id列表",
+                    "openParamList": [
+                        {
+                            "paramType": 1,
+                            "paramName": "$item",
+                            "required": false,
+                            "desc": null,
+                            "openParamList": null
+                        }
+                    ]
+                },
+                {
+                    "paramType": 5,
+                    "paramName": "todayCanDeliver",
+                    "required": false,
+                    "desc": "是否今日可发货",
+                    "openParamList": null
+                },
+                {
+                    "paramType": 1,
+                    "paramName": "expectLatestArrivalTimeTo",
+                    "required": false,
+                    "desc": "要求最晚到达时间-结束（时间戳 单位：毫秒）",
+                    "openParamList": null
+                },
+                {
+                    "paramType": 8,
+                    "paramName": "statusList",
+                    "required": false,
+                    "desc": "订单状态 0-待接单；1-已接单，待发货；2-已送货；3-已收货；4-已拒收；5-已验收，全部退回；6-已验收；7-已入库；8-作废；9-已超时",
+                    "openParamList": [
+                        {
+                            "paramType": 1,
+                            "paramName": "$item",
+                            "required": false,
+                            "desc": null,
+                            "openParamList": null
+                        }
+                    ]
+                },
+                {
+                    "paramType": 5,
+                    "paramName": "isCustomGoods",
+                    "required": false,
+                    "desc": "是否为定制品",
+                    "openParamList": null
+                },
+                {
+                    "paramType": 1,
+                    "paramName": "qcOption",
+                    "required": false,
+                    "desc": "是否存在质检不合格的sku，10-是，20-否",
+                    "openParamList": null
+                }
+            ],
+            "responseParam": [
+                {
+                    "paramType": 6,
+                    "paramName": "result",
+                    "required": false,
+                    "desc": null,
+                    "openParamList": [
+                        {
+                            "paramType": 1,
+                            "paramName": "total",
+                            "required": false,
+                            "desc": "总数",
+                            "openParamList": null
+                        },
+                        {
+                            "paramType": 8,
+                            "paramName": "subOrderForSupplierList",
+                            "required": false,
+                            "desc": "订单信息",
+                            "openParamList": [
+                                {
+                                    "paramType": 6,
+                                    "paramName": "$item",
+                                    "required": false,
+                                    "desc": null,
+                                    "openParamList": [
+                                        {
+                                            "paramType": 4,
+                                            "paramName": "originalPurchaseOrderSn",
+                                            "required": false,
+                                            "desc": "母订单号（原始采购母单号）",
+                                            "openParamList": null
+                                        },
+                                        {
+                                            "paramType": 1,
+                                            "paramName": "source",
+                                            "required": false,
+                                            "desc": "下单来源；0-运营，1-供应商，2-系统, 3-excel上传, 4-系统规则",
+                                            "openParamList": null
+                                        },
+                                        {
+                                            "paramType": 4,
+                                            "paramName": "productName",
+                                            "required": false,
+                                            "desc": "货品名称",
+                                            "openParamList": null
+                                        },
+                                        {
+                                            "paramType": 1,
+                                            "paramName": "fulfilmentFormStatus",
+                                            "required": false,
+                                            "desc": "关联履约函状态，0-待确认，1-已确认，2-已拒绝，3-已取消",
+                                            "openParamList": null
+                                        },
+                                        {
+                                            "paramType": 5,
+                                            "paramName": "isFirst",
+                                            "required": false,
+                                            "desc": "是否首单",
+                                            "openParamList": null
+                                        },
+                                        {
+                                            "paramType": 8,
+                                            "paramName": "skuQuantityDetailList",
+                                            "required": false,
+                                            "desc": "sku维度数量信息-非定制品",
+                                            "openParamList": [
+                                                {
+                                                    "paramType": 6,
+                                                    "paramName": "$item",
+                                                    "required": false,
+                                                    "desc": null,
+                                                    "openParamList": [
+                                                        {
+                                                            "paramType": 4,
+                                                            "paramName": "currencyType",
+                                                            "required": false,
+                                                            "desc": "货币类型(参考 ISO 4217)  CNY-人民币 USD-美元",
+                                                            "openParamList": null
+                                                        },
+                                                        {
+                                                            "paramType": 6,
+                                                            "paramName": "processTypeVO",
+                                                            "required": false,
+                                                            "desc": "定制品工艺信息",
+                                                            "openParamList": [
+                                                                {
+                                                                    "paramType": 4,
+                                                                    "paramName": "processTypeDesc",
+                                                                    "required": false,
+                                                                    "desc": "工艺类型名称",
+                                                                    "openParamList": null
+                                                                },
+                                                                {
+                                                                    "paramType": 4,
+                                                                    "paramName": "firstProcessTypeDesc",
+                                                                    "required": false,
+                                                                    "desc": "一级工艺名称",
+                                                                    "openParamList": null
+                                                                },
+                                                                {
+                                                                    "paramType": 8,
+                                                                    "paramName": "secondProcessTypeDesc",
+                                                                    "required": false,
+                                                                    "desc": "二级工艺",
+                                                                    "openParamList": [
+                                                                        {
+                                                                            "paramType": 4,
+                                                                            "paramName": "$item",
+                                                                            "required": false,
+                                                                            "desc": null,
+                                                                            "openParamList": null
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "paramType": 4,
+                                                            "paramName": "className",
+                                                            "required": false,
+                                                            "desc": "尺码名称",
+                                                            "openParamList": null
+                                                        },
+                                                        {
+                                                            "paramType": 5,
+                                                            "paramName": "supportIncreaseNum",
+                                                            "required": false,
+                                                            "desc": "是否支持上浮",
+                                                            "openParamList": null
+                                                        },
+                                                        {
+                                                            "paramType": 1,
+                                                            "paramName": "realReceiveAuthenticQuantity",
+                                                            "required": false,
+                                                            "desc": "入库数量",
+                                                            "openParamList": null
+                                                        },
+                                                        {
+                                                            "paramType": 1,
+                                                            "paramName": "fulfilmentProductSkuId",
+                                                            "required": false,
+                                                            "desc": "履约货品skuId",
+                                                            "openParamList": null
+                                                        },
+                                                        {
+                                                            "paramType": 1,
+                                                            "paramName": "customizationType",
+                                                            "required": false,
+                                                            "desc": "定制类型,0-文字，1-图片",
+                                                            "openParamList": null
+                                                        },
+                                                        {
+                                                            "paramType": 1,
+                                                            "paramName": "productSkuId",
+                                                            "required": false,
+                                                            "desc": "productSkuId",
+                                                            "openParamList": null
+                                                        },
+                                                        {
+                                                            "paramType": 1,
+                                                            "paramName": "deliverQuantity",
+                                                            "required": false,
+                                                            "desc": "已送货待收货数量",
+                                                            "openParamList": null
+                                                        },
+                                                        {
+                                                            "paramType": 8,
+                                                            "paramName": "thumbUrlList",
+                                                            "required": false,
+                                                            "desc": "sku缩略图列表",
+                                                            "openParamList": [
+                                                                {
+                                                                    "paramType": 4,
+                                                                    "paramName": "$item",
+                                                                    "required": false,
+                                                                    "desc": null,
+                                                                    "openParamList": null
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "paramType": 1,
+                                                            "paramName": "qcResult",
+                                                            "required": false,
+                                                            "desc": "质检结果，0-暂无结果，1-合格，2-不合格，3-无需质检，4-质检让步，5-重新上床视频，6-部分合格",
+                                                            "openParamList": null
+                                                        },
+                                                        {
+                                                            "paramType": 4,
+                                                            "paramName": "extCode",
+                                                            "required": false,
+                                                            "desc": "sku货号",
+                                                            "openParamList": null
+                                                        },
+                                                        {
+                                                            "paramType": 1,
+                                                            "paramName": "adviceQuantity",
+                                                            "required": false,
+                                                            "desc": "下单时建议量",
+                                                            "openParamList": null
+                                                        },
+                                                        {
+                                                            "paramType": 1,
+                                                            "paramName": "purchaseUpLimit",
+                                                            "required": false,
+                                                            "desc": "下单上限（系统自动下单时按照规则设置）",
+                                                            "openParamList": null
+                                                        },
+                                                        {
+                                                            "paramType": 1,
+                                                            "paramName": "purchaseQuantity",
+                                                            "required": false,
+                                                            "desc": "下单数量",
+                                                            "openParamList": null
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "paramType": 6,
+                                            "paramName": "deliverInfo",
+                                            "required": false,
+                                            "desc": "发货信息",
+                                            "openParamList": [
+                                                {
+                                                    "paramType": 1,
+                                                    "paramName": "receiveTime",
+                                                    "required": false,
+                                                    "desc": "收货时间（单位：毫秒）",
+                                                    "openParamList": null
+                                                },
+                                                {
+                                                    "paramType": 1,
+                                                    "paramName": "deliverTime",
+                                                    "required": false,
+                                                    "desc": "发货时间（单位：毫秒）",
+                                                    "openParamList": null
+                                                },
+                                                {
+                                                    "paramType": 1,
+                                                    "paramName": "receiveWarehouseId",
+                                                    "required": false,
+                                                    "desc": "实际收货仓库Id",
+                                                    "openParamList": null
+                                                },
+                                                {
+                                                    "paramType": 4,
+                                                    "paramName": "receiveWarehouseName",
+                                                    "required": false,
+                                                    "desc": "实际收货仓库名称",
+                                                    "openParamList": null
+                                                },
+                                                {
+                                                    "paramType": 1,
+                                                    "paramName": "expectLatestDeliverTimeOrDefault",
+                                                    "required": false,
+                                                    "desc": "要求最晚发货时间带默认值（时间戳 单位：毫秒）",
+                                                    "openParamList": null
+                                                },
+                                                {
+                                                    "paramType": 1,
+                                                    "paramName": "expectLatestArrivalTimeOrDefault",
+                                                    "required": false,
+                                                    "desc": "要求最晚到达时间带默认值（时间戳 单位：毫秒）",
+                                                    "openParamList": null
+                                                },
+                                                {
+                                                    "paramType": 4,
+                                                    "paramName": "deliveryOrderSn",
+                                                    "required": false,
+                                                    "desc": "发货单号",
+                                                    "openParamList": null
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "paramType": 1,
+                                            "paramName": "productSkcId",
+                                            "required": false,
+                                            "desc": "skcId",
+                                            "openParamList": null
+                                        },
+                                        {
+                                            "paramType": 5,
+                                            "paramName": "isCloseJit",
+                                            "required": false,
+                                            "desc": "是否JIT转备货",
+                                            "openParamList": null
+                                        },
+                                        {
+                                            "paramType": 1,
+                                            "paramName": "warehouseGroupId",
+                                            "required": false,
+                                            "desc": "备货仓组",
+                                            "openParamList": null
+                                        },
+                                        {
+                                            "paramType": 1,
+                                            "paramName": "productId",
+                                            "required": false,
+                                            "desc": "productId",
+                                            "openParamList": null
+                                        },
+                                        {
+                                            "paramType": 1,
+                                            "paramName": "hasQcBill",
+                                            "required": false,
+                                            "desc": "是否有质检报告，0-否，1-是",
+                                            "openParamList": null
+                                        },
+                                        {
+                                            "paramType": 1,
+                                            "paramName": "supplyStatus",
+                                            "required": false,
+                                            "desc": "供应状态 0-正常供货 1-暂时无货 2-停产",
+                                            "openParamList": null
+                                        },
+                                        {
+                                            "paramType": 1,
+                                            "paramName": "applyDeleteStatus",
+                                            "required": false,
+                                            "desc": "申请作废状态 0-未申请作废，1-作废审核中，2-作废审核通过, 3-作废审核不通过",
+                                            "openParamList": null
+                                        },
+                                        {
+                                            "paramType": 6,
+                                            "paramName": "skuQuantityTotalInfo",
+                                            "required": false,
+                                            "desc": "sku维度数量汇总信息",
+                                            "openParamList": [
+                                                {
+                                                    "paramType": 4,
+                                                    "paramName": "currencyType",
+                                                    "required": false,
+                                                    "desc": "货币类型(参考 ISO 4217)  CNY-人民币 USD-美元",
+                                                    "openParamList": null
+                                                },
+                                                {
+                                                    "paramType": 6,
+                                                    "paramName": "processTypeVO",
+                                                    "required": false,
+                                                    "desc": "定制品工艺信息",
+                                                    "openParamList": [
+                                                        {
+                                                            "paramType": 4,
+                                                            "paramName": "processTypeDesc",
+                                                            "required": false,
+                                                            "desc": "工艺类型名称",
+                                                            "openParamList": null
+                                                        },
+                                                        {
+                                                            "paramType": 4,
+                                                            "paramName": "firstProcessTypeDesc",
+                                                            "required": false,
+                                                            "desc": "一级工艺名称",
+                                                            "openParamList": null
+                                                        },
+                                                        {
+                                                            "paramType": 8,
+                                                            "paramName": "secondProcessTypeDesc",
+                                                            "required": false,
+                                                            "desc": "二级工艺",
+                                                            "openParamList": [
+                                                                {
+                                                                    "paramType": 4,
+                                                                    "paramName": "$item",
+                                                                    "required": false,
+                                                                    "desc": null,
+                                                                    "openParamList": null
+                                                                }
+                                                            ]
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "paramType": 4,
+                                                    "paramName": "className",
+                                                    "required": false,
+                                                    "desc": "尺码名称",
+                                                    "openParamList": null
+                                                },
+                                                {
+                                                    "paramType": 5,
+                                                    "paramName": "supportIncreaseNum",
+                                                    "required": false,
+                                                    "desc": "是否支持上浮",
+                                                    "openParamList": null
+                                                },
+                                                {
+                                                    "paramType": 1,
+                                                    "paramName": "realReceiveAuthenticQuantity",
+                                                    "required": false,
+                                                    "desc": "入库数量",
+                                                    "openParamList": null
+                                                },
+                                                {
+                                                    "paramType": 1,
+                                                    "paramName": "customizationType",
+                                                    "required": false,
+                                                    "desc": "定制类型,0-文字，1-图片",
+                                                    "openParamList": null
+                                                },
+                                                {
+                                                    "paramType": 1,
+                                                    "paramName": "productSkuId",
+                                                    "required": false,
+                                                    "desc": "productSkuId",
+                                                    "openParamList": null
+                                                },
+                                                {
+                                                    "paramType": 1,
+                                                    "paramName": "deliverQuantity",
+                                                    "required": false,
+                                                    "desc": "已送货待收货数量",
+                                                    "openParamList": null
+                                                },
+                                                {
+                                                    "paramType": 4,
+                                                    "paramName": "extCode",
+                                                    "required": false,
+                                                    "desc": "sku货号",
+                                                    "openParamList": null
+                                                },
+                                                {
+                                                    "paramType": 1,
+                                                    "paramName": "adviceQuantity",
+                                                    "required": false,
+                                                    "desc": "下单时建议量",
+                                                    "openParamList": null
+                                                },
+                                                {
+                                                    "paramType": 1,
+                                                    "paramName": "purchaseQuantity",
+                                                    "required": false,
+                                                    "desc": "下单数量",
+                                                    "openParamList": null
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "paramType": 5,
+                                            "paramName": "isCanJoinDeliverPlatform",
+                                            "required": false,
+                                            "desc": "是否可以加入发货台",
+                                            "openParamList": null
+                                        },
+                                        {
+                                            "paramType": 1,
+                                            "paramName": "categoryType",
+                                            "required": false,
+                                            "desc": "类目类型, 0-未分类、1-服饰",
+                                            "openParamList": null
+                                        },
+                                        {
+                                            "paramType": 4,
+                                            "paramName": "subPurchaseOrderSn",
+                                            "required": false,
+                                            "desc": "采购子单号",
+                                            "openParamList": null
+                                        },
+                                        {
+                                            "paramType": 1,
+                                            "paramName": "status",
+                                            "required": false,
+                                            "desc": "状态",
+                                            "openParamList": null
+                                        },
+                                        {
+                                            "paramType": 1,
+                                            "paramName": "supplierId",
+                                            "required": false,
+                                            "desc": "卖家id",
+                                            "openParamList": null
+                                        },
+                                        {
+                                            "paramType": 5,
+                                            "paramName": "isCustomProduct",
+                                            "required": false,
+                                            "desc": "是否定制品，0-否，1-是",
+                                            "openParamList": null
+                                        },
+                                        {
+                                            "paramType": 1,
+                                            "paramName": "appealStatus",
+                                            "required": false,
+                                            "desc": "申述状态，1000-审核中,1010-审核通过,1020-审核驳回",
+                                            "openParamList": null
+                                        },
+                                        {
+                                            "paramType": 1,
+                                            "paramName": "fulfilmentFormId",
+                                            "required": false,
+                                            "desc": "关联履约函id",
+                                            "openParamList": null
+                                        },
+                                        {
+                                            "paramType": 4,
+                                            "paramName": "productSkcPicture",
+                                            "required": false,
+                                            "desc": "货品图片",
+                                            "openParamList": null
+                                        },
+                                        {
+                                            "paramType": 5,
+                                            "paramName": "supportIncreaseNum",
+                                            "required": false,
+                                            "desc": "是否支持上浮",
+                                            "openParamList": null
+                                        },
+                                        {
+                                            "paramType": 8,
+                                            "paramName": "lackOrSoldOutTagList",
+                                            "required": false,
+                                            "desc": "是否含缺货或售罄sku",
+                                            "openParamList": [
+                                                {
+                                                    "paramType": 6,
+                                                    "paramName": "$item",
+                                                    "required": false,
+                                                    "desc": null,
+                                                    "openParamList": [
+                                                        {
+                                                            "paramType": 5,
+                                                            "paramName": "isLack",
+                                                            "required": false,
+                                                            "desc": "是否缺货",
+                                                            "openParamList": null
+                                                        },
+                                                        {
+                                                            "paramType": 4,
+                                                            "paramName": "skuDisplay",
+                                                            "required": false,
+                                                            "desc": "属性",
+                                                            "openParamList": null
+                                                        },
+                                                        {
+                                                            "paramType": 1,
+                                                            "paramName": "soldOut",
+                                                            "required": false,
+                                                            "desc": "售罄状态",
+                                                            "openParamList": null
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "paramType": 1,
+                                            "paramName": "qcReject",
+                                            "required": false,
+                                            "desc": "创单时是否存在质检不合格sku，0-不存在 1-存在",
+                                            "openParamList": null
+                                        },
+                                        {
+                                            "paramType": 1,
+                                            "paramName": "purchaseStockType",
+                                            "required": false,
+                                            "desc": "是否是JIT备货， 0-普通，1-JIT备货",
+                                            "openParamList": null
+                                        },
+                                        {
+                                            "paramType": 8,
+                                            "paramName": "skuLackItemList",
+                                            "required": false,
+                                            "desc": "缺货sku列表",
+                                            "openParamList": [
+                                                {
+                                                    "paramType": 6,
+                                                    "paramName": "$item",
+                                                    "required": false,
+                                                    "desc": null,
+                                                    "openParamList": [
+                                                        {
+                                                            "paramType": 4,
+                                                            "paramName": "skuDisplay",
+                                                            "required": false,
+                                                            "desc": null,
+                                                            "openParamList": null
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "paramType": 4,
+                                            "paramName": "deliveryOrderSn",
+                                            "required": false,
+                                            "desc": "发货单号",
+                                            "openParamList": null
+                                        },
+                                        {
+                                            "paramType": 1,
+                                            "paramName": "skuLackSnapshot",
+                                            "required": false,
+                                            "desc": "创单时是否存在缺货sku，0-不存在 1-存在",
+                                            "openParamList": null
+                                        },
+                                        {
+                                            "paramType": 4,
+                                            "paramName": "supplierName",
+                                            "required": false,
+                                            "desc": "卖家名称",
+                                            "openParamList": null
+                                        },
+                                        {
+                                            "paramType": 1,
+                                            "paramName": "settlementType",
+                                            "required": false,
+                                            "desc": "结算类型 0-非vmi(采购) 1-vmi(备货)",
+                                            "openParamList": null
+                                        },
+                                        {
+                                            "paramType": 4,
+                                            "paramName": "productSn",
+                                            "required": false,
+                                            "desc": "货号",
+                                            "openParamList": null
+                                        },
+                                        {
+                                            "paramType": 1,
+                                            "paramName": "urgencyType",
+                                            "required": false,
+                                            "desc": "是否紧急，0-否，1-是",
+                                            "openParamList": null
+                                        },
+                                        {
+                                            "paramType": 8,
+                                            "paramName": "skuQcRejectItemList",
+                                            "required": false,
+                                            "desc": "质量隐患sku列表",
+                                            "openParamList": [
+                                                {
+                                                    "paramType": 6,
+                                                    "paramName": "$item",
+                                                    "required": false,
+                                                    "desc": null,
+                                                    "openParamList": [
+                                                        {
+                                                            "paramType": 4,
+                                                            "paramName": "skuDisplay",
+                                                            "required": false,
+                                                            "desc": null,
+                                                            "openParamList": null
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "paramType": 1,
+                                            "paramName": "expectLatestArrivalIntervalDays",
+                                            "required": false,
+                                            "desc": "预计最晚送达间隔天数",
+                                            "openParamList": null
+                                        },
+                                        {
+                                            "paramType": 1,
+                                            "paramName": "defectiveTime",
+                                            "required": false,
+                                            "desc": "退货时间（时间戳 单位：毫秒）",
+                                            "openParamList": null
+                                        },
+                                        {
+                                            "paramType": 5,
+                                            "paramName": "todayCanDeliver",
+                                            "required": false,
+                                            "desc": "是否今日可发货",
+                                            "openParamList": null
+                                        },
+                                        {
+                                            "paramType": 1,
+                                            "paramName": "purchaseTime",
+                                            "required": false,
+                                            "desc": "下单时间（时间戳：毫秒）",
+                                            "openParamList": null
+                                        },
+                                        {
+                                            "paramType": 1,
+                                            "paramName": "applyChangeSupplyStatus",
+                                            "required": false,
+                                            "desc": "申请变更供应状态的审批状态, 0-无需审核，1-审核中，2-审核通过，3-审核驳回，4-撤销",
+                                            "openParamList": null
+                                        },
+                                        {
+                                            "paramType": 4,
+                                            "paramName": "category",
+                                            "required": false,
+                                            "desc": "类目",
+                                            "openParamList": null
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "paramType": 5,
+                    "paramName": "success",
+                    "required": false,
+                    "desc": null,
+                    "openParamList": null
+                },
+                {
+                    "paramType": 1,
+                    "paramName": "errorCode",
+                    "required": false,
+                    "desc": null,
+                    "openParamList": null
+                },
+                {
+                    "paramType": 4,
+                    "paramName": "errorMsg",
+                    "required": false,
+                    "desc": null,
+                    "openParamList": null
+                }
+            ],
+            "errorCodeList": [
+                {
+                    "errorCode": "2000000",
+                    "errorMsg": "业务异常，请稍后再试。",
+                    "errorRecommendations": "调用依赖接口有异常，一般短期内会恢复，建议稍后再试。"
+                }
+            ],
+            "permissionList": [
+                {
+                    "permission": "采购API组",
+                    "hasPermissionAppTypeList": [
+                        "他用型",
+                        "自用型"
+                    ]
+                },
+                {
+                    "permission": "独立站高级接口",
+                    "hasPermissionAppTypeList": [
+                        "他用型",
+                        "自用型"
+                    ]
+                }
+            ]
+        },
+        "freeDocument": null
+    }
+}

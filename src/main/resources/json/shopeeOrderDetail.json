@@ -1,0 +1,816 @@
+{
+	"request_params": [
+		{
+			"name": "order_sn_list",
+			"limits": "",
+			"required": "True",
+			"sample": "201214JAJXU6G7,201214JASXYXY6",
+			"key": "yktnJS",
+			"type": "string",
+			"description": "The set of order_sn. If there are multiple order_sn, you need to use English comma to connect them. limit [1,50]"
+		},
+		{
+			"description": "\u003cp\u003eCompatible parameter during migration period, send True will let API support PENDING status and return\u0026nbsp; pending_terms, send False or don’t send will fallback to old logic\u003c/p\u003e",
+			"name": "request_order_status_pending",
+			"sample": "true",
+			"type": "boolean",
+			"required": "False",
+			"key": "HCMwQxi"
+		},
+		{
+			"name": "response_optional_fields",
+			"limits": "",
+			"required": "False",
+			"sample": "total_amount",
+			"key": "pmfDfSB",
+			"type": "string",
+			"description": "\u003cp\u003ea response fields you want to get. Please select from the below response parameters. If you input an object field, all the params under it will be included automatically in the response. If there are multiple response fields you want to get, you need to use English comma to connect them.  Available values: buyer_user_id,buyer_username,estimated_shipping_fee,recipient_address,actual_shipping_fee ,goods_to_declare,note,note_update_time,item_list,pay_time,dropshipper, dropshipper_phone,split_up,buyer_cancel_reason,cancel_by,cancel_reason,actual_shipping_fee_confirmed,buyer_cpf_id,fulfillment_flag,pickup_done_time,package_list,shipping_carrier,payment_method,total_amount,buyer_username,invoice_data,order_chargeable_weight_gram,return_request_due_date,edt\u003c/p\u003e"
+		}
+	],
+	"response_params": [
+		{
+			"sample": "a8e1b94f51d64540bf5762abe7783073",
+			"type": "string",
+			"name": "request_id",
+			"key": "knhSidB",
+			"description": "The identifier for an API request for error tracking."
+		},
+		{
+			"sample": "common.error_auth",
+			"type": "string",
+			"name": "error",
+			"key": "hQrwJXr",
+			"description": "Indicate error type if hit error. Empty if no error happened."
+		},
+		{
+			"sample": "Invalid access_token.",
+			"type": "string",
+			"name": "message",
+			"key": "wWRxadQ",
+			"description": "Indicate error details if hit error. Empty if no error happened."
+		},
+		{
+			"description": "Detail informations you are querying.",
+			"sample": "",
+			"key": "aeDsNtf",
+			"type": "object",
+			"children": [
+				{
+					"description": "The list of orders.",
+					"sample": "",
+					"key": "YcpkWTG",
+					"type": "object[]",
+					"children": [
+						{
+							"sample": "2404098R48U37H",
+							"type": "string",
+							"name": "order_sn",
+							"key": "FdNdrBE",
+							"description": "Return by default. Shopee's unique identifier for an order.\t"
+						},
+						{
+							"sample": "VN",
+							"type": "string",
+							"name": "region",
+							"key": "znWdYDM",
+							"description": "Return by default. The two-digit code representing the region where the order was made.\t"
+						},
+						{
+							"sample": "VND",
+							"type": "string",
+							"name": "currency",
+							"key": "ctZkRAR",
+							"description": "Return by default. The three-digit code representing the currency unit for which the order was paid.\t"
+						},
+						{
+							"sample": "false",
+							"type": "boolean",
+							"name": "cod",
+							"key": "tNrZZsm",
+							"description": "Return by default. This value indicates whether the order was a COD (cash on delivery) order.\t"
+						},
+						{
+							"sample": "1004.0",
+							"type": "float",
+							"name": "total_amount",
+							"key": "bRTcNhC",
+							"description": "The total amount paid by the buyer for the order. This amount includes the total sale price of items, shipping cost beared by buyer; and offset by Shopee promotions if applicable. This value will only return after the buyer has completed payment for the order.\t"
+						},
+						{
+							"description": "\u003cp\u003eThe list of pending terms, possible values: SYSTEM_PENDING for order under Shopee internal processing, KYC_PENDING for order under KYC checking(TW CB order only)\u003c/p\u003e",
+							"name": "pending_terms",
+							"sample": "[\"SYSTEM_PENDING\", \"KYC_PENDING\"]",
+							"type": "string[]",
+							"required": null,
+							"key": "apkdBHp"
+						},
+						{
+							"sample": "CANCELLED",
+							"type": "string",
+							"name": "order_status",
+							"key": "WpwGmxx",
+							"description": "Return by default. Enumerated type that defines the current status of the order.\t"
+						},
+						{
+							"sample": "Standard Delivery",
+							"type": "string",
+							"name": "shipping_carrier",
+							"key": "BhcFznK",
+							"description": "The logistics service provider that the buyer selected for the order to deliver items.\t"
+						},
+						{
+							"sample": "Bank Transfer",
+							"type": "string",
+							"name": "payment_method",
+							"key": "BkcWRMX",
+							"description": "The payment method that the buyer selected to pay for the order. Applicable values: See Data Definition- Payment Methods.\t"
+						},
+						{
+							"sample": "4.0",
+							"type": "float",
+							"name": "estimated_shipping_fee",
+							"key": "QziPpPS",
+							"description": "The estimated shipping fee is an estimation calculated by Shopee based on specific logistics courier's standard.\t"
+						},
+						{
+							"sample": "",
+							"type": "string",
+							"name": "message_to_seller",
+							"key": "pBDciTe",
+							"description": "Return by default. Message to seller.\t"
+						},
+						{
+							"sample": "1607930885",
+							"type": "timestamp",
+							"name": "create_time",
+							"key": "siEpsdW",
+							"description": "Return by default. Timestamp that indicates the date and time that the order was created.\t"
+						},
+						{
+							"sample": "1608134691",
+							"type": "timestamp",
+							"name": "update_time",
+							"key": "NfnSiwA",
+							"description": "Return by default. Timestamp that indicates the last time that there was a change in value of order, such as order status changed from 'Paid' to 'Completed'.\t"
+						},
+						{
+							"sample": "2",
+							"type": "int32",
+							"name": "days_to_ship",
+							"key": "RpRsPy",
+							"description": "Return by default. Shipping preparation time set by the seller when listing item on Shopee.\t"
+						},
+						{
+							"sample": "1608103685",
+							"type": "int32",
+							"name": "ship_by_date",
+							"key": "ziFNJkh",
+							"description": "Return by default. The deadline to ship out the parcel.\t"
+						},
+						{
+							"sample": "9193214",
+							"type": "int32",
+							"name": "buyer_user_id",
+							"key": "GxJiPWN",
+							"description": "\u003cp\u003eThe user id of buyer of this order, will be empty if it is a non-integrated order in TW region.\u003c/p\u003e"
+						},
+						{
+							"sample": "Tom",
+							"type": "string",
+							"name": "buyer_username",
+							"key": "wWBmypM",
+							"description": "\u003cp\u003eThe name of buyer, will be masked as \"****\" if it is a non-integrated order in TW region.\u003c/p\u003e"
+						},
+						{
+							"description": "\u003cp\u003eThis object contains detailed breakdown for the recipient address.\u003cbr /\u003eDifferent parameters might be masked according to each market and kind of seller.\u003cbr /\u003e\u003cbr /\u003eFor TW region integrated channel orders will be all masked as \"****\". More details may refer the announcement.\u003cbr /\u003e\u003c/p\u003e",
+							"sample": "",
+							"key": "mSzYkJZ",
+							"type": "object",
+							"children": [
+								{
+									"sample": "Max",
+									"type": "string",
+									"name": "name",
+									"key": "RfbSanr",
+									"description": "Recipient's name for the address.\t"
+								},
+								{
+									"sample": "3828203",
+									"type": "string",
+									"name": "phone",
+									"key": "XdhMwG",
+									"description": "\u003cp\u003eRecipient's phone number input when order was placed.\u003cbr /\u003e[Only for TW non-integrated channel] Will return \"****\" when the \"virtual_contact_number\" is available\u003cbr /\u003e\u003c/p\u003e"
+								},
+								{
+									"sample": "Sara",
+									"type": "string",
+									"name": "town",
+									"key": "QmRTktN",
+									"description": " The town of the recipient's address. Whether there is a town will depend on the region and/or country.\t"
+								},
+								{
+									"sample": "Dada",
+									"type": "string",
+									"name": "district",
+									"key": "mRiQshz",
+									"description": "The district of the recipient's address. Whether there is a district will depend on the region and/or country.\t"
+								},
+								{
+									"sample": "Asajaya",
+									"type": "string",
+									"name": "city",
+									"key": "nFjenHe",
+									"description": "The city of the recipient's address. Whether there is a city will depend on the region and/or country.\t"
+								},
+								{
+									"sample": "Sarawak",
+									"type": "string",
+									"name": "state",
+									"key": "EDYrDmi",
+									"description": "The state/province of the recipient's address. Whether there is a state/province will depend on the region and/or country.\t"
+								},
+								{
+									"sample": "MY",
+									"type": "string",
+									"name": "region",
+									"key": "iQGtrMP",
+									"description": "The two-digit code representing the region of the Recipient.\t"
+								},
+								{
+									"sample": "40009",
+									"type": "string",
+									"name": "zipcode",
+									"key": "mNfwTx",
+									"description": "Recipient's postal code.\t"
+								},
+								{
+									"sample": "C-15-14 BLOK C JALAN 30/146, Asajaya, 40009, Sarawak",
+									"type": "string",
+									"name": "full_address",
+									"key": "XhMzYZP",
+									"description": "The full address of the recipient, including country, state, even street, and etc.\t"
+								}
+							],
+							"name": "recipient_address"
+						},
+						{
+							"sample": "0.0",
+							"type": "float",
+							"name": "actual_shipping_fee",
+							"key": "MjRQHXa",
+							"description": "The actual shipping fee of the order if available from external logistics partners.\t"
+						},
+						{
+							"sample": "false",
+							"type": "boolean",
+							"name": "goods_to_declare",
+							"key": "SjxQcsr",
+							"description": "Only work for cross-border order.This value indicates whether the order contains goods that are required to declare at customs. \"T\" means true and it will mark as \"T\" on the shipping label; \"F\" means false and it will mark as \"P\" on the shipping label. This value is accurate ONLY AFTER the order trackingNo is generated, please capture this value AFTER your retrieve the trackingNo.\t"
+						},
+						{
+							"sample": "haha",
+							"type": "string",
+							"name": "note",
+							"key": "bdXKGEw",
+							"description": "The note seller made for own reference.\t"
+						},
+						{
+							"sample": "1608103685",
+							"type": "timestamp",
+							"name": "note_update_time",
+							"key": "ykWXjT",
+							"description": "Update time for the note.\t"
+						},
+						{
+							"description": "This object contains the detailed breakdown for the result of this API call.\t",
+							"sample": "",
+							"key": "KMKhYxy",
+							"type": "object[]",
+							"children": [
+								{
+									"sample": "2600144043",
+									"type": "int64",
+									"name": "item_id",
+									"key": "DSZEWpK",
+									"description": "Shopee's unique identifier for an item."
+								},
+								{
+									"sample": "backpack",
+									"type": "string",
+									"name": "item_name",
+									"key": "iirtTxz",
+									"description": "The name of the item."
+								},
+								{
+									"sample": "sku",
+									"type": "string",
+									"name": "item_sku",
+									"key": "cfiNTQj",
+									"description": " A item SKU (stock keeping unit) is an identifier defined by a seller, sometimes called parent SKU. Item SKU can be assigned to an item in Shopee Listings.\t"
+								},
+								{
+									"sample": "0",
+									"type": "int64",
+									"name": "model_id",
+									"key": "KQBbfmj",
+									"description": "ID of the model that belongs to the same item.\t"
+								},
+								{
+									"sample": "",
+									"type": "string",
+									"name": "model_name",
+									"key": "jMWmhZT",
+									"description": "Name of the model that belongs to the same item. A seller can offer models of the same item. For example, the seller could create a fixed-priced listing for a t-shirt design and offer the shirt in different colors and sizes. In this case, each color and size combination is a separate model. Each model can have a different quantity and price.\t"
+								},
+								{
+									"sample": "",
+									"type": "string",
+									"name": "model_sku",
+									"key": "pSbjeds",
+									"description": "A model SKU (stock keeping unit) is an identifier defined by a seller. It is only intended for the seller's use. Many sellers assign a SKU to an item of a specific type, size, and color, which are models of one item in Shopee Listings.\t"
+								},
+								{
+									"sample": "1",
+									"type": "int32",
+									"name": "model_quantity_purchased",
+									"key": "WWsrKba",
+									"description": "The number of identical items purchased at the same time by the same buyer from one listing/item.\t"
+								},
+								{
+									"sample": "1000.0",
+									"type": "float",
+									"name": "model_original_price",
+									"key": "mSJktND",
+									"description": "The original price of the item in the listing currency.\t"
+								},
+								{
+									"sample": "1000.0",
+									"type": "float",
+									"name": "model_discounted_price",
+									"key": "nFDMTHk",
+									"description": "The after-discount price of the item in the listing currency. If there is no discount, this value will be same as that of model_original_price. In case of bundle deal item, this value will return 0 as by design bundle deal discount will not be breakdown to item/model level. Due to technical restriction, the value will return the price before bundle deal if we don't configure it to 0. Please call GetEscrowDetails if you want to calculate item-level discounted price for bundle deal item.\t"
+								},
+								{
+									"sample": "false",
+									"type": "boolean",
+									"name": "wholesale",
+									"key": "QijJCy",
+									"description": "This value indicates whether buyer buy the order item in wholesale price.\t"
+								},
+								{
+									"sample": "12.0",
+									"type": "float",
+									"name": "weight",
+									"key": "shYcNGS",
+									"description": "The weight of the item\t"
+								},
+								{
+									"sample": "false",
+									"type": "boolean",
+									"name": "add_on_deal",
+									"key": "GzyRWTj",
+									"description": "To indicate if this item belongs to an addon deal.\t"
+								},
+								{
+									"sample": "false",
+									"type": "boolean",
+									"name": "main_item",
+									"key": "ryymsMe",
+									"description": "To indicate if this item is main item or sub item. True means main item, false means sub item.\t"
+								},
+								{
+									"sample": "0",
+									"type": "int64",
+									"name": "add_on_deal_id",
+									"key": "QQhkQKH",
+									"description": "A unique ID to distinguish groups of items in Cart, and Order. (e.g. AddOnDeal)\t"
+								},
+								{
+									"sample": "flash_sale",
+									"type": "string",
+									"name": "promotion_type",
+									"key": "hbbXDcC",
+									"description": "\u003cp\u003eAvailable type：product_promotion, flash_sale, bundle_deal, add_on_deal_main, add_on_deal_sub.\u003c/p\u003e\u003cp\u003e\u003cbr /\u003e\u003c/p\u003e\u003cp\u003eFor items which attend multiple promotions will only show one promotion, the order of priority is:\u0026nbsp;\u003c/p\u003e\u003cp\u003ebundle_deal \u0026gt; add_on_deal_main \u0026gt; add_on_deal_sub \u0026gt; product_promotion \u0026gt;flash_sale\u003c/p\u003e"
+								},
+								{
+									"sample": "0",
+									"type": "int64",
+									"name": "promotion_id",
+									"key": "EYtNamd",
+									"description": "The ID of the promotion.\t"
+								},
+								{
+									"sample": "2600144043",
+									"type": "int64",
+									"name": "order_item_id",
+									"key": "GreGQck",
+									"description": "The identify of order item."
+								},
+								{
+									"sample": "0",
+									"type": "int32",
+									"name": "promotion_group_id",
+									"key": "mPGEAJc",
+									"description": "The identify of product promotion."
+								},
+								{
+									"description": "Image info of the product.",
+									"sample": "",
+									"key": "tKHRsRb",
+									"type": "object",
+									"children": [
+										{
+											"sample": "",
+											"type": "string",
+											"name": "image_url",
+											"key": "tnMkaHD",
+											"description": "The image url of the product. Default to be variation image, if the model does not have a variation image, will use an item main image instead."
+										}
+									],
+									"name": "image_info"
+								},
+								{
+									"sample": "",
+									"type": "string",
+									"name": "product_location_id",
+									"key": "yHnQYhH",
+									"description": "The fulfilment warehouse ID(s) of the items in the order. (Multi-Warehouse sellers only)"
+								},
+								{
+									"description": "\u003cp\u003eTo indicate if this item is prescription item\u003cbr /\u003e\u003c/p\u003e",
+									"required": null,
+									"sample": "",
+									"key": "nJxwrkc",
+									"type": "boolean",
+									"name": "is_prescription_item"
+								},
+								{
+									"description": "\u003cp\u003edetermine if item is B2C_shop_item\u003c/p\u003e\u003cp\u003eIt should be `\u003cb\u003eis_b2c_shop_item\u003c/b\u003e` but it was a bug from dev. Then now it's \u003cb\u003eis_b2c_owned_item\u003c/b\u003e\u003c/p\u003e",
+									"name": "is_b2c_owned_item",
+									"sample": "",
+									"type": "boolean",
+									"required": null,
+									"key": "KXTyjZY"
+								}
+							],
+							"name": "item_list"
+						},
+						{
+							"sample": "1607930885",
+							"type": "timestamp",
+							"name": "pay_time",
+							"key": "rYFbrwY",
+							"description": "The time when the order status is updated from UNPAID to PAID. This value is NULL when order is not paid yet.\t"
+						},
+						{
+							"sample": "",
+							"type": "string",
+							"name": "dropshipper",
+							"key": "BwfRGwT",
+							"description": "For Indonesia orders only. The name of the dropshipper.\t"
+						},
+						{
+							"sample": "",
+							"type": "string",
+							"name": "dropshipper_phone",
+							"key": "HZRpEZn",
+							"description": "The phone number of dropshipper, could be empty."
+						},
+						{
+							"sample": "false",
+							"type": "boolean",
+							"name": "split_up",
+							"key": "ETJZThx",
+							"description": "To indicate whether this order is split to fullfil order(forder) level. Call GetForderInfo if it's \"true\".\t"
+						},
+						{
+							"sample": "",
+							"type": "string",
+							"name": "buyer_cancel_reason",
+							"key": "pHSwSkH",
+							"description": "Cancel reason from buyer, could be empty."
+						},
+						{
+							"sample": "system",
+							"type": "string",
+							"name": "cancel_by",
+							"key": "FArWzZn",
+							"description": "Could be one of buyer, seller, system or Ops.\t"
+						},
+						{
+							"sample": "BACKEND_LOGISTICS_NOT_STARTED",
+							"type": "string",
+							"name": "cancel_reason",
+							"key": "bZSMFzP",
+							"description": "Use this field to get reason for buyer, seller, and system cancellation.\t"
+						},
+						{
+							"sample": "false",
+							"type": "boolean",
+							"name": "actual_shipping_fee_confirmed",
+							"key": "CASHHeY",
+							"description": "Use this filed to judge whether the actual_shipping_fee is confirmed.\t"
+						},
+						{
+							"sample": "",
+							"type": "string",
+							"name": "buyer_cpf_id",
+							"key": "DewXKwB",
+							"description": "Buyer's CPF number for taxation and invoice purposes. Only for Brazil order.\t"
+						},
+						{
+							"sample": "fulfilled_by_shopee",
+							"type": "string",
+							"name": "fulfillment_flag",
+							"key": "wxeMJpY",
+							"description": "Use this field to indicate the order is fulfilled by shopee or seller. Applicable values: fulfilled_by_shopee, fulfilled_by_cb_seller, fulfilled_by_local_seller.\t"
+						},
+						{
+							"sample": "0",
+							"type": "timestamp",
+							"name": "pickup_done_time",
+							"key": "MwemFFt",
+							"description": "The timestamp when pickup is done."
+						},
+						{
+							"description": "The list of package under an order",
+							"sample": "",
+							"key": "GDzekYm",
+							"type": "object[]",
+							"children": [
+								{
+									"sample": "\"61630084074470\"",
+									"type": "string",
+									"name": "package_number",
+									"key": "WNxFsnd",
+									"description": "Shopee's unique identifier for the package under an order."
+								},
+								{
+									"sample": "LOGISTICS_INVALID",
+									"type": "string",
+									"name": "logistics_status",
+									"key": "rbTKSGJ",
+									"description": "The Shopee logistics status for the order. Applicable values: See Data Definition-LogisticsStatus."
+								},
+								{
+									"description": "\u003cp\u003eThe identity of logistic channel.\u003c/p\u003e",
+									"name": "logistics_channel_id",
+									"sample": "18080",
+									"type": "int64",
+									"required": null,
+									"key": "MAKsG"
+								},
+								{
+									"sample": "Standard Delivery",
+									"type": "string",
+									"name": "shipping_carrier",
+									"key": "wzmswRd",
+									"description": "The logistics service provider that the buyer selected for the order to deliver items."
+								},
+								{
+									"description": "\u003cp\u003eTo indicate whether the package allows for self-designed AWB, if allow_self_design_awb returns false, it means that the package does not allow for self-designed AWB and only the system-AWB can be used.\u003c/p\u003e",
+									"name": "allow_self_design_awb",
+									"sample": "false",
+									"type": "boolean",
+									"required": null,
+									"key": "FzPjnbE"
+								},
+								{
+									"description": "The lis of items.",
+									"sample": "",
+									"key": "EpzYSPK",
+									"type": "object[]",
+									"children": [
+										{
+											"sample": "2600144043",
+											"type": "int64",
+											"name": "item_id",
+											"key": "zFnsPtT",
+											"description": "Shopee's unique identifier for an item."
+										},
+										{
+											"sample": "0",
+											"type": "int64",
+											"name": "model_id",
+											"key": "iyHZZrF",
+											"description": "Shopee's unique identifier for a model."
+										},
+										{
+											"description": "\u003cp\u003eThe number of identical items/variations purchased at the same time by the same buyer from one listing/item.\u003c/p\u003e",
+											"name": "model_quantity",
+											"sample": "1",
+											"type": "int32",
+											"required": null,
+											"key": "bZfmCEZ"
+										},
+										{
+											"description": "\u003cp\u003eThe identify of order item. For items in one same bundle deal promotion, the order_item_id should share the same id, such as 1,2. For items not in bundle deal promotion, the order_item_id should be the same as item_id.\u003cbr /\u003e\u003c/p\u003e",
+											"name": "order_item_id",
+											"sample": "2600144043",
+											"type": "int64",
+											"required": null,
+											"key": "DkmRzfS"
+										},
+										{
+											"description": "\u003cp\u003eThe identify of product promotion.\u003cbr /\u003e\u003c/p\u003e",
+											"name": "promotion_group_id",
+											"sample": "7850298",
+											"type": "int32",
+											"required": null,
+											"key": "BYJFfHd"
+										},
+										{
+											"description": "\u003cp\u003eThe warehouse ID of the item.\u003cbr /\u003e\u003c/p\u003e",
+											"name": "product_location_id",
+											"sample": "IDL",
+											"type": "string",
+											"required": null,
+											"key": "YFdRaxB"
+										}
+									],
+									"name": "item_list"
+								},
+								{
+									"sample": "",
+									"type": "int",
+									"name": "parcel_chargeable_weight",
+									"key": "bBMirsh",
+									"description": "display weight used to calculate ASF for this parcel"
+								},
+								{
+									"description": "\u003cp\u003eThe common identifier for multiple orders combined in the same parcel.\u003cbr /\u003e\u003c/p\u003e",
+									"name": "group_shipment_id",
+									"sample": "150654369130420",
+									"type": "int64",
+									"required": null,
+									"key": "tdEhZxx"
+								},
+								{
+									"description": "\u003cp\u003e[Only for TW non-integrated channel] The virtual phone number to contact the recipient.\u003cbr /\u003e\u003c/p\u003e",
+									"name": "virtual_contact_number",
+									"sample": "0928000886",
+									"type": "string",
+									"required": null,
+									"key": "hnptRFP"
+								},
+								{
+									"description": "\u003cp\u003e[Only for TW non-integrated channel] The query number used in virtual phone number calls to contact the recipient of this package.\u003cbr /\u003e\u003c/p\u003e",
+									"name": "package_query_number",
+									"sample": "66668888",
+									"type": "string",
+									"required": null,
+									"key": "pzaynte"
+								}
+							],
+							"name": "package_list"
+						},
+						{
+							"description": "The invoice data of the order.",
+							"sample": "",
+							"key": "xyYEXfS",
+							"type": "object",
+							"children": [
+								{
+									"sample": "",
+									"type": "string",
+									"name": "number",
+									"key": "GcAzJwC",
+									"description": "The number of the invoice."
+								},
+								{
+									"sample": "",
+									"type": "string",
+									"name": "series_number",
+									"key": "RRTZZwn",
+									"description": "The series number of the invoice."
+								},
+								{
+									"sample": "",
+									"type": "string",
+									"name": "access_key",
+									"key": "ZxDcEzD",
+									"description": "The access key of the invoice."
+								},
+								{
+									"sample": "",
+									"type": "timestamp",
+									"name": "issue_date",
+									"key": "DNCGNrf",
+									"description": "The issue date of the invoice."
+								},
+								{
+									"sample": "",
+									"type": "float",
+									"name": "total_value",
+									"key": "TfhbXjG",
+									"description": "The total value of the invoice."
+								},
+								{
+									"sample": "",
+									"type": "float",
+									"name": "products_total_value",
+									"key": "zBhkbHX",
+									"description": "The products total value of the invoice."
+								},
+								{
+									"sample": "",
+									"type": "string",
+									"name": "tax_code",
+									"key": "XfimKGp",
+									"description": "The tax code for the invoice."
+								}
+							],
+							"name": "invoice_data"
+						},
+						{
+							"sample": "Standard Delivery",
+							"type": "string",
+							"name": "checkout_shipping_carrier",
+							"key": "bZSpNRT",
+							"description": "For non masking order, the logistics service provider that the buyer selected for the order to deliver items.  For masking order, the logistics service type that the buyer selected for the order to deliver items."
+						},
+						{
+							"sample": "",
+							"type": "float",
+							"name": "reverse_shipping_fee",
+							"key": "RKEQQTM",
+							"description": "Shopee charges the reverse shipping fee for the returned order.The value of this field will be non-negative."
+						},
+						{
+							"sample": "",
+							"type": "int",
+							"name": "order_chargeable_weight_gram",
+							"key": "XkbHThC",
+							"description": "display weight used to calculate ASF for this order"
+						},
+						{
+							"description": "\u003cp\u003eReturn prescription images of this order, only for ID and PH whitelist sellers.\u003c/p\u003e\u003cp\u003e\u003cbr /\u003e\u003c/p\u003e\u003cp\u003ePlease add the prefix to review:\u003c/p\u003e\u003cp\u003efor ID:\u0026nbsp;\u003ca href=\"https://cf.shopee.co.id/file/+prescription_image\" target=\"_blank\" style=\"font-size:14px;\"\u003ehttps://cf.shopee.co.id/file/+prescription_image\u003c/a\u003e\u003c/p\u003e\u003cp\u003efor PH:\u003ca href=\"https://cf.shopee.co.id/file/+prescription_image\" target=\"_blank\" style=\"font-size:14px;\"\u003ehttps://cf.shopee.ph/file/+prescription_image\u003c/a\u003e\u003c/p\u003e",
+							"required": null,
+							"sample": "",
+							"key": "MKmrZkF",
+							"type": "string[]",
+							"name": "prescription_images"
+						},
+						{
+							"description": "enum OrderPrescriptionCheckStatus: NONE = 0; PASSED = 1; FAILED = 2; Only for ID and PH whitelist sellers.",
+							"required": null,
+							"sample": "",
+							"key": "PGwNDEi",
+							"type": "int",
+							"name": "prescription_check_status"
+						},
+						{
+							"description": "\u003cp\u003eEarliest estimated delivery date of orders (only available for BR region)\u003cbr /\u003e\u003c/p\u003e",
+							"name": "edt_from",
+							"sample": "",
+							"type": "timestamp",
+							"required": null,
+							"key": "CdhYFsd"
+						},
+						{
+							"description": "\u003cp\u003eLatest estimated delivery time of orders (only available for BR region)\u003cbr /\u003e\u003c/p\u003e",
+							"name": "edt_to",
+							"sample": "",
+							"type": "timestamp",
+							"required": null,
+							"key": "epyZzij"
+						},
+						{
+							"description": "\u003cp\u003eReturn by default. Shopee's unique identifier for a booking.\u003c/p\u003e\u003cp\u003eOnly returned for advance fulfilment matched order only.\u003c/p\u003e",
+							"name": "booking_sn",
+							"sample": "2404098R48U37H",
+							"type": "string",
+							"required": null,
+							"key": "tDnrxrk"
+						},
+						{
+							"description": "\u003cp\u003eIndicate whether order will be fulfilled using advance fulfilment stock or not. If value is true, order will be matched with a booking and seller should not arrange shipment.\u003c/p\u003e",
+							"name": "advance_package",
+							"sample": "true",
+							"type": "boolean",
+							"required": null,
+							"key": "bebEzhP"
+						},
+						{
+							"description": "\u003cp\u003eThis field represents the deadline for buyers to initiate returns and refunds after order is completed.\u003c/p\u003e\u003cp\u003e\u003cbr /\u003e\u003c/p\u003e\u003cp\u003eThe “return_request_due_date” response parameter will be returned if the requested order meets\u0026nbsp;\u003cb\u003eALL\u0026nbsp;the conditions\u003c/b\u003e\u0026nbsp;below:\u003c/p\u003e\u003cp\u003e- The status of the order is COMPLETED\u003c/p\u003e\u003cp\u003e- The return refund eligibility of the order is true\u003c/p\u003e\u003cp\u003e\u003cbr /\u003e\u003c/p\u003e\u003cp\u003eIf you have any questions related to the function of \"returns and refunds after order is completed,\" please refer to the following link:\u0026nbsp;https://seller.shopee.tw/edu/article/18474\u003c/p\u003e",
+							"name": "return_request_due_date",
+							"sample": "",
+							"type": "timestamp",
+							"required": null,
+							"key": "KJSGcbz"
+						}
+					],
+					"name": "order_list"
+				}
+			],
+			"name": "response"
+		},
+		{
+			"sample": "",
+			"type": "string[]",
+			"name": "warning",
+			"key": "aWcBKw",
+			"description": "Indicate warning message you should take care."
+		}
+	]
+}

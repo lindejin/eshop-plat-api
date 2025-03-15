@@ -1,0 +1,267 @@
+{
+    "code": 1,
+    "message": "success",
+    "data": {
+        "methodId": "98e5e590826f464bb6ce043bfd2aa8ac",
+        "subCateId": "001005",
+        "methodv": "dh.shipping.trackinfo.get$1.0",
+        "nameKey": "获得物流信息接口",
+        "visitUrl": "http://api.dhgate.com/dop/router",
+        "apiLevel": "A",
+        "publicVisit": "1",
+        "ignoreSign": "0",
+        "timeout": "15",
+        "needSession": "1",
+        "descKey": "获得物流信息",
+        "createTime": 1733730183,
+        "changedKey": "",
+        "obsoleted": "3",
+        "bizErrorJson": "",
+        "apiNEW": null,
+        "requestExamlpes": [
+            {
+                "exampleId": "e993e46ea6524ba48e9ed809fed5a294",
+                "exampleType": "1",
+                "example": "DhgateDefaultClient defaultClient = new DhgateDefaultClient(url);\nCompositeResponse<String> response=defaultClient.buildRequestClient(access_token)\n    .addParam(\"trackno\",\"LT131582887CN\")\n    .addParam(\"language\",\"EN\")\n    .addParam(\"shippingtype\",\"ePacket-yw\")\n    .postForEntity(\"dh.shipping.trackinfo.get\",\"1.0\");\nString responseStr = response.getSuccessResponse();"
+            },
+            {
+                "exampleId": "bcf1ed187fe549a0b85adb0ab13fa67e",
+                "exampleType": "2",
+                "example": "import http.client\n\nconn = http.client.HTTPConnection(\"api,dhgate,com\")\n\nheaders = {\n    'cache-control': \"no-cache\"\n    }\n\nconn.request(\"POST\", \"/dop/router?access_token=xxxx&method=dh.shipping.trackinfo.get&timestamp=1566569414743&v=1.0&language=EN&shippingtype=ePacke&trackno= 3124864437\", headers=headers)\n\nres = conn.getresponse()\ndata = res.read()\n\nprint(data.decode(\"utf-8\"))"
+            },
+            {
+                "exampleId": "c00884cab81e4a7fa3f3a2f291424fe0",
+                "exampleType": "3",
+                "example": "<?php\n\n$request = new HttpRequest();\n$request->setUrl('http://api.dhgate.com/dop/router');\n$request->setMethod(\"POST\");\n\n$request->setQueryData(array(\n  'access_token' => 'xxxx',\n  'method' => 'dh.shipping.trackinfo.get',\n  'timestamp' => '1566803067730',\n  'v' => '1.0',\n  'language' => 'EN',\n  'shippingtype' => 'ePacke',\n  'trackno' => '%203124864437'\n));\n\n$request->setHeaders(array(\n  'cache-control' => 'no-cache'\n));\n\ntry {\n  $response = $request->send();\n\n  echo $response->getBody();\n} catch (HttpException $ex) {\n  echo $ex;\n}"
+            }
+        ],
+        "responseExamlpes": [
+            {
+                "exampleId": "977197b22c604cc1bca8920bb12002c3",
+                "exampleType": "7",
+                "example": "{\n    \"status\": {\n        \"code\": \"00000000\",\n        \"message\": \"OK\",\n        \"solution\": \"\",\n        \"subErrors\": []\n    },\n    \"frtTrackInfoList\": [\n        {\n            \"trackno\": \"LT131582887CN\",\n            \"shippingtype\": \"ePacket-yw\",\n            \"language\": \"EN\",\n            \"occurDate\": \"2018-12-17 22:38:59\",\n            \"info\": \"Your package is now waiting to be sent to the distribution center\",\n            \"place\": null\n        }\n    ]\n}"
+            },
+            {
+                "exampleId": "3401d5ff528e4c84bed7ee7978af9b5c",
+                "exampleType": "8",
+                "example": "<status>\n\t<code>00000000</code>\n\t<message>OK</message>\n\t<solution></solution>\n</status>\n<frtTrackInfoList>\n\t<trackno>LT131582887CN</trackno>\n\t<shippingtype>ePacket-yw</shippingtype>\n\t<language>EN</language>\n\t<occurDate>2018-12-17 22:38:59</occurDate>\n\t<info>Your package is now waiting to be sent to the distribution center</info>\n\t<place></place>\n</frtTrackInfoList>"
+            }
+        ],
+        "errorExamlpes": [
+            {
+                "exampleId": "97ddc1ac117348fb95dadb8799632f88",
+                "exampleType": "7",
+                "example": "{\n    \"status\": {\n        \"code\": \"00000001\",\n        \"message\": \"call back success and null value returned\",\n        \"solution\": \"\",\n        \"subErrors\": []\n    },\n    \"frtTrackInfoList\": null\n}"
+            },
+            {
+                "exampleId": "bc4da8055ca247d6a6988fc094c649c0",
+                "exampleType": "8",
+                "example": "<status>\n\t<code>00000001</code>\n\t<message>call back success and null value returned</message>\n\t<solution></solution>\n</status>\n<frtTrackInfoList></frtTrackInfoList>"
+            }
+        ],
+        "systemParams": [
+            {
+                "fieldId": "5e820ed21be74cd5bbe1b6887a942f8d",
+                "methodId": "98e5e590826f464bb6ce043bfd2aa8ac",
+                "fieldName": "method",
+                "fieldType": "0",
+                "fieldKey": "API接口名称",
+                "fieldValueKey": "dh.shipping.trackinfo.get",
+                "paramType": "0",
+                "must": "1",
+                "fieldTypeDetail": "String",
+                "bizObjId": null,
+                "createTime": 1733730183,
+                "childField": null
+            },
+            {
+                "fieldId": "7b57185c0b5449cb81b55cce56b74305",
+                "methodId": "98e5e590826f464bb6ce043bfd2aa8ac",
+                "fieldName": "timestamp",
+                "fieldType": "0",
+                "fieldKey": "请求时间戳,请求时的时间毫秒单位,例如：2013-11-25 20:23:30对应的毫秒时间戳为1385382210000。以北京时间为准,敦煌API服务端允许客户端请求时间误差为30分钟",
+                "fieldValueKey": "1385382210000",
+                "paramType": "0",
+                "must": "1",
+                "fieldTypeDetail": "String",
+                "bizObjId": null,
+                "createTime": 1733730183,
+                "childField": null
+            },
+            {
+                "fieldId": "92496ccc6a4a46e49ce04a2ba1e73a36",
+                "methodId": "98e5e590826f464bb6ce043bfd2aa8ac",
+                "fieldName": "v",
+                "fieldType": "0",
+                "fieldKey": "接口版本号",
+                "fieldValueKey": "1.0",
+                "paramType": "0",
+                "must": "1",
+                "fieldTypeDetail": "String",
+                "bizObjId": null,
+                "createTime": 1733730183,
+                "childField": null
+            },
+            {
+                "fieldId": "c67bbbb50ab742ba8c3a23f466af3296",
+                "methodId": "98e5e590826f464bb6ce043bfd2aa8ac",
+                "fieldName": "access_token",
+                "fieldType": "0",
+                "fieldKey": "请求令牌,需要提前通过OAuth2授权接口获取令牌",
+                "fieldValueKey": "access_token令牌字符串",
+                "paramType": "0",
+                "must": "1",
+                "fieldTypeDetail": "String",
+                "bizObjId": null,
+                "createTime": 1733730183,
+                "childField": null
+            }
+        ],
+        "requestParams": [
+            {
+                "fieldId": "0f2853fa74314aa7929fbbbcc8c5b338",
+                "methodId": "98e5e590826f464bb6ce043bfd2aa8ac",
+                "fieldName": "shippingtype",
+                "fieldType": "0",
+                "fieldKey": "物流方式，如e-ulink等",
+                "fieldValueKey": "",
+                "paramType": "1",
+                "must": "1",
+                "fieldTypeDetail": "String",
+                "bizObjId": null,
+                "createTime": 1733730183,
+                "childField": null
+            },
+            {
+                "fieldId": "8a3cf42cc6c44f0e89355c759f65a48d",
+                "methodId": "98e5e590826f464bb6ce043bfd2aa8ac",
+                "fieldName": "language",
+                "fieldType": "0",
+                "fieldKey": "语言，只能是EN或CN",
+                "fieldValueKey": "",
+                "paramType": "1",
+                "must": "1",
+                "fieldTypeDetail": "String",
+                "bizObjId": null,
+                "createTime": 1733730183,
+                "childField": null
+            },
+            {
+                "fieldId": "97826615b6d34a49aa33149b34ff95c9",
+                "methodId": "98e5e590826f464bb6ce043bfd2aa8ac",
+                "fieldName": "trackno",
+                "fieldType": "0",
+                "fieldKey": "运单号",
+                "fieldValueKey": "",
+                "paramType": "1",
+                "must": "1",
+                "fieldTypeDetail": "String",
+                "bizObjId": null,
+                "createTime": 1733730183,
+                "childField": null
+            }
+        ],
+        "responseParams": [
+            {
+                "fieldId": "3195522f135d41049ba614a1ea78b758",
+                "methodId": "98e5e590826f464bb6ce043bfd2aa8ac",
+                "fieldName": "frtTrackInfoList",
+                "fieldType": "3",
+                "fieldKey": "物流信息列表",
+                "fieldValueKey": "",
+                "paramType": "2",
+                "must": "1",
+                "fieldTypeDetail": "FrtTrackinfoVO[]",
+                "bizObjId": "68c170e2dda2432a9ff1c01ca23e4583",
+                "createTime": 1733730183,
+                "childField": [
+                    {
+                        "fieldId": "0dd2d2fe50f24be79cd93a6aa6135aea",
+                        "methodId": null,
+                        "fieldName": "occurDate",
+                        "fieldType": "0",
+                        "fieldKey": "发生时间",
+                        "fieldValueKey": "",
+                        "paramType": null,
+                        "must": "1",
+                        "fieldTypeDetail": "String",
+                        "bizObjId": null,
+                        "createTime": 1733730183,
+                        "childField": null
+                    },
+                    {
+                        "fieldId": "13c66c7eb4e0480fb380fa8558a7d15d",
+                        "methodId": null,
+                        "fieldName": "shippingtype",
+                        "fieldType": "0",
+                        "fieldKey": "物流方式",
+                        "fieldValueKey": "",
+                        "paramType": null,
+                        "must": "1",
+                        "fieldTypeDetail": "String",
+                        "bizObjId": null,
+                        "createTime": 1733730183,
+                        "childField": null
+                    },
+                    {
+                        "fieldId": "87d790d196964ecfbc2b809a9efbd156",
+                        "methodId": null,
+                        "fieldName": "language",
+                        "fieldType": "0",
+                        "fieldKey": "语言",
+                        "fieldValueKey": "",
+                        "paramType": null,
+                        "must": "1",
+                        "fieldTypeDetail": "String",
+                        "bizObjId": null,
+                        "createTime": 1733730183,
+                        "childField": null
+                    },
+                    {
+                        "fieldId": "ab1feab0d7fb42079a48539daab9b4bf",
+                        "methodId": null,
+                        "fieldName": "info",
+                        "fieldType": "0",
+                        "fieldKey": "发生事件",
+                        "fieldValueKey": "",
+                        "paramType": null,
+                        "must": "1",
+                        "fieldTypeDetail": "String",
+                        "bizObjId": null,
+                        "createTime": 1733730183,
+                        "childField": null
+                    },
+                    {
+                        "fieldId": "b1982d96202247fd9ca77098114d8204",
+                        "methodId": null,
+                        "fieldName": "trackno",
+                        "fieldType": "0",
+                        "fieldKey": "运单号",
+                        "fieldValueKey": "",
+                        "paramType": null,
+                        "must": "1",
+                        "fieldTypeDetail": "String",
+                        "bizObjId": null,
+                        "createTime": 1733730183,
+                        "childField": null
+                    },
+                    {
+                        "fieldId": "b6ff89a40a634b8eb93518d25a6f58d5",
+                        "methodId": null,
+                        "fieldName": "place",
+                        "fieldType": "0",
+                        "fieldKey": "发生地点",
+                        "fieldValueKey": "",
+                        "paramType": null,
+                        "must": "1",
+                        "fieldTypeDetail": "String",
+                        "bizObjId": null,
+                        "createTime": 1733730183,
+                        "childField": null
+                    }
+                ]
+            }
+        ],
+        "errorParam": []
+    }
+}
