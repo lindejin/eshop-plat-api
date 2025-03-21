@@ -1,4 +1,4 @@
-// 删除已声明
+# 删除已声明
 DELETE FROM tb_waybill_syn_err
 WHERE EXISTS (
     SELECT 1
