@@ -1,14 +1,23 @@
 package com.eshop.sync;
 
+import cn.hutool.core.util.ObjectUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.eshop.entity.config.TbPlatformApp;
+import com.eshop.entity.config.TbShop;
 import com.eshop.entity.order.TbOrder;
 import com.eshop.entity.order.TbWaybillSynErr;
 import com.eshop.entity.order.TbWaybillSynRecord;
+import com.eshop.example.utls.MapExtUtils;
+import com.eshop.service.config.ITbPlatformAppService;
+import com.eshop.service.config.ITbShopService;
 import com.eshop.service.order.ITbOrderService;
 import com.eshop.service.order.ITbWaybillSynErrService;
 import com.eshop.service.order.ITbWaybillSynRecordService;
 import com.eshop.util.platform.api.structure.dhgate.dto.DhAppClientDTO;
 import com.eshop.util.shop.PlatformAppClientUtils;
+import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.collections4.MapUtils;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
@@ -17,6 +26,7 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Executor;
 import java.util.stream.Collectors;
 
+@Slf4j
 @Component
 public class ITbWaybillSynErrServiceTest {
 
@@ -30,6 +40,12 @@ public class ITbWaybillSynErrServiceTest {
     private ITbOrderService iTbOrderService;
 
     @Resource
+    private ITbShopService iTbShopService;
+
+    @Resource
+    private ITbPlatformAppService iTbPlatformAppService;
+
+    @Resource
     private PlatformAppClientUtils platformAppClientUtils;
 
     @Resource
@@ -38,6 +54,7 @@ public class ITbWaybillSynErrServiceTest {
     public List<TbWaybillSynErr> getWaybillSynErrList() {
         LambdaQueryWrapper<TbWaybillSynErr> qw = new LambdaQueryWrapper<>();
         qw.eq(TbWaybillSynErr::getIsDelete, 2);
+        qw.eq(TbWaybillSynErr::getPlatformId, 1);
         //Date synTime 指定时间范围 2025.01.01 - 2025.03.08
 //        qw.between(TbWaybillSynErr::getSynTime, "2025.01.01", "2025.03.08");
         //根据id正序排序
@@ -113,10 +130,14 @@ public class ITbWaybillSynErrServiceTest {
     }
 
     public Map<Long, DhAppClientDTO> getAppClientDTOMap(Set<Long> shopIds) {
+        Map<Long, Long> shopAppIdMap = getShopAppIdMap(shopIds);
+        Map<Long, String> appParamJsonMap = getShopAppParamJsonMap(new ArrayList<>(shopAppIdMap.values()));
+
         Map<Long, DhAppClientDTO> appClientDTOMap = new HashMap<>();
         for (Long shopId : shopIds) {
+            String paramStaticJson = appParamJsonMap.get(shopAppIdMap.get(shopId));
             try {
-                DhAppClientDTO dhAppClientDTO = platformAppClientUtils.getDhAppClientDTO(shopId);
+                DhAppClientDTO dhAppClientDTO = platformAppClientUtils.getDhAppClientDTO(shopId, paramStaticJson);
                 appClientDTOMap.put(shopId, dhAppClientDTO);
             } catch (Exception e) {
                 e.printStackTrace();
@@ -154,5 +175,54 @@ public class ITbWaybillSynErrServiceTest {
                 .map(CompletableFuture::join)
                 .flatMap(Collection::stream)
                 .collect(Collectors.toList());
+    }
+
+    private Map<Long, Long> getShopAppIdMap(Set<Long> shopIds) {
+        List<TbShop> shopDOList = iTbShopService.listByIds(shopIds);
+        if (CollectionUtils.isEmpty(shopDOList)) {
+            log.error("店铺查询为空！");
+            throw new RuntimeException("店铺查询为空！");
+        }
+        return MapExtUtils.toMapKeepNewest(shopDOList, TbShop::getId, TbShop::getAppId);
+    }
+
+
+    /**
+     * 获取店长
+     */
+    public Map<Long, String> getShopAppParamJsonMap(List<Long> appIds) {
+        try {
+            if (CollectionUtils.isEmpty(appIds)) {
+                return Collections.emptyMap();
+            }
+            Map<Long, String> paMap = getAppParamJsonMap(appIds);
+            if (ObjectUtil.isEmpty(paMap)) {
+                return Collections.emptyMap();
+            }
+            return paMap;
+        } catch (Exception e) {
+            return Collections.emptyMap();
+        }
+    }
+
+    /**
+     * 获取应用静态变量
+     */
+    public Map<Long, String> getAppParamJsonMap(List<Long> appIds) {
+        List<TbPlatformApp> paList = null;
+        try {
+            paList = iTbPlatformAppService.listByIds(appIds);
+        } catch (Exception e) {
+            throw new RuntimeException("查询应用参数异常:appIds" + appIds);
+        }
+
+        if (CollectionUtils.isEmpty(paList)) {
+            throw new RuntimeException("应用参数异常！appIds:" + appIds);
+        }
+        Map<Long, String> paMap = MapExtUtils.toMapKeepNewest(paList, TbPlatformApp::getId, TbPlatformApp::getAppParamJson);
+        if (MapUtils.isEmpty(paMap)) {
+            throw new RuntimeException("应用参数异常！appParamJson查询为空，appIds:" + appIds);
+        }
+        return paMap;
     }
 }
