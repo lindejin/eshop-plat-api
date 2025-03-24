@@ -49,6 +49,16 @@ WHERE EXISTS (
       and tb_order.platform_id = 7
 );
 
+# 删除订单 中转
+DELETE FROM tb_waybill_syn_err
+WHERE EXISTS (
+    SELECT 1
+    FROM tb_order
+    WHERE tb_order.order_no = tb_waybill_syn_err.order_no
+      AND tb_order.platform_order_status = '121'
+      and tb_order.platform_id = 7
+);
+
 # 删除自己创建的订单
 DELETE FROM tb_waybill_syn_err
 WHERE order_no LIKE '9000000%';
