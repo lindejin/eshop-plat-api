@@ -9,13 +9,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class TemuShipOrderCallServiceImpl implements TemuShipOrderCallService {
+public class TemuFullOrderCallImpl implements TemuFullOrderCall {
 
     @Autowired
     private TemuClient temuClient;
 
     @Override
-    public String getShipOrder(TemuAppClientDTO publicDto, JSONObject businessDto) throws Exception {
+    public String getPurchaseOrderV2(TemuAppClientDTO publicDto, JSONObject businessDto) throws Exception {
         //请求接口 API接口名，形如：bg.*
         String type = "bg.purchaseorderv2.get";
         String version = null;
