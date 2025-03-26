@@ -5,7 +5,7 @@ WHERE EXISTS (
     FROM tb_waybill_syn_record
     WHERE tb_waybill_syn_record.parcel_no = tb_waybill_syn_err.parcel_no
       AND tb_waybill_syn_record.waybill_no = tb_waybill_syn_err.waybill_no
-);
+) and platform_id = 1;
 # 删除多余
 DELETE FROM tb_waybill_syn_err
 WHERE is_delete = 1;
