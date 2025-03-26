@@ -261,6 +261,7 @@ public class TemuVOGenerator {
         if (str.equals("float")) return "BigDecimal";
         if (str.equals("double")) return "BigDecimal";
         if (str.equals("long")) return "Long";
+        if (str.equals("map")) return "Map";
         return str.substring(0, 1).toUpperCase() + str.substring(1);
     }
 
@@ -275,6 +276,7 @@ public class TemuVOGenerator {
         if (str.equals("float")) return "BigDecimal";
         if (str.equals("double")) return "BigDecimal";
         if (str.equals("long")) return "Long";
+        if (str.equals("map")) return "Map";
         str= str.substring(0, 1).toUpperCase() + str.substring(1);
         return str.replace("List","");
     }
@@ -293,6 +295,9 @@ public class TemuVOGenerator {
                 break;
             case 6:
                 name =  "object";
+                break;
+            case 7:
+                name =  "map";
                 break;
             case 8:
                 name =  "list";
@@ -319,6 +324,9 @@ public class TemuVOGenerator {
                 break;
             case 6:
                 name =  "object";
+                break;
+            case 7:
+                name =  "map";
                 break;
             case 8:
                 name =  "list";
