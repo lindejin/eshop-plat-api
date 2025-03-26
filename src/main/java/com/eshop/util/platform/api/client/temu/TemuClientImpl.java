@@ -1,6 +1,7 @@
 package com.eshop.util.platform.api.client.temu;
 
 import com.alibaba.fastjson.JSONObject;
+import com.eshop.util.platform.api.exception.ApiSyncException;
 import com.eshop.util.platform.api.structure.temu.dto.TemuAppClientDTO;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,29 +61,29 @@ public class TemuClientImpl implements TemuClient {
         String type = temuRequest.getType();
 
         if (temuRequest == null) {
-            throw new Exception("Temu temuRequest is null.");
+            throw new ApiSyncException("Temu temuRequest is null.");
         }
         if (publicDTO == null) {
-            throw new Exception("Temu publicDTO is null.");
+            throw new ApiSyncException("Temu publicDTO is null.");
         }
         if (StringUtils.isBlank(publicDTO.getLocation())) {
-            throw new Exception("Temu location is null.");
+            throw new ApiSyncException("Temu location is null.");
         }
 
         if (StringUtils.isBlank(apiUrl)) {
-            throw new Exception("Temu apiUrl is null.");
+            throw new ApiSyncException("Temu apiUrl is null.");
         }
         if (StringUtils.isBlank(appKey)) {
-            throw new Exception("Temu appKey is null.");
+            throw new ApiSyncException("Temu appKey is null.");
         }
         if (StringUtils.isBlank(appSecret)) {
-            throw new Exception("Temu appSecret is null.");
+            throw new ApiSyncException("Temu appSecret is null.");
         }
         if (StringUtils.isBlank(accessToken)) {
-            throw new Exception("Temu accessToken is null.");
+            throw new ApiSyncException("Temu accessToken is null.");
         }
         if (StringUtils.isBlank(type)) {
-            throw new Exception("Temu type is null.");
+            throw new ApiSyncException("Temu type is null.");
         }
     }
 
