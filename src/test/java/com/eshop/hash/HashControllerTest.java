@@ -64,7 +64,50 @@ public class HashControllerTest {
             upList.add(upLog);
         }
         if (upList.size() > 0) {
-            iTbOrderRespLogService.updateBatchById(upList,2000);
+            // 每批处理的数据量
+            final int batchSize = 2000;
+            // 计算需要多少批次
+            int totalBatches = (upList.size() + batchSize - 1) / batchSize;
+            
+            // 创建异步任务列表
+            List<CompletableFuture<Boolean>> updateFutures = new ArrayList<>();
+            
+            // 分批处理数据
+            for (int i = 0; i < totalBatches; i++) {
+                int start = i * batchSize;
+                int end = Math.min(start + batchSize, upList.size());
+                List<TbOrderRespLog> batchList = upList.subList(start, end);
+                
+                // 创建异步更新任务
+                int finalI = i;
+                CompletableFuture<Boolean> future = CompletableFuture.supplyAsync(() -> {
+                    try {
+                        iTbOrderRespLogService.updateBatchById(batchList, batchSize);
+                        return true;
+                    } catch (Exception e) {
+                        log.error("批量更新失败，批次：" + (finalI + 1), e);
+                        return false;
+                    }
+                }, excelTaskPool);
+                
+                updateFutures.add(future);
+            }
+            
+            try {
+                // 等待所有更新任务完成
+                CompletableFuture.allOf(updateFutures.toArray(new CompletableFuture[0])).join();
+                
+                // 检查是否所有批次都更新成功
+                boolean allSuccess = updateFutures.stream()
+                        .map(CompletableFuture::join)
+                        .allMatch(success -> success);
+                
+                if (!allSuccess) {
+                    log.error("部分批次更新失败");
+                }
+            } catch (Exception e) {
+                log.error("等待更新任务完成时发生错误", e);
+            }
         }
         // MurmurHashUtil.generateUniqueHash()
     }
@@ -212,8 +255,9 @@ public class HashControllerTest {
 
         QueryWrapper<TbOrderRespLog> wrapperInit = new QueryWrapper<>();
         // 时间范围（15天）
-        Date startDate = new Date(System.currentTimeMillis() - 30L * 24 * 60 * 60 * 1000);
-        wrapperInit.ge("operate_time", startDate)
+        Date startDate = new Date(System.currentTimeMillis() - 40L * 24 * 60 * 60 * 1000);
+        wrapperInit
+//                .ge("operate_time", startDate)
                 .isNull("hash")
                 .orderByAsc("id");  // 必须按ID排序
 
@@ -222,7 +266,8 @@ public class HashControllerTest {
         try {
             while (true) {
                 QueryWrapper<TbOrderRespLog> wrapper = new QueryWrapper<>();
-                wrapper.ge("operate_time", startDate)
+                wrapper
+//                        .ge("operate_time", startDate)
                         .isNull("hash")
                         .orderByAsc("id");  // 必须按ID排序
                 // 动态更新查询条件
