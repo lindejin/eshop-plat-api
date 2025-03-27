@@ -1,7 +1,7 @@
 server:
   port: 8080
 default-db:
-  ip: 192.168.10.136
+  ip: 192.168.10.53
   username: eshop
   password: eshop123
   type: com.atomikos.jdbc.AtomikosDataSourceBean

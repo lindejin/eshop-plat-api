@@ -72,4 +72,9 @@ public class TbOrderRespLog implements Serializable {
      * 运行时间
      */
     private Date operateTime;
+
+    /**
+     * hash
+     */
+    private Long hash;
 }
