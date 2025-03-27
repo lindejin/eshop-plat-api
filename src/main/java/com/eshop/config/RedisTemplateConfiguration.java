@@ -11,23 +11,43 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.core.*;
+import org.springframework.data.redis.serializer.GenericJackson2JsonRedisSerializer;
 import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
+
+import java.util.Objects;
 
 @Configuration
 public class RedisTemplateConfiguration {
 
+
     @Bean
     @Primary
-    public RedisTemplate<String, Object> redisTemplate(RedisConnectionFactory factory) {
-        RedisTemplate<String, Object> template = new RedisTemplate<String, Object>();
-        template.setConnectionFactory(factory);
-        template.setKeySerializer(new StringRedisSerializer());
-        template.setValueSerializer(jackson2JsonRedisSerializer());
-        template.setHashKeySerializer(jackson2JsonRedisSerializer());
-        template.setHashValueSerializer(jackson2JsonRedisSerializer());
-        template.afterPropertiesSet();
-        return template;
+    public RedisTemplate<String, Object> redisTemplate(DynamicRedisConfig config) {
+//        RedisTemplate<String, Object> template = new RedisTemplate<String, Object>();
+//        template.setConnectionFactory(factory);
+//        template.setKeySerializer(new StringRedisSerializer());
+//        template.setValueSerializer(jackson2JsonRedisSerializer());
+//        template.setHashKeySerializer(jackson2JsonRedisSerializer());
+//        template.setHashValueSerializer(jackson2JsonRedisSerializer());
+//        template.afterPropertiesSet();
+//        return template;
+        return new RedisTemplate<String, Object>() {
+            @Override
+            public RedisConnectionFactory getConnectionFactory() {
+                return config.getActiveConnectionFactory();
+            }
+
+            @Override
+            public void afterPropertiesSet() {
+                super.setConnectionFactory(Objects.requireNonNull(getConnectionFactory()));
+                super.setKeySerializer(new StringRedisSerializer());
+                super.setValueSerializer(jackson2JsonRedisSerializer());
+                super.setHashKeySerializer(jackson2JsonRedisSerializer());
+                super.setHashValueSerializer(jackson2JsonRedisSerializer());
+                super.afterPropertiesSet();
+            }
+        };
     }
 
     @Bean

@@ -5,7 +5,8 @@ default-db:
   username: eshop
   password: eshop123
   type: com.atomikos.jdbc.AtomikosDataSourceBean
-
+database:
+  ip: 192.168.10.53
 spring:
   redis:
     #数据库索引
