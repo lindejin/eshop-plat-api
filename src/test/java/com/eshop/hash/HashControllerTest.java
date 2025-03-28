@@ -8,9 +8,9 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.eshop.entity.log.TbOrderRespLog;
 import com.eshop.service.log.ITbOrderRespLogService;
-import com.eshop.util.BeanPlusUtil;
 import com.eshop.util.MurmurHashUtil;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,8 +23,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Executor;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 @Slf4j
 @SpringBootTest
@@ -36,6 +34,39 @@ public class HashControllerTest {
     @Resource(name = "excelTaskPool")
     private Executor excelTaskPool;
 
+
+    @Test
+    public void queryHash_128() {
+        QueryWrapper<TbOrderRespLog> wrapper = new QueryWrapper<>();
+        // 时间范围（15天）
+        wrapper
+                .eq("order_no", "250210S3S2K810")
+                .isNotNull("hash_128")
+                .orderByAsc("id");  // 必须按ID排序
+
+        List<TbOrderRespLog> list = iTbOrderRespLogService.list(wrapper);
+        if (CollectionUtils.isNotEmpty(list)) {
+            for (TbOrderRespLog respLog : list) {
+                System.out.println(toHexString(respLog.getHash128()));
+            }
+        }
+    }
+
+    // 转换为十六进制字符串的方法
+    public String toHexString(Byte[] hash128) {
+        if (hash128 == null) {
+            return null;
+        }
+
+        StringBuilder hexString = new StringBuilder();
+        for (byte b : hash128) {
+            // 将每个字节转换为两位十六进制表示
+            String hex = String.format("%02X", b);
+            hexString.append(hex);
+        }
+        return hexString.toString();
+    }
+
     @Test
     public void generateHash() {
         // 循环1w次，每次生成一个hash值，然后存入数据库
@@ -43,14 +74,14 @@ public class HashControllerTest {
         List<TbOrderRespLog> tbOrderRespLogs = queryDataWithCursor();
         if (tbOrderRespLogs == null || tbOrderRespLogs.size() == 0) {
             log.info("没有数据");
-            return; 
+            return;
         }
 
         List<TbOrderRespLog> upList = new ArrayList<>();
         for (TbOrderRespLog respLog : tbOrderRespLogs) {
             String respBody = respLog.getRespBody();
             String orderNo = respLog.getOrderNo();
-            if (StringUtils.isBlank(respLog.getRespBody())){
+            if (StringUtils.isBlank(respLog.getRespBody())) {
                 continue;
             }
             TbOrderRespLog upLog = fun01(respLog, respBody, orderNo);
@@ -68,16 +99,16 @@ public class HashControllerTest {
             final int batchSize = 2000;
             // 计算需要多少批次
             int totalBatches = (upList.size() + batchSize - 1) / batchSize;
-            
+
             // 创建异步任务列表
             List<CompletableFuture<Boolean>> updateFutures = new ArrayList<>();
-            
+
             // 分批处理数据
             for (int i = 0; i < totalBatches; i++) {
                 int start = i * batchSize;
                 int end = Math.min(start + batchSize, upList.size());
                 List<TbOrderRespLog> batchList = upList.subList(start, end);
-                
+
                 // 创建异步更新任务
                 int finalI = i;
                 CompletableFuture<Boolean> future = CompletableFuture.supplyAsync(() -> {
@@ -89,19 +120,19 @@ public class HashControllerTest {
                         return false;
                     }
                 }, excelTaskPool);
-                
+
                 updateFutures.add(future);
             }
-            
+
             try {
                 // 等待所有更新任务完成
                 CompletableFuture.allOf(updateFutures.toArray(new CompletableFuture[0])).join();
-                
+
                 // 检查是否所有批次都更新成功
                 boolean allSuccess = updateFutures.stream()
                         .map(CompletableFuture::join)
                         .allMatch(success -> success);
-                
+
                 if (!allSuccess) {
                     log.error("部分批次更新失败");
                 }
@@ -123,15 +154,15 @@ public class HashControllerTest {
                 .map(r -> r.getString("order_sn")).orElse(null);
 
 
-        if (orderIncomeJson == null){
+        if (orderIncomeJson == null) {
             return null;
         }
 
-        if (orderSn == null){
+        if (orderSn == null) {
             return null;
         }
 
-        if (!orderSn.equals(orderNo)){
+        if (!orderSn.equals(orderNo)) {
             return null;
         }
         // 转回 String 并保留 null 值
@@ -140,11 +171,11 @@ public class HashControllerTest {
                 SerializerFeature.WriteMapNullValue // 关键：保留 null 字段
         );
 
-        Long hash = MurmurHashUtil.generateUniqueHash(orderIncomeStr);
+        Byte[] hash128 = MurmurHashUtil.generateUniqueHashByte(orderIncomeStr + orderSn);
 
         TbOrderRespLog upLog = new TbOrderRespLog();
         upLog.setId(respLog.getId());
-        upLog.setHash(hash);
+        upLog.setHash128(hash128);
         return upLog;
     }
 
@@ -159,15 +190,15 @@ public class HashControllerTest {
                 .map(r -> r.getString("order_sn")).orElse(null);
 
 
-        if (orderIncomeJson == null){
+        if (orderIncomeJson == null) {
             return null;
         }
 
-        if (orderSn == null){
+        if (orderSn == null) {
             return null;
         }
 
-        if (!orderSn.equals(orderNo)){
+        if (!orderSn.equals(orderNo)) {
             return null;
         }
         // 转回 String 并保留 null 值
@@ -176,11 +207,11 @@ public class HashControllerTest {
                 SerializerFeature.WriteMapNullValue // 关键：保留 null 字段
         );
 
-        Long hash = MurmurHashUtil.generateUniqueHash(orderIncomeStr);
+        Byte[] hash128 = MurmurHashUtil.generateUniqueHashByte(orderIncomeStr + orderSn);
 
         TbOrderRespLog upLog = new TbOrderRespLog();
         upLog.setId(respLog.getId());
-        upLog.setHash(hash);
+        upLog.setHash128(hash128);
         return upLog;
     }
 
@@ -200,17 +231,17 @@ public class HashControllerTest {
         // 限制最大查询数量为5000条
         long total = Math.min(count, 40000);
         // 计算总页数
-        int totalPages = (int)((total + pageSize - 1) / pageSize);
-        
+        int totalPages = (int) ((total + pageSize - 1) / pageSize);
+
 //        // 创建线程池
 //        ExecutorService executorService = Executors.newFixedThreadPool(
 //            Math.min(Runtime.getRuntime().availableProcessors() * 2, totalPages)
 //        );
-        
+
         try {
             // 创建异步任务列表
             List<CompletableFuture<List<TbOrderRespLog>>> futures = new ArrayList<>();
-            
+
             for (int pageNum = 1; pageNum <= totalPages; pageNum++) {
                 final int currentPage = pageNum;
                 System.out.println("当前查询第" + currentPage + "页");
@@ -224,13 +255,13 @@ public class HashControllerTest {
                     // 3. 执行分页查询（此时不会触发 COUNT）
                     return iTbOrderRespLogService.list(page, wrapper);
                 }, excelTaskPool);
-                
+
                 futures.add(future);
             }
-            
+
             // 等待所有异步任务完成并收集结果
             CompletableFuture.allOf(futures.toArray(new CompletableFuture[0])).join();
-            
+
             // 合并所有查询结果
             for (CompletableFuture<List<TbOrderRespLog>> future : futures) {
                 resultList.addAll(future.get());
@@ -243,22 +274,22 @@ public class HashControllerTest {
         } finally {
 //            excelTaskPool.shutdown();
         }
-        
+
         return resultList;
     }
 
     private List<TbOrderRespLog> queryDataWithCursor() {
         List<TbOrderRespLog> resultList = new ArrayList<>();
         int pageSize = 500;
-        int maxRecords = 100000; // 最大限制10w条
+        int maxRecords = 200000; // 最大限制10w条
         Long lastId = null;      // 游标标记
 
         QueryWrapper<TbOrderRespLog> wrapperInit = new QueryWrapper<>();
         // 时间范围（15天）
-        Date startDate = new Date(System.currentTimeMillis() - 10L * 24 * 60 * 60 * 1000);
+        Date startDate = new Date(System.currentTimeMillis() - 20L * 24 * 60 * 60 * 1000);
         wrapperInit
-                .ge("operate_time", startDate)
-                .isNull("hash")
+//                .ge("operate_time", startDate)
+                .isNull("hash_128")
                 .orderByAsc("id");  // 必须按ID排序
 
         // 添加联合索引建议：ALTER TABLE tb_order_resp_log ADD INDEX idx_operate_hash_id (operate_time, hash, id);
@@ -267,8 +298,8 @@ public class HashControllerTest {
             while (true) {
                 QueryWrapper<TbOrderRespLog> wrapper = new QueryWrapper<>();
                 wrapper
-                        .ge("operate_time", startDate)
-                        .isNull("hash")
+//                        .ge("operate_time", startDate)
+                        .isNull("hash_128")
                         .orderByAsc("id");  // 必须按ID排序
                 // 动态更新查询条件
                 if (lastId != null) {
@@ -308,17 +339,17 @@ public class HashControllerTest {
     public void deleteByHashBatch() {
         // 每批处理的数据量
         final int batchSize = 500;
-        
+
         // 1. 先查询所有重复的hash值
         QueryWrapper<TbOrderRespLog> hashWrapper = new QueryWrapper<>();
         hashWrapper.select("hash, COUNT(*) as count")
                 .isNotNull("hash")
                 .groupBy("hash")
                 .having("COUNT(*) > 1");
-        
+
         List<Object> duplicateHashes = iTbOrderRespLogService.listObjs(hashWrapper);
         log.info("找到{}组重复hash数据", duplicateHashes.size());
-        
+
         int totalDeleted = 0;
         // 2. 对每个重复的hash值进行分批删除处理
         for (Object hash : duplicateHashes) {
@@ -326,23 +357,23 @@ public class HashControllerTest {
             QueryWrapper<TbOrderRespLog> recordWrapper = new QueryWrapper<>();
             recordWrapper.eq("hash", hash)
                     .orderByAsc("id");
-            
+
             // 分页查询该hash值的所有记录
             long page = 1;
             while (true) {
                 Page<TbOrderRespLog> pageResult = new Page<>(page, batchSize);
                 Page<TbOrderRespLog> records = iTbOrderRespLogService.page(pageResult, recordWrapper);
-                
+
                 if (records.getRecords().isEmpty()) {
                     break;
                 }
-                
+
                 // 保留最新的一条记录（ID最大的记录）
                 List<Long> idsToDelete = new ArrayList<>();
                 for (int i = 0; i < records.getRecords().size() - 1; i++) {
                     idsToDelete.add(records.getRecords().get(i).getId());
                 }
-                
+
                 if (!idsToDelete.isEmpty()) {
                     boolean success = iTbOrderRespLogService.removeByIds(idsToDelete);
                     if (success) {
@@ -350,14 +381,14 @@ public class HashControllerTest {
                         log.info("成功删除hash值{}的{}条重复数据", hash, idsToDelete.size());
                     }
                 }
-                
+
                 if (!records.hasNext()) {
                     break;
                 }
                 page++;
             }
         }
-        
+
         log.info("批量删除完成，共删除{}条重复数据", totalDeleted);
     }
 

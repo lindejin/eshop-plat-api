@@ -1,13 +1,15 @@
 package com.eshop.entity.log;
 
 import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-import java.io.Serializable;
-import java.util.Date;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+
+import java.io.Serializable;
+import java.util.Date;
 
 /**
  * <p>
@@ -77,4 +79,10 @@ public class TbOrderRespLog implements Serializable {
      * hash
      */
     private Long hash;
+
+    /**
+     * 128位完整哈希值（BINARY(16)）
+     */
+    @TableField("hash_128")
+    private Byte[] hash128;
 }

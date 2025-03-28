@@ -1,12 +1,20 @@
 package com.eshop.util;
 
 import com.google.common.hash.Hashing;
+import org.apache.commons.lang3.ArrayUtils;
 
 public class MurmurHashUtil {
 
     // 生成 64 位哈希值（Long 类型）
     public static long generateUniqueHash(String orderJson) {
         return Hashing.murmur3_128().hashUnencodedChars(orderJson).asLong();
+    }
+
+    // 生成 64 位哈希值（Long 类型）
+    public static Byte[] generateUniqueHashByte(String orderJson) {
+        byte[] primitiveArray =  Hashing.murmur3_128().hashUnencodedChars(orderJson).asBytes();
+        // byte[] -> Byte[]
+        return ArrayUtils.toObject(primitiveArray);
     }
 
     /**

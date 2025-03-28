@@ -1,6 +1,10 @@
 package com.eshop.hash;
 
 import org.apache.commons.codec.digest.MurmurHash3;
+import org.apache.commons.lang3.ArrayUtils;
+
+import java.nio.ByteBuffer;
+import java.nio.ByteOrder;
 
 public class MurmurHashUtils {
 
@@ -32,5 +36,51 @@ public class MurmurHashUtils {
             bytes[i * 2 + 1] = (byte) ((chars[i] >> 8) & 0xFF); // 高 8 位
         }
         return bytes;
+    }
+
+    /**
+     * 生成与 Guava 完全一致的 128 位 Murmur3 哈希（返回字节数组）
+     * @param input 输入字符串（无需编码处理）
+     * @return 128 位哈希值（16字节）
+     */
+    public static byte[] murmur3_128Bytes(String input) {
+        // 2. MurmurHash3.hash128x64 (UTF-16, seed=0, Little-Endian)
+        byte[] bytes = new byte[input.length() * 2];
+        for (int i = 0; i < input.length(); i++) {
+            char c = input.charAt(i);
+            bytes[i * 2] = (byte) (c & 0xFF);
+            bytes[i * 2 + 1] = (byte) ((c >> 8) & 0xFF);
+        }
+
+        long[] hash128 = MurmurHash3.hash128x64(bytes, 0, bytes.length, 0);
+        return longArrayToBytes(hash128);
+    }
+
+    /**
+     * 将包含两个long值的数组转换为16字节的byte数组（128位）
+     * 转换过程采用Little-Endian字节序，与Guava的MurmurHash3实现保持一致
+     *
+     * @param hash128 包含两个long值的数组，代表128位的哈希值
+     *                hash128[0] - 哈希值的低64位
+     *                hash128[1] - 哈希值的高64位
+     * @return 16字节的byte数组，表示128位的哈希值
+     * @throws IllegalArgumentException 如果输入数组长度不为2
+     */
+    public static byte[] longArrayToBytes(long[] hash128) {
+        ByteBuffer buffer = ByteBuffer.allocate(16);
+        buffer.order(ByteOrder.LITTLE_ENDIAN);  // 关键！Little-Endian
+        buffer.putLong(hash128[0]);
+        buffer.putLong(hash128[1]);
+        return buffer.array();
+    }
+
+    /**
+     * 生成与 Guava 完全一致的 128 位 Murmur3 哈希（返回 Byte[]）
+     * @param input 输入字符串（无需编码处理）
+     * @return 128 位哈希值（16字节）
+     */
+    public static Byte[] murmur3_128ByteArray(String input) {
+        byte[] primitiveArray = murmur3_128Bytes(input);
+        return ArrayUtils.toObject(primitiveArray); // 依赖 Apache Commons Lang
     }
 }

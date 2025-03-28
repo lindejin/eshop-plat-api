@@ -1,6 +1,7 @@
 package com.eshop.entity.order;
 
 import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
@@ -127,6 +128,7 @@ public class TbOrderCostShopee implements Serializable {
     /**
      * 第三方物流运费折扣 3PF
      */
+    @TableField("shipping_fee_discount_from_3pl")
     private BigDecimal shippingFeeDiscountFrom3pl;
 
     /**

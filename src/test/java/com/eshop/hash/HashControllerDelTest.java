@@ -46,148 +46,6 @@ public class HashControllerDelTest {
             log.info("没有数据");
             return; 
         }
-
-        List<TbOrderRespLog> upList = new ArrayList<>();
-        for (TbOrderRespLog respLog : tbOrderRespLogs) {
-            String respBody = respLog.getRespBody();
-            String orderNo = respLog.getOrderNo();
-            if (StringUtils.isBlank(respLog.getRespBody())){
-                continue;
-            }
-            TbOrderRespLog upLog = fun01(respLog, respBody, orderNo);
-            if (upLog == null) {
-                upLog = fun02(respLog, respBody, orderNo);
-            }
-
-            if (upLog == null) {
-                continue;
-            }
-            System.out.println(upLog.getHash());
-            upList.add(upLog);
-        }
-        // saveList(upList);
-        // MurmurHashUtil.generateUniqueHash()
-    }
-
-    private void saveList(List<TbOrderRespLog> upList) {
-        if (upList.size() > 0) {
-            // 每批处理的数据量
-            final int batchSize = 2000;
-            // 计算需要多少批次
-            int totalBatches = (upList.size() + batchSize - 1) / batchSize;
-
-            // 创建异步任务列表
-            List<CompletableFuture<Boolean>> updateFutures = new ArrayList<>();
-
-            // 分批处理数据
-            for (int i = 0; i < totalBatches; i++) {
-                int start = i * batchSize;
-                int end = Math.min(start + batchSize, upList.size());
-                List<TbOrderRespLog> batchList = upList.subList(start, end);
-
-                // 创建异步更新任务
-                int finalI = i;
-                CompletableFuture<Boolean> future = CompletableFuture.supplyAsync(() -> {
-                    try {
-                        iTbOrderRespLogService.updateBatchById(batchList, batchSize);
-                        return true;
-                    } catch (Exception e) {
-                        log.error("批量更新失败，批次：" + (finalI + 1), e);
-                        return false;
-                    }
-                }, excelTaskPool);
-
-                updateFutures.add(future);
-            }
-
-            try {
-                // 等待所有更新任务完成
-                CompletableFuture.allOf(updateFutures.toArray(new CompletableFuture[0])).join();
-
-                // 检查是否所有批次都更新成功
-                boolean allSuccess = updateFutures.stream()
-                        .map(CompletableFuture::join)
-                        .allMatch(success -> success);
-
-                if (!allSuccess) {
-                    log.error("部分批次更新失败");
-                }
-            } catch (Exception e) {
-                log.error("等待更新任务完成时发生错误", e);
-            }
-        }
-    }
-
-    private static TbOrderRespLog fun01(TbOrderRespLog respLog, String respBody, String orderNo) {
-        JSONObject root = JSON.parseObject(respBody);
-        JSONObject orderIncomeJson = Optional.ofNullable(root)
-                .map(r -> r.getJSONObject("response"))
-                .map(r -> r.getJSONObject("order_income")).orElse(null);
-
-        String orderSn = Optional.ofNullable(root)
-                .map(r -> r.getJSONObject("response"))
-                .map(r -> r.getString("order_sn")).orElse(null);
-
-
-        if (orderIncomeJson == null){
-            return null;
-        }
-
-        if (orderSn == null){
-            return null;
-        }
-
-        if (!orderSn.equals(orderNo)){
-            return null;
-        }
-        // 转回 String 并保留 null 值
-        String orderIncomeStr = JSON.toJSONString(
-                orderIncomeJson,
-                SerializerFeature.WriteMapNullValue // 关键：保留 null 字段
-        );
-
-        Long hash = MurmurHashUtil.generateUniqueHash(orderIncomeStr);
-
-        TbOrderRespLog upLog = new TbOrderRespLog();
-        upLog.setId(respLog.getId());
-        upLog.setHash(hash);
-        return upLog;
-    }
-
-    private static TbOrderRespLog fun02(TbOrderRespLog respLog, String respBody, String orderNo) {
-        JSONObject root = JSON.parseObject(respBody);
-        JSONObject orderIncomeJson = Optional.ofNullable(root)
-                .map(r -> r.getJSONObject("escrow_detail"))
-                .map(r -> r.getJSONObject("order_income")).orElse(null);
-
-        String orderSn = Optional.ofNullable(root)
-                .map(r -> r.getJSONObject("escrow_detail"))
-                .map(r -> r.getString("order_sn")).orElse(null);
-
-
-        if (orderIncomeJson == null){
-            return null;
-        }
-
-        if (orderSn == null){
-            return null;
-        }
-
-        if (!orderSn.equals(orderNo)){
-            return null;
-        }
-        // 转回 String 并保留 null 值
-        String orderIncomeStr = JSON.toJSONString(
-                orderIncomeJson,
-                SerializerFeature.WriteMapNullValue // 关键：保留 null 字段
-        );
-
-        Long hash = MurmurHashUtil.generateUniqueHash(orderIncomeStr);
-
-        TbOrderRespLog upLog = new TbOrderRespLog();
-        upLog.setId(respLog.getId());
-        upLog.setHash(hash);
-        return upLog;
     }
 
     // 用iTbOrderRespLogService 分页查询1w数据 完善查询
@@ -389,6 +247,65 @@ public class HashControllerDelTest {
                     }
                     page++;
                 }
+            }
+        }
+        
+        log.info("批量删除完成，共删除{}条重复数据", totalDeleted);
+    }
+
+    @Test
+    public void deleteByHashBatchWithOrderNo() {
+        // 每批处理的数据量
+        final int batchSize = 500;
+        
+        // 1. 查询所有重复的hash值
+        QueryWrapper<TbOrderRespLog> hashWrapper = new QueryWrapper<>();
+        hashWrapper.select("hash, COUNT(*) as count")
+                .eq("order_no", "250208MKA8ET4D")
+                .isNotNull("hash")
+                .groupBy("hash")
+                .having("COUNT(*) > 1");
+        
+        List<Object> duplicateHashes = iTbOrderRespLogService.listObjs(hashWrapper);
+        log.info("找到{}组重复hash数据", duplicateHashes.size());
+        
+        int totalDeleted = 0;
+        // 2. 对每个重复的hash值进行分批删除处理
+        for (Object hash : duplicateHashes) {
+            // 查询该hash值对应的所有记录ID，按ID升序排序
+            QueryWrapper<TbOrderRespLog> recordWrapper = new QueryWrapper<>();
+            recordWrapper.eq("hash", hash)
+                    .eq("order_no", "250208MKA8ET4D")
+                    .orderByAsc("id");
+            
+            // 分页查询该hash值的所有记录
+            long page = 1;
+            while (true) {
+                Page<TbOrderRespLog> pageResult = new Page<>(page, batchSize);
+                Page<TbOrderRespLog> records = iTbOrderRespLogService.page(pageResult, recordWrapper);
+                
+                if (records.getRecords().isEmpty()) {
+                    break;
+                }
+                
+                // 保留最新的一条记录（ID最大的记录）
+                List<Long> idsToDelete = new ArrayList<>();
+                for (int i = 0; i < records.getRecords().size() - 1; i++) {
+                    idsToDelete.add(records.getRecords().get(i).getId());
+                }
+                
+                if (!idsToDelete.isEmpty()) {
+                    boolean success = iTbOrderRespLogService.removeByIds(idsToDelete);
+                    if (success) {
+                        totalDeleted += idsToDelete.size();
+                        log.info("成功删除hash值{}的{}条重复数据", hash, idsToDelete.size());
+                    }
+                }
+                
+                if (!records.hasNext()) {
+                    break;
+                }
+                page++;
             }
         }
         
