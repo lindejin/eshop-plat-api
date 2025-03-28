@@ -136,7 +136,7 @@ public class HashControllerTest {
         }
         // 转回 String 并保留 null 值
         String orderIncomeStr = JSON.toJSONString(
-                root,
+                orderIncomeJson,
                 SerializerFeature.WriteMapNullValue // 关键：保留 null 字段
         );
 
@@ -172,7 +172,7 @@ public class HashControllerTest {
         }
         // 转回 String 并保留 null 值
         String orderIncomeStr = JSON.toJSONString(
-                root,
+                orderIncomeJson,
                 SerializerFeature.WriteMapNullValue // 关键：保留 null 字段
         );
 
@@ -250,14 +250,14 @@ public class HashControllerTest {
     private List<TbOrderRespLog> queryDataWithCursor() {
         List<TbOrderRespLog> resultList = new ArrayList<>();
         int pageSize = 500;
-        int maxRecords = 100000; // 最大限制1w条
+        int maxRecords = 100000; // 最大限制10w条
         Long lastId = null;      // 游标标记
 
         QueryWrapper<TbOrderRespLog> wrapperInit = new QueryWrapper<>();
         // 时间范围（15天）
-        Date startDate = new Date(System.currentTimeMillis() - 40L * 24 * 60 * 60 * 1000);
+        Date startDate = new Date(System.currentTimeMillis() - 10L * 24 * 60 * 60 * 1000);
         wrapperInit
-//                .ge("operate_time", startDate)
+                .ge("operate_time", startDate)
                 .isNull("hash")
                 .orderByAsc("id");  // 必须按ID排序
 
@@ -267,7 +267,7 @@ public class HashControllerTest {
             while (true) {
                 QueryWrapper<TbOrderRespLog> wrapper = new QueryWrapper<>();
                 wrapper
-//                        .ge("operate_time", startDate)
+                        .ge("operate_time", startDate)
                         .isNull("hash")
                         .orderByAsc("id");  // 必须按ID排序
                 // 动态更新查询条件
