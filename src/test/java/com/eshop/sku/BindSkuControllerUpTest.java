@@ -5,10 +5,12 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.eshop.entity.config.TbShop;
 import com.eshop.entity.product.TbExteriorSkuBinding;
 import com.eshop.entity.sds.ShopeeProduct;
 import com.eshop.entity.sds.ShopeeProductSku;
 import com.eshop.exception.BusinessException;
+import com.eshop.service.config.ITbShopService;
 import com.eshop.service.product.ITbExteriorSkuBindingService;
 import com.eshop.service.sds.IShopeeProductService;
 import com.eshop.service.sds.IShopeeProductSkuService;
@@ -29,7 +31,7 @@ import java.util.stream.Collectors;
 
 @Slf4j
 @SpringBootTest
-public class BindSkuControllerTest {
+public class BindSkuControllerUpTest {
 
     @Resource
     private ITbExteriorSkuBindingService iTbExteriorSkuBindingService;
@@ -43,11 +45,17 @@ public class BindSkuControllerTest {
     @Resource(name = "excelTaskPool")
     private Executor excelTaskPool;
 
+
     @Resource
-    private BindSkuControllerResultTest bindSkuControllerResultTest;
+    private ITbShopService iTbShopService;
 
     @Test
-    public void generateHash() throws Exception {
+    public void upload() {
+
+    }
+
+    @Test
+    public void generateHash() {
         // 循环1w次，每次生成一个hash值，然后存入数据库
         // 生成hash值的方法：MurmurHashUtil.generateUniqueHash()
         List<ShopeeProduct> shopeeProductList = queryDataWithCursor();
@@ -55,31 +63,91 @@ public class BindSkuControllerTest {
             log.info("没有数据");
             return;
         }
-
-        Set<Long> productIds = shopeeProductList.stream().map(ShopeeProduct::getId).collect(Collectors.toSet());
-        List<ShopeeProductSku> psList = queryDataWithId(productIds);
-
-        if (psList == null || psList.size() == 0) {
-            log.info("没有数据");
-            return;
-        }
+        Map<Long, Long> shopMap = queryDataWithShop();
         // 使用并行流提高处理速度
-        Set<String> skuCodes = psList.parallelStream()
-                .map(ShopeeProductSku::getSkuCode)
-                .filter(Objects::nonNull) // 可选：过滤null值
-                .collect(Collectors.toSet());
-        List<TbExteriorSkuBinding> tbExteriorSkuBindings = queryDataBindWithId(skuCodes);
-        if (tbExteriorSkuBindings == null || tbExteriorSkuBindings.size() == 0) {
-            log.info("没有数据");
-            return;
+        List<ShopeeProduct> pList = shopeeProductList.parallelStream()
+                .filter(p -> {
+                    // 过滤掉已存在绑定关系的SKU
+                    Long shopMerchantId = p.getShopMerchantId();
+                    return shopMerchantId != null && shopMerchantId.equals(0L);
+                })
+                .map(p -> {
+
+                    Long shopMerchantId = shopMap.get(p.getShopId());
+                    if (shopMerchantId == null) {
+                        return null;
+                    }
+                    // 构造新的绑定对象
+                    ShopeeProduct up = new ShopeeProduct();
+                    up.setId(p.getId());
+                    up.setShopMerchantId(shopMerchantId);
+                    return up;
+                })
+                .filter(Objects::nonNull)
+                .collect(Collectors.toList());
+
+        for (ShopeeProduct shopeeProduct : pList) {
+            System.out.println(shopeeProduct.getShopMerchantId());
         }
-        System.out.println(shopeeProductList.size());
-        System.out.println(psList.size());
-        System.out.println(tbExteriorSkuBindings.size());
 
-        Map<String, String> stringStringMap = getsSkuBindMapByShopId(tbExteriorSkuBindings);
 
-        bindSkuControllerResultTest.generateHash(shopeeProductList,psList,stringStringMap);
+        if (pList.size() > 0) {
+            // 每批处理的数据量
+            final int batchSize = 2000;
+            // 计算需要多少批次
+            int totalBatches = (pList.size() + batchSize - 1) / batchSize;
+
+            // 创建异步任务列表
+            List<CompletableFuture<Boolean>> updateFutures = new ArrayList<>();
+
+            // 分批处理数据
+            for (int i = 0; i < totalBatches; i++) {
+                int start = i * batchSize;
+                int end = Math.min(start + batchSize, pList.size());
+                List<ShopeeProduct> batchList = pList.subList(start, end);
+
+                // 创建异步更新任务
+                int finalI = i;
+                CompletableFuture<Boolean> future = CompletableFuture.supplyAsync(() -> {
+                    try {
+                        iShopeeProductService.updateBatchById(batchList, batchSize);
+                        return true;
+                    } catch (Exception e) {
+                        log.error("批量更新失败，批次：" + (finalI + 1), e);
+                        return false;
+                    }
+                }, excelTaskPool);
+
+                updateFutures.add(future);
+            }
+
+            try {
+                // 等待所有更新任务完成
+                CompletableFuture.allOf(updateFutures.toArray(new CompletableFuture[0])).join();
+
+                // 检查是否所有批次都更新成功
+                boolean allSuccess = updateFutures.stream()
+                        .map(CompletableFuture::join)
+                        .allMatch(success -> success);
+
+                if (!allSuccess) {
+                    log.error("部分批次更新失败");
+                }
+            } catch (Exception e) {
+                log.error("等待更新任务完成时发生错误", e);
+            }
+        }
+        // MurmurHashUtil.generateUniqueHash()
+    }
+
+    private Map<Long, Long> queryDataWithShop() {
+        LambdaQueryWrapper<TbShop> lqWrapper = Wrappers.<TbShop>lambdaQuery();
+        lqWrapper.isNotNull(TbShop::getShopMerchantId);
+        List<TbShop> list = iTbShopService.list(lqWrapper);
+        if (CollectionUtils.isEmpty(list)) {
+            return Collections.emptyMap();
+        }
+        return list.stream().collect(Collectors.toMap(TbShop::getId, TbShop::getShopMerchantId));
     }
 
     private List<ShopeeProduct> queryDataWithCursor() {
@@ -89,9 +157,8 @@ public class BindSkuControllerTest {
         Long lastId = null;      // 游标标记
 
         LambdaQueryWrapper<ShopeeProduct> lqWrapper = Wrappers.<ShopeeProduct>lambdaQuery()
-                .isNotNull(ShopeeProduct::getItemGlobalId)
+                .eq(ShopeeProduct::getShopMerchantId, 0)
                 .eq(ShopeeProduct::getIsPublish, 1)
-                .eq(ShopeeProduct::getProductType, 2)
                 .orderByAsc(ShopeeProduct::getId);
 
         // 添加联合索引建议：ALTER TABLE tb_order_resp_log ADD INDEX idx_operate_hash_id (operate_time, hash, id);
@@ -107,10 +174,8 @@ public class BindSkuControllerTest {
                                 ShopeeProduct::getIsPublish
                                 // 只添加需要的字段
                         )
-                        .isNotNull(ShopeeProduct::getItemGlobalId)
-                        .eq(ShopeeProduct::getSpuCode, "267-44SKHC")
+                        .eq(ShopeeProduct::getShopMerchantId, 0)
                         .eq(ShopeeProduct::getIsPublish, 1)
-                        .eq(ShopeeProduct::getProductType, 2)
                         .orderByAsc(ShopeeProduct::getId);
                 // 动态更新查询条件
                 if (lastId != null) {
@@ -162,7 +227,6 @@ public class BindSkuControllerTest {
                     LambdaQueryWrapper<ShopeeProductSku> wrapper = Wrappers.lambdaQuery(ShopeeProductSku.class)
                             .select(
                                     ShopeeProductSku::getId,
-                                    ShopeeProductSku::getProductId,
                                     ShopeeProductSku::getSkuCode
                             )
                             .in(ShopeeProductSku::getProductId, batch)

@@ -5,10 +5,14 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.eshop.entity.config.TbShop;
+import com.eshop.entity.config.TbShopMerchant;
 import com.eshop.entity.product.TbExteriorSkuBinding;
 import com.eshop.entity.sds.ShopeeProduct;
 import com.eshop.entity.sds.ShopeeProductSku;
 import com.eshop.exception.BusinessException;
+import com.eshop.service.config.ITbShopMerchantService;
+import com.eshop.service.config.ITbShopService;
 import com.eshop.service.product.ITbExteriorSkuBindingService;
 import com.eshop.service.sds.IShopeeProductService;
 import com.eshop.service.sds.IShopeeProductSkuService;
@@ -16,7 +20,6 @@ import com.google.common.collect.Lists;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import javax.annotation.Resource;
@@ -29,7 +32,7 @@ import java.util.stream.Collectors;
 
 @Slf4j
 @SpringBootTest
-public class BindSkuControllerTest {
+public class BindSkuControllerResultTest2 {
 
     @Resource
     private ITbExteriorSkuBindingService iTbExteriorSkuBindingService;
@@ -44,42 +47,56 @@ public class BindSkuControllerTest {
     private Executor excelTaskPool;
 
     @Resource
-    private BindSkuControllerResultTest bindSkuControllerResultTest;
+    private ITbShopService iTbShopService;
 
-    @Test
-    public void generateHash() throws Exception {
-        // 循环1w次，每次生成一个hash值，然后存入数据库
-        // 生成hash值的方法：MurmurHashUtil.generateUniqueHash()
-        List<ShopeeProduct> shopeeProductList = queryDataWithCursor();
-        if (shopeeProductList == null || shopeeProductList.size() == 0) {
-            log.info("没有数据");
-            return;
+    @Resource
+    private ITbShopMerchantService iTbShopMerchantService;
+
+    private Set<Long> queryShopIdList(Long shopMerchantId) {
+        LambdaQueryWrapper<TbShop> lqWrapper = Wrappers.<TbShop>lambdaQuery();
+        lqWrapper.eq(TbShop::getShopMerchantId,shopMerchantId);
+        List<TbShop> list = iTbShopService.list(lqWrapper);
+        if (CollectionUtils.isEmpty(list)) {
+            return Collections.emptySet();
         }
+        return list.stream().map(TbShop::getId).collect(Collectors.toSet());
+    }
 
-        Set<Long> productIds = shopeeProductList.stream().map(ShopeeProduct::getId).collect(Collectors.toSet());
-        List<ShopeeProductSku> psList = queryDataWithId(productIds);
-
-        if (psList == null || psList.size() == 0) {
-            log.info("没有数据");
-            return;
+    private Set<Long> queryShopMerchantIdList() {
+        LambdaQueryWrapper<TbShopMerchant> lqWrapper = Wrappers.<TbShopMerchant>lambdaQuery();
+        List<TbShopMerchant> list = iTbShopMerchantService.list(lqWrapper);
+        if (CollectionUtils.isEmpty(list)) {
+            return Collections.emptySet();
         }
-        // 使用并行流提高处理速度
-        Set<String> skuCodes = psList.parallelStream()
-                .map(ShopeeProductSku::getSkuCode)
-                .filter(Objects::nonNull) // 可选：过滤null值
-                .collect(Collectors.toSet());
-        List<TbExteriorSkuBinding> tbExteriorSkuBindings = queryDataBindWithId(skuCodes);
-        if (tbExteriorSkuBindings == null || tbExteriorSkuBindings.size() == 0) {
-            log.info("没有数据");
-            return;
+        return list.stream().map(TbShopMerchant::getId).collect(Collectors.toSet());
+    }
+
+    public List<TbExteriorSkuBinding> generateHash(List<ShopeeProduct> pList,List<ShopeeProductSku> psList,Map<String, String> stringStringMap ) throws Exception {
+        //pList 根据商户id分组
+        Map<Long, List<ShopeeProduct>> pListMap = pList.parallelStream().collect(Collectors.groupingBy(ShopeeProduct::getShopMerchantId));
+        //psList 根据 productId分组
+        Map<Long, List<ShopeeProductSku>> psListMap = psList.parallelStream().collect(Collectors.groupingBy(ShopeeProductSku::getProductId));
+
+        Set<Long> shopMerchantIds = queryShopMerchantIdList();
+
+        List<TbExteriorSkuBinding> result = new ArrayList<>();
+        for (Long shopMerchantId : shopMerchantIds) {
+            Set<Long> shopIdList = queryShopIdList(shopMerchantId);
+            List<ShopeeProduct> shopeeProductList = pListMap.get(shopMerchantId);
+            Set<String> bindSkuCodeList = new HashSet<>();
+            for (ShopeeProduct shopeeProduct : shopeeProductList) {
+                List<ShopeeProductSku> shopeeProductSkus = psListMap.get(shopeeProduct.getId());
+                shopeeProductSkus.parallelStream().forEach(shopeeProductSku -> {bindSkuCodeList.add(shopeeProductSku.getSkuCode());});
+            }
+
+            for (Long shopId : shopIdList) {
+                List<TbExteriorSkuBinding> addList =   makeTbExteriorSkuBindInfo(bindSkuCodeList,shopId,stringStringMap);
+                if (CollectionUtils.isNotEmpty(addList)) {
+                    result.addAll(addList);
+                }
+            }
         }
-        System.out.println(shopeeProductList.size());
-        System.out.println(psList.size());
-        System.out.println(tbExteriorSkuBindings.size());
-
-        Map<String, String> stringStringMap = getsSkuBindMapByShopId(tbExteriorSkuBindings);
-
-        bindSkuControllerResultTest.generateHash(shopeeProductList,psList,stringStringMap);
+        return result;
     }
 
     private List<ShopeeProduct> queryDataWithCursor() {
@@ -108,7 +125,6 @@ public class BindSkuControllerTest {
                                 // 只添加需要的字段
                         )
                         .isNotNull(ShopeeProduct::getItemGlobalId)
-                        .eq(ShopeeProduct::getSpuCode, "267-44SKHC")
                         .eq(ShopeeProduct::getIsPublish, 1)
                         .eq(ShopeeProduct::getProductType, 2)
                         .orderByAsc(ShopeeProduct::getId);
@@ -162,7 +178,6 @@ public class BindSkuControllerTest {
                     LambdaQueryWrapper<ShopeeProductSku> wrapper = Wrappers.lambdaQuery(ShopeeProductSku.class)
                             .select(
                                     ShopeeProductSku::getId,
-                                    ShopeeProductSku::getProductId,
                                     ShopeeProductSku::getSkuCode
                             )
                             .in(ShopeeProductSku::getProductId, batch)
@@ -386,15 +401,11 @@ public class BindSkuControllerTest {
 //        return false;
 //    }
 
-    public Boolean makeTbExteriorSkuBindInfo(List<String> bindSkuCode, Long shopId, List<TbExteriorSkuBinding> skuBindList) throws Exception {
+    public List<TbExteriorSkuBinding> makeTbExteriorSkuBindInfo(Set<String> bindSkuCode, Long shopId, Map<String, String> skuBindingMap) throws Exception {
         // 参数校验
         if (ObjectUtil.isEmpty(bindSkuCode) || ObjectUtil.isEmpty(shopId)) {
-            return true;
+            return null;
         }
-
-        // 获取sku绑定映射 key:shopSku->value:productSku
-        Map<String, String> skuBindingMap = getsSkuBindMapByShopId(skuBindList);
-
         // 使用并行流处理
         List<TbExteriorSkuBinding> addList = bindSkuCode.parallelStream()
                 .filter(skuCode -> {
@@ -415,11 +426,8 @@ public class BindSkuControllerTest {
 
         // 如果没有需要添加的记录，直接返回
         if (CollectionUtils.isEmpty(addList)) {
-            return true;
+            return null;
         }
-
-        // 批量保存
-        boolean b = iTbExteriorSkuBindingService.saveBatch(addList, 1000);
-        return b;
+        return addList;
     }
 }

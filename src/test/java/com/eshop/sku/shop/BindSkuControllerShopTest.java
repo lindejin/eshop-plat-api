@@ -1,6 +1,5 @@
-package com.eshop.sku;
+package com.eshop.sku.shop;
 
-import cn.hutool.core.util.ObjectUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
@@ -15,7 +14,6 @@ import com.eshop.service.sds.IShopeeProductSkuService;
 import com.google.common.collect.Lists;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections4.CollectionUtils;
-import org.apache.commons.lang3.StringUtils;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -29,7 +27,7 @@ import java.util.stream.Collectors;
 
 @Slf4j
 @SpringBootTest
-public class BindSkuControllerTest {
+public class BindSkuControllerShopTest {
 
     @Resource
     private ITbExteriorSkuBindingService iTbExteriorSkuBindingService;
@@ -44,14 +42,14 @@ public class BindSkuControllerTest {
     private Executor excelTaskPool;
 
     @Resource
-    private BindSkuControllerResultTest bindSkuControllerResultTest;
+    private BindSkuControllerShopResultTest bindSkuControllerShopResultTest;
 
     @Test
     public void generateHash() throws Exception {
         // 循环1w次，每次生成一个hash值，然后存入数据库
         // 生成hash值的方法：MurmurHashUtil.generateUniqueHash()
         List<ShopeeProduct> shopeeProductList = queryDataWithCursor();
-        if (shopeeProductList == null || shopeeProductList.size() == 0) {
+        if (shopeeProductList == null || shopeeProductList.isEmpty()) {
             log.info("没有数据");
             return;
         }
@@ -59,7 +57,7 @@ public class BindSkuControllerTest {
         Set<Long> productIds = shopeeProductList.stream().map(ShopeeProduct::getId).collect(Collectors.toSet());
         List<ShopeeProductSku> psList = queryDataWithId(productIds);
 
-        if (psList == null || psList.size() == 0) {
+        if (psList == null || psList.isEmpty()) {
             log.info("没有数据");
             return;
         }
@@ -69,7 +67,7 @@ public class BindSkuControllerTest {
                 .filter(Objects::nonNull) // 可选：过滤null值
                 .collect(Collectors.toSet());
         List<TbExteriorSkuBinding> tbExteriorSkuBindings = queryDataBindWithId(skuCodes);
-        if (tbExteriorSkuBindings == null || tbExteriorSkuBindings.size() == 0) {
+        if (tbExteriorSkuBindings == null || tbExteriorSkuBindings.isEmpty()) {
             log.info("没有数据");
             return;
         }
@@ -79,7 +77,7 @@ public class BindSkuControllerTest {
 
         Map<String, String> stringStringMap = getsSkuBindMapByShopId(tbExteriorSkuBindings);
 
-        bindSkuControllerResultTest.generateHash(shopeeProductList,psList,stringStringMap);
+        bindSkuControllerShopResultTest.generateHash(shopeeProductList, psList, stringStringMap);
     }
 
     private List<ShopeeProduct> queryDataWithCursor() {
@@ -89,12 +87,9 @@ public class BindSkuControllerTest {
         Long lastId = null;      // 游标标记
 
         LambdaQueryWrapper<ShopeeProduct> lqWrapper = Wrappers.<ShopeeProduct>lambdaQuery()
-                .isNotNull(ShopeeProduct::getItemGlobalId)
                 .eq(ShopeeProduct::getIsPublish, 1)
-                .eq(ShopeeProduct::getProductType, 2)
+                .eq(ShopeeProduct::getProductType, 1)
                 .orderByAsc(ShopeeProduct::getId);
-
-        // 添加联合索引建议：ALTER TABLE tb_order_resp_log ADD INDEX idx_operate_hash_id (operate_time, hash, id);
 
         try {
             while (true) {
@@ -107,10 +102,8 @@ public class BindSkuControllerTest {
                                 ShopeeProduct::getIsPublish
                                 // 只添加需要的字段
                         )
-                        .isNotNull(ShopeeProduct::getItemGlobalId)
-                        .eq(ShopeeProduct::getSpuCode, "267-44SKHC")
                         .eq(ShopeeProduct::getIsPublish, 1)
-                        .eq(ShopeeProduct::getProductType, 2)
+                        .eq(ShopeeProduct::getProductType, 1)
                         .orderByAsc(ShopeeProduct::getId);
                 // 动态更新查询条件
                 if (lastId != null) {
@@ -181,32 +174,6 @@ public class BindSkuControllerTest {
         return result;
     }
 
-//    private List<TbExteriorSkuBinding> queryDataBindWithId(Set<String> skuCodes) {
-//        // 配置线程池
-//
-//        // 分批处理ID（每批500个）
-//        List<List<String>> batches = Lists.partition(new ArrayList<>(skuCodes), 500);
-//
-//        // 收集所有异步任务
-//        List<CompletableFuture<List<TbExteriorSkuBinding>>> futures = batches.stream()
-//                .map(batch -> CompletableFuture.supplyAsync(() -> {
-//                    LambdaQueryWrapper<TbExteriorSkuBinding> wrapper = Wrappers.lambdaQuery(TbExteriorSkuBinding.class)
-//                            .in(TbExteriorSkuBinding::getShopSku, batch)
-//                            .orderByAsc(TbExteriorSkuBinding::getId);
-//
-//                    // 查询所有匹配记录（不分页）
-//                    return iTbExteriorSkuBindingService.list(wrapper);
-//                }, excelTaskPool))
-//                .collect(Collectors.toList());
-//
-//        // 合并所有结果
-//        List<TbExteriorSkuBinding> result = futures.stream()
-//                .map(CompletableFuture::join)
-//                .flatMap(List::stream)
-//                .collect(Collectors.toList());
-//        return result;
-//    }
-
     private List<TbExteriorSkuBinding> queryDataBindWithId(Set<String> skuCodes) {
         // 1. 参数校验
         if (CollectionUtils.isEmpty(skuCodes)) {
@@ -263,51 +230,6 @@ public class BindSkuControllerTest {
         }
     }
 
-    private List<TbExteriorSkuBinding> queryDataBindWithId2(Set<String> skuCodes) {
-        if (CollectionUtils.isEmpty(skuCodes)) {
-            return Collections.emptyList();
-        }
-
-        List<List<String>> batches = Lists.partition(new ArrayList<>(skuCodes), 2000);
-
-        // 使用明确类型的列表
-        // 3. 使用显式类型声明
-        @SuppressWarnings("unchecked") // 我们知道这个转换是安全的
-        List<CompletableFuture<List<TbExteriorSkuBinding>>> futures = batches.stream()
-                .map(batch -> {
-                    if (CollectionUtils.isEmpty(batch)) {
-                        return CompletableFuture.<List<TbExteriorSkuBinding>>completedFuture(Collections.emptyList());
-                    }
-
-                    return CompletableFuture.supplyAsync(() -> {
-                        try {
-                            LambdaQueryWrapper<TbExteriorSkuBinding> wrapper = Wrappers.lambdaQuery(TbExteriorSkuBinding.class)
-                                    .in(TbExteriorSkuBinding::getShopSku, batch);
-
-                            List<TbExteriorSkuBinding> result = iTbExteriorSkuBindingService.list(wrapper);
-                            return result != null ? result : Collections.<TbExteriorSkuBinding>emptyList();
-                        } catch (Exception e) {
-                            log.error("查询失败", e);
-                            return Collections.<TbExteriorSkuBinding>emptyList();
-                        }
-                    }, excelTaskPool);
-                })
-                .collect(Collectors.toList());
-
-        try {
-            CompletableFuture.allOf(futures.toArray(new CompletableFuture[0]))
-                    .get(30, TimeUnit.SECONDS);
-
-            return futures.stream()
-                    .map(f -> f.getNow(Collections.<TbExteriorSkuBinding>emptyList()))
-                    .flatMap(List::stream)
-                    .collect(Collectors.toList());
-        } catch (Exception e) {
-            log.error("查询异常", e);
-            throw new BusinessException("查询失败");
-        }
-    }
-
 
     /**
      * 获取绑定信息映射 shopSku->productSku
@@ -338,88 +260,5 @@ public class BindSkuControllerTest {
             skuBindingMap.put(key, productSku);
         }
         return skuBindingMap;
-    }
-
-    /**
-     * 获取绑定productSku
-     */
-    public String getSkuBindByShopId(Map<String, String> skuBindingMap, Long shopId, String shopSku) {
-        String privateKey = "";
-        String mark = "";
-        //私自绑定-店铺 判断
-        mark = "2";
-        privateKey = shopId + "||" + shopSku + "||" + mark;
-
-        privateKey = privateKey.trim().toLowerCase();
-        return skuBindingMap.get(privateKey);
-    }
-
-//
-//    public Boolean makeTbExteriorSkuBindInfo(List<String> bindSkuCode, Long shopId,List<TbExteriorSkuBinding> skuBindList) throws Exception {
-//        if (ObjectUtil.isEmpty(bindSkuCode) || ObjectUtil.isEmpty(shopId)) {
-//            return true;
-//        }
-//        //获取sku绑定映射 key:shopSku->value:productSku
-//        Map<String, String> skuBindingMap = getsSkuBindMapByShopId(skuBindList);
-//
-//        List<TbExteriorSkuBinding> addList = new ArrayList<>();
-//        for (String skuCode : bindSkuCode) {
-//            // 存在绑定关系 跳过这个sku
-//            String productSku = getSkuBindByShopId(skuBindingMap, shopId, skuCode);
-//            if (StringUtils.isNotBlank(productSku)) {
-//                continue;
-//            }
-//            TbExteriorSkuBinding tbExteriorSkuBinding = new TbExteriorSkuBinding();
-//            tbExteriorSkuBinding.setProductSku(skuCode);
-//            tbExteriorSkuBinding.setShopSku(skuCode);
-//            tbExteriorSkuBinding.setShopId(shopId);
-//            tbExteriorSkuBinding.setMark(2);
-//            addList.add(tbExteriorSkuBinding);
-//        }
-//        if (CollectionUtils.isEmpty(addList)){
-//            return true;
-//        }
-//        int result = tbExteriorSkuBindingService.saveMul(addList);
-//        if (result > 0) {
-//            return true;
-//        }
-//        return false;
-//    }
-
-    public Boolean makeTbExteriorSkuBindInfo(List<String> bindSkuCode, Long shopId, List<TbExteriorSkuBinding> skuBindList) throws Exception {
-        // 参数校验
-        if (ObjectUtil.isEmpty(bindSkuCode) || ObjectUtil.isEmpty(shopId)) {
-            return true;
-        }
-
-        // 获取sku绑定映射 key:shopSku->value:productSku
-        Map<String, String> skuBindingMap = getsSkuBindMapByShopId(skuBindList);
-
-        // 使用并行流处理
-        List<TbExteriorSkuBinding> addList = bindSkuCode.parallelStream()
-                .filter(skuCode -> {
-                    // 过滤掉已存在绑定关系的SKU
-                    String productSku = getSkuBindByShopId(skuBindingMap, shopId, skuCode);
-                    return StringUtils.isBlank(productSku);
-                })
-                .map(skuCode -> {
-                    // 构造新的绑定对象
-                    TbExteriorSkuBinding binding = new TbExteriorSkuBinding();
-                    binding.setProductSku(skuCode);
-                    binding.setShopSku(skuCode);
-                    binding.setShopId(shopId);
-                    binding.setMark(new Byte("2"));
-                    return binding;
-                })
-                .collect(Collectors.toList());
-
-        // 如果没有需要添加的记录，直接返回
-        if (CollectionUtils.isEmpty(addList)) {
-            return true;
-        }
-
-        // 批量保存
-        boolean b = iTbExteriorSkuBindingService.saveBatch(addList, 1000);
-        return b;
     }
 }

@@ -1,4 +1,4 @@
-package com.eshop.sku;
+package com.eshop.sku.gl;
 
 import cn.hutool.core.util.ObjectUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
@@ -29,7 +29,7 @@ import java.util.stream.Collectors;
 
 @Slf4j
 @SpringBootTest
-public class BindSkuControllerTest {
+public class BindSkuControllerGlTest {
 
     @Resource
     private ITbExteriorSkuBindingService iTbExteriorSkuBindingService;
@@ -44,7 +44,7 @@ public class BindSkuControllerTest {
     private Executor excelTaskPool;
 
     @Resource
-    private BindSkuControllerResultTest bindSkuControllerResultTest;
+    private BindSkuControllerGLResultTest bindSkuControllerGLResultTest;
 
     @Test
     public void generateHash() throws Exception {
@@ -79,7 +79,7 @@ public class BindSkuControllerTest {
 
         Map<String, String> stringStringMap = getsSkuBindMapByShopId(tbExteriorSkuBindings);
 
-        bindSkuControllerResultTest.generateHash(shopeeProductList,psList,stringStringMap);
+        bindSkuControllerGLResultTest.generateHash(shopeeProductList,psList,stringStringMap);
     }
 
     private List<ShopeeProduct> queryDataWithCursor() {
