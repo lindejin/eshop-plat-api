@@ -28,43 +28,50 @@ DELETE err
 FROM tb_waybill_shipment_err err
 JOIN tb_order_waybill ow ON err.waybill_id = ow.waybill_id
 JOIN tb_order o ON ow.order_id = o.id
-WHERE o.platform_order_status = '111111'
+WHERE o.platform_order_status = '111111';
 
 # 删除订单取消
 DELETE err
 FROM tb_waybill_shipment_err err
 JOIN tb_order_waybill ow ON err.waybill_id = ow.waybill_id
 JOIN tb_order o ON ow.order_id = o.id
-WHERE o.platform_order_status = '111000'
+WHERE o.platform_order_status = '111000';
 
 # 删除订单 交易成功
 DELETE err
 FROM tb_waybill_shipment_err err
 JOIN tb_order_waybill ow ON err.waybill_id = ow.waybill_id
 JOIN tb_order o ON ow.order_id = o.id
-WHERE o.platform_order_status = '102111'
+WHERE o.platform_order_status = '102111';
 
 # 删除订单 等待买家确认收货
 DELETE err
 FROM tb_waybill_shipment_err err
 JOIN tb_order_waybill ow ON err.waybill_id = ow.waybill_id
 JOIN tb_order o ON ow.order_id = o.id
-WHERE o.platform_order_status = '101009'
+WHERE o.platform_order_status = '101009';
 
 # 删除订单 已发货
 DELETE err
 FROM tb_waybill_shipment_err err
 JOIN tb_order_waybill ow ON err.waybill_id = ow.waybill_id
 JOIN tb_order o ON ow.order_id = o.id
-WHERE o.platform_order_status = '102111'
+WHERE o.platform_order_status = '102111';
 
 
 # 推送到仓库 就删除
 DELETE wse
 FROM eshop_order.tb_waybill_shipment_err wse
 JOIN eshop_depot.tb_parcel p ON wse.parcel_no = p.parcel_no
-WHERE p.parcel_no is not null
+WHERE p.parcel_no is not null;
 
 # 删除本身删除的数据
 DELETE FROM tb_waybill_shipment_err
 WHERE is_delete = 1;
+
+
+# 推送到仓库 就删除
+DELETE wse
+FROM eshop_order.tb_waybill_shipment_err wse
+JOIN eshop_depot.tb_process_parcel p ON wse.parcel_no = p.parcel_no
+WHERE p.parcel_no is not null;
