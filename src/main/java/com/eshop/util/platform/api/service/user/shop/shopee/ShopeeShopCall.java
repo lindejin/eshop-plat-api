@@ -14,10 +14,6 @@ public interface ShopeeShopCall {
 
     /**
      * 虾皮 获取店铺信息
-     *
-     * @param publicDto
-     * @param businessDto
-     * @return
      */
     String getShopInfo(ShopeeAppClientDTO publicDto, Map<String, Object> businessDto) throws Exception;
 }
