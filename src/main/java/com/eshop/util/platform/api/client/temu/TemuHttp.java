@@ -23,8 +23,7 @@ public class TemuHttp {
         MediaType type = MediaType.parseMediaType("application/json; charset=UTF-8");
         headers.setContentType(type);
         headers.add("Accept", MediaType.APPLICATION_JSON.toString());
-        HttpEntity<String> formEntity = new HttpEntity<String>(json, headers);
-        String body = restTemplate.postForEntity(url, formEntity, String.class).getBody();
-        return body;
+        HttpEntity<String> formEntity = new HttpEntity<>(json, headers);
+        return restTemplate.postForEntity(url, formEntity, String.class).getBody();
     }
 }

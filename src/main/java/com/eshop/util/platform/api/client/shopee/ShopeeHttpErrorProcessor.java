@@ -38,7 +38,8 @@ public class ShopeeHttpErrorProcessor {
 
     // 直接返回的HTTP状态码
     private static final Set<HttpStatus> RETURN_STATUSES = ImmutableSet.of(
-            HttpStatus.FORBIDDEN          // 403
+            HttpStatus.FORBIDDEN,          // 403
+            HttpStatus.NOT_FOUND            // 404
     );
 
     public static boolean shouldReturn(HttpClientErrorException ex) {
@@ -101,6 +102,7 @@ public class ShopeeHttpErrorProcessor {
 
     // 监控系统集成
     private static void logErrorForMonitoring(HttpClientErrorException ex) {
+        System.out.println(ex.getResponseBodyAsString());
         log.error("[Shopee Monitor] HTTP Error {} - {}",
                 ex.getStatusCode(), ex.getStatusText());
         // 推送到监控系统（示例）
