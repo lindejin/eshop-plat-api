@@ -163,8 +163,6 @@ public class TestShop {
 
     /**
      * 一些参数补充
-     *
-     * @param tokenJson
      */
     private void assemblyTokenJson(JSONObject tokenJson) {
         boolean isToken = false;
