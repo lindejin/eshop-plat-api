@@ -343,55 +343,75 @@ public class ShopeeClientImpl implements ShopeeClient {
 
     @Override
     public ShopeeResponse tokenCreateAndRefresh(ShopeeRequest shopeeRequest, ShopeeAppClientDTO publicDTO) {
-        JSONObject result = null;
-        try {
-            String apiUrl = publicDTO.getUrl();
+        final int maxRetries = 3;
+        int retryCount = 0;
+        JSONObject result = new JSONObject();
+        boolean shouldExit = false; // 退出循环标志
+        while (retryCount <= maxRetries && !shouldExit) {
+            try {
+                String apiUrl = publicDTO.getUrl();
 
-            Integer mediaType = shopeeRequest.getMediaType();
-            Integer secretType = shopeeRequest.getSecretType();
-            String apiMethod = shopeeRequest.getApiName();
+                Integer mediaType = shopeeRequest.getMediaType();
+                Integer secretType = shopeeRequest.getSecretType();
+                String apiMethod = shopeeRequest.getApiName();
 
-            String partnerId = publicDTO.getPartnerId();
-            String partnerKey = publicDTO.getPartnerKey();
-            String shopId = publicDTO.getPlatformShopId();
+                String partnerId = publicDTO.getPartnerId();
+                String partnerKey = publicDTO.getPartnerKey();
+                String shopId = publicDTO.getPlatformShopId();
 
-            long timest = System.currentTimeMillis();
-            timest = timest / 1000L;
+                long timest = System.currentTimeMillis();
+                timest = timest / 1000L;
 
-            String body = "";
-            String sign = "";
-            String urlNet = "";
-            if (mediaType == null) {
-                throw new RuntimeException("请求类型判断失败！");
+                String body = "";
+                String sign = "";
+                String urlNet = "";
+                if (mediaType == null) {
+                    throw new RuntimeException("请求类型判断失败！");
+                }
+                if (secretType == null) {
+                    throw new RuntimeException("加密类型判断失败！");
+                }
+                //公共加密
+                String tmp_base_string = partnerId + apiMethod + timest;
+                sign = ShopeeUtils.getsShopeeSign(tmp_base_string, partnerKey);
+                urlNet = apiUrl + apiMethod + "?partner_id=" + partnerId + "&timestamp=" + timest + "&sign=" + sign;
+                // 请求类型 4.post-map_json
+                Map<String, Object> params = shopeeRequest.getMapParams();
+                body = postForMapJsonGetBody(urlNet, params);
+                JSONObject resultJson = JSON.parseObject(body, Feature.DisableCircularReferenceDetect);
+
+                result = resultJson;
+                shouldExit = true; // 成功时退出循环
+            } catch (HttpClientErrorException ex) {
+                if (!ShopeeRetryPolicyChecker.shouldRetry(ex, retryCount)) {
+                    // 不可重试时立即构建错误结果
+                    result = ShopeeHttpErrorProcessor.buildStandardizedError(ex);
+                    shouldExit = true; // 设置退出标志
+                    continue; // 跳过本次循环剩余代码
+                }
+
+                // 计算退避时间
+                long backoff = ShopeeRetryPolicyChecker.calculateBackoff(retryCount);
+                try {
+                    Thread.sleep(backoff);
+                } catch (InterruptedException e) {
+                    Thread.currentThread().interrupt();
+                    result.put("error", "THREAD_INTERRUPTED");
+                    shouldExit = true;
+                }
+
+                retryCount++;
+                // 处理错误信息的代码
+            } catch (Exception e) {
+                result = new JSONObject();
+                // 其他异常处理
+                result.put("error", e.getMessage());
+                shouldExit = true;
             }
-            if (secretType == null) {
-                throw new RuntimeException("加密类型判断失败！");
-            }
-            //公共加密
-            String tmp_base_string = partnerId + apiMethod + timest;
-            sign = ShopeeUtils.getsShopeeSign(tmp_base_string, partnerKey);
-            urlNet = apiUrl + apiMethod + "?partner_id=" + partnerId + "&timestamp=" + timest + "&sign=" + sign;
-            // 请求类型 4.post-map_json
-            Map<String, Object> params = shopeeRequest.getMapParams();
-            body = postForMapJsonGetBody(urlNet, params);
-            JSONObject resultJson = JSON.parseObject(body, Feature.DisableCircularReferenceDetect);
-
-            result = resultJson;
-        } catch (HttpClientErrorException ex) {
-            String statusText = ex.getStatusText();  // 获取错误状态文本，如 "Bad Request"
-            int statusCode = ex.getStatusCode().value();  // 获取错误状态码，如 400
-            String responseBody = ex.getResponseBodyAsString();  // 获取包含错误信息的响应体
-
-            JSONObject jsonObject = new JSONObject();
-            jsonObject.put("Https错误状态文本", statusText);
-            jsonObject.put("Https错误状态码", statusCode);
-            jsonObject.put("Https错误信息的响应体", responseBody);
-            result = jsonObject;
-            // 处理错误信息的代码
-        } catch (Exception e) {
-            JSONObject jsonObject = new JSONObject();
-            jsonObject.put("错误信息", e.getMessage());
-            result = jsonObject;
+        }
+        // 补充最后一次重试失败的返回
+        if (!shouldExit) {
+            result.put("error", "MAX_RETRIES_EXCEEDED");
         }
         ShopeeResponse shopeeResponse = new ShopeeResponse();
         shopeeResponse.setGopResponseBody(result.toJSONString());

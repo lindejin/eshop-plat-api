@@ -102,7 +102,7 @@ public class ShopeeHttpErrorProcessor {
     // 监控系统集成
     private static void logErrorForMonitoring(HttpClientErrorException ex) {
         log.error("[Shopee Monitor] HTTP Error {} - {}",
-                ex.getStatusCode(), ex.getStatusText(), ex);
+                ex.getStatusCode(), ex.getStatusText());
         // 推送到监控系统（示例）
 //        MonitoringService.report(
 //                new ShopeeApiIncident(ex.getStatusCode(), ex.getResponseBodyAsString())
