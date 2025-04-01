@@ -51,3 +51,6 @@ WHERE EXISTS (
     WHERE tb_order.order_no = tb_waybill_syn_err.order_no
       AND tb_order.order_status = -1
 );
+
+
+TikTok does not support this method to obtain the waybill number
