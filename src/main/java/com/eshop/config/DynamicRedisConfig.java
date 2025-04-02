@@ -6,14 +6,10 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
-import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.connection.RedisPassword;
 import org.springframework.data.redis.connection.RedisStandaloneConfiguration;
 import org.springframework.data.redis.connection.lettuce.LettuceClientConfiguration;
 import org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory;
-import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.data.redis.serializer.GenericJackson2JsonRedisSerializer;
-import org.springframework.data.redis.serializer.StringRedisSerializer;
 
 import java.time.Duration;
 import java.util.concurrent.Executors;
@@ -85,22 +81,4 @@ public class DynamicRedisConfig {
         Executors.newSingleThreadScheduledExecutor()
                 .schedule(() -> standbyConnectionFactory.destroy(), 30, TimeUnit.SECONDS);
     }
-
-//    @Bean
-//    public RedisTemplate<String, Object> redisTemplate(DynamicRedisConfig config) {
-//        return new RedisTemplate<String, Object>() {
-//            @Override
-//            public RedisConnectionFactory getConnectionFactory() {
-//                return config.getActiveConnectionFactory();
-//            }
-//
-//            @Override
-//            public void afterPropertiesSet() {
-//                super.setConnectionFactory(getConnectionFactory());
-//                super.setKeySerializer(new StringRedisSerializer());
-//                super.setValueSerializer(new GenericJackson2JsonRedisSerializer());
-//                super.afterPropertiesSet();
-//            }
-//        };
-//    }
 }

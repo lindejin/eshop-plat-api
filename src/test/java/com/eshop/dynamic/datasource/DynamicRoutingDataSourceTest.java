@@ -1,6 +1,5 @@
 package com.eshop.dynamic.datasource;
 
-import com.alibaba.fastjson.JSON;
 import com.baomidou.dynamic.datasource.creator.DataSourceProperty;
 import com.baomidou.dynamic.datasource.creator.DefaultDataSourceCreator;
 import com.baomidou.dynamic.datasource.provider.DynamicDataSourceProvider;
