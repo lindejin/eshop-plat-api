@@ -88,7 +88,7 @@ public class QueryTest {
     public List<TbOrderProducts> getOpListConcurrently() {
         // 1. 先获取总记录数
         long total = iTbOrderProductsService.count(Wrappers.<TbOrderProducts>lambdaQuery()
-                .isNull(TbOrderProducts::getProductSku)
+//                .isNull(TbOrderProducts::getProductSku)
                 .isNull(TbOrderProducts::getSkuImgId));
 
         System.out.println("Total records: " + total);
@@ -134,7 +134,7 @@ public class QueryTest {
         Page<TbOrderProducts> page = new Page<>(pageNum, pageSize);
         page.setSearchCount(false); // 关闭自动统计
         IPage<TbOrderProducts> result = iTbOrderProductsService.page(page, Wrappers.<TbOrderProducts>lambdaQuery()
-                .isNull(TbOrderProducts::getProductSku)
+//                .isNull(TbOrderProducts::getProductSku)
                 .isNull(TbOrderProducts::getSkuImgId));
 
         System.out.printf("Page %d completed, size: %d%n", pageNum, result.getRecords().size());

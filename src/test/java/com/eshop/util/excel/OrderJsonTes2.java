@@ -22,7 +22,7 @@ import java.util.concurrent.Executor;
 import java.util.stream.Collectors;
 
 @Service
-public class OrderJsonTest {
+public class OrderJsonTes2 {
 
     @Resource
     private ShopeeOrderCall shopeeOrderCall;

@@ -145,6 +145,13 @@ public class ExcelReaderTest4 {
             for (ShopeeOrderDetailRespVO body : orderJSONList) {
                 try {
                     ShopeeOrderDetailResponse response = body.getResponse();
+                    if (response == null){
+                        System.out.println(body.getRespBody());
+                        continue;
+                    }
+                    if (response.getOrder_list() == null || response.getOrder_list().size() == 0){
+                        continue;
+                    }
                     ShopeeOrderDetailItem shopeeOrderDetailItem = response.getOrder_list().get(0);
                     String orderNo = shopeeOrderDetailItem.getOrder_sn();
 
@@ -158,15 +165,15 @@ public class ExcelReaderTest4 {
                             if (modelId !=null && StringUtils.isNotBlank(imageUrl)) {
                                 skuImgMap.put(orderNo + modelId, imageUrl);
                             }
-                        } finally {
+                        } catch (Exception e) {
 
                         }
                     }
-                } finally {
+                } catch (Exception e) {
 
                 }
             }
-        } finally {
+        } catch (Exception e) {
 
         }
         return skuImgMap;

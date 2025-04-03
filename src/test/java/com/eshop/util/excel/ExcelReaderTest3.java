@@ -109,8 +109,8 @@ public class ExcelReaderTest3 {
 
         Map<Long, TbOrderProducts> opMap = imgList.stream().collect(Collectors.toMap(TbOrderProducts::getId, Function.identity(), (o1, o2) -> o1));
 
-        List<TbOrderRequestBody> list = queryTest.getBodyList(orderNos);
-        Map<String, String> skuImgMap = getSkuImgMap(list);
+//        List<TbOrderRequestBody> list = queryTest.getBodyList(orderNos);
+//        Map<String, String> skuImgMap = getSkuImgMap(list);
 
         List<TbDownloadFileError> downloadList = queryTest3.getDownloadList(orderNos);
         Map<String, String> downloadMap = downloadList.stream().collect(Collectors.toMap(TbDownloadFileError::getJoinCode, TbDownloadFileError::getDownloadUrl, (o1, o2) -> o1));
