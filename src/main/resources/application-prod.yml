@@ -5,6 +5,18 @@ default-db:
   username: eshop
   password: eshop123
   type: com.atomikos.jdbc.AtomikosDataSourceBean
+# Minio配置
+minio:
+  url: http://192.168.10.219:9000
+  accessKey: admin
+  secretKey: admin123
+  bucketName: eshop
+  outsideUrl: https://file.vogocm.com:9000
+  filePaths:
+    1: eshop_img
+    2: eshop_video
+    3: eshop_sd
+    4: eshop_file
 database:
   ip: 192.168.10.53
 spring:

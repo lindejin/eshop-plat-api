@@ -7,6 +7,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.eshop.entity.file.TbImg;
+import com.eshop.entity.log.TbDownloadFileError;
 import com.eshop.entity.order.TbOrderProducts;
 import com.eshop.entity.order.TbOrderRequestBody;
 import com.eshop.service.config.ITbShopService;
@@ -55,7 +56,7 @@ import java.util.stream.Collectors;
  */
 @Slf4j
 @SpringBootTest
-public class ExcelReaderTest2 {
+public class ExcelReaderTest3 {
 
     @Resource
     private ITbShopService shopService;
@@ -85,6 +86,12 @@ public class ExcelReaderTest2 {
     @Autowired
     protected QueryTest queryTest;
 
+    @Autowired
+    protected QueryTest2 queryTest2;
+
+    @Autowired
+    protected QueryTest3 queryTest3;
+
     @Test
     public void testReadExcelToTbImg() throws Exception {
         // 调用ExcelReader读取Excel文件并转换为TbImg对象列表
@@ -92,10 +99,22 @@ public class ExcelReaderTest2 {
 
         Set<String> orderNos = imgList.stream().map(TbOrderProducts::getOrderNo).collect(Collectors.toSet());
 
-        List<TbOrderRequestBody> list = queryTest.getBodyList(orderNos);
+        List<TbOrderProducts> ooopList = queryTest2.getOpList(orderNos);
+
+        Map<String, Long> orderProductCount = ooopList.stream()
+                .collect(Collectors.groupingBy(
+                        TbOrderProducts::getOrderNo,
+                        Collectors.counting()  // 统计每个订单的商品数量
+                ));
 
         Map<Long, TbOrderProducts> opMap = imgList.stream().collect(Collectors.toMap(TbOrderProducts::getId, Function.identity(), (o1, o2) -> o1));
+
+        List<TbOrderRequestBody> list = queryTest.getBodyList(orderNos);
         Map<String, String> skuImgMap = getSkuImgMap(list);
+
+        List<TbDownloadFileError> downloadList = queryTest3.getDownloadList(orderNos);
+        Map<String, String> downloadMap = downloadList.stream().collect(Collectors.toMap(TbDownloadFileError::getJoinCode, TbDownloadFileError::getDownloadUrl, (o1, o2) -> o1));
+
 
         // 2. 批量提交异步任务
         List<CompletableFuture<Void>> futures = imgList.stream()
@@ -107,7 +126,11 @@ public class ExcelReaderTest2 {
                         }
                         Long platformSkuId = op.getPlatformSkuId();
                         String orderNo = op.getOrderNo();
-                        String url = skuImgMap.get(orderNo + platformSkuId);
+                        Long l = orderProductCount.get(orderNo);
+                        if (l.intValue() != 1){
+                            return;
+                        }
+                        String url = downloadMap.get(orderNo);
                         System.out.println(url);
                         if (StringUtils.isBlank(url)) {
                             return;
