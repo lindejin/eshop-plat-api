@@ -4,8 +4,6 @@ import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.URLUtil;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.eshop.entity.file.TbImg;
 import com.eshop.entity.order.TbOrderProducts;
 import com.eshop.entity.order.TbOrderRequestBody;
@@ -14,6 +12,7 @@ import com.eshop.service.file.ITbImgService;
 import com.eshop.service.order.ITbOrderProductsService;
 import com.eshop.service.order.ITbOrderRequestBodyService;
 import com.eshop.service.order.ITbOrderService;
+import com.eshop.util.*;
 import com.eshop.util.minio.MinioFileUtils;
 import com.eshop.util.minio.RetCode;
 import com.eshop.util.minio.SysFile;
@@ -55,7 +54,7 @@ import java.util.stream.Collectors;
  */
 @Slf4j
 @SpringBootTest
-public class ExcelReaderTest2 {
+public class ExcelReaderTest4 {
     /**
      * 文件下载 敦煌
      */
@@ -89,18 +88,18 @@ public class ExcelReaderTest2 {
     @Autowired
     protected QueryTest queryTest;
 
+    @Autowired
+    protected OrderJsonTest orderJsonTest;
+
     @Test
     public void testReadExcelToTbImg() throws Exception {
         // 调用ExcelReader读取Excel文件并转换为TbImg对象列表
         List<TbOrderProducts> imgList = queryTest.getOpListConcurrently() ;
 
         Set<String> orderNos = imgList.stream().map(TbOrderProducts::getOrderNo).collect(Collectors.toSet());
-
-        List<TbOrderRequestBody> list = queryTest.getBodyList(orderNos);
-
+        List<ShopeeOrderDetailRespVO> orderJSONList = orderJsonTest.getOrderJSON(orderNos);
         Map<Long, TbOrderProducts> opMap = imgList.stream().collect(Collectors.toMap(TbOrderProducts::getId, Function.identity(), (o1, o2) -> o1));
-        Map<String, String> skuImgMap = getSkuImgMap(list);
-
+        Map<String, String> skuImgMap = getSkuImgMap(orderJSONList);
         // 2. 批量提交异步任务
         List<CompletableFuture<Void>> futures = imgList.stream()
                 .map(op -> CompletableFuture.runAsync(() -> {
@@ -140,56 +139,35 @@ public class ExcelReaderTest2 {
         }
     }
 
-    private Map<String, String> getSkuImgMap(List<TbOrderRequestBody> list) {
+    private Map<String, String> getSkuImgMap(List<ShopeeOrderDetailRespVO> orderJSONList) {
         Map<String, String> skuImgMap = new HashMap<>();
-        for (TbOrderRequestBody body : list) {
-            String orderNo = body.getOrderNo();
-            String orderDetail = body.getOrderDetail();
-            try {
-                JSONArray array = JSONArray.parseArray(orderDetail);
+        try {
+            for (ShopeeOrderDetailRespVO body : orderJSONList) {
+                try {
+                    ShopeeOrderDetailResponse response = body.getResponse();
+                    ShopeeOrderDetailItem shopeeOrderDetailItem = response.getOrder_list().get(0);
+                    String orderNo = shopeeOrderDetailItem.getOrder_sn();
 
-                for (int i = 0; i < array.size(); i++) {
-                    JSONObject jsonObject = array.getJSONObject(i);
-                    try {
-                        String sku_id = jsonObject.getString("sku_id");
-                        String sku_image = jsonObject.getString("sku_image");
-                        if (StringUtils.isBlank(sku_image)) {
-                            throw new RuntimeException("");
-                        }
-                        if (StringUtils.isNotBlank(sku_id) && StringUtils.isNotBlank(sku_image)) {
-                            skuImgMap.put(orderNo + sku_id, sku_image);
-                        }
-                    } catch (Exception e) {
-                    }
+                    List<ShopeeOrderDetailItemListItem> itemList = shopeeOrderDetailItem.getItem_list();
 
-                    try {
-                        String model_id = jsonObject.getString("model_id");
-                        JSONObject imageInfo = jsonObject.getJSONObject("image_info");
-                        if (imageInfo == null) {
-                            throw new RuntimeException("");
+                    for (ShopeeOrderDetailItemListItem shopeeOrderDetailItemListItem : itemList) {
+                        try {
+                            Long modelId = shopeeOrderDetailItemListItem.getModel_id();
+                            ShopeeOrderDetailImageInfo imageInfo = shopeeOrderDetailItemListItem.getImage_info();
+                            String imageUrl = imageInfo.getImage_url();
+                            if (modelId !=null && StringUtils.isNotBlank(imageUrl)) {
+                                skuImgMap.put(orderNo + modelId, imageUrl);
+                            }
+                        } finally {
+
                         }
-                        String image_url = imageInfo.getString("image_url");
-                        if (StringUtils.isBlank(image_url)) {
-                            throw new RuntimeException("");
-                        }
-                        if (StringUtils.isNotBlank(model_id) && StringUtils.isNotBlank(image_url)) {
-                            skuImgMap.put(orderNo + model_id, image_url);
-                        }
-                    } catch (Exception e) {
                     }
-                    try {
-                        String platformSkuId = jsonObject.getString("platformSkuId");
-                        String goodsImgeUrl = jsonObject.getString("goodsImgeUrl");
-                        if (StringUtils.isBlank(goodsImgeUrl)) {
-                            throw new RuntimeException("");
-                        }
-                        skuImgMap.put(orderNo + platformSkuId, goodsImgeUrl);
-                    } catch (Exception e) {
-                    }
+                } finally {
+
                 }
-            } catch (Exception e) {
-                e.printStackTrace();
             }
+        } finally {
+
         }
         return skuImgMap;
     }
