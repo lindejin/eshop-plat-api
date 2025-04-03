@@ -126,7 +126,11 @@ public class ExcelReader {
         
         switch (cell.getCellType()) {
             case STRING:
-                field.set(obj, cell.getStringCellValue());
+                try {
+                    field.set(obj, cell.getStringCellValue());
+                } catch (IllegalArgumentException e) {
+                    field.set(obj, Long.valueOf(cell.getStringCellValue()));
+                }
                 break;
             case NUMERIC:
                 if (DateUtil.isCellDateFormatted(cell)) {
