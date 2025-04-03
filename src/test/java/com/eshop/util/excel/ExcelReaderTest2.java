@@ -74,7 +74,7 @@ public class ExcelReaderTest2 {
     private ITbOrderRequestBodyService iTbOrderRequestBodyService;
 
 
-    @Resource
+    @Resource(name = "okHttpRestTemplate")
     private RestTemplate restTemplate;
 
     @Resource(name = "excelTaskPool")
@@ -112,7 +112,6 @@ public class ExcelReaderTest2 {
                         Long platformSkuId = op.getPlatformSkuId();
                         String orderNo = op.getOrderNo();
                         String url = skuImgMap.get(orderNo + platformSkuId);
-                        System.out.println(url);
                         if (StringUtils.isBlank(url)) {
                             return;
                         }
