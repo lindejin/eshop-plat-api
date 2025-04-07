@@ -49,27 +49,14 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 
 /**
- * Excel读取工具类测试
- *
- * @author ldj
- * @date 2024/03/27
+ * 统计读取下载地址
  */
 @Slf4j
 @SpringBootTest
 public class ExcelReaderTest32 {
 
     @Resource
-    private ITbShopService shopService;
-
-    @Resource
-    private ITbOrderService iTbOrderService;
-
-    @Resource
     private ITbOrderProductsService iTbOrderProductsService;
-
-    @Resource
-    private ITbOrderRequestBodyService iTbOrderRequestBodyService;
-
 
     @Resource
     private RestTemplate restTemplate;
@@ -94,7 +81,7 @@ public class ExcelReaderTest32 {
 
     @Test
     public void testReadExcelToTbImg() throws Exception {
-        // 调用ExcelReader读取Excel文件并转换为TbImg对象列表
+
         List<TbOrderProducts> imgList = queryTest.getOpListConcurrently() ;
 
         Set<String> orderNos = imgList.stream().map(TbOrderProducts::getOrderNo).collect(Collectors.toSet());
@@ -263,12 +250,6 @@ public class ExcelReaderTest32 {
 
     /**
      * 生成文件信息
-     *
-     * @param originalName
-     * @param newFileName
-     * @param originalUri
-     * @param minioUrl
-     * @return
      */
     private TbImg generateTbImg(String originalName, String newFileName, String originalUri, String minioUrl, String thuMinioUrl) {
         TbImg vo = new TbImg();

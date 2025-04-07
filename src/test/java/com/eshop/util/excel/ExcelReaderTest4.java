@@ -47,10 +47,7 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 
 /**
- * Excel读取工具类测试
- *
- * @author ldj
- * @date 2024/03/27
+ * 线上读取下载地址
  */
 @Slf4j
 @SpringBootTest
@@ -61,17 +58,7 @@ public class ExcelReaderTest4 {
     public final static String FILE_DOWNLOAD_DHGATE_IMAGE_NET = "https://image.dhgate.com/";
 
     @Resource
-    private ITbShopService shopService;
-
-    @Resource
-    private ITbOrderService iTbOrderService;
-
-    @Resource
     private ITbOrderProductsService iTbOrderProductsService;
-
-    @Resource
-    private ITbOrderRequestBodyService iTbOrderRequestBodyService;
-
 
     @Resource
     private RestTemplate restTemplate;
@@ -93,9 +80,7 @@ public class ExcelReaderTest4 {
 
     @Test
     public void testReadExcelToTbImg() throws Exception {
-        // 调用ExcelReader读取Excel文件并转换为TbImg对象列表
         List<TbOrderProducts> imgList = queryTest.getOpListConcurrently() ;
-
         Set<String> orderNos = imgList.stream().map(TbOrderProducts::getOrderNo).collect(Collectors.toSet());
         List<ShopeeOrderDetailRespVO> orderJSONList = orderJsonTest.getOrderJSON(orderNos);
         Map<Long, TbOrderProducts> opMap = imgList.stream().collect(Collectors.toMap(TbOrderProducts::getId, Function.identity(), (o1, o2) -> o1));
