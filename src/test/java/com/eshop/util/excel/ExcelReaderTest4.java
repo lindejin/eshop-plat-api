@@ -187,9 +187,7 @@ public class ExcelReaderTest4 {
                     MediaType mediaType = getMediaType(content);
                     String mimeType = mediaType.toString();
                     // 利用 tika 获取 文件的扩展名
-                    String extension = getExtension(mediaType);
-
-                    String fileTye = extension;
+                    String fileTye = getExtension(mediaType);
                     if (StringUtils.isNotBlank(fileTye)) {
                         if (!fileTye.contains(".")){
                             suffix = "." + fileTye;
@@ -201,9 +199,7 @@ public class ExcelReaderTest4 {
 
                 String fileName = uuid + suffix;
 
-                String newFileName = fileName;
-
-                RetCode<SysFile> ret = minioFileUtils.uploadFile(newFileName, content, 1, null);
+                RetCode<SysFile> ret = minioFileUtils.uploadFile(fileName, content, 1, null);
                 if (ret.getAck() == 0) {
                     TbImg img = generateTbImg(fileName, ret.getData().getName(), tempUrl, ret.getData().getUrl(), null);
                     iTbImgService.save(img);
@@ -276,12 +272,6 @@ public class ExcelReaderTest4 {
 
     /**
      * 生成文件信息
-     *
-     * @param originalName
-     * @param newFileName
-     * @param originalUri
-     * @param minioUrl
-     * @return
      */
     private TbImg generateTbImg(String originalName, String newFileName, String originalUri, String minioUrl, String thuMinioUrl) {
         TbImg vo = new TbImg();
@@ -310,10 +300,7 @@ public class ExcelReaderTest4 {
             // 使用 Tika 的 Detector 检测文件类型
             Detector detector = new DefaultDetector();
             Metadata metadata = new Metadata();
-            MediaType mediaType = detector.detect(inputStream, metadata);
-            return mediaType;
-        } catch (IOException e) {
-            throw e;
+            return detector.detect(inputStream, metadata);
         }
     }
 
@@ -321,7 +308,6 @@ public class ExcelReaderTest4 {
         // 利用 tika 获取 文件的扩展名
         MimeTypes mimeTypes = MimeTypes.getDefaultMimeTypes();
         MimeType mimeTypeVO = mimeTypes.forName(mediaType.toString());
-        String extension = mimeTypeVO.getExtension();
-        return extension;
+        return mimeTypeVO.getExtension();
     }
 }
