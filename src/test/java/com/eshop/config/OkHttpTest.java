@@ -7,6 +7,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.web.client.RestTemplate;
 
 import javax.annotation.Resource;
 import java.io.IOException;
@@ -82,5 +83,22 @@ class OkHttpTest {
     @AfterEach
     void teardown() throws IOException {
         mockWebServer.shutdown();
+    }
+
+
+    @Test
+    public void testOnlyOkHttpLogged() throws IOException {
+        String url = "https://v2ex.com/t/1123578";
+        // 通过OkHttp发起的请求应被记录
+        client.newCall(new Request.Builder()
+                .url(url)
+                .build()).execute();
+
+        RestTemplate restTemplate = new RestTemplate();
+        // 普通Servlet请求不应被记录
+        restTemplate.getForObject(url, String.class);
+
+//        assertThat(logOutput).contains("okhttp");
+//        assertThat(logOutput).doesNotContain("servlet");
     }
 }

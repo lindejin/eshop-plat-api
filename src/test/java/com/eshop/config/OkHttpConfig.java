@@ -5,6 +5,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.zalando.logbook.Logbook;
+import org.zalando.logbook.core.DefaultHttpLogWriter;
+import org.zalando.logbook.core.DefaultSink;
+import org.zalando.logbook.json.JsonHttpLogFormatter;
+import org.zalando.logbook.okhttp.LogbookInterceptor;
 
 import javax.net.ssl.*;
 import java.io.IOException;
@@ -26,7 +31,7 @@ public class OkHttpConfig {
     private static final int WRITE_TIMEOUT = 60;
 
     @Bean
-    public OkHttpClient okHttpClient() {
+    public OkHttpClient okHttpClient(Logbook logbook) {
         return new OkHttpClient.Builder()
                 .connectionPool(new ConnectionPool(MAX_IDLE_CONNECTIONS, KEEP_ALIVE_DURATION, TimeUnit.SECONDS))
                 .connectTimeout(CONNECT_TIMEOUT, TimeUnit.SECONDS)
@@ -35,7 +40,15 @@ public class OkHttpConfig {
                 .sslSocketFactory(sslSocketFactory(), x509TrustManager())
                 .hostnameVerifier((hostname, session) -> true)
                 .retryOnConnectionFailure(true)
-                .addInterceptor(new LoggingInterceptor())
+                .addInterceptor(new LogbookInterceptor(logbook))  // 关键拦截器
+                .build();
+    }
+
+    @Bean
+    public Logbook logbook() {
+        return Logbook.builder()
+                .sink(new DefaultSink(new JsonHttpLogFormatter(), new DefaultHttpLogWriter()))
+                .bodyFilter(new HtmlToTextFilter()) // 新增HTML文本提取过滤器
                 .build();
     }
 

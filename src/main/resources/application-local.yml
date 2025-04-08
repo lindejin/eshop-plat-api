@@ -127,3 +127,9 @@ spring:
           password: ${default-db.password}
           driver-class-name: com.mysql.cj.jdbc.MysqlXADataSource
           type: ${default-db.type}
+logging:
+  level:
+    org.zalando.logbook: TRACE
+logbook:
+  filter:
+    enabled: false  # 关键！关闭Servlet容器请求拦截
