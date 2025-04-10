@@ -45,8 +45,8 @@ public class TemuOrderPoCallTest {
 
     @Test
     void logisticsCompaniesGet() throws Exception {
-        TbShop shopDO = shopService.getById(1955L);
-        TemuAppClientDTO us = platformAppClientUtils.getTemuAppClientDTO(shopDO, "US");
+        TbShop shopDO = shopService.getById(2461L);
+        TemuAppClientDTO us = platformAppClientUtils.getTemuAppClientDTO(shopDO, "GL");
         TemuOrderPoLogisticsCompaniesGetReqDTO params = new TemuOrderPoLogisticsCompaniesGetReqDTO();
         params.setRegionId(211L);
         TemuOrderPoLogisticsCompaniesGetRespVO respVO = temuOrderPoCallService.logisticsCompaniesGet(us, params);
@@ -58,11 +58,34 @@ public class TemuOrderPoCallTest {
      */
     @Test
     void getOrderShippingInfo() throws Exception {
-        TbShop shopDO = shopService.getById(1722L);
+        TbShop shopDO = shopService.getById(2461L);
         TemuAppClientDTO us = platformAppClientUtils.getTemuAppClientDTO(shopDO, "GL");
         JSONObject params = new JSONObject();
-        params.put("parentOrderSn", "PO-100-09998279782950932");
+        params.put("parentOrderSn", "PO-211-09624026665512941");
         String respBody = temuOrderPoCall.getOrderShippingInfo(us, params);
         System.out.println(respBody);
+    }
+
+    @Test
+    void getOrderDetail() throws Exception {
+        TbShop shopDO = shopService.getById(2461L);
+        TemuAppClientDTO GL = platformAppClientUtils.getTemuAppClientDTO(shopDO, "GL");
+        JSONObject params = new JSONObject();
+        params.put("parentOrderSn", "PO-100-19934836234792890");
+        String respBody = temuOrderPoCall.getOrderDetail(GL, params);
+        System.out.println(respBody);
+
+    }
+    //PO-211-09201654360873408
+
+    @Test
+    void getOrderDetailUS() throws Exception {
+        TbShop shopDO = shopService.getById(2461L);
+        TemuAppClientDTO US = platformAppClientUtils.getTemuAppClientDTO(shopDO, "US");
+        JSONObject params = new JSONObject();
+        params.put("parentOrderSn", "PO-211-09201654360873408");
+        String respBody = temuOrderPoCall.getOrderDetail(US, params);
+        System.out.println(respBody);
+
     }
 }

@@ -53,7 +53,8 @@ public class TemuAppClientDTO {
     private static final String ENV_CN_TEST = "https://kj-openapi.temudemo.com/openapi/router";
     //正式环境 US	无	https://openapi-b-us.temu.com/openapi/router
 //    private static final String ENV_US = "https://openapi-b-us.temu.com/openapi/router";
-    private static final String ENV_US = "https://us.vogocmerp.com/openapi/router";
+//    private static final String ENV_US = "https://us.vogocmerp.com/openapi/router";
+    private static final String ENV_US = "https://us.vogocmerp.com/openapi_temu_us/openapi/router";
     //测试环境 US	无	http://openapi-b-us.temudemo.com/openapi/router
     private static final String ENV_US_TEST = "http://openapi-b-us.temudemo.com/openapi/router";
     //正式环境 EU	无	https://openapi-b-eu.temu.com/openapi/router
@@ -62,5 +63,8 @@ public class TemuAppClientDTO {
     private static final String ENV_EU_TEST = "http://openapi-b-eu.temudemo.com/openapi/router";
 
     //正式环境 GL	无	https://us.vogocmerp.com/global/openapi/router
-    private static final String ENV_GL = "https://us.vogocmerp.com/global/openapi/router";
+//    private static final String ENV_GL = "https://us.vogocmerp.com/global/openapi/router";
+
+    private static final String ENV_GL = "https://us.vogocmerp.com/openapi_temu_gl/openapi/router";
+
 }
