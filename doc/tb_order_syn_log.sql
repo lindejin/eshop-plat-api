@@ -18,6 +18,11 @@ DELETE FROM `eshop_log`.`tb_order_syn_log`
 WHERE `exception_log` LIKE '%未支付%'
     LIMIT 10000;
 
+# 批量删除
+DELETE FROM `eshop_log`.`tb_order_syn_log`
+WHERE `exception_log` LIKE '%请求过于频繁，超过限流阈值%'
+    LIMIT 10000;
+
 # 订单主表存在
 DELETE sol
 FROM eshop_log.tb_order_syn_log sol
