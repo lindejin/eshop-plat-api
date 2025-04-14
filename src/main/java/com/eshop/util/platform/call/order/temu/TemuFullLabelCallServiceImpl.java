@@ -56,7 +56,7 @@ public class TemuFullLabelCallServiceImpl implements TemuFullLabelCallService {
     @Override
     public TemuFullLogisticsBoxMarkInfoRespVO getLogisticsBoxMarkInfo(TemuAppClientDTO tcDTO, TemuFullLogisticsBoxMarkInfoReqDTO reqDTO) throws Exception {
         JSONObject jsonParams = JSON.parseObject(JSON.toJSONString(reqDTO));
-        String orderListBody = temuFullLabelCall.getGoodsCustomLabel(tcDTO, jsonParams);
+        String orderListBody = temuFullLabelCall.getLogisticsBoxMarkInfo(tcDTO, jsonParams);
         TemuFullLogisticsBoxMarkInfoRespVO respVO = JSON.parseObject(
                 orderListBody,
                 TemuFullLogisticsBoxMarkInfoRespVO.class,

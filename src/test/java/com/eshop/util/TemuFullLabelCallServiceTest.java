@@ -124,7 +124,7 @@ public class TemuFullLabelCallServiceTest {
         TemuAppClientDTO cn = platformAppClientUtils.getTemuAppClientDTO(shopDO, "CN");
 
         List<String> deliveryOrderSnList = new ArrayList<>();
-        deliveryOrderSnList.add("FH2504090365840");
+        deliveryOrderSnList.add("FH2504140586555");
         TemuFullLogisticsBoxMarkInfoReqDTO params = new TemuFullLogisticsBoxMarkInfoReqDTO();
         params.setReturn_data_key("true");
         params.setDeliveryOrderSnList(deliveryOrderSnList);
@@ -145,7 +145,7 @@ public class TemuFullLabelCallServiceTest {
         TemuAppClientDTO cn = platformAppClientUtils.getTemuAppClientDTO(shopDO, "CN");
 
         List<String> deliveryOrderSnList = new ArrayList<>();
-        deliveryOrderSnList.add("FH2504090365840");
+        deliveryOrderSnList.add("FH2504140586555");
         TemuFullLogisticsBoxMarkInfoReqDTO params = new TemuFullLogisticsBoxMarkInfoReqDTO();
         params.setReturn_data_key("false");
         params.setDeliveryOrderSnList(deliveryOrderSnList);
