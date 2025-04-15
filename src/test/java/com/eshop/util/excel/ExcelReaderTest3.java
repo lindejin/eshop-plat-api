@@ -92,6 +92,10 @@ public class ExcelReaderTest3 {
     @Autowired
     protected QueryTest3 queryTest3;
 
+    /**
+     * 图片下载失败 重下
+     * 单品订单
+     */
     @Test
     public void testReadExcelToTbImg() throws Exception {
         // 调用ExcelReader读取Excel文件并转换为TbImg对象列表

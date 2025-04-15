@@ -78,6 +78,10 @@ public class ExcelReaderTest4 {
     @Autowired
     protected OrderJsonTest orderJsonTest;
 
+    /**
+     * 图片下载失败 重下
+     * 线上数据拉去
+     */
     @Test
     public void testReadExcelToTbImg() throws Exception {
         List<TbOrderProducts> imgList = queryTest.getOpListConcurrently() ;

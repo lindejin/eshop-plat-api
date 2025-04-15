@@ -89,6 +89,10 @@ public class ExcelReaderTest2 {
     @Autowired
     protected QueryTest queryTest;
 
+    /**
+     * 图片下载失败 重下
+     * 数据库 json数据比对
+     */
     @Test
     public void testReadExcelToTbImg() throws Exception {
         // 调用ExcelReader读取Excel文件并转换为TbImg对象列表
