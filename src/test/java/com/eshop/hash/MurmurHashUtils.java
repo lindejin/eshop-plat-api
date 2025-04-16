@@ -83,4 +83,29 @@ public class MurmurHashUtils {
         byte[] primitiveArray = murmur3_128Bytes(input);
         return ArrayUtils.toObject(primitiveArray); // 依赖 Apache Commons Lang
     }
+
+    /**
+     * 生成与 Guava 完全一致的 128 位 Murmur3 哈希（返回十六进制字符串）
+     *
+     * @param input 输入字符串（无需编码处理）
+     * @return 128 位哈希值的十六进制表示（32字符小写，与 HashCode.toString() 一致）
+     */
+    public static String murmur3_128HashString(String input) {
+        byte[] hashBytes = murmur3_128Bytes(input);
+        return bytesToHex(hashBytes);
+    }
+
+    /**
+     * 将字节数组转换为十六进制字符串（小写，补零）
+     * 例如：0x1A3F -> "1a3f"
+     */
+    private static String bytesToHex(byte[] bytes) {
+        StringBuilder hexString = new StringBuilder(32);
+        for (byte b : bytes) {
+            // 每个字节转换为两位十六进制（高位在前）
+            String hex = String.format("%02x", b & 0xFF);
+            hexString.append(hex);
+        }
+        return hexString.toString();
+    }
 }

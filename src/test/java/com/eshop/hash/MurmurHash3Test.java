@@ -32,10 +32,16 @@ public class MurmurHash3Test {
 //        System.out.println("64-bit-2 Hash: " + hash);
 
         String input = "hello";
-        byte[] guavaHash = Hashing.murmur3_128().hashUnencodedChars(input).asBytes();
-        byte[] customHash = MurmurHashUtils.murmur3_128Bytes(input);
-        System.out.println(toHexString(guavaHash));
-        System.out.println(toHexString(customHash));
+//        byte[] guavaHash = Hashing.murmur3_128().hashUnencodedChars(input).asBytes();
+//        byte[] customHash = MurmurHashUtils.murmur3_128Bytes(input);
+//        System.out.println(toHexString(guavaHash));
+//        System.out.println(toHexString(customHash));
+
+
+       String guavaHash = Hashing.murmur3_128().hashUnencodedChars(input).toString();
+        String customHash = MurmurHashUtils.murmur3_128HashString(input);
+        System.out.println(guavaHash);
+        System.out.println(customHash);
     }
 
     // 生成 64 位哈希值（Long 类型）
