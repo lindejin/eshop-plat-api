@@ -27,7 +27,7 @@ public class SkuTest {
 
     @Test
     public void upload() {
-        String skuCode = "240-40HIYQ-Black-Free Size";
+        String skuCode = "626514";
         TbProductSku psVO = getProductSku(skuCode);
         TbStock stock = getStock(skuCode);
 
@@ -48,6 +48,21 @@ public class SkuTest {
                 System.out.println(tbProductSku.getRawSku());
                 System.out.println(stock.getProductSku());
                 System.out.println(stock.getProductSku().equals(tbProductSku.getRawSku()));
+            }
+        }
+    }
+
+    @Test
+    public void upload2() {
+        String skuCode = "626514";
+
+        List<TbProductSku> productSkuRaw = getProductSkuRaw(skuCode);
+        if (CollectionUtils.isNotEmpty(productSkuRaw)) {
+            for (TbProductSku tbProductSku : productSkuRaw) {
+                System.out.println(tbProductSku.getSkuCode());
+                System.out.println(tbProductSku.getRawSku());
+                System.out.println(skuCode);
+                System.out.println(skuCode.equals(tbProductSku.getRawSku()));
             }
         }
     }
