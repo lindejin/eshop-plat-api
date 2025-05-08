@@ -181,6 +181,12 @@
             <version>2.7.0</version>
             <type>pom</type>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/net.sf.jmimemagic/jmimemagic -->
+        <dependency>
+            <groupId>net.sf.jmimemagic</groupId>
+            <artifactId>jmimemagic</artifactId>
+            <version>0.1.5</version>
+        </dependency>
         <!-- Apache HttpComponents -->
         <dependency>
             <groupId>org.apache.httpcomponents</groupId>

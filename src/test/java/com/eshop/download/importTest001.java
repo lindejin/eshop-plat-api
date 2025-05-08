@@ -1,56 +1,61 @@
 package com.eshop.download;
 
+import lombok.extern.slf4j.Slf4j;
+import net.sf.jmimemagic.*;
+import org.apache.http.conn.ssl.NoopHostnameVerifier;
+import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClients;
+import org.apache.tika.Tika;
 import org.springframework.http.*;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.http.client.SimpleClientHttpRequestFactory;
 import org.springframework.web.client.ResourceAccessException;
 import org.springframework.web.client.RestTemplate;
 
-import javax.net.ssl.*;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.TrustManager;
+import javax.net.ssl.X509TrustManager;
 import java.security.SecureRandom;
 import java.security.cert.X509Certificate;
 import java.util.Arrays;
 
-import org.apache.http.conn.ssl.NoopHostnameVerifier;
-import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
-import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.HttpClients;
-import org.apache.tika.Tika;
-
+@Slf4j
 public class importTest001 {
-    public static void main(String[] args) {
-        String downloadUrl = "https://open-fs-va.tiktokshop.com/wsos_v2/oec_fulfillment_doc_tts/object/wsos67d126cbbad08b05?expire=1741846609&skipCookie=true&timeStamp=1741760209&sign=fb5bf55b290c0672d24bbac73857d3502815db4219bbccf4971dd507e3d8080a"; // 下载URL
+    public static void main(String[] args) throws MagicMatchNotFoundException, MagicException, MagicParseException {
+        String downloadUrl = "http://xmxc.kingtrans.net/upload/printPdf/202505081355334564118.pdf"; // 下载URL
         ResponseEntity<byte[]> result = httpExchange(downloadUrl);
         if (result == null) {
             throw new RuntimeException("pdf文件下载下载出错！");
         }
         byte[] content = result.getBody();
-        
-        // 保存文件到本地
-        try {
-            // 创建文件保存路径
-            String saveDir = "downloads";
-            File dir = new File(saveDir);
-            if (!dir.exists()) {
-                dir.mkdirs();
-            }
-            
-            // 生成文件名
-            String fileName = "download_" + System.currentTimeMillis() + ".pdf";
-            String filePath = saveDir + File.separator + fileName;
-            
-            // 写入文件
-            FileOutputStream fos = new FileOutputStream(filePath);
-            fos.write(content);
-            fos.close();
-            
-            System.out.println("文件已保存至: " + filePath);
-        } catch (IOException e) {
-            throw new RuntimeException("文件保存失败: " + e.getMessage());
-        }
+
+        MagicMatch match = Magic.getMagicMatch(content);
+        System.out.println(match.getMimeType());
+        System.out.println(TikaFileUtil.getFileExtension(content));
+        System.out.println(TikaFileUtil.getMimeType(content));;
+//        // 保存文件到本地
+//        try {
+//            // 创建文件保存路径
+//            String saveDir = "downloads";
+//            File dir = new File(saveDir);
+//            if (!dir.exists()) {
+//                dir.mkdirs();
+//            }
+//
+//            // 生成文件名
+//            String fileName = "download_" + System.currentTimeMillis() + ".pdf";
+//            String filePath = saveDir + File.separator + fileName;
+//
+//            // 写入文件
+//            FileOutputStream fos = new FileOutputStream(filePath);
+//            fos.write(content);
+//            fos.close();
+//
+//            System.out.println("文件已保存至: " + filePath);
+//        } catch (IOException e) {
+//            throw new RuntimeException("文件保存失败: " + e.getMessage());
+//        }
     }
 
     /**
