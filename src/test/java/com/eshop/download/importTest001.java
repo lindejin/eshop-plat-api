@@ -1,7 +1,6 @@
 package com.eshop.download;
 
 import lombok.extern.slf4j.Slf4j;
-import net.sf.jmimemagic.*;
 import org.apache.http.conn.ssl.NoopHostnameVerifier;
 import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
 import org.apache.http.impl.client.CloseableHttpClient;
@@ -22,7 +21,7 @@ import java.util.Arrays;
 
 @Slf4j
 public class importTest001 {
-    public static void main(String[] args) throws MagicMatchNotFoundException, MagicException, MagicParseException {
+    public static void main(String[] args) {
         String downloadUrl = "http://xmxc.kingtrans.net/upload/printPdf/202505081355334564118.pdf"; // 下载URL
         ResponseEntity<byte[]> result = httpExchange(downloadUrl);
         if (result == null) {
@@ -30,10 +29,9 @@ public class importTest001 {
         }
         byte[] content = result.getBody();
 
-        MagicMatch match = Magic.getMagicMatch(content);
-        System.out.println(match.getMimeType());
         System.out.println(TikaFileUtil.getFileExtension(content));
-        System.out.println(TikaFileUtil.getMimeType(content));;
+        System.out.println(TikaFileUtil.getMimeType(content));
+        ;
 //        // 保存文件到本地
 //        try {
 //            // 创建文件保存路径
@@ -72,9 +70,15 @@ public class importTest001 {
         try {
             SSLContext sslContext = SSLContext.getInstance("TLS");
             sslContext.init(null, new TrustManager[]{new X509TrustManager() {
-                public X509Certificate[] getAcceptedIssuers() { return null; }
-                public void checkClientTrusted(X509Certificate[] certs, String authType) {}
-                public void checkServerTrusted(X509Certificate[] certs, String authType) {}
+                public X509Certificate[] getAcceptedIssuers() {
+                    return null;
+                }
+
+                public void checkClientTrusted(X509Certificate[] certs, String authType) {
+                }
+
+                public void checkServerTrusted(X509Certificate[] certs, String authType) {
+                }
             }}, new SecureRandom());
 
             SSLConnectionSocketFactory csf = new SSLConnectionSocketFactory(sslContext, NoopHostnameVerifier.INSTANCE);
@@ -98,7 +102,7 @@ public class importTest001 {
                 headers.setAccept(Arrays.asList(MediaType.APPLICATION_PDF, MediaType.APPLICATION_OCTET_STREAM));
                 headers.set("User-Agent", "Mozilla/5.0");
                 HttpEntity<String> entity = new HttpEntity<>(headers);
-                
+
                 result = restTemplate.exchange(uri, HttpMethod.GET, entity, byte[].class);
                 byte[] content = result.getBody();
                 if (content == null) {
@@ -110,10 +114,10 @@ public class importTest001 {
                 if (!"application/pdf".equals(mimeType)) {
                     throw new RuntimeException("pdf文件下载下载出错！");
                 }
-                
+
                 // 下载成功，跳出重试循环
                 break;
-                
+
             } catch (ResourceAccessException e) {
                 retryCount++;
                 if (retryCount >= maxRetries) {

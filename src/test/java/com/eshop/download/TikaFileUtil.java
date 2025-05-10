@@ -1,8 +1,6 @@
 package com.eshop.download;
 
 import lombok.extern.slf4j.Slf4j;
-import net.sf.jmimemagic.Magic;
-import net.sf.jmimemagic.MagicMatch;
 import org.apache.tika.config.TikaConfig;
 import org.apache.tika.metadata.Metadata;
 import org.apache.tika.mime.MediaType;
@@ -31,12 +29,7 @@ public class TikaFileUtil {
             MimeTypes allTypes = tikaConfig.getMimeRepository();
             return allTypes.forName(mediaType.toString()).getExtension();
         } catch (Exception e) {
-            try {
-                MagicMatch match = Magic.getMagicMatch(fileContent);
-                return "." + match.getExtension();
-            } catch (Exception e1) {
-                log.error("getFileType error", e);
-            }
+            log.error("getFileType error", e);
             return null;
         }
     }
@@ -52,12 +45,7 @@ public class TikaFileUtil {
             mediaType = MediaType.parse(metadata.get(HttpHeaders.CONTENT_TYPE));
             return mediaType.toString();
         } catch (Exception e) {
-            try {
-                MagicMatch match = Magic.getMagicMatch(fileContent);
-                return match.getMimeType();
-            } catch (Exception e1) {
-                log.error("getMimeType error", e);
-            }
+            log.error("getMimeType error", e);
             return null;
         }
     }
