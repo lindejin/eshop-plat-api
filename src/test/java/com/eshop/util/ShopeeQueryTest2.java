@@ -27,7 +27,7 @@ public class ShopeeQueryTest2 {
 
     @Test
     void contextLoads() throws Exception {
-        TbShop shopDO = iTbShopService.getById()
+        TbShop shopDO = iTbShopService.getById(1L);
 
         ShopeeAppClientDTO publicDTO = platformAppClientUtils.getShopeeAppClientDTO(shopDO);
         String orderNo = "250208MXFF5MHP";
