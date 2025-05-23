@@ -10,6 +10,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -42,6 +43,12 @@ public class ApiShopeeLogisticsSyncServiceTest3 {
         String imgUrl = "http://192.168.10.219:9000/eshop/eshop_img/2025/5/23/vg-250523194712950A159663.jpg";
         Integer catType = 1;
         byte[] imageData = okImageDownloader.downloadImageWithRetry(imgUrl);
+        String imgBase64 = Base64.encodeBase64String(imageData);
+        String suffix = TikaFileUtil.getFileExtension(imageData);
+        if (suffix != null && suffix.startsWith(".")) {
+            suffix = suffix.substring(1); // 去掉开头的点（例如 ".jpg" -> "jpg"）
+        }
+        System.out.println(suffix);
         try (ByteArrayInputStream bis = new ByteArrayInputStream(imageData)) {
             BufferedImage sourceImage = null;
             try {
@@ -86,7 +93,7 @@ public class ApiShopeeLogisticsSyncServiceTest3 {
                 }
             }
             String imgType = imgUrl.substring(imgUrl.lastIndexOf(".") + 1);
-            String imgBase64 = ImageUtil.imgConvertBase64(sourceImage, imgType);
+//            String imgBase64 = ImageUtil.imgConvertBase64(sourceImage, imgType);
 //            try {
 //                BufferedImage processedImage = imgCompress(sourceImage, "jpg", 1024); // 调用你的压缩方法
 //                if (processedImage != null) {
@@ -99,7 +106,7 @@ public class ApiShopeeLogisticsSyncServiceTest3 {
 //            } catch (IOException e) {
 //                e.printStackTrace();
 //            }
-            System.out.println(imgBase64);
+//            System.out.println(imgBase64);
             // 2. 直接保存为文件
             saveImageToFile(sourceImage, "jpg", "/output/images/result.jpg");
         }
