@@ -69,7 +69,7 @@ public class ApiShopeeLogisticsSyncServiceTest3 {
                 int canvasHeight = 1785;
                 if ((double) width / height == 3.0 / 4.0 && height > canvasHeight && width > canvasWidth) {
                     //宽高 3:4,宽度 >1340,高度>1785
-                    sourceImage = ImageUtil.imgCompress(sourceImage, imgUrl.substring(imgUrl.lastIndexOf(".") + 1), 1024);
+                    sourceImage = ImageUtil.imgCompress(sourceImage, suffix, 1024);
                     height = sourceImage.getHeight();
                     width = sourceImage.getWidth();
                     sourceImage = CanvaUtils.imageConversion(canvasWidth, canvasHeight, sourceImage);
@@ -77,7 +77,7 @@ public class ApiShopeeLogisticsSyncServiceTest3 {
                     width = sourceImage.getWidth();
                 } else {
                     //原图超过200KB压缩
-                    sourceImage = ImageUtil.imgCompress(sourceImage, imgUrl.substring(imgUrl.lastIndexOf(".") + 1), 200);
+                    sourceImage = ImageUtil.imgCompress(sourceImage, suffix, 200);
                     height = sourceImage.getHeight();
                     width = sourceImage.getWidth();
                     //服装轮播图 5-10张，宽高比例为3:4，宽>1340px，高>1785px，小于2M
