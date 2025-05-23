@@ -14,8 +14,8 @@ import java.util.List;
 
 public class CodeGenerator {
 
-    public static String path = "C:\\zit\\workspacetest\\eshop-plat-api\\src\\main\\java";
-    public static String pathXml = "C:\\zit\\workspacetest\\eshop-plat-api\\src\\main\\resources\\mapper";
+    public static String path = "C:\\zit\\workspace_test\\eshop-plat-api\\src\\main\\java";
+    public static String pathXml = "C:\\zit\\workspace_test\\eshop-plat-api\\src\\main\\resources\\mapper";
     public static String  packagePath = "com.eshop";
     public static void main(String[] args) {
 //        List<String> list = Arrays.asList("ai", "collect", "config", "customer", "depot", "file", "finance", "gpt", "job", "kpi", "log", "logistics", "order", "product", "sds", "supply");
