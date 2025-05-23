@@ -1,5 +1,6 @@
 package com.eshop.order;
 
+import cn.hutool.core.img.ImgUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.eshop.entity.order.TbOrderBillPlatform;
@@ -22,6 +23,7 @@ import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.file.Files;
 import java.util.*;
 import java.util.List;
@@ -108,7 +110,10 @@ public class ApiShopeeLogisticsSyncServiceTest3 {
 //            }
 //            System.out.println(imgBase64);
             // 2. 直接保存为文件
-            saveImageToFile(sourceImage, "jpg", "/output/images/result.jpg");
+            byte[] imgArr = ImageService.processImage(imageData, suffix);
+            InputStream inputStreamForRead = new ByteArrayInputStream(imgArr);
+            BufferedImage image = ImgUtil.read(inputStreamForRead);
+            saveImageToFile(image, suffix, "/output/images/result."+suffix);
         }
     }
     /**
