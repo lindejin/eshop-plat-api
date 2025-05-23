@@ -19,9 +19,9 @@ public class CodeGenerator {
     public static String  packagePath = "com.eshop";
     public static void main(String[] args) {
 //        List<String> list = Arrays.asList("ai", "collect", "config", "customer", "depot", "file", "finance", "gpt", "job", "kpi", "log", "logistics", "order", "product", "sds", "supply");
-        List<String> list = Arrays.asList("collect", "config", "customer", "depot", "file", "finance", "job", "kpi", "log", "logistics", "order", "product", "sds", "supply");
+//        List<String> list = Arrays.asList("collect", "config", "customer", "depot", "file", "finance", "job", "kpi", "log", "logistics", "order", "product", "sds", "supply");
 
-//        List<String> list = Arrays.asList("sds");
+        List<String> list = Arrays.asList("order");
 
         for (String db : list) {
             create(db);
@@ -69,13 +69,14 @@ public class CodeGenerator {
                 )
                 .strategyConfig(builder ->
                         builder
+                                .addInclude("tb_order_bill_detail","tb_order_bill_platform") // 设置需要生成的表名
                                 .entityBuilder()
                                 .enableLombok() // 启用 Lombok
                                 .enableFileOverride() // 允许覆盖已生成文件
                                 .controllerBuilder().enableFileOverride() // 允许覆盖已生成文件
                                 .mapperBuilder().enableFileOverride() // 允许覆盖已生成文件
                                 .serviceBuilder().enableFileOverride() // 允许覆盖已生成文件
-//                                .addInclude("t_simple") // 设置需要生成的表名
+
                               //  .addTablePrefix("t_", "c_") // 设置过滤表前缀
                 )
                 .templateEngine(new BeetlTemplateEngine()) // 使用Freemarker引擎模板，默认的是Velocity引擎模板

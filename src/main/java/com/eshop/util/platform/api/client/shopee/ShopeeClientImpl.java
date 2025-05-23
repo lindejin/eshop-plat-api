@@ -6,7 +6,9 @@ import com.alibaba.fastjson.parser.Feature;
 import com.eshop.util.ExceptionUtils;
 import com.eshop.util.platform.api.structure.shopee.dto.ShopeeAppClientDTO;
 import lombok.extern.slf4j.Slf4j;
+import okhttp3.*;
 import org.springframework.http.*;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.HttpClientErrorException;
@@ -33,6 +35,9 @@ public class ShopeeClientImpl implements ShopeeClient {
 
     @Resource
     private RestTemplate restTemplate;
+
+    @Resource
+    private OkHttpClient okHttpClient;
 
     public ShopeeResponse execute(ShopeeRequest shopeeRequest, ShopeeAppClientDTO publicDTO) {
         final int maxRetries = 3;
@@ -308,38 +313,104 @@ public class ShopeeClientImpl implements ShopeeClient {
         return null;
     }
 
-    /**
-     * 发送post请求，接收文件流
-     */
-    private ResponseEntity<byte[]> downloadFile(String url, JSONObject jsonParams) throws RestClientException, IOException {
-        HttpHeaders headers = new HttpHeaders();
-        MediaType type = MediaType.APPLICATION_JSON;
-        headers.setContentType(type);
-        headers.setAccept(Arrays.asList(MediaType.APPLICATION_OCTET_STREAM));
+    private ResponseEntity<byte[]> downloadFile(String urlNet, JSONObject jsonParams){
+        try {
+            RequestBody body = RequestBody.create(jsonParams.toString(), okhttp3.MediaType.get("application/json"));
+            // 构建OkHttp请求
+            Request request = new Request.Builder()
+                    .url(urlNet)
+                    .post(body)
+                    .addHeader("Content-Type", "application/json")
+                    .build();
 
-//        HttpEntity<Map<String, Object>> requestEntity = new HttpEntity<>(jsonParams, headers);
-        RequestEntity<Map<String, Object>> request = new RequestEntity<>(jsonParams, headers, HttpMethod.POST, URI.create(url));
+            // 执行请求
+            Response response = okHttpClient.newCall(request).execute();
 
-//        ResponseEntity<InputStream> response = restTemplate.exchange(request, InputStream.class);
-        ResponseEntity<byte[]> response = restTemplate.exchange(request, byte[].class);
-        MediaType contentType = response.getHeaders().getContentType();
+            // 处理响应
+            if (!response.isSuccessful()) {
+                // 获取错误详细信息
+                int code = response.code();
+                String message = response.message();
+                Headers headers = response.headers();
+                String responseBody = null;
 
-//        HttpHeaders headers = response.getHeaders();
-        MediaType contentTypeR = response.getHeaders().getContentType();
+                try {
+                    responseBody = response.body().string();
+                } catch (IOException e) {
+                    responseBody = "无法读取响应体: " + e.getMessage();
+                }
 
-        if (contentTypeR != null && contentTypeR.isCompatibleWith(MediaType.APPLICATION_JSON)) {
-            byte[] responseBody = response.getBody();
-            if (responseBody != null) {
-                String jsonContent = new String(responseBody, StandardCharsets.UTF_8);
-                System.out.println(jsonContent);
+                // 结构化错误信息
+                String errorDetails = String.format(
+                        "{\n" +
+                                "  \"status\": %d,\n" +
+                                "  \"message\": \"%s\",\n" +
+                                "  \"headers\": %s,\n" +
+                                "  \"body\": %s\n" +
+                                "}",
+                        code,
+                        message,
+                        headers.toMultimap(),
+                        responseBody
+                );
+
+                // 记录完整错误日志
+                log.error("Shopee API请求失败: {}", errorDetails);
+
+                // 抛出包含完整信息的异常
+                throw new RuntimeException("API请求失败: " + errorDetails);
             }
-        }
-        if (response.getStatusCode().is2xxSuccessful()) {
-            return response;
-        } else {
-            throw new RestClientException("Failed to download file. Status code: " + response.getStatusCodeValue());
+
+            // 获取二进制响应
+            byte[] bytes = response.body().bytes();
+
+            // 构建返回对象
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
+            ResponseEntity<byte[]> responseEntity = ResponseEntity.ok()
+                    .headers(headers)
+                    .body(bytes);
+
+            return responseEntity;
+        } catch (IOException e) {
+            // 异常处理（保持原有逻辑）
+            log.error("虾皮 请求异常：" + ExceptionUtils.exToString(e));
+            throw new RuntimeException(e.getMessage());
         }
     }
+
+//    /**
+//     * 发送post请求，接收文件流
+//     */
+//    private ResponseEntity<byte[]> downloadFile(String url, JSONObject jsonParams) throws RestClientException, IOException {
+//        HttpHeaders headers = new HttpHeaders();
+//        MediaType type = MediaType.APPLICATION_JSON;
+//        headers.setContentType(type);
+//        headers.setAccept(Arrays.asList(MediaType.APPLICATION_OCTET_STREAM));
+//
+////        HttpEntity<Map<String, Object>> requestEntity = new HttpEntity<>(jsonParams, headers);
+//        RequestEntity<Map<String, Object>> request = new RequestEntity<>(jsonParams, headers, HttpMethod.POST, URI.create(url));
+//
+////        ResponseEntity<InputStream> response = restTemplate.exchange(request, InputStream.class);
+//        ResponseEntity<byte[]> response = restTemplate.exchange(request, byte[].class);
+//        MediaType contentType = response.getHeaders().getContentType();
+//
+////        HttpHeaders headers = response.getHeaders();
+//        MediaType contentTypeR = response.getHeaders().getContentType();
+//
+//        if (contentTypeR != null && contentTypeR.isCompatibleWith(MediaType.APPLICATION_JSON)) {
+//            byte[] responseBody = response.getBody();
+//            if (responseBody != null) {
+//                String jsonContent = new String(responseBody, StandardCharsets.UTF_8);
+//                System.out.println(jsonContent);
+//            }
+//        }
+//        if (response.getStatusCode().is2xxSuccessful()) {
+//            return response;
+//        } else {
+//            throw new RestClientException("Failed to download file. Status code: " + response.getStatusCodeValue());
+//        }
+//    }
 
     @Override
     public ShopeeResponse tokenCreateAndRefresh(ShopeeRequest shopeeRequest, ShopeeAppClientDTO publicDTO) {
