@@ -1,13 +1,14 @@
 package com.eshop.util.platform.api.service.user.shop.temu;
 
-import com.alibaba.fastjson.JSONObject;
+import com.eshop.util.platform.api.service.user.shop.temu.dto.TemuOpenAccessTokenInfoGetReqDTO;
+import com.eshop.util.platform.api.service.user.shop.temu.vo.TemuOpenAccessTokenInfoGetRespVO;
 import com.eshop.util.platform.api.structure.temu.dto.TemuAppClientDTO;
 
 public interface TemuOrderPoShopCall {
 
     /**
-     * 查询店铺权限
-     * US/EU
+     * 查询当前token对应授权信息
+     * CN/US/EU
      */
-    String openAccessTokenInfoGet(TemuAppClientDTO publicDto, JSONObject businessDto) throws Exception;
+    TemuOpenAccessTokenInfoGetRespVO openAccessTokenInfoGet(TemuAppClientDTO publicDto, TemuOpenAccessTokenInfoGetReqDTO reqDTO) throws Exception;
 }

@@ -1,28 +1,35 @@
-package com.eshop.util.platform.api.service.user.shop.temu;
+package com.eshop.util.platform.api.service.product.temu;
 
 import com.alibaba.fastjson.JSONObject;
 import com.eshop.util.platform.api.client.temu.TemuClient;
 import com.eshop.util.platform.api.client.temu.TemuRequest;
 import com.eshop.util.platform.api.client.temu.TemuResponse;
-import com.eshop.util.platform.api.service.user.shop.temu.dto.TemuOpenAccessTokenInfoGetReqDTO;
-import com.eshop.util.platform.api.service.user.shop.temu.vo.TemuOpenAccessTokenInfoGetRespVO;
+import com.eshop.util.platform.api.service.product.temu.dto.TemuModelInfoGetReqDTO;
+import com.eshop.util.platform.api.service.product.temu.vo.TemuModelInfoGetRespVO;
 import com.eshop.util.platform.api.structure.temu.dto.TemuAppClientDTO;
 import com.eshop.util.platform.utils.FastJsonUtil;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+@Slf4j
 @Service
-public class TemuOrderPoShopCallImpl implements TemuOrderPoShopCall {
+public class TemuModelCallImpl implements TemuModelCall {
 
     @Autowired
     private TemuClient temuClient;
 
-    // bg.open.accesstoken.info.get
-    // 查询当前token对应授权信息
+    /**
+     * bg.modelinfo.get
+     * 模特信息查询
+     * 更新时间：2025-03-26 14:33:26
+     * 接口介绍：模特信息查询
+     * CN
+     */
     @Override
-    public TemuOpenAccessTokenInfoGetRespVO openAccessTokenInfoGet(TemuAppClientDTO publicDto, TemuOpenAccessTokenInfoGetReqDTO reqDTO) throws Exception {
+    public TemuModelInfoGetRespVO modelInfoGet(TemuAppClientDTO publicDto, TemuModelInfoGetReqDTO reqDTO) throws Exception {
         //请求接口 API接口名，形如：bg.*
-        String type = "bg.open.accesstoken.info.get";
+        String type = "bg.modelinfo.get";
         String version = null;
         //请求返回的数据格式，可选参数固定为JSON
         String dataType = "JSON";
@@ -37,9 +44,9 @@ public class TemuOrderPoShopCallImpl implements TemuOrderPoShopCall {
 
         TemuResponse temuResponse = temuClient.execute(temuRequest, publicDto);
         String respBody = temuResponse.getGopResponseBody();
-        TemuOpenAccessTokenInfoGetRespVO respVO = JSONObject.parseObject(respBody, TemuOpenAccessTokenInfoGetRespVO.class);
+        TemuModelInfoGetRespVO respVO = JSONObject.parseObject(respBody, TemuModelInfoGetRespVO.class);
         if (respVO == null) {
-            respVO = new TemuOpenAccessTokenInfoGetRespVO();
+            respVO = new TemuModelInfoGetRespVO();
         }
         respVO.setRespBody(respBody);
         return respVO;

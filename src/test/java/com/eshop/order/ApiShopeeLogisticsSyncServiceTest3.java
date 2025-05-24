@@ -42,7 +42,7 @@ public class ApiShopeeLogisticsSyncServiceTest3 {
 
     @Test
     void contextLoads2() throws Exception {
-        String imgUrl = "http://192.168.10.219:9000/eshop/eshop_img/2025/5/23/vg-250523194712950A159663.jpg";
+        String imgUrl = "https://file.vogocm.com:9000/eshop/eshop_img/2025/5/23/vg-250523193018113A007279.jpg";
         Integer catType = 1;
         byte[] imageData = okImageDownloader.downloadImageWithRetry(imgUrl);
         String imgBase64 = Base64.encodeBase64String(imageData);
@@ -110,10 +110,26 @@ public class ApiShopeeLogisticsSyncServiceTest3 {
 //            }
 //            System.out.println(imgBase64);
             // 2. 直接保存为文件
-            byte[] imgArr = ImageService.processImage(imageData, suffix);
-            InputStream inputStreamForRead = new ByteArrayInputStream(imgArr);
-            BufferedImage image = ImgUtil.read(inputStreamForRead);
-            saveImageToFile(image, suffix, "/output/images/result."+suffix);
+            String ss = null;
+            try {
+//                byte[] imgArr = ImageService.processImage(imageData, suffix);
+//                InputStream inputStreamForRead = new ByteArrayInputStream(imgArr);
+//                BufferedImage image = ImgUtil.read(inputStreamForRead);
+                ss = System.currentTimeMillis()+"1";
+                saveImageToFile(sourceImage, suffix, "/output/images/result"+ss+"."+suffix);
+                ss = ss+"2";
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+
+            try {
+                imageData = TemuImageService.processImage(imageData,suffix);
+                InputStream inputStreamForRead22 = new ByteArrayInputStream(imageData);
+                BufferedImage image22 = ImgUtil.read(inputStreamForRead22);
+                saveImageToFile(image22, suffix, "/output/images/result"+ss+"."+suffix);
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
         }
     }
     /**

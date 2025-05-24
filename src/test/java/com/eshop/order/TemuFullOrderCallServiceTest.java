@@ -4,6 +4,8 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.eshop.entity.config.TbShop;
 import com.eshop.service.config.ITbShopService;
+import com.eshop.util.platform.api.service.marketing.temu.TemuActivityCall;
+import com.eshop.util.platform.api.service.marketing.temu.vo.TemuActivityListRespVO;
 import com.eshop.util.platform.api.structure.temu.dto.TemuAppClientDTO;
 import com.eshop.util.platform.call.order.temu.TemuFullOrderCallService;
 import com.eshop.util.platform.call.order.temu.dto.TemuFullOrderPurchaseOrderV2ReqDTO;
@@ -27,6 +29,9 @@ public class TemuFullOrderCallServiceTest {
     @Resource
     private TemuFullOrderCallService temuFullOrderCallService;
 
+    @Resource
+    private TemuActivityCall temuActivityCall;
+
     @Test
     void getLogisticsShipment() throws Exception {
         String orderNo = "WB250325506705";
@@ -48,5 +53,16 @@ public class TemuFullOrderCallServiceTest {
 
         respVO.setRespBody(null);
         System.out.println(JSON.toJSONString(respVO, SerializerFeature.WriteMapNullValue));    }
+
+    @Test
+    void getLogisticsShipment2() throws Exception {
+        Long shopId = 3127L;
+        TbShop shopDO = shopService.getById(shopId);
+        String shopLocation = "CN";
+        TemuAppClientDTO clientDTO = platformAppClientUtils.getTemuAppClientDTO(shopDO, shopLocation);
+
+        TemuActivityListRespVO temuActivityListRespVO = temuActivityCall.marketingActivityListGet(clientDTO, null);
+        System.out.println(temuActivityListRespVO.getRespBody());
+    }
 
 }

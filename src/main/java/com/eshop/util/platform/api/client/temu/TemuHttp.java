@@ -1,29 +1,39 @@
 package com.eshop.util.platform.api.client.temu;
 
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
+import okhttp3.*;
 import org.springframework.stereotype.Component;
-import org.springframework.web.client.RestClientException;
-import org.springframework.web.client.RestTemplate;
 
 import javax.annotation.Resource;
+import java.io.IOException;
 
 @Component
 public class TemuHttp {
 
+    // 推荐重用 OkHttpClient 实例（线程安全）
     @Resource
-    private RestTemplate restTemplate;
+    private OkHttpClient client;
+    private static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
 
     /**
-     * post请求  发送json数据
+     * POST 请求 发送 JSON 数据
      */
-    public  String postForJson(String url, String json) throws RestClientException {
-        HttpHeaders headers = new HttpHeaders();
-        MediaType type = MediaType.parseMediaType("application/json; charset=UTF-8");
-        headers.setContentType(type);
-        headers.add("Accept", MediaType.APPLICATION_JSON.toString());
-        HttpEntity<String> formEntity = new HttpEntity<>(json, headers);
-        return restTemplate.postForEntity(url, formEntity, String.class).getBody();
+    public String execute(String url, String json) throws IOException {
+        // 构建请求体
+        RequestBody body = RequestBody.create(json, JSON);
+
+        // 构建请求
+        Request request = new Request.Builder()
+                .url(url)
+                .post(body)
+                .addHeader("Accept", "application/json")
+                .build();
+
+        // 执行请求
+        try (Response response = client.newCall(request).execute()) {
+            if (!response.isSuccessful()) throw new IOException("Unexpected code " + response);
+
+            // 获取响应体（自动处理 UTF-8 解码）
+            return response.body() != null ? response.body().string() : "";
+        }
     }
 }

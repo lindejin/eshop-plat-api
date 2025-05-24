@@ -4,13 +4,14 @@ import com.alibaba.fastjson.JSONObject;
 import com.eshop.util.platform.api.exception.ApiSyncException;
 import com.eshop.util.platform.api.structure.temu.dto.TemuAppClientDTO;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import javax.annotation.Resource;
 
 @Service
 public class TemuClientImpl implements TemuClient {
 
-    @Autowired
+    @Resource
     private TemuHttp temuHttp;
 
     @Override
@@ -44,7 +45,7 @@ public class TemuClientImpl implements TemuClient {
         jsonParams.put("data_type", dataType);
         jsonParams.put("sign", sign);
 
-        String jsonStr = temuHttp.postForJson(apiUrl, jsonParams.toJSONString());
+        String jsonStr = temuHttp.execute(apiUrl, jsonParams.toJSONString());
         TemuResponse response = new TemuResponse();
         response.setGopResponseBody(jsonStr);
         return response;
@@ -99,7 +100,7 @@ public class TemuClientImpl implements TemuClient {
         String dataType = temuRequest.getDataType();
 
         String code = null;
-        if (temuRequest.getJsonParams() !=null) {
+        if (temuRequest.getJsonParams() != null) {
             JSONObject jsonParams = temuRequest.getJsonParams();
             code = jsonParams.getString("code");
 
@@ -128,7 +129,7 @@ public class TemuClientImpl implements TemuClient {
         jsonParams.put("data_type", dataType);
         jsonParams.put("sign", sign);
 
-        String jsonStr = temuHttp.postForJson(apiUrl, jsonParams.toJSONString());
+        String jsonStr = temuHttp.execute(apiUrl, jsonParams.toJSONString());
         TemuResponse response = new TemuResponse();
         response.setGopResponseBody(jsonStr);
         return response;
