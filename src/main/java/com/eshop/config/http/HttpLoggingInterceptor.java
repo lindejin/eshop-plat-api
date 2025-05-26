@@ -1,4 +1,4 @@
-package com.eshop.config;
+package com.eshop.config.http;
 
 import org.apache.hc.core5.http.*;
 import org.apache.hc.core5.http.io.entity.BufferedHttpEntity;

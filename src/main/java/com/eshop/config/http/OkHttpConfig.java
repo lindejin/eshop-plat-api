@@ -1,4 +1,4 @@
-package com.eshop.config;
+package com.eshop.config.http;
 
 import okhttp3.*;
 import org.slf4j.Logger;
@@ -35,7 +35,7 @@ public class OkHttpConfig {
                 .sslSocketFactory(sslSocketFactory(), x509TrustManager())
                 .hostnameVerifier((hostname, session) -> true)
                 .retryOnConnectionFailure(true)
-                .addInterceptor(new LoggingInterceptor())
+                .addInterceptor(new OkLogInterceptor())
                 .build();
     }
 

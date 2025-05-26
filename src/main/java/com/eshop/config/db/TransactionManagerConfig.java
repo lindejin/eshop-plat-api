@@ -1,4 +1,4 @@
-package com.eshop.config;
+package com.eshop.config.db;
 
 import com.atomikos.icatch.jta.UserTransactionImp;
 import com.atomikos.icatch.jta.UserTransactionManager;

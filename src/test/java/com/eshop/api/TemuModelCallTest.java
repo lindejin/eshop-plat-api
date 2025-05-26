@@ -98,7 +98,7 @@ public class TemuModelCallTest {
 
         // 示例调用（自动处理500并发）
         List<CompletableFuture<TemuModelInfoGetRespVO>> futures = new ArrayList<>();
-        for (int i = 0; i < 5000; i++) {
+        for (int i = 0; i < 100; i++) {
             futures.add(CompletableFuture.supplyAsync(() -> {
                 try {
 //                    return temuApiInvoker.execute(

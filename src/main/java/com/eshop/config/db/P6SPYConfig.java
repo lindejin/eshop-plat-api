@@ -1,4 +1,4 @@
-package com.eshop.config;
+package com.eshop.config.db;
 
 import com.baomidou.mybatisplus.core.toolkit.StringPool;
 import com.p6spy.engine.spy.appender.MessageFormattingStrategy;

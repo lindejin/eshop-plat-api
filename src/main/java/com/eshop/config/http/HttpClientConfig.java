@@ -1,4 +1,4 @@
-package com.eshop.config;
+package com.eshop.config.http;
 
 import org.apache.hc.client5.http.ConnectionKeepAliveStrategy;
 import org.apache.hc.client5.http.config.RequestConfig;

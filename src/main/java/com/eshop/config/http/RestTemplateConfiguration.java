@@ -1,4 +1,4 @@
-package com.eshop.config;
+package com.eshop.config.http;
 
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
