@@ -1,14 +1,13 @@
 package com.eshop.util.platform.api.service.product.temu.vo;
 
-import com.eshop.util.platform.api.structure.BaseResponseVO;
+import java.util.List;
 
 @lombok.Getter
 @lombok.Setter
 @lombok.ToString
-public class TemuModelInfoGetRespVO extends BaseResponseVO {
-
-    //  "result": {
+public class TemuModelInfoGetResultVO {
     //        "total": 1,
+    private Integer total;
     //        "modelList": [
     //            {
     //                "modelName": "jo ke",
@@ -26,14 +25,6 @@ public class TemuModelInfoGetRespVO extends BaseResponseVO {
     //                "headPortrait": "https://img.cdnfe.com/product/1f14f501298/038c189d-3ffd-4698-861f-1d5916db5c30_480x480.png"
     //            }
     //        ]
-    //    },
-    private TemuModelInfoGetResultVO result;
-    //    "success": true,
-    private Boolean success;
-    //    "requestId": "cn-c42863ef-d801-4dc7-b633-cdc509551357",
-    private String requestId;
-    //    "errorCode": 1000000,
-    private Integer errorCode;
-    //    "errorMsg": ""
-    private String errorMsg;
+    private List<TemuModelInfoGetResultModelListVO> modelList;
+
 }
