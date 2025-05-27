@@ -36,7 +36,7 @@ public class TemuClientImpl implements TemuClient {
         }
 
         //md5加密签名
-        String sign = TemuUtils.getSign(appKey, appSecret, accessToken, timestamp, type, dataType, jsonParams);
+        String sign = TemuUtils.getSignKey(appKey, appSecret, accessToken, timestamp, type, dataType, jsonParams);
 
         jsonParams.put("app_key", appKey);
         jsonParams.put("access_token", accessToken);
@@ -119,7 +119,7 @@ public class TemuClientImpl implements TemuClient {
         }
 
         //md5加密签名
-        String sign = TemuUtils.getSign(appKey, appSecret, accessToken, timestamp, type, dataType, jsonParams);
+        String sign = TemuUtils.getSignKey(appKey, appSecret, accessToken, timestamp, type, dataType, jsonParams);
 
         jsonParams.put("app_key", appKey);
         jsonParams.put("access_token", accessToken);

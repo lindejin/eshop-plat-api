@@ -36,7 +36,7 @@ public class TikTokTest {
 
     @Test
     void getLogisticsShipment() throws Exception {
-        TbShop shopDO = iTbShopService.getById(2090);
+        TbShop shopDO = iTbShopService.getById(1597);
         TikTokAppClientDTO tikTokAppClientDTO = platformAppClientUtils.getTikTokAppClientDTO(shopDO);
         //获取平台店铺信息
         TiktokAuthBaseInfoDTO authDto = new TiktokAuthBaseInfoDTO();
@@ -45,6 +45,8 @@ public class TikTokTest {
 
         Map<String, TKShopInfoVO> shopInfoMap = getShopInfoMap(authDto);
         System.out.println(JSONObject.toJSONString(shopInfoMap));
+
+        System.out.println(tikTokAppClientDTO.getAccessToken());
     }
 
     /**
@@ -95,18 +97,29 @@ public class TikTokTest {
         }
         return resultJson;
     }
+    private static final String ENV_GL_OLD = "https://open-api.tiktokglobalshop.com";
 
+    private static final String ENV_GL = "https://us.vogocmerp.com/openapi_tiktok_gl";
     /**
      * get请求
      */
     public JSONObject sendGetRequest1(String urlTemp, TiktokAuthBaseInfoDTO authDTO, Map<String, Object> paramMap,
                                       String logPrefix) {
+
+        String appKey = authDTO.getPlatformAppInfo().getString("app_key");
+        String appSecret = authDTO.getPlatformAppInfo().getString("app_secret");
+        String shopCipher = authDTO.getShopCipher();
+        String accessToken = authDTO.getAccessToken();
+
         if (StringUtils.isBlank(urlTemp)) {
             throw new TkException("Url路径不能为空!!!");
         }
         String urlFirst = PatternUtil.replaceCurlyBracketContent(urlTemp, paramMap);
-        String requestUrl = TikTokUtil.generateNewRequestUrl(urlFirst, authDTO, paramMap, "");
-        String accessToken = authDTO.getAccessToken();
+        String requestUrl = TikTokUtil.generateNewRequestUrl(urlFirst, appKey, appSecret,shopCipher,paramMap, "");
+
+        if (requestUrl.indexOf(ENV_GL_OLD)!=-1){
+            requestUrl = requestUrl.replace(ENV_GL_OLD,ENV_GL);
+        }
         return sendGetRequestOkHttp(requestUrl, accessToken, logPrefix);
 
     }

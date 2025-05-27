@@ -35,7 +35,7 @@ public class OkHttpConfig {
                 .sslSocketFactory(sslSocketFactory(), x509TrustManager())
                 .hostnameVerifier((hostname, session) -> true)
                 .retryOnConnectionFailure(true)
-                .addInterceptor(new OkLogInterceptor())
+                .addInterceptor(new LoggingInterceptor())
                 .build();
     }
 
@@ -62,7 +62,7 @@ public class OkHttpConfig {
     }
 
     // 日志拦截器
-    static class LoggingInterceptor implements Interceptor {
+    public static class LoggingInterceptor implements Interceptor {
         @Override
         public Response intercept(Chain chain) throws IOException {
             Request request = chain.request();

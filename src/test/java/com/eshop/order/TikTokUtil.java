@@ -562,22 +562,17 @@ public final class TikTokUtil {
     /**
      * 请求构建URl (202309版)
      */
-    public static String generateNewRequestUrl(String requestPath, TiktokAuthBaseInfoDTO authBaseInfoDTO, Map<String,
+    public static String generateNewRequestUrl(String requestPath, String appKey, String appSecret, String shopCipher, Map<String,
             Object> paramMap, String bodyStr) {
-        if (Objects.isNull(authBaseInfoDTO)) {
-            throw new RuntimeException("TikTok授权信息不能为空!!!");
-        }
         if (Objects.isNull(paramMap)) {
             paramMap = new HashMap<>();
         }
-        JSONObject platformAppInfo = authBaseInfoDTO.getPlatformAppInfo();
-        paramMap.put("app_key", platformAppInfo.getString("app_key"));
+        paramMap.put("app_key", appKey);
         paramMap.put("timestamp", Instant.now().getEpochSecond());
-        if (StringUtils.isNotBlank(authBaseInfoDTO.getShopCipher())) {
-            paramMap.put("shop_cipher", authBaseInfoDTO.getShopCipher());
+        if (StringUtils.isNotBlank(shopCipher)) {
+            paramMap.put("shop_cipher", shopCipher);
         }
-        String sign = TikTokUtil.generateSignNew(requestPath, paramMap, bodyStr,
-                platformAppInfo.getString("app_secret"));
+        String sign = TikTokUtil.generateSignNew(requestPath, paramMap, bodyStr, appSecret);
         paramMap.put("sign", sign);
         StringBuilder requestUrl = new StringBuilder();
         requestUrl.append(ConstantTikTok.OPEN_API).append(requestPath).append("?")
