@@ -137,7 +137,7 @@ public class TemuVideoCallTest {
                     Math.min((int) ((finalI + 1) * chunkSizeInBytes), bytes.length));
             String partNum = String.valueOf(finalI + 1);
             String fileParam = "part_file";
-            String fileName = UUID.randomUUID()  + ".part";
+            String fileName = UUID.randomUUID() + ".part";
             String contentMd5Temp = null;
 
             TemuVideoUploadPartDTO partDTO = new TemuVideoUploadPartDTO();
@@ -153,8 +153,13 @@ public class TemuVideoCallTest {
         }
 
         for (TemuVideoUploadPartDTO partDTO : partDTOList) {
+            String partNum = partDTO.getPartNum();
             TemuVideoUploadPartRespVO partRespVO = uploadVideoPart(partDTO);
             System.out.println(partRespVO.getRespBody());
+            Integer uploadedPartNum = partRespVO.getUploaded_part_num();
+            if (uploadedPartNum != null && partNum.equals(uploadedPartNum + "")) {
+                System.out.println("分块上传成功！"+uploadedPartNum);
+            }
         }
 
         TemuVideoUploadCompleteRespVO completeRespVO = completeVideoUpload(partSign, contentMd5);
