@@ -4,8 +4,6 @@ import com.eshop.util.platform.api.service.media.temu.dto.*;
 import com.eshop.util.platform.api.service.media.temu.vo.*;
 import com.eshop.util.platform.api.structure.temu.dto.TemuAppClientDTO;
 
-import java.io.InputStream;
-
 public interface TemuVideoCall {
     /**
      * bg.goods.video.upload.sign.get

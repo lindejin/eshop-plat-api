@@ -10,5 +10,14 @@ public class TemuVideoUploadCompleteRespVO extends BaseResponseVO {
      * 上传视频文件对应vid，后续查询转码结果使用
      */
     private String vid;
+    /**
+     * 成功时不返回
+     */
+    private Integer error_code;
+
+    /**
+     * 错误消息
+     */
+    private String error_msg;
 
 }

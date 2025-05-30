@@ -9,4 +9,14 @@ public class TemuVideoInitRespVO extends BaseResponseVO {
 
     //
     private String sign;
+
+    /**
+     * 成功时不返回
+     */
+    private Integer error_code;
+
+    /**
+     * 错误消息
+     */
+    private String error_msg;
 }
