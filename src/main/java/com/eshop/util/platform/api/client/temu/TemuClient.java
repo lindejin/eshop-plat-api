@@ -9,4 +9,7 @@ public interface TemuClient {
 
     TemuResponse tokenCreateAndRefresh(TemuRequest temuRequest, TemuAppClientDTO publicDTO) throws Exception;
 
+    TemuResponse executeUpload(TemuFileRequest request) throws Exception;
+
+    TemuResponse executeUploadPost(TemuFileRequest requestFile) throws Exception;
 }

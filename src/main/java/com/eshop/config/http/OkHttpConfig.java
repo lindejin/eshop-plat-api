@@ -1,20 +1,25 @@
 package com.eshop.config.http;
 
+import com.moczul.ok2curl.CurlInterceptor;
+import com.moczul.ok2curl.logger.Logger;
+import lombok.extern.slf4j.Slf4j;
 import okhttp3.*;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.beetl.core.util.Log;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import javax.net.ssl.*;
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.SSLSocketFactory;
+import javax.net.ssl.TrustManager;
+import javax.net.ssl.X509TrustManager;
 import java.io.IOException;
 import java.security.SecureRandom;
 import java.security.cert.X509Certificate;
 import java.util.concurrent.TimeUnit;
 
+@Slf4j
 @Configuration
 public class OkHttpConfig {
-    private static final Logger logger = LoggerFactory.getLogger(OkHttpConfig.class);
 
     // 连接池参数
     private static final int MAX_IDLE_CONNECTIONS = 200;
@@ -24,6 +29,8 @@ public class OkHttpConfig {
     private static final int CONNECT_TIMEOUT = 30;
     private static final int READ_TIMEOUT = 60;
     private static final int WRITE_TIMEOUT = 60;
+
+    private static final String TAG = OkHttpConfig.class.getSimpleName();
 
     @Bean
     public OkHttpClient okHttpClient() {
@@ -35,6 +42,12 @@ public class OkHttpConfig {
                 .sslSocketFactory(sslSocketFactory(), x509TrustManager())
                 .hostnameVerifier((hostname, session) -> true)
                 .retryOnConnectionFailure(true)
+//                .addNetworkInterceptor(new CurlInterceptor(new Logger() {
+//                    @Override
+//                    public void log(String message) {
+//                        Log.d(TAG,message);
+//                    }
+//                }))
                 .addInterceptor(new LoggingInterceptor())
                 .build();
     }
@@ -67,10 +80,10 @@ public class OkHttpConfig {
         public Response intercept(Chain chain) throws IOException {
             Request request = chain.request();
             long startTime = System.nanoTime();
-            logger.info("Sending request: {} {}", request.method(), request.url());
+            log.info("Sending request: {} {}", request.method(), request.url());
             Response response = chain.proceed(request);
             long duration = (System.nanoTime() - startTime) / 1_000_000;
-            logger.info("Received response in {}ms: {}", duration, response.code());
+            log.info("Received response in {}ms: {}", duration, response.code());
             return response;
         }
     }

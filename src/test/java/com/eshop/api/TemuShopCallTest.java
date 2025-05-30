@@ -3,8 +3,6 @@ package com.eshop.api;
 import com.eshop.entity.config.TbShop;
 import com.eshop.service.config.ITbShopService;
 import com.eshop.util.platform.api.client.temu.TemuApiInvoker;
-import com.eshop.util.platform.api.service.marketing.temu.TemuActivityCall;
-import com.eshop.util.platform.api.service.marketing.temu.vo.TemuActivityListRespVO;
 import com.eshop.util.platform.api.service.user.shop.temu.TemuOrderPoShopCall;
 import com.eshop.util.platform.api.service.user.shop.temu.vo.TemuOpenAccessTokenInfoGetRespVO;
 import com.eshop.util.platform.api.structure.temu.dto.TemuAppClientDTO;
@@ -16,7 +14,7 @@ import javax.annotation.Resource;
 
 
 @SpringBootTest
-public class TemuOrderPoShopCallTest {
+public class TemuShopCallTest {
 
     @Resource
     private PlatformAppClientUtils platformAppClientUtils;

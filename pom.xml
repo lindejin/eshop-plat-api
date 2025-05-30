@@ -222,7 +222,18 @@
             <artifactId>okhttp</artifactId>
             <version>4.12.0</version>
         </dependency>
-
+        <!-- https://mvnrepository.com/artifact/com.squareup.okhttp3/logging-interceptor -->
+        <dependency>
+            <groupId>com.squareup.okhttp3</groupId>
+            <artifactId>logging-interceptor</artifactId>
+            <version>4.12.0</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/com.github.mrmike/ok2curl -->
+        <dependency>
+            <groupId>com.github.mrmike</groupId>
+            <artifactId>ok2curl</artifactId>
+            <version>0.8.0</version>
+        </dependency>
         <!-- https://mvnrepository.com/artifact/com.squareup.okhttp3/mockwebserver -->
         <dependency>
             <groupId>com.squareup.okhttp3</groupId>

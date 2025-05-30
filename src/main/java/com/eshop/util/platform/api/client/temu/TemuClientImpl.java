@@ -3,16 +3,24 @@ package com.eshop.util.platform.api.client.temu;
 import com.alibaba.fastjson.JSONObject;
 import com.eshop.util.platform.api.exception.ApiSyncException;
 import com.eshop.util.platform.api.structure.temu.dto.TemuAppClientDTO;
+import okhttp3.*;
+import okio.BufferedSink;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Map;
 
 @Service
 public class TemuClientImpl implements TemuClient {
 
     @Resource
     private TemuHttp temuHttp;
+
+    @Resource
+    private OkHttpClient client;
 
     @Override
     public TemuResponse execute(TemuRequest temuRequest, TemuAppClientDTO publicDTO) throws Exception {
@@ -130,6 +138,75 @@ public class TemuClientImpl implements TemuClient {
         jsonParams.put("sign", sign);
 
         String jsonStr = temuHttp.execute(apiUrl, jsonParams.toJSONString());
+        TemuResponse response = new TemuResponse();
+        response.setGopResponseBody(jsonStr);
+        return response;
+    }
+
+
+    @Override
+    public TemuResponse executeUpload(TemuFileRequest requestFile) throws Exception {
+        String jsonStr = "";
+        JSONObject jsonParams = requestFile.getJsonParams();
+        byte[] byteFile = requestFile.getByteFile();
+        String fileParam = requestFile.getFileParam();
+        String fileName = requestFile.getFileName();
+        String url = requestFile.getUrl();
+        // 1. 准备输入流（模拟从网络或数据库获取）
+
+
+        // 2. 创建 RequestBody
+        RequestBody fileBody = RequestBody.create(MediaType.parse("application/octet-stream"), byteFile);
+        // 3. 构建 Multipart 请求体
+        MultipartBody.Builder builder = new MultipartBody.Builder()
+                .setType(MultipartBody.FORM);
+
+        builder.addFormDataPart(
+                fileParam,
+                fileName,
+                fileBody
+        );
+
+        if (jsonParams != null) {
+            for (Map.Entry<String, Object> entry : jsonParams.entrySet()) {
+                String key = entry.getKey();
+                Object value = entry.getValue();
+
+                // 空值检查（重要！）
+                if (value != null) {
+                    builder.addFormDataPart(key, value.toString());
+                }
+            }
+        }
+
+        RequestBody requestBody = builder.build();
+
+        // 4. 发送请求
+        Request request = new Request.Builder()
+                .url(url)
+                .post(requestBody)
+                .build();
+
+        try (Response response = client.newCall(request).execute()) {
+            jsonStr = response.body().string();
+            String msg = jsonStr == null ? "" : jsonStr;
+            msg = "Upload failed" + msg;
+            if (!response.isSuccessful()) throw new IOException(msg);
+        }
+        TemuResponse response = new TemuResponse();
+        response.setGopResponseBody(jsonStr);
+        return response;
+    }
+
+
+    @Override
+    public TemuResponse executeUploadPost(TemuFileRequest requestFile) throws Exception {
+        JSONObject jsonParams = requestFile.getJsonParams();
+        String url = requestFile.getUrl();
+        if (jsonParams == null) {
+            jsonParams = new JSONObject();
+        }
+        String jsonStr = temuHttp.execute(url, jsonParams.toJSONString());
         TemuResponse response = new TemuResponse();
         response.setGopResponseBody(jsonStr);
         return response;

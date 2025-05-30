@@ -4,6 +4,8 @@ import com.eshop.util.platform.api.service.media.temu.dto.*;
 import com.eshop.util.platform.api.service.media.temu.vo.*;
 import com.eshop.util.platform.api.structure.temu.dto.TemuAppClientDTO;
 
+import java.io.InputStream;
+
 public interface TemuVideoCall {
     /**
      * bg.goods.video.upload.sign.get
@@ -37,7 +39,9 @@ public interface TemuVideoCall {
      * https://openapi.kuajingmaihuo.com/api/galerie/v1/store_video
      */
     TemuVideoStoreVideoUploadRespVO uploadStoreVideo(
-            TemuAppClientDTO appClientDTO,
+            byte[] byteFile,
+            String fileParam,
+            String fileName,
             TemuVideoStoreVideoUploadReqDTO uploadReqDTO
     ) throws Exception;
 
@@ -50,7 +54,6 @@ public interface TemuVideoCall {
      * https://openapi.kuajingmaihuo.com/api/galerie/large_file/v1/video/upload_init
      */
     TemuVideoInitRespVO initVideoUpload(
-            TemuAppClientDTO appClientDTO,
             TemuVideoInitReqDTO initReqDTO
     ) throws Exception;
 
@@ -62,7 +65,9 @@ public interface TemuVideoCall {
      * https://openapi.kuajingmaihuo.com/api/galerie/large_file/v1/video/upload_part
      */
     TemuVideoUploadPartRespVO uploadVideoPart(
-            TemuAppClientDTO appClientDTO,
+            byte[] partFile,
+            String fileParam,
+            String fileName,
             TemuVideoUploadPartReqDTO partReqDTO
     ) throws Exception;
 
@@ -74,7 +79,6 @@ public interface TemuVideoCall {
      * https://openapi.kuajingmaihuo.com/api/galerie/large_file/v1/video/upload_complete
      */
     TemuVideoUploadCompleteRespVO completeVideoUpload(
-            TemuAppClientDTO appClientDTO,
             TemuVideoUploadCompleteReqDTO completeReqDTO
     ) throws Exception;
 }

@@ -1,4 +1,10 @@
 package com.eshop.util.platform.api.service.media.temu.vo;
 
-public class TemuVideoUploadPartRespVO {
+import com.eshop.util.platform.api.structure.BaseResponseVO;
+
+@lombok.Getter
+@lombok.Setter
+@lombok.ToString
+public class TemuVideoUploadPartRespVO extends BaseResponseVO {
+
 }

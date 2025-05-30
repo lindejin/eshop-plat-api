@@ -1,5 +1,6 @@
 package com.eshop.api;
 
+import eu.medsea.mimeutil.MimeType;
 import eu.medsea.mimeutil.MimeUtil;
 
 import java.io.IOException;
@@ -20,6 +21,16 @@ public class MimeDetector {
     // 根据二进制数据检测 MIME 类型
     public static Collection<?> detectMimeType(byte[] data) {
         return MimeUtil.getMimeTypes(data);// 默认返回未知类型
+    }
+
+    public static MimeType getMimeType(byte[] data){
+        Collection<?> objects = detectMimeType(data);
+
+        MimeType m = objects.toArray(new MimeType[0])[0];
+
+        System.out.println("File Type: " + m.getMediaType());
+        System.out.println("File Extension: " + m.getSubType());
+        return m;
     }
 
     // 根据输入流检测（自动关闭流）
