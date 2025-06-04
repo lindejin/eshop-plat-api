@@ -221,8 +221,9 @@ public class TemuVideoCallTest {
     @Test
     void goodsBigVideoUploadResultGet() throws Exception {
         String vid = "goods-video-tag#hzv72wppszu0tjfielsj6m3v8gc4o16o";
+        vid =  "goods-video-tag#cv8te340egwkjtacqji56mijr5ifnxfk";
 
-        Long shopId = 2325L;
+        Long shopId = 3055L;
         TbShop shopDO = shopService.getById(shopId);
         String shopLocation = "CN";
         TemuAppClientDTO clientDTO = platformAppClientUtils.getTemuAppClientDTO(shopDO, shopLocation);
