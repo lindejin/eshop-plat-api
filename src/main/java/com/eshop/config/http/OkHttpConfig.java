@@ -87,4 +87,39 @@ public class OkHttpConfig {
             return response;
         }
     }
+
+
+
+    public static OkHttpClient create() {
+        try {
+            // 创建信任所有证书的信任管理器
+            X509TrustManager trustAllCertManager = new X509TrustManager() {
+                @Override
+                public void checkClientTrusted(X509Certificate[] chain, String authType) {}
+
+                @Override
+                public void checkServerTrusted(X509Certificate[] chain, String authType) {}
+
+                @Override
+                public X509Certificate[] getAcceptedIssuers() {
+                    return new X509Certificate[0];
+                }
+            };
+
+            // 创建支持所有 SSL/TLS 版本的上下文
+            SSLContext sslContext = SSLContext.getInstance("SSL");
+            sslContext.init(null, new TrustManager[]{trustAllCertManager}, new java.security.SecureRandom());
+
+            // 构建客户端
+            return new OkHttpClient.Builder()
+                    .connectTimeout(30, TimeUnit.SECONDS)
+                    .readTimeout(60, TimeUnit.SECONDS)
+                    .sslSocketFactory(sslContext.getSocketFactory(), trustAllCertManager)
+                    .hostnameVerifier((hostname, session) -> true) // 信任所有主机名
+                    .build();
+
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to create universal client", e);
+        }
+    }
 }

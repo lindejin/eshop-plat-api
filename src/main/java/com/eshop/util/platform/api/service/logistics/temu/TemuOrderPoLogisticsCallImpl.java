@@ -6,14 +6,14 @@ import com.eshop.util.platform.api.client.temu.TemuClient;
 import com.eshop.util.platform.api.client.temu.TemuRequest;
 import com.eshop.util.platform.api.client.temu.TemuResponse;
 import com.eshop.util.platform.api.service.logistics.temu.dto.TemuLogisticsShipmentDocumentReqDTO;
-import com.eshop.util.platform.api.service.logistics.temu.vo.TemuLogisticsShipmentDocumentRespVO;
-import com.eshop.util.platform.api.service.order.temu.dto.TemuOrderListV2ReqDTO;
-import com.eshop.util.platform.api.service.order.temu.vo.TemuOrderListV2RespVO;
+import com.eshop.util.platform.api.service.logistics.temu.dto.TemuLogisticsShipmentResultReqDTO;
+import com.eshop.util.platform.api.service.logistics.temu.vo.*;
 import com.eshop.util.platform.api.structure.temu.dto.TemuAppClientDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.Optional;
 
 @Service
 public class TemuOrderPoLogisticsCallImpl implements TemuOrderPoLogisticsCall {
@@ -138,23 +138,22 @@ public class TemuOrderPoLogisticsCallImpl implements TemuOrderPoLogisticsCall {
     // bg.logistics.shipment.result.get
 
     @Override
-    public String logisticsShipmentResultGet(TemuAppClientDTO publicDto, JSONObject businessDto) throws Exception {
+    public TemuLogisticsShipmentResultRespVO logisticsShipmentResultGet(TemuAppClientDTO temuAcDTO, TemuLogisticsShipmentResultReqDTO reqDTO) throws Exception {
 
         //请求接口 API接口名，形如：bg.*
         String type = "bg.logistics.shipment.result.get";
-        String version = null;
-        //请求返回的数据格式，可选参数固定为JSON
-        String dataType = "JSON";
-
-        TemuRequest temuRequest = new TemuRequest();
-        temuRequest.setType(type);
-        temuRequest.setDataType(dataType);
-        temuRequest.setVersion(version);
-        //商品实体
-        temuRequest.setJsonParams(businessDto);
-
-        TemuResponse temuResponse = temuClient.execute(temuRequest, publicDto);
-        return temuResponse.getGopResponseBody();
+        TemuLogisticsShipmentResultRespVO respVO = temuApiInvoker.execute(
+                temuAcDTO,
+                type,
+                TemuLogisticsShipmentResultRespVO.class,
+                reqDTO
+        );
+        String trackingNumber = Optional.ofNullable(respVO.getResult())
+                .map(TemuLogisticsShipmentResultVO::getPackageInfoResultList)
+                .map(list -> list.get(0))
+                .map(TemuLogisticsShipmentResultPackageInfoVO::getTrackingNumber).orElse(null);
+        respVO.setTrackingNumber(trackingNumber);
+        return respVO;
     }
 
     // 物流在线发货重新下单接口
@@ -214,6 +213,12 @@ public class TemuOrderPoLogisticsCallImpl implements TemuOrderPoLogisticsCall {
                 TemuLogisticsShipmentDocumentRespVO.class,
                 reqDTO
         );
+        //返回参数二次处理
+        String url = Optional.ofNullable(respVO.getResult())
+                .map(TemuLogisticsShipmentDocumentResultVO::getShippingLabelUrlList)
+                .map(list -> list.get(0))
+                .map(TemuLogisticsShipmentDocumentShippingLabelUrlVO::getUrl).orElse(null);
+        respVO.setUrl(url);
         return respVO;
     }
 }

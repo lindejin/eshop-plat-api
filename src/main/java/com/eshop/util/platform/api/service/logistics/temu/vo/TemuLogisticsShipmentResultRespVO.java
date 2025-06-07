@@ -5,9 +5,9 @@ import com.eshop.util.platform.api.structure.BaseResponseVO;
 @lombok.Getter
 @lombok.Setter
 @lombok.ToString
-public class TemuLogisticsShipmentDocumentRespVO  extends BaseResponseVO {
+public class TemuLogisticsShipmentResultRespVO  extends BaseResponseVO {
 
-    private TemuLogisticsShipmentDocumentResultVO result;
+    private TemuLogisticsShipmentResultVO result;
 
     //      "success": true,
     private Boolean success;
@@ -18,7 +18,7 @@ public class TemuLogisticsShipmentDocumentRespVO  extends BaseResponseVO {
     //		"errorMsg": "SUC"
     private String errorMsg;
 
-
     //
-    private String url;
+     //运单号
+    private String trackingNumber;
 }

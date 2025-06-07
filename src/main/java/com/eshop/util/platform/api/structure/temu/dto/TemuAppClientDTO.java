@@ -62,8 +62,8 @@ public class TemuAppClientDTO {
     //测试环境 EU	无	http://openapi-b-eu.temudemo.com/openapi/router
     private static final String ENV_EU_TEST = "http://openapi-b-eu.temudemo.com/openapi/router";
 
-    //正式环境 GL	无	https://us.vogocmerp.com/global/openapi/router
-//    private static final String ENV_GL = "https://us.vogocmerp.com/global/openapi/router";
+    //正式环境 GL	无	https://openapi-b-global.temu.com/openapi/router
+//    private static final String ENV_GL = "https://openapi-b-global.temu.com/openapi/router";
 
     private static final String ENV_GL = "https://us.vogocmerp.com/openapi_temu_gl/openapi/router";
 
