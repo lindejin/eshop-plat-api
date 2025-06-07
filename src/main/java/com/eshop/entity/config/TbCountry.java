@@ -3,10 +3,11 @@ package com.eshop.entity.config;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-import java.io.Serializable;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+
+import java.io.Serializable;
 
 /**
  * <p>
@@ -36,6 +37,11 @@ public class TbCountry implements Serializable {
      * 国家代码缩写 (三位)
      */
     private String countryThreeCode;
+
+    /**
+     * 币种
+     */
+    private String currencyCode;
 
     /**
      * 国家中文名

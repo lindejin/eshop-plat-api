@@ -1,13 +1,9 @@
 package com.eshop.api2;
 
-import cn.hutool.core.util.ObjectUtil;
 import com.alibaba.fastjson.JSONObject;
-import com.eshop.entity.config.TbShop;
-import com.eshop.order.OkImageDownloader;
 import com.eshop.service.config.ITbShopService;
 import com.eshop.util.platform.api.service.im.dhpage.DhGateImCall;
 import com.eshop.util.platform.api.service.im.dhpage.dto.DhContactListReqDTO;
-import com.eshop.util.platform.api.service.media.temu.TemuVideoCall;
 import com.eshop.util.platform.api.structure.dhgate.dto.DhAppClientDTO;
 import com.eshop.util.platform.utils.FastJsonUtil;
 import com.eshop.util.shop.PlatformAppClientUtils;
@@ -15,7 +11,6 @@ import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import javax.annotation.Resource;
-import java.util.List;
 
 
 @SpringBootTest
@@ -39,12 +34,6 @@ public class DhGateImCallTest {
         int size = 20;
         reqDTO.setSize(size);
         reqDTO.setPage(1);
-//        if (ObjectUtil.isNotEmpty(dto.getFilter())) {
-//            reqDTO.setFilter(dto.getFilter());
-//        }
-//        if (ObjectUtil.isNotEmpty(dto.getSearch())) {
-//            reqDTO.setFilter(dto.getSearch());
-//        }
         DhAppClientDTO dhAppClientDTO = getDH();
         JSONObject businessDto = FastJsonUtil.toJsonToJsonObj(reqDTO);
         String contactList = dhGateImCall.getContactList(dhAppClientDTO, businessDto);

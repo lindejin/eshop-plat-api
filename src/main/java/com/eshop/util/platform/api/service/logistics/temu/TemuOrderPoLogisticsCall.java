@@ -1,6 +1,8 @@
 package com.eshop.util.platform.api.service.logistics.temu;
 
 import com.alibaba.fastjson.JSONObject;
+import com.eshop.util.platform.api.service.logistics.temu.dto.TemuLogisticsShipmentDocumentReqDTO;
+import com.eshop.util.platform.api.service.logistics.temu.vo.TemuLogisticsShipmentDocumentRespVO;
 import com.eshop.util.platform.api.structure.temu.dto.TemuAppClientDTO;
 
 public interface TemuOrderPoLogisticsCall {
@@ -57,5 +59,5 @@ public interface TemuOrderPoLogisticsCall {
      * 物流在线发货打印面单接口
      * US/EU
      */
-    String logisticsShipmentDocumentGet(TemuAppClientDTO publicDto, JSONObject businessDto) throws Exception;
+    TemuLogisticsShipmentDocumentRespVO logisticsShipmentDocumentGet(TemuAppClientDTO publicDto, TemuLogisticsShipmentDocumentReqDTO businessDto) throws Exception;
 }

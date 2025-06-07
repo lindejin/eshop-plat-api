@@ -1,18 +1,28 @@
 package com.eshop.util.platform.api.service.logistics.temu;
 
 import com.alibaba.fastjson.JSONObject;
+import com.eshop.util.platform.api.client.temu.TemuApiInvoker;
 import com.eshop.util.platform.api.client.temu.TemuClient;
 import com.eshop.util.platform.api.client.temu.TemuRequest;
 import com.eshop.util.platform.api.client.temu.TemuResponse;
+import com.eshop.util.platform.api.service.logistics.temu.dto.TemuLogisticsShipmentDocumentReqDTO;
+import com.eshop.util.platform.api.service.logistics.temu.vo.TemuLogisticsShipmentDocumentRespVO;
+import com.eshop.util.platform.api.service.order.temu.dto.TemuOrderListV2ReqDTO;
+import com.eshop.util.platform.api.service.order.temu.vo.TemuOrderListV2RespVO;
 import com.eshop.util.platform.api.structure.temu.dto.TemuAppClientDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import javax.annotation.Resource;
 
 @Service
 public class TemuOrderPoLogisticsCallImpl implements TemuOrderPoLogisticsCall {
 
     @Autowired
     private TemuClient temuClient;
+
+    @Resource
+    private TemuApiInvoker temuApiInvoker;
 
     // 查询卖家发货仓库基础信息接口
     // bg.logistics.warehouse.list.get
@@ -194,22 +204,16 @@ public class TemuOrderPoLogisticsCallImpl implements TemuOrderPoLogisticsCall {
     // 物流在线发货打印面单接口
     // bg.logistics.shipment.document.get
     @Override
-    public String logisticsShipmentDocumentGet(TemuAppClientDTO publicDto, JSONObject businessDto) throws Exception {
+    public TemuLogisticsShipmentDocumentRespVO logisticsShipmentDocumentGet(TemuAppClientDTO temuAcDTO, TemuLogisticsShipmentDocumentReqDTO reqDTO) throws Exception {
 
         //请求接口 API接口名，形如：bg.*
         String type = "bg.logistics.shipment.document.get";
-        String version = null;
-        //请求返回的数据格式，可选参数固定为JSON
-        String dataType = "JSON";
-
-        TemuRequest temuRequest = new TemuRequest();
-        temuRequest.setType(type);
-        temuRequest.setDataType(dataType);
-        temuRequest.setVersion(version);
-        //商品实体
-        temuRequest.setJsonParams(businessDto);
-
-        TemuResponse temuResponse = temuClient.execute(temuRequest, publicDto);
-        return temuResponse.getGopResponseBody();
+        TemuLogisticsShipmentDocumentRespVO respVO = temuApiInvoker.execute(
+                temuAcDTO,
+                type,
+                TemuLogisticsShipmentDocumentRespVO.class,
+                reqDTO
+        );
+        return respVO;
     }
 }
