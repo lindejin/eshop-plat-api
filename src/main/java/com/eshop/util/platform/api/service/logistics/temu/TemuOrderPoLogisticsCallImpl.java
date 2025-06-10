@@ -5,14 +5,17 @@ import com.eshop.util.platform.api.client.temu.TemuApiInvoker;
 import com.eshop.util.platform.api.client.temu.TemuClient;
 import com.eshop.util.platform.api.client.temu.TemuRequest;
 import com.eshop.util.platform.api.client.temu.TemuResponse;
+import com.eshop.util.platform.api.service.logistics.temu.dto.TemuLogisticsShipLogisticsTypeReqDTO;
 import com.eshop.util.platform.api.service.logistics.temu.dto.TemuLogisticsShipmentDocumentReqDTO;
 import com.eshop.util.platform.api.service.logistics.temu.dto.TemuLogisticsShipmentResultReqDTO;
+import com.eshop.util.platform.api.service.logistics.temu.dto.TemuLogisticsWarehouseListReqDTO;
 import com.eshop.util.platform.api.service.logistics.temu.vo.*;
 import com.eshop.util.platform.api.structure.temu.dto.TemuAppClientDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -27,23 +30,45 @@ public class TemuOrderPoLogisticsCallImpl implements TemuOrderPoLogisticsCall {
     // 查询卖家发货仓库基础信息接口
     // bg.logistics.warehouse.list.get
     @Override
-    public String logisticsWarehouseListGet(TemuAppClientDTO publicDto, JSONObject businessDto) throws Exception {
+    public TemuLogisticsWarehouseListRespVO logisticsWarehouseListGet(TemuAppClientDTO temuAcDTO, TemuLogisticsWarehouseListReqDTO reqDTO) throws Exception {
 
         //请求接口 API接口名，形如：bg.*
         String type = "bg.logistics.warehouse.list.get";
-        String version = null;
-        //请求返回的数据格式，可选参数固定为JSON
-        String dataType = "JSON";
+        TemuLogisticsWarehouseListRespVO respVO = temuApiInvoker.execute(
+                temuAcDTO,
+                type,
+                TemuLogisticsWarehouseListRespVO.class,
+                reqDTO
+        );
+        //返回参数二次处理
+        List<TemuLogisticsWarehouseListResultWarehouseVO> warehouseList = Optional.ofNullable(respVO.getResult())
+                .map(TemuLogisticsWarehouseListResultVO::getWarehouseList).orElse(null);
+        respVO.setWarehouseList(warehouseList);
+        return respVO;
+    }
 
-        TemuRequest temuRequest = new TemuRequest();
-        temuRequest.setType(type);
-        temuRequest.setDataType(dataType);
-        temuRequest.setVersion(version);
-        //商品实体
-        temuRequest.setJsonParams(businessDto);
+    //temu.logistics.shiplogisticstype.get
+    //描述：您可以通过此 API 获取所有在线发货物流类型的信息。
+    // 之后，他们可以在 Temu 上调用“bg.logistics.shipment.create”来创建购买发货。
+    // 一旦您选择购买发货物流类型，Temu 将自动为您选择最推荐的渠道 ID 和购买发货方式。
+    @Override
+    public TemuLogisticsShipLogisticsTypeRespVO logisticsShipLogisticsTypeGet(TemuAppClientDTO temuAcDTO, TemuLogisticsShipLogisticsTypeReqDTO reqDTO) throws Exception {
 
-        TemuResponse temuResponse = temuClient.execute(temuRequest, publicDto);
-        return temuResponse.getGopResponseBody();
+        //请求接口 API接口名，形如：bg.*
+        String type = "temu.logistics.shiplogisticstype.get";
+        TemuLogisticsShipLogisticsTypeRespVO respVO = temuApiInvoker.execute(
+                temuAcDTO,
+                type,
+                TemuLogisticsShipLogisticsTypeRespVO.class,
+                reqDTO
+        );
+        //返回参数二次处理
+        TemuLogisticsShipLogisticsTypeResultVO resultVO = Optional.ofNullable(respVO.getResult()).orElse(null);
+        if (resultVO != null) {
+            respVO.setRegionId(resultVO.getRegionId());
+            respVO.setShipLogisticsTypeInfoDTOList(resultVO.getShipLogisticsTypeInfoDTOList());
+        }
+        return respVO;
     }
 
     // 查询可用物流服务接口

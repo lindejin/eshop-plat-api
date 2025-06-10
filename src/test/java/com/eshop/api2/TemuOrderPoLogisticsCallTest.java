@@ -1,14 +1,20 @@
 package com.eshop.api2;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import com.eshop.config.http.OkHttpConfig;
 import com.eshop.entity.config.TbShop;
 import com.eshop.service.config.ITbShopService;
 import com.eshop.util.platform.api.service.logistics.temu.TemuOrderPoLogisticsCall;
+import com.eshop.util.platform.api.service.logistics.temu.dto.TemuLogisticsShipLogisticsTypeReqDTO;
 import com.eshop.util.platform.api.service.logistics.temu.dto.TemuLogisticsShipmentDocumentReqDTO;
 import com.eshop.util.platform.api.service.logistics.temu.dto.TemuLogisticsShipmentResultReqDTO;
+import com.eshop.util.platform.api.service.logistics.temu.dto.TemuLogisticsWarehouseListReqDTO;
+import com.eshop.util.platform.api.service.logistics.temu.vo.TemuLogisticsShipLogisticsTypeRespVO;
 import com.eshop.util.platform.api.service.logistics.temu.vo.TemuLogisticsShipmentDocumentRespVO;
 import com.eshop.util.platform.api.service.logistics.temu.vo.TemuLogisticsShipmentResultRespVO;
+import com.eshop.util.platform.api.service.logistics.temu.vo.TemuLogisticsWarehouseListRespVO;
 import com.eshop.util.platform.api.service.order.temu.TemuOrderV2Call;
 import com.eshop.util.platform.api.service.order.temu.dto.TemuOrderDetailV2ReqDTO;
 import com.eshop.util.platform.api.service.order.temu.vo.TemuOrderDetailV2RespVO;
@@ -179,5 +185,66 @@ public class TemuOrderPoLogisticsCallTest {
             sb.append(String.format("%02x", b & 0xff));
         }
         return sb.toString();
+    }
+
+    @Test
+    void contextLoads() throws Exception {
+        Long shopId = 3110L;
+        TbShop shopDO = shopService.getById(shopId);
+        String shopLocation = "GL";
+        TemuAppClientDTO gl = platformAppClientUtils.getTemuAppClientDTO(shopDO, shopLocation);
+
+
+        TemuLogisticsWarehouseListReqDTO businessDto = new TemuLogisticsWarehouseListReqDTO();
+        TemuLogisticsWarehouseListRespVO s = temuOrderPoLogisticsCall.logisticsWarehouseListGet(gl, businessDto);
+        System.out.println(s.getRespBody());
+        System.out.println(JSON.toJSON(s.getWarehouseList()));
+    }
+
+
+    @Test
+    void logisticsShipLogisticsTypeGet() throws Exception {
+        Long shopId = 3110L;
+        TbShop shopDO = shopService.getById(shopId);
+        String shopLocation = "GL";
+        TemuAppClientDTO gl = platformAppClientUtils.getTemuAppClientDTO(shopDO, shopLocation);
+
+
+        TemuLogisticsShipLogisticsTypeReqDTO businessDto = new TemuLogisticsShipLogisticsTypeReqDTO();
+        businessDto.setRegionId(160L);
+        TemuLogisticsShipLogisticsTypeRespVO s = temuOrderPoLogisticsCall.logisticsShipLogisticsTypeGet(gl, businessDto);
+        System.out.println(s.getRespBody());
+        System.out.println(JSON.toJSON(s.getShipLogisticsTypeInfoDTOList()));
+
+    }
+
+    @Test
+    void logisticsShippingServicesGet() throws Exception {
+        Long shopId = 3110L;
+        TbShop shopDO = shopService.getById(shopId);
+        String shopLocation = "GL";
+        TemuAppClientDTO gl = platformAppClientUtils.getTemuAppClientDTO(shopDO, shopLocation);
+
+
+        //订单同步的包裹号
+        JSONArray jsonArray = new JSONArray();
+        jsonArray.add("160-01121136323192676");
+
+        JSONObject businessDto = new JSONObject();
+        businessDto.put("warehouseId","WH-10971324948630058");
+        //WH-01436465889433016
+//        businessDto.put("warehouseId","WH-01436465889433016");
+
+        businessDto.put("orderSnList", jsonArray);
+
+        businessDto.put("weight","0.15");
+        businessDto.put("weightUnit","kg");
+
+        businessDto.put("length","30.00");
+        businessDto.put("width","25.00");
+        businessDto.put("height","1.00");
+        businessDto.put("dimensionUnit","cm");
+        String s = temuOrderPoLogisticsCall.logisticsShippingServicesGet(gl, businessDto);
+        System.out.println(s);
     }
 }

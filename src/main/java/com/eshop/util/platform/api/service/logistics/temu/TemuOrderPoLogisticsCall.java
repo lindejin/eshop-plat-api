@@ -1,10 +1,14 @@
 package com.eshop.util.platform.api.service.logistics.temu;
 
 import com.alibaba.fastjson.JSONObject;
+import com.eshop.util.platform.api.service.logistics.temu.dto.TemuLogisticsShipLogisticsTypeReqDTO;
 import com.eshop.util.platform.api.service.logistics.temu.dto.TemuLogisticsShipmentDocumentReqDTO;
 import com.eshop.util.platform.api.service.logistics.temu.dto.TemuLogisticsShipmentResultReqDTO;
+import com.eshop.util.platform.api.service.logistics.temu.dto.TemuLogisticsWarehouseListReqDTO;
+import com.eshop.util.platform.api.service.logistics.temu.vo.TemuLogisticsShipLogisticsTypeRespVO;
 import com.eshop.util.platform.api.service.logistics.temu.vo.TemuLogisticsShipmentDocumentRespVO;
 import com.eshop.util.platform.api.service.logistics.temu.vo.TemuLogisticsShipmentResultRespVO;
+import com.eshop.util.platform.api.service.logistics.temu.vo.TemuLogisticsWarehouseListRespVO;
 import com.eshop.util.platform.api.structure.temu.dto.TemuAppClientDTO;
 
 public interface TemuOrderPoLogisticsCall {
@@ -13,7 +17,15 @@ public interface TemuOrderPoLogisticsCall {
      * 查询卖家发货仓库基础信息接口
      * US/EU
      */
-    String logisticsWarehouseListGet(TemuAppClientDTO publicDto, JSONObject businessDto) throws Exception;
+    TemuLogisticsWarehouseListRespVO logisticsWarehouseListGet(TemuAppClientDTO publicDto, TemuLogisticsWarehouseListReqDTO reqDTO) throws Exception;
+
+    /**
+     * temu.logistics.shiplogisticstype.get
+     * 描述：您可以通过此 API 获取所有在线发货物流类型的信息。
+     * 之后，他们可以在 Temu 上调用“bg.logistics.shipment.create”来创建购买发货。
+     * 一旦您选择购买发货物流类型，Temu 将自动为您选择最推荐的渠道 ID 和购买发货方式。
+     */
+    TemuLogisticsShipLogisticsTypeRespVO logisticsShipLogisticsTypeGet(TemuAppClientDTO temuAcDTO, TemuLogisticsShipLogisticsTypeReqDTO reqDTO) throws Exception;
 
     /**
      * 查询可用物流服务接口
@@ -43,7 +55,7 @@ public interface TemuOrderPoLogisticsCall {
      * 物流在线发货下单查询接口
      * US/EU
      */
-    TemuLogisticsShipmentResultRespVO logisticsShipmentResultGet(TemuAppClientDTO temuAcDTO, TemuLogisticsShipmentResultReqDTO reqDTO)  throws Exception;
+    TemuLogisticsShipmentResultRespVO logisticsShipmentResultGet(TemuAppClientDTO temuAcDTO, TemuLogisticsShipmentResultReqDTO reqDTO) throws Exception;
 
     /**
      * 物流在线发货重新下单接口

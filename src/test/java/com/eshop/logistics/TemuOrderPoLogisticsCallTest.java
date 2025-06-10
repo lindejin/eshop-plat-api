@@ -39,9 +39,11 @@ public class TemuOrderPoLogisticsCallTest {
 
 
         JSONObject businessDto = new JSONObject();
-        String s = temuOrderPoLogisticsCall.logisticsWarehouseListGet(gl, businessDto);
-        System.out.println(s);
+//        String s = temuOrderPoLogisticsCall.logisticsWarehouseListGet(gl, businessDto);
+//        System.out.println(s);
     }
+
+
     @Test
     void logisticsShippingServicesGet() throws Exception {
         TbShop shopDO = shopService.getById(1722L);
