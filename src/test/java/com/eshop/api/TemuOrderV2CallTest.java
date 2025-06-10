@@ -28,7 +28,7 @@ public class TemuOrderV2CallTest {
 
     @Test
     void getOrderDetailV2() throws Exception {
-        Long shopId = 3110L;
+        Long shopId = 3280L;
         TbShop shopDO = shopService.getById(shopId);
         String shopLocation = "GL";
         TemuAppClientDTO clientDTO = platformAppClientUtils.getTemuAppClientDTO(shopDO, shopLocation);
