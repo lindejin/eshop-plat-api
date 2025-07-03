@@ -11,7 +11,7 @@ public interface TemuOrderPoLogisticsCall {
      * 查询卖家发货仓库基础信息接口
      * US/EU
      */
-    TemuLogisticsWarehouseListRespVO logisticsWarehouseListGet(TemuAppClientDTO publicDto, TemuLogisticsWarehouseListReqDTO reqDTO) throws Exception;
+    TemuLogisticsWarehouseListRespVO logisticsWarehouseListGet(TemuAppClientDTO temuAcDTO, TemuLogisticsWarehouseListReqDTO reqDTO) throws Exception;
 
     /**
      * temu.logistics.shiplogisticstype.get
@@ -25,25 +25,25 @@ public interface TemuOrderPoLogisticsCall {
      * 查询可用物流服务接口
      * US/EU
      */
-    TemuLogisticsShippingServicesRespVO logisticsShippingServicesGet(TemuAppClientDTO publicDto, TemuLogisticsShippingServicesReqDTO reqDTO) throws Exception;
+    TemuLogisticsShippingServicesRespVO logisticsShippingServicesGet(TemuAppClientDTO temuAcDTO, TemuLogisticsShippingServicesReqDTO reqDTO) throws Exception;
 
     /**
      * 物流在线发货下单接口
      * US/EU
      */
-    String logisticsShipmentCreate(TemuAppClientDTO publicDto, JSONObject businessDto) throws Exception;
+    TemuLogisticsShipmentCreateRespVO logisticsShipmentCreate(TemuAppClientDTO temuAcDTO, TemuLogisticsShipmentCreateReqDTO reqDTO) throws Exception;
 
     /**
      * 下call成功待发货包裹列表查询接口
      * US/EU
      */
-    String orderUnshippedPackageGet(TemuAppClientDTO publicDto, JSONObject businessDto) throws Exception;
+    String orderUnshippedPackageGet(TemuAppClientDTO temuAcDTO, JSONObject businessDto) throws Exception;
 
     /**
      * 确认包裹发货接口
      * US/EU
      */
-    String logisticsShippedPackageConfirm(TemuAppClientDTO publicDto, JSONObject businessDto) throws Exception;
+    String logisticsShippedPackageConfirm(TemuAppClientDTO temuAcDTO, JSONObject businessDto) throws Exception;
 
     /**
      * 物流在线发货下单查询接口
@@ -55,17 +55,17 @@ public interface TemuOrderPoLogisticsCall {
      * 物流在线发货重新下单接口
      * US/EU
      */
-    String logisticsShipmentUpdate(TemuAppClientDTO publicDto, JSONObject businessDto) throws Exception;
+    String logisticsShipmentUpdate(TemuAppClientDTO temuAcDTO, JSONObject businessDto) throws Exception;
 
     /**
      * 物流在线发货修改物流接口
      * US/EU
      */
-    String logisticsShipmentShippingTypeUpdate(TemuAppClientDTO publicDto, JSONObject businessDto) throws Exception;
+    String logisticsShipmentShippingTypeUpdate(TemuAppClientDTO temuAcDTO, JSONObject businessDto) throws Exception;
 
     /**
      * 物流在线发货打印面单接口
      * US/EU
      */
-    TemuLogisticsShipmentDocumentRespVO logisticsShipmentDocumentGet(TemuAppClientDTO publicDto, TemuLogisticsShipmentDocumentReqDTO businessDto) throws Exception;
+    TemuLogisticsShipmentDocumentRespVO logisticsShipmentDocumentGet(TemuAppClientDTO temuAcDTO, TemuLogisticsShipmentDocumentReqDTO businessDto) throws Exception;
 }

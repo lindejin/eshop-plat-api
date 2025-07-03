@@ -93,23 +93,23 @@ public class TemuOrderPoLogisticsCallImpl implements TemuOrderPoLogisticsCall {
     // 物流在线发货下单接口
     // bg.logistics.shipment.create
     @Override
-    public String logisticsShipmentCreate(TemuAppClientDTO publicDto, JSONObject businessDto) throws Exception {
+    public TemuLogisticsShipmentCreateRespVO logisticsShipmentCreate(TemuAppClientDTO temuAcDTO, TemuLogisticsShipmentCreateReqDTO reqDTO) throws Exception {
 
         //请求接口 API接口名，形如：bg.*
         String type = "bg.logistics.shipment.create";
-        String version = null;
-        //请求返回的数据格式，可选参数固定为JSON
-        String dataType = "JSON";
-
-        TemuRequest temuRequest = new TemuRequest();
-        temuRequest.setType(type);
-        temuRequest.setDataType(dataType);
-        temuRequest.setVersion(version);
-        //商品实体
-        temuRequest.setJsonParams(businessDto);
-
-        TemuResponse temuResponse = temuClient.execute(temuRequest, publicDto);
-        return temuResponse.getGopResponseBody();
+        TemuLogisticsShipmentCreateRespVO respVO = temuApiInvoker.execute(
+                temuAcDTO,
+                type,
+                TemuLogisticsShipmentCreateRespVO.class,
+                reqDTO
+        );
+        //返回参数二次处理
+        TemuLogisticsShipmentCreateResultVO resultVO = Optional.ofNullable(respVO.getResult()).orElse(null);
+        if (resultVO != null) {
+            respVO.setPackageSnList(resultVO.getPackageSnList());
+            respVO.setShipLaterLimitTime(resultVO.getShipLaterLimitTime());
+        }
+        return respVO;
     }
 
     // 下call成功待发货包裹列表查询接口
