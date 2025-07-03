@@ -66,8 +66,8 @@ public class TemuOrderPoLogisticsCallTest {
         businessDto.put("width","1.01");
         businessDto.put("height","1.01");
         businessDto.put("dimensionUnit","cm");
-        String s = temuOrderPoLogisticsCall.logisticsShippingServicesGet(gl, businessDto);
-        System.out.println(s);
+//        String s = temuOrderPoLogisticsCall.logisticsShippingServicesGet(gl, businessDto);
+//        System.out.println(s);
     }
 
     @Test
@@ -92,8 +92,8 @@ public class TemuOrderPoLogisticsCallTest {
         businessDto.put("width","1.01");
         businessDto.put("height","1.01");
         businessDto.put("dimensionUnit","in");
-        String s = temuOrderPoLogisticsCall.logisticsShippingServicesGet(gl, businessDto);
-        System.out.println(s);
+//        String s = temuOrderPoLogisticsCall.logisticsShippingServicesGet(gl, businessDto);
+//        System.out.println(s);
     }
 
     @Test

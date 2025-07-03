@@ -1,14 +1,8 @@
 package com.eshop.util.platform.api.service.logistics.temu;
 
 import com.alibaba.fastjson.JSONObject;
-import com.eshop.util.platform.api.service.logistics.temu.dto.TemuLogisticsShipLogisticsTypeReqDTO;
-import com.eshop.util.platform.api.service.logistics.temu.dto.TemuLogisticsShipmentDocumentReqDTO;
-import com.eshop.util.platform.api.service.logistics.temu.dto.TemuLogisticsShipmentResultReqDTO;
-import com.eshop.util.platform.api.service.logistics.temu.dto.TemuLogisticsWarehouseListReqDTO;
-import com.eshop.util.platform.api.service.logistics.temu.vo.TemuLogisticsShipLogisticsTypeRespVO;
-import com.eshop.util.platform.api.service.logistics.temu.vo.TemuLogisticsShipmentDocumentRespVO;
-import com.eshop.util.platform.api.service.logistics.temu.vo.TemuLogisticsShipmentResultRespVO;
-import com.eshop.util.platform.api.service.logistics.temu.vo.TemuLogisticsWarehouseListRespVO;
+import com.eshop.util.platform.api.service.logistics.temu.dto.*;
+import com.eshop.util.platform.api.service.logistics.temu.vo.*;
 import com.eshop.util.platform.api.structure.temu.dto.TemuAppClientDTO;
 
 public interface TemuOrderPoLogisticsCall {
@@ -31,7 +25,7 @@ public interface TemuOrderPoLogisticsCall {
      * 查询可用物流服务接口
      * US/EU
      */
-    String logisticsShippingServicesGet(TemuAppClientDTO publicDto, JSONObject businessDto) throws Exception;
+    TemuLogisticsShippingServicesRespVO logisticsShippingServicesGet(TemuAppClientDTO publicDto, TemuLogisticsShippingServicesReqDTO reqDTO) throws Exception;
 
     /**
      * 物流在线发货下单接口
