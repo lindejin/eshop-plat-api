@@ -68,10 +68,10 @@ public class TemuOrderPoCallTest {
 
     @Test
     void getOrderDetail() throws Exception {
-        TbShop shopDO = shopService.getById(2461L);
+        TbShop shopDO = shopService.getById(3110L);
         TemuAppClientDTO GL = platformAppClientUtils.getTemuAppClientDTO(shopDO, "GL");
         JSONObject params = new JSONObject();
-        params.put("parentOrderSn", "PO-100-19934836234792890");
+        params.put("parentOrderSn", "PO-160-03454286858872051");
         String respBody = temuOrderPoCall.getOrderDetail(GL, params);
         System.out.println(respBody);
 
@@ -80,12 +80,25 @@ public class TemuOrderPoCallTest {
 
     @Test
     void getOrderDetailUS() throws Exception {
-        TbShop shopDO = shopService.getById(2461L);
-        TemuAppClientDTO US = platformAppClientUtils.getTemuAppClientDTO(shopDO, "US");
+        TbShop shopDO = shopService.getById(3110L);
+        String shopLocation = "GL";
+        TemuAppClientDTO US = platformAppClientUtils.getTemuAppClientDTO(shopDO, shopLocation);
         JSONObject params = new JSONObject();
         params.put("parentOrderSn", "PO-211-09201654360873408");
         String respBody = temuOrderPoCall.getOrderDetail(US, params);
         System.out.println(respBody);
-
     }
+
+//
+//    @Test
+//    void getOrderDetailUS() throws Exception {
+//        TbShop shopDO = shopService.getById(3110L);
+//        String shopLocation = "GL";
+//        TemuAppClientDTO US = platformAppClientUtils.getTemuAppClientDTO(shopDO, shopLocation);
+//        JSONObject params = new JSONObject();
+//        params.put("parentOrderSn", "PO-211-09201654360873408");
+//        String respBody = temuOrderPoCall.getOrderDetail(US, params);
+//        System.out.println(respBody);
+//
+//    }
 }
