@@ -10,6 +10,9 @@ import com.eshop.util.platform.api.service.logistics.temu.dto.TemuLogisticsWareh
 import com.eshop.util.platform.api.service.logistics.temu.vo.TemuLogisticsShipmentCreateRespVO;
 import com.eshop.util.platform.api.service.logistics.temu.vo.TemuLogisticsShippingServicesRespVO;
 import com.eshop.util.platform.api.service.logistics.temu.vo.TemuLogisticsWarehouseListRespVO;
+import com.eshop.util.platform.api.service.product.temu.TemuProductBrandCall;
+import com.eshop.util.platform.api.service.product.temu.dto.TemuGoodsBrandGetReqDTO;
+import com.eshop.util.platform.api.service.product.temu.vo.TemuGoodsBrandGetRespVO;
 import com.eshop.util.platform.api.structure.temu.dto.TemuAppClientDTO;
 import com.eshop.util.shop.PlatformAppClientUtils;
 import org.junit.jupiter.api.Test;
@@ -31,6 +34,9 @@ public class TemuOrderPoLogisticsCallTestNew {
     @Resource
     private TemuOrderPoLogisticsCall temuOrderPoLogisticsCall;
 
+    @Resource
+    private TemuProductBrandCall temuProductBrandCall;
+
     @Test
     void logisticsWarehouseListGet() throws Exception {
         Long shopId = 3110L;
@@ -42,6 +48,27 @@ public class TemuOrderPoLogisticsCallTestNew {
         TemuLogisticsWarehouseListRespVO s = temuOrderPoLogisticsCall.logisticsWarehouseListGet(gl, businessDto);
         System.out.println(s.getRespBody());
         System.out.println(JSON.toJSON(s.getWarehouseList()));
+    }
+
+    @Test
+    void goodsDetailGet() throws Exception {
+        Long shopId = 3425l;
+        TbShop shopDO = shopService.getById(shopId);
+        String shopLocation = "CN";
+        TemuAppClientDTO gl = platformAppClientUtils.getTemuAppClientDTO(shopDO, shopLocation);
+
+        System.out.println(JSON.toJSON(gl));
+        TemuGoodsBrandGetReqDTO businessDto = new TemuGoodsBrandGetReqDTO();
+        businessDto.setPage(1);
+        businessDto.setPageSize(50);
+//        businessDto.setVid(1000000473007L);
+        TemuGoodsBrandGetRespVO s = temuProductBrandCall.goodsDetailGet(gl, businessDto);
+        System.out.println(s.getRespBody());
+        System.out.println(JSON.toJSON(s));
+        /*
+        {"result":{"total":2,"pageItems":[{"vid":146223,"brandId":1000000473007,"brandNameEn":"MARVEL","pid":1467,"regSerialCode":"85319128"},{"vid":120557,"brandId":360776542,"brandNameEn":"DISNEY","pid":1467,"regSerialCode":"77098343"}]},"success":true,"requestId":"cn-b4c09fe7-fd5e-4bef-8403-1a86c4e9f0c4","errorCode":1000000,"errorMsg":""}
+         */
+
     }
 /*
 {
