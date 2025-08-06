@@ -1,7 +1,7 @@
 package com.eshop.util.platform.api.service.order.temu.vo;
 
 import com.eshop.util.platform.api.structure.BaseResponseVO;
-import com.eshop.util.platform.call.order.temu.vo.TemuOrderPoListResultResultVO;
+import com.eshop.util.platform.call.order.temu.order.vo.TemuOrderPoListResultResultVO;
 
 
 @lombok.Getter

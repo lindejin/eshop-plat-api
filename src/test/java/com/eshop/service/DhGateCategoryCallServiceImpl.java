@@ -3,7 +3,6 @@ package com.eshop.service;
 import com.alibaba.fastjson.JSONObject;
 import com.eshop.util.platform.api.service.category.dhgate.DhGateCategoryCall;
 import com.eshop.util.platform.api.structure.dhgate.dto.DhAppClientDTO;
-import com.eshop.util.platform.call.order.temu.vo.TemuOrderPoListRespVO;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

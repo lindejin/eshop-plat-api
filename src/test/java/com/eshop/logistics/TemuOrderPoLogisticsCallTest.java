@@ -6,15 +6,14 @@ import com.eshop.entity.config.TbShop;
 import com.eshop.service.config.ITbShopService;
 import com.eshop.util.platform.api.service.logistics.temu.TemuOrderPoLogisticsCall;
 import com.eshop.util.platform.api.structure.temu.dto.TemuAppClientDTO;
-import com.eshop.util.platform.call.order.temu.TemuOrderPoCallService;
-import com.eshop.util.platform.call.order.temu.dto.TemuOrderPoLogisticsShipmentReqDTO;
-import com.eshop.util.platform.call.order.temu.vo.TemuOrderPoLogisticsShipmentRespVO;
+import com.eshop.util.platform.call.order.temu.order.TemuOrderPoCallService;
+import com.eshop.util.platform.call.order.temu.order.dto.TemuOrderPoLogisticsShipmentReqDTO;
+import com.eshop.util.platform.call.order.temu.order.vo.TemuOrderPoLogisticsShipmentRespVO;
 import com.eshop.util.shop.PlatformAppClientUtils;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import javax.annotation.Resource;
-import java.util.Arrays;
 
 @SpringBootTest
 public class TemuOrderPoLogisticsCallTest {
