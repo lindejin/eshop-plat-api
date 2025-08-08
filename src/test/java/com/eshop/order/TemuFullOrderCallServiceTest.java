@@ -11,8 +11,9 @@ import com.eshop.util.platform.call.order.temu.order.TemuFullOrderCallService;
 import com.eshop.util.platform.call.order.temu.order.dto.TemuFullOrderPurchaseOrderV2ReqDTO;
 import com.eshop.util.platform.call.order.temu.order.vo.TemuFullOrderPurchaseOrderV2RespVO;
 import com.eshop.util.platform.call.order.temu.ship.TemuOrderShipCall;
+import com.eshop.util.platform.call.order.temu.ship.dto.TemuOrderShipPackageGetReqDTO;
 import com.eshop.util.platform.call.order.temu.ship.dto.TemuOrderShipV2GetReqDTO;
-import com.eshop.util.platform.call.order.temu.ship.vo.TemuOrderShipV2GetRespVO;
+import com.eshop.util.platform.call.order.temu.ship.vo.*;
 import com.eshop.util.shop.PlatformAppClientUtils;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -20,6 +21,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import javax.annotation.Resource;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
 
 @SpringBootTest
 public class TemuFullOrderCallServiceTest {
@@ -79,7 +81,7 @@ public class TemuFullOrderCallServiceTest {
 
     @Test
     void v2Get() throws Exception {
-        String orderNo = "WB241224652164";
+        String orderNo = "WB2508055677566";
         Long pageNo = 1L;
         Long pageSize = 50L;
         Long shopId = 3258L;
@@ -95,6 +97,37 @@ public class TemuFullOrderCallServiceTest {
         TemuOrderShipV2GetRespVO shipOrder = temuOrderShipCall.v2Get(temuAcDTO, shipOrderDTO);
 
         System.out.println(shipOrder.getRespBody());
+    }
+
+
+    @Test
+    void v2Get2() throws Exception {
+        String orderNo = "WB2508055677566";
+        Long shopId = 3258L;
+        TbShop shopDO = shopService.getById(shopId);
+        String shopLocation = "CN";
+        TemuAppClientDTO temuAcDTO = platformAppClientUtils.getTemuAppClientDTO(shopDO, shopLocation);
+
+
+        TemuOrderShipV2GetReqDTO shipOrderDTO = new TemuOrderShipV2GetReqDTO();
+        shipOrderDTO.setPageNo(1);
+        shipOrderDTO.setPageSize(100);
+        shipOrderDTO.setSubPurchaseOrderSnList(Arrays.asList(orderNo));
+        TemuOrderShipV2GetRespVO shipOrder = temuOrderShipCall.v2Get(temuAcDTO, shipOrderDTO);
+
+        TemuOrderShipV2GetVO getVO = shipOrder.getResult().getList().get(0);
+        String deliveryOrderSn = getVO.getDeliveryOrderSn();
+        List<TemuOrderShipV2GetPackageVO> packageList = getVO.getPackageList();
+        List<TemuOrderShipV2GetPackageDetailVO> packageDetailList = getVO.getPackageDetailList();
+
+
+        TemuOrderShipPackageGetReqDTO reqDTO = new TemuOrderShipPackageGetReqDTO();
+        reqDTO.setDeliveryOrderSn(deliveryOrderSn);
+        TemuOrderShipPackageGetRespVO respVO = temuOrderShipCall.packageGet(temuAcDTO, reqDTO);
+
+        List<TemuOrderShipPackageGetPackageInfoVO> packageInfo = respVO.getResult().getPackageInfo();
+
+
     }
 
 

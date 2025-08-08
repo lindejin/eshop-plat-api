@@ -64,6 +64,8 @@ public interface TemuOrderShipCall {
      *  装箱发货校验
      *  bg.shiporder.packing.match
      */
+    TemuOrderShipPackingMatchRespVO packingMatch(TemuAppClientDTO temuAcDTO, TemuOrderShipPackingMatchReqDTO reqDTO) throws Exception;
+
 
     /**
      *  发货包裹编辑

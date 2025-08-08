@@ -1,9 +1,9 @@
 package com.eshop.util.platform.call.order.temu.ship;
 
 import com.eshop.util.platform.api.client.temu.TemuApiInvoker;
+import com.eshop.util.platform.api.structure.temu.dto.TemuAppClientDTO;
 import com.eshop.util.platform.call.order.temu.ship.dto.*;
 import com.eshop.util.platform.call.order.temu.ship.vo.*;
-import com.eshop.util.platform.api.structure.temu.dto.TemuAppClientDTO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -156,6 +156,25 @@ public class TemuOrderShipCallImpl implements TemuOrderShipCall {
         if (resultVO != null) {
             respVO.setTotal(resultVO.getTotal());
             respVO.setList(resultVO.getList());
+        }
+        return respVO;
+    }
+
+    @Override
+    public TemuOrderShipPackingMatchRespVO packingMatch(TemuAppClientDTO temuAcDTO, TemuOrderShipPackingMatchReqDTO reqDTO) throws Exception {
+        String type = "bg.shiporder.packing.match";
+        TemuOrderShipPackingMatchRespVO respVO = temuApiInvoker.execute(
+                temuAcDTO,
+                type,
+                TemuOrderShipPackingMatchRespVO.class,
+                reqDTO
+        );
+
+        TemuOrderShipPackingMatchResultVO resultVO = Optional.ofNullable(respVO.getResult()).orElse(null);
+        if (resultVO != null) {
+            respVO.setShouldAddDeliveryOrderInfoList(resultVO.getShouldAddDeliveryOrderInfoList());
+            respVO.setDeliveryOrderSnNotPrintBox(resultVO.getDeliveryOrderSnNotPrintBox());
+            respVO.setSkuSumWeight(resultVO.getSkuSumWeight());
         }
         return respVO;
     }
