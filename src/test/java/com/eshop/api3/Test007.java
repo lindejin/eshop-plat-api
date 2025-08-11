@@ -24,8 +24,8 @@ public class Test007 {
         String apiName = "/api/Erp/index";
 
         String bodyResp = "{\n" +
-                "  \"orderid\" : \"10000497272521\",\n" +
-                "  \"ydh\" : \"10000497272521\",\n" +
+                "  \"orderid\" : \"100004972725211\",\n" +
+                "  \"ydh\" : \"100004972725211\",\n" +
                 "  \"uid\" : \"2013\",\n" +
                 "  \"uname\" : \"TK本地-TH\",\n" +
                 "  \"weight\" : 1,\n" +

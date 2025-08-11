@@ -7,6 +7,7 @@ import com.eshop.util.platform.api.structure.temu.dto.TemuAppClientDTO;
 import com.eshop.util.platform.call.order.temu.ship.TemuOrderShipCall;
 import com.eshop.util.platform.call.order.temu.ship.dto.TemuOrderShipPackageGetReqDTO;
 import com.eshop.util.platform.call.order.temu.ship.dto.TemuOrderShipPackingMatchReqDTO;
+import com.eshop.util.platform.call.order.temu.ship.dto.TemuOrderShipStagingGetReqDTO;
 import com.eshop.util.platform.call.order.temu.ship.dto.TemuOrderShipV2GetReqDTO;
 import com.eshop.util.platform.call.order.temu.ship.vo.*;
 import com.eshop.util.shop.PlatformAppClientUtils;
@@ -30,6 +31,30 @@ public class TemuOrderShipCallTest {
 
     @Resource
     private TemuOrderShipCall temuOrderShipCall;
+
+    @Test
+    void stagingGet() throws Exception {
+        String orderNo = "WB2508071121432";
+        Long shopId = 3258L;
+        TbShop shopDO = shopService.getById(shopId);
+        String shopLocation = "CN";
+        TemuAppClientDTO temuAcDTO = platformAppClientUtils.getTemuAppClientDTO(shopDO, shopLocation);
+
+        TemuOrderShipStagingGetRespVO temuOrderShipStagingGetRespVO = stagingGet(orderNo, temuAcDTO);
+        System.out.println(temuOrderShipStagingGetRespVO.getRespBody());
+
+    }
+
+    /**
+     * 先查询一次如果存在就不用加入发货台了
+     */
+    private TemuOrderShipStagingGetRespVO stagingGet(String orderNo, TemuAppClientDTO temuAcDTO) throws Exception {
+        TemuOrderShipStagingGetReqDTO stagingDTO = new TemuOrderShipStagingGetReqDTO();
+        stagingDTO.setPageNo(1);
+        stagingDTO.setPageSize(50);
+        stagingDTO.setSubPurchaseOrderSnList(Collections.singletonList(orderNo));
+        return temuOrderShipCall.stagingGet(temuAcDTO, stagingDTO);
+    }
 
     @Test
     void packingMatch() throws Exception {
