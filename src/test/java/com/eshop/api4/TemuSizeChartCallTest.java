@@ -2,14 +2,10 @@ package com.eshop.api4;
 
 import com.eshop.entity.config.TbShop;
 import com.eshop.service.config.ITbShopService;
-import com.eshop.util.platform.api.service.product.temu.TemuModelCall;
 import com.eshop.util.platform.api.service.product.temu.TemuSizeChartCall;
-import com.eshop.util.platform.api.service.product.temu.dto.TemuModelInfoGetReqDTO;
 import com.eshop.util.platform.api.service.product.temu.dto.TemuSizeChartGetReqDTO;
-import com.eshop.util.platform.api.service.product.temu.vo.TemuModelInfoGetRespVO;
 import com.eshop.util.platform.api.service.product.temu.vo.TemuSizeChartGetRespVO;
 import com.eshop.util.platform.api.structure.temu.dto.TemuAppClientDTO;
-import com.eshop.util.platform.call.order.temu.ship.TemuOrderShipCall;
 import com.eshop.util.shop.PlatformAppClientUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
