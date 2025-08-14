@@ -3,6 +3,9 @@ package com.eshop.api4;
 import com.alibaba.fastjson.JSON;
 import com.eshop.entity.config.TbShop;
 import com.eshop.service.config.ITbShopService;
+import com.eshop.util.platform.api.service.product.temu.TemuModelCall;
+import com.eshop.util.platform.api.service.product.temu.dto.TemuModelInfoGetReqDTO;
+import com.eshop.util.platform.api.service.product.temu.vo.TemuModelInfoGetRespVO;
 import com.eshop.util.platform.api.structure.temu.dto.TemuAppClientDTO;
 import com.eshop.util.platform.call.order.temu.ship.TemuOrderShipCall;
 import com.eshop.util.platform.call.order.temu.ship.dto.TemuOrderShipPackageGetReqDTO;
@@ -175,5 +178,25 @@ public class TemuOrderShipCallTest {
         }
 
         return new ArrayList<>(packageVOMap.values());
+    }
+    @Resource
+    private TemuModelCall temuModelCall;
+
+    @Test
+    void modelInfoGet() throws Exception {
+        Long shopId = 3258L;
+        TbShop shopDO = shopService.getById(shopId);
+        String shopLocation = "CN";
+        TemuAppClientDTO temuAcDTO = platformAppClientUtils.getTemuAppClientDTO(shopDO, shopLocation);
+
+
+        TemuModelInfoGetReqDTO reqDTO = new TemuModelInfoGetReqDTO();
+        reqDTO.setModelName(null);
+        reqDTO.setPageNo(1);
+        reqDTO.setPageSize(200);
+        reqDTO.setId(2409210004037L);
+        reqDTO.setModelType(0);
+        TemuModelInfoGetRespVO respVO = temuModelCall.modelInfoGet(temuAcDTO, reqDTO);
+        System.out.println(respVO.getRespBody());
     }
 }
