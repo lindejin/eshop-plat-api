@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component;
 import javax.annotation.Resource;
 
 /**
- * temu
+ * jushuitan
  * 万能API调用工具（极简版）
  */
 @Component

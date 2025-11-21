@@ -15,6 +15,9 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * 奇门api接口调用通用客户端
+ */
 @Slf4j
 @Service
 public class JushuitanClient {
