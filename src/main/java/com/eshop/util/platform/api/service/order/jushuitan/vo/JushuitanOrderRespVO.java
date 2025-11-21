@@ -35,7 +35,7 @@ public class JushuitanOrderRespVO {
     //as_id	number		补发换货单对应的售后单号
     private Long as_id;
     //free_amount	number		抵扣金额
-    private BigDecimal free_amount;
+    private String free_amount;
     //shop_name	string	川梣铺子	店铺名称
     private String shop_name;
     //question_type	string	等待订单合并	问题类型，仅当问题订单时有效
@@ -43,15 +43,17 @@ public class JushuitanOrderRespVO {
     //outer_pay_id	string	20210928	外部支付单号
     private String outer_pay_id;
     //so_id	string	20210928	线上订单号，线上同步过来的订单号，最长不超过20;唯一
+    //对应销售单号
     private String so_id;
     //type	string	普通订单	订单类型，普通订单；补发订单；分销Plus；供销Plus；换货订单
+    //
     private String type;
     //order_from	string	open	订单来源，ERP：手工下单； COPY：复制； MERGE：合并； SPLIT：拆分；拆分还原； MOBILE：京东； IMPORT:导入； drp-s：供销推送； drp-d：分销推送； KWAISHOP：快手；微商城； PINDUODUO；拼多多； TOUTIAOFXG；头条放心购
     private String order_from;
     //status	string	Question	聚水潭订单状态 待付款：WaitPay；发货中：Delivering；被合并：Merged；异常：Question；被拆分：Split；等供销商|外仓发货：WaitOuterSent；已付款待审核：WaitConfirm；已客审待财审：WaitFConfirm；已发货：Sent；取消：Cancelled
     private String status;
     //pay_amount	number		应付金额，保留两位小数，单位（元）
-    private BigDecimal pay_amount;
+    private String pay_amount;
     //shop_buyer_id	string		买家昵称
     private String shop_buyer_id;
     //open_id	string		平台买家唯一值，仅限平台已经支持的才会返回
@@ -91,7 +93,7 @@ public class JushuitanOrderRespVO {
     //labels	string	延时发货	多标签
     private String labels;
     //paid_amount	number		实际支付金额
-    private BigDecimal paid_amount;
+    private String paid_amount;
     //platform_free_amount	string		平台优惠；null值处理成了空字符串返回，实际有值的是number类型返回
     private String platform_free_amount;
     //pay_free_amount	string		支付优惠；null值处理成了空字符串返回，实际有值的是number类型返回
