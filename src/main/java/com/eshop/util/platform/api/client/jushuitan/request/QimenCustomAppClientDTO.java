@@ -33,4 +33,16 @@ public class QimenCustomAppClientDTO {
      * 聚水潭注释 请求容器URL
      */
     private String apiUrl;
+
+
+    /*
+    名词解释
+        appkey：调用方的appkey。
+
+        targetAppkey：被调方，也就是服务提供方的appkey。
+
+        授权：调用的许可，如果没有对调用方的appkey授权那么对方是不可以调用服务的。
+
+        验签：为了防止接口被人乱掉用，需要在服务端做验签的逻辑，校验请求的合法性。
+     */
 }

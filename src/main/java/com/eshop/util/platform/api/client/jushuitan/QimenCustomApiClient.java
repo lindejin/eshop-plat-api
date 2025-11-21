@@ -73,6 +73,8 @@ public class QimenCustomApiClient {
 
         //md5加密签名
         String sign = QimenCustomSignUtil.createSign(param, appSecret);
+        System.out.println("sign: " + sign);
+        System.out.println("sign2: " + QimenCustomSignUtil2.createSign(param, appSecret));
         param.put("sign", sign);
 
         // 构建表单请求体
