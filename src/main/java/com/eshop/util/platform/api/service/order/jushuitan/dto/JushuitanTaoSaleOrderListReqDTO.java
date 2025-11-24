@@ -27,9 +27,9 @@ public class JushuitanTaoSaleOrderListReqDTO {
     //so_ids	string		"111,222,333"	线上单号列表，多个线上单号以逗号分开
     private String so_ids;
     //o_ids	int			内部单号列表
-    private List<Integer> o_ids;
+    private List<Long> o_ids;
     //io_ids	int			销售出库单号列表
-    private List<Integer> io_ids;
+    private List<Long> io_ids;
     //date_type	int			时间类型 0:修改时间modified，2:出库时间io_date;默认0
     private Integer date_type;
     //is_get_supplier	bool			是否获取天猫分销信息

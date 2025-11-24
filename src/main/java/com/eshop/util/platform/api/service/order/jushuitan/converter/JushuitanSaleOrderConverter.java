@@ -2,40 +2,39 @@ package com.eshop.util.platform.api.service.order.jushuitan.converter;
 
 
 import cn.hutool.core.collection.CollectionUtil;
-import com.eshop.util.BeanPlusUtil;
 import com.eshop.util.platform.api.service.order.jushuitan.converter.vo.*;
-import com.eshop.util.platform.api.service.order.jushuitan.request.*;
-import com.eshop.util.platform.api.service.order.jushuitan.vo.JushuitanOrderItemRespVO;
-import com.eshop.util.platform.api.service.order.jushuitan.vo.JushuitanOrderListDataRespVO;
-import com.eshop.util.platform.api.service.order.jushuitan.vo.JushuitanOrderListRespVO;
-import com.eshop.util.platform.api.service.order.jushuitan.vo.JushuitanOrderRespVO;
+import com.eshop.util.platform.api.service.order.jushuitan.vo.JushuitanSaleOrderItemVO;
+import com.eshop.util.platform.api.service.order.jushuitan.vo.JushuitanSaleOrderListDataVO;
+import com.eshop.util.platform.api.service.order.jushuitan.vo.JushuitanSaleOrderListRespVO;
+import com.eshop.util.platform.api.service.order.jushuitan.vo.JushuitanSaleOrderVO;
 import org.springframework.stereotype.Component;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
 @Component
-public class JushuitanApiOrderConverter implements JushuitanErpOrderConverter<JushuitanOrderListRespVO> {
+public class JushuitanSaleOrderConverter implements JushuitanErpOrderConverter<JushuitanSaleOrderListRespVO> {
 
     @Override
-    public List<JushuitanErpOrderVO> convert(JushuitanOrderListRespVO source) {
-        List<JushuitanOrderRespVO> orders = Optional.ofNullable(source)
-                .map(JushuitanOrderListRespVO::getData)
-                .map(JushuitanOrderListDataRespVO::getOrders)
+    public List<JushuitanErpOrderVO> convert(JushuitanSaleOrderListRespVO source) {
+        List<JushuitanSaleOrderVO> orders = Optional.ofNullable(source)
+                .map(JushuitanSaleOrderListRespVO::getData)
+                .map(JushuitanSaleOrderListDataVO::getDatas)
                 .orElse(new ArrayList<>());
 
         return getErpOrderVOS(orders);
     }
 
-    private List<JushuitanErpOrderVO> getErpOrderVOS(List<JushuitanOrderRespVO> orders) {
+    private List<JushuitanErpOrderVO> getErpOrderVOS(List<JushuitanSaleOrderVO> orders) {
         if (CollectionUtil.isEmpty(orders)) {
             return Collections.emptyList();
         }
 
         List<JushuitanErpOrderVO> jushuitanErpOrderVOS = new ArrayList<>();
-        for (JushuitanOrderRespVO order : orders) {
+        for (JushuitanSaleOrderVO order : orders) {
             JushuitanErpOrderVO erpOrder = new JushuitanErpOrderVO();
             erpOrder.setOrderInfo(getOrderInfoVO(order));
             erpOrder.setSenderInfo(getSenderInfo(order));
@@ -50,7 +49,7 @@ public class JushuitanApiOrderConverter implements JushuitanErpOrderConverter<Ju
     /**
      * 转化订单信息
      */
-    private JushuitanErpOrderInfoVO getOrderInfoVO(JushuitanOrderRespVO order) {
+    private JushuitanErpOrderInfoVO getOrderInfoVO(JushuitanSaleOrderVO order) {
         JushuitanErpOrderInfoVO deliveryOrder = new JushuitanErpOrderInfoVO();
 
         //shopNick 店铺名称 销售出库单-店铺名称
@@ -69,10 +68,12 @@ public class JushuitanApiOrderConverter implements JushuitanErpOrderConverter<Ju
         deliveryOrder.setBuyerMessage(order.getBuyer_message());
 
         //buyer_tax_no string 发票税号  先存在后台表
-        deliveryOrder.setBuyerTaxNo(order.getBuyer_tax_no());
+        //非淘系 - 无
+        deliveryOrder.setBuyerTaxNo("");
 
         //deliveryOrderCode OMS订单号 是 销售出库单-出仓单号
-        deliveryOrder.setDeliveryOrderCode();
+        String deliveryOrderCode = order.getIo_id() == null ? "" : order.getIo_id().toString();
+        deliveryOrder.setDeliveryOrderCode(deliveryOrderCode);
 
         //oaidOrderSourceCode oaid对应线上单号 否 - 淘系oaid对应的线上单号，唯一
         //so_id	线上订单号，线上同步过来的订单号，最长不超过20;唯一 /对应销售单号
@@ -83,15 +84,17 @@ public class JushuitanApiOrderConverter implements JushuitanErpOrderConverter<Ju
         deliveryOrder.setOrderType("");
 
         //type	string	普通订单	订单类型，普通订单；补发订单；分销Plus；供销Plus；换货订单
-        deliveryOrder.setType(order.getType());
+        deliveryOrder.setType(order.getOrder_type());
 
         //warehouseCode 外部仓库编码是奇门配置-仓库代码WMS提供
         //warehouse_oid	string		外部单据号
-        deliveryOrder.setWarehouseCode(order.getWms_co_id());
+        String warehouseCode = order.getWms_co_id() == null ? "" : order.getWms_co_id().toString();
+        deliveryOrder.setWarehouseCode(warehouseCode);
 
         //latestDeliveryTime 最晚发货时间 否 订单-计划发货日期
         //plan_delivery_date	string		计划发货时间
-        deliveryOrder.setLatestDeliveryTime(order.getPlan_delivery_date());
+        String latestDeliveryTime = "";
+        deliveryOrder.setLatestDeliveryTime(latestDeliveryTime);
 
         //createTime 单据创建时间 是 订单审核时间
         // String createTime;
@@ -99,31 +102,35 @@ public class JushuitanApiOrderConverter implements JushuitanErpOrderConverter<Ju
 
         //payNo 支付平台交易号 否 订单-支付单号
         //outer_pay_id	string	20210928	外部支付单号
-        deliveryOrder.setPayNo(order.getOuter_pay_id());
+        String payNo = "";
+        deliveryOrder.setPayNo(payNo);
 
         //buyerNick 买家昵称 是 订单-买家账号 代发业务会使用该字段传店铺ID一类信息，详情可见菜单【关于收件人加密】
         //buyer_id	string		买家ID（系统根据shop_buy_id生成的）
-        deliveryOrder.setBuyerNick(order.getBuyer_id());
+        deliveryOrder.setBuyerNick(order.getShop_buyer_id());
 
         //totalAmount 订单总金额 (元) 是 商品总金额+运费-折扣金额 受奇门配置-金额隐藏影响，开启则推0
         //需要单独计算 ......
-        ??
-        deliveryOrder.setTotalAmount();
+        deliveryOrder.setTotalAmount(getTotalAmount(order));
 
         //itemAmount 商品总金额 (元) 是 订单项(实际成交金额*应发数量)总和
-        deliveryOrder.setItemAmount(order.getPay_amount());
+        String itemAmount = order.getPay_amount() == null ? "" : order.getPay_amount().toString();
+        deliveryOrder.setItemAmount(itemAmount);
 
         //discountAmount 订单折扣金额 (元) 是 订单表里的折扣金额
-        //free_amount		抵扣金额
-        deliveryOrder.setDiscountAmount(order.getFree_amount());
+        //free_amount	number	0.0	优惠金额
+        String discountAmount = order.getFree_amount() == null ? "" : order.getFree_amount().toString();
+        deliveryOrder.setDiscountAmount(discountAmount);
 
         //freight 快递费用 (元  ) 是 订单表里的运费金额
         //freight 4.0	买家支付运费，保留两位小数，单位（元）
-        deliveryOrder.setFreight(order.getFreight());
+        String freight = order.getFreight() == null ? "" : order.getFreight().toString();
+        deliveryOrder.setFreight(freight);
 
         //gotAmount 已收金额 (元) 是 不是货到付款状态:订单表中的实付金额 是货到付款： 0 --- 实付金额
         //paid_amount		实际支付金额
-        deliveryOrder.setGotAmount(order.getPaid_amount());
+        String gotAmount = order.getPaid_amount() == null ? "" : order.getPaid_amount().toString();
+        deliveryOrder.setGotAmount(gotAmount);
 
         //logisticsCode 快递公司编码 是 销售出库单-快递公司
         //lc_id		物流公司编码
@@ -145,7 +152,7 @@ public class JushuitanApiOrderConverter implements JushuitanErpOrderConverter<Ju
     /**
      * 转化订单发件人信息
      */
-    private JushuitanErpOrderSenderInfoVO getSenderInfo(JushuitanOrderRespVO order) {
+    private JushuitanErpOrderSenderInfoVO getSenderInfo(JushuitanSaleOrderVO order) {
         JushuitanErpOrderSenderInfoVO senderInfo = new JushuitanErpOrderSenderInfoVO();
         //name 姓名 是 按奇门配置读取仓库或者店铺联系人信息 仓库名称、店铺简称、仓库联系人
         // String name;
@@ -171,7 +178,7 @@ public class JushuitanApiOrderConverter implements JushuitanErpOrderConverter<Ju
     /**
      * 转发订单收件人信息
      */
-    private JushuitanErpOrderReceiverInfo getReceiverInfo(JushuitanOrderRespVO order) {
+    private JushuitanErpOrderReceiverInfo getReceiverInfo(JushuitanSaleOrderVO order) {
         JushuitanErpOrderReceiverInfo receiverInfo = new JushuitanErpOrderReceiverInfo();
 
         //name 收件人 是 销售出库单-收货人
@@ -196,9 +203,8 @@ public class JushuitanApiOrderConverter implements JushuitanErpOrderConverter<Ju
         // String detailAddress;
         receiverInfo.setDetailAddress(order.getReceiver_address());
         //oaid oaid 否 - 淘系密文订单必传； 小红书密文订单必传； 1688平台传值中间带 -  ，为caid
-        // String oaid;
-        //本次转化非淘系 不用传递
-//        receiverInfo.setOaid();
+        // open_id	string		平台买家唯一值，仅支持天猫，抖音，快手
+        receiverInfo.setOaid(order.getOpen_id());
 
         //receiver_country		国家代码
         receiverInfo.setCountry(order.getReceiver_country());
@@ -212,50 +218,89 @@ public class JushuitanApiOrderConverter implements JushuitanErpOrderConverter<Ju
      * @param order
      * @return
      */
-    private List<JushuitanErpOrderLineInfo> getOrderLines(JushuitanOrderRespVO order) {
-        List<JushuitanOrderItemRespVO> items = order.getItems();
+    private List<JushuitanErpOrderLineInfo> getOrderLines(JushuitanSaleOrderVO order) {
+        List<JushuitanSaleOrderItemVO> items = order.getItems();
         if (CollectionUtil.isEmpty(items)) {
             return Collections.emptyList();
         }
 
         List<JushuitanErpOrderLineInfo> erpOrderLines = new ArrayList<>();
-        for (JushuitanOrderItemRespVO orderLine : items) {
+        for (JushuitanSaleOrderItemVO saleOrderItemVO : items) {
             JushuitanErpOrderLineInfo erpOrderLineInfo = new JushuitanErpOrderLineInfo();
             //orderLineNo  行号  是
-            //  String orderLineNo;
-            erpOrderLineInfo.setOrderLineNo(orderLine.getBatch_id());
+            String orderLineNo = "";
+            erpOrderLineInfo.setOrderLineNo(orderLineNo);
             //ownerCode  货主编码  是  奇门配置-货主  WMS提供
-            //  String ownerCode;
+            String ownerCode = "";
+            erpOrderLineInfo.setOwnerCode(ownerCode);
             //itemCode  sku商品编码  是  订单-商品编码
-            //  String itemCode;
+            String itemCode = saleOrderItemVO.getSku_id();
+            erpOrderLineInfo.setItemCode(itemCode);
             //inventoryType  库存类型  是    固定为“ZP”，销售订单只能出库正品
-            //  String inventoryType;
+            String inventoryType = "ZP";
+            erpOrderLineInfo.setInventoryType(inventoryType);
             //planQty  计划出库数量  是
-            //  Integer planQty;
+            Integer planQty = saleOrderItemVO.getQty();
+            erpOrderLineInfo.setPlanQty(planQty);
             //retailPrice  零售价  否  单价  开启奇门推送营收小计开关后推送；  很可能有  除不尽情况，建议使用明细行的商品总金额
-            //  String retailPrice;
+            String retailPrice = saleOrderItemVO.getSale_amount() == null ? "" : saleOrderItemVO.getSale_amount().toString();
+            erpOrderLineInfo.setRetailPrice(retailPrice);
             //actualPrice  零售价  否  单价
-            //  String actualPrice;
+            String actualPrice = saleOrderItemVO.getSale_price() == null ? "" : saleOrderItemVO.getSale_price().toString();
+            erpOrderLineInfo.setActualPrice(actualPrice);
 
 
             //isGift  是否赠品标识  是  1-赠品；  0-非赠品
-            //  Integer isGift;
+            Boolean isGift = saleOrderItemVO.getIs_gift();
+            if (isGift != null) {
+                if (isGift) {
+                    erpOrderLineInfo.setIsGift(1);
+                } else {
+                    erpOrderLineInfo.setIsGift(0);
+                }
+            }
             //combine_sku_id  组合装编码  否
             //  String combine_sku_id;
+            erpOrderLineInfo.setCombine_sku_id(saleOrderItemVO.getCombine_sku_id());
             //combine_sku_quantity  组合装数量  否
-            //  Integer combine_sku_quantity;
+            erpOrderLineInfo.setCombine_sku_quantity(saleOrderItemVO.getQty());
             //buyer_paidamount  买家实付金额（明细）  否  订单详情-营收小计-买家实付  按金额占比分摊明细
-            //  String buyer_paidamount;
+            String buyer_paidamount = saleOrderItemVO.getBuyer_paid_amount() == null ? "" : saleOrderItemVO.getBuyer_paid_amount().toString();
+            erpOrderLineInfo.setBuyer_paidamount(buyer_paidamount);
             //sellerIncome_amount  商家实收  否  订单详情-营收小计-商家实收  按金额占比分摊明细
-            //  String sellerIncome_amount;
+            String sellerIncome_amount = saleOrderItemVO.getSeller_income_amount() == null ? "" : saleOrderItemVO.getSeller_income_amount().toString();
+            erpOrderLineInfo.setSellerIncome_amount(sellerIncome_amount);
             //platform_freeamount  平台优惠总金额  否  营收小计-平台补贴  开启奇门推送营收小计开关后推送；  按金额占比分摊明细
-            //  String platform_freeamount;
+            String platform_freeamount = "";
+            erpOrderLineInfo.setPlatform_freeamount(platform_freeamount);
             //venderFee  邮费  否  订单邮费  开启奇门推送营收小计开关后推送；  按金额占比分摊明细
-            //  String venderFee;
-
+            String venderFee = "";
+            erpOrderLineInfo.setVenderFee(venderFee);
             erpOrderLines.add(erpOrderLineInfo);
 
         }
         return erpOrderLines;
+    }
+
+    /**
+     * totalAmount 订单总金额 (元) 是 商品总金额+运费-折扣金额 受奇门配置-金额隐藏影响，开启则推0
+     */
+    private String getTotalAmount(JushuitanSaleOrderVO order) {
+        BigDecimal freight = order.getFreight();
+        BigDecimal freeAmount = order.getFree_amount();
+
+        BigDecimal productAmount = BigDecimal.ZERO;
+        List<JushuitanSaleOrderItemVO> items = order.getItems();
+        if (CollectionUtil.isNotEmpty(items)) {
+            for (JushuitanSaleOrderItemVO saleOrderItemVO : items) {
+                //itemCode  sku商品编码  是  订单-商品编码
+                BigDecimal sale_amount = saleOrderItemVO.getSale_amount() == null ? BigDecimal.ZERO : saleOrderItemVO.getSale_amount();
+                productAmount = productAmount.add(sale_amount);
+
+            }
+        }
+
+
+        return productAmount.add(freight).subtract(freeAmount).toString();
     }
 }
