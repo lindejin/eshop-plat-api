@@ -61,6 +61,7 @@ public class QimenCustomApiInvoker {
         request.setFormat(FORMAT);
         request.setVersion(VERSION);
         request.setSignMethod(SIGN_METHOD);
+
         request.setParams(objectToMapWithJsonString(dto));
 
         // 执行请求

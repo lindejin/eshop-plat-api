@@ -40,6 +40,7 @@ public class QimenCustomApiClient {
         String appSecret = appDTO.getAppSecret();
         String sessionKey = appDTO.getSessionKey();
         String targetAppKey = appDTO.getTargetAppKey();
+        String customerId = appDTO.getCustomerId();
 
         String method = jstRequest.getMethod();
         //这里默认 2.0
@@ -65,16 +66,18 @@ public class QimenCustomApiClient {
 
         param.put("method", method);
 
-        // 申请奇门自定义场景的target_app_key
-        param.put("target_app_key", targetAppKey);
-        // 申请奇门自定义场景的customer_id
-        param.put("customer_id", "");
+        if (StringUtils.isNotBlank(targetAppKey)) {
+            // 申请奇门自定义场景的target_app_key
+            param.put("target_app_key", targetAppKey);
+        }
+        if (StringUtils.isNotBlank(customerId)) {
+            // 申请奇门自定义场景的customer_id
+            param.put("customer_id", customerId);
+        }
 
 
         //md5加密签名
-        String sign = QimenCustomSignUtil.createSign(param, appSecret);
-        System.out.println("sign: " + sign);
-        System.out.println("sign2: " + QimenCustomSignUtil2.createSign(param, appSecret));
+        String sign = TaoBaoSignUtil.signTopRequest(param, appSecret,"md5");
         param.put("sign", sign);
 
         // 构建表单请求体

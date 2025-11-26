@@ -29,6 +29,12 @@ public class QimenCustomAppClientDTO {
     private String targetAppKey;
 
     /**
+     * 接口需要额外带上customer_id,传不同的customer_id来路由不同的商家链接
+     * customer_id
+     */
+    private String customerId;
+
+    /**
      * 奇门调用地址
      * 聚水潭注释 请求容器URL
      */

@@ -59,6 +59,7 @@ public class JushuitanClient {
         //md5加密签名
         String sign = JushuitanSignUtil.generateSign(params, appSecret);
         params.put("sign", sign);
+        System.out.println("sign"+sign);
 
         // 构建表单请求体
         FormBody.Builder formBuilder = new FormBody.Builder();
