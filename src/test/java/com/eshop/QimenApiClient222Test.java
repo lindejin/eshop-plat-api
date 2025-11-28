@@ -21,7 +21,7 @@ public class QimenApiClient222Test {
 
     @Test
     void getOrderDetailV2() throws Exception {
-
+//        CombinationAnnotationElement
         String method = "jushuitan.order.list.query";
         /**
          * 返回内容响应格式。不传默认为xml格式，可选值：xml，json。
