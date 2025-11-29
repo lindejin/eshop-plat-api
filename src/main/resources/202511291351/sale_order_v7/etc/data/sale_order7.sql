@@ -57,6 +57,8 @@ SELECT
     t.parentSku,
     t.asin,
     t.isGift,
+    t.deliveryOrderCode,
+    t.payNo,
     CASE
         WHEN IFNULL(t.trackNo,'') != '' THEN t.trackNo
         WHEN IFNULL(t.trackNoBak,'') != '' THEN t.trackNoBak
@@ -132,6 +134,8 @@ FROM(
             so.`is_active` AS isActive,
             so.`is_artificial` AS isArtificial,
             so.`is_gift` AS isGift,
+            so.`delivery_order_code` AS deliveryOrderCode,
+            so.`pay_no` AS payNo,
             so.`is_onsite` AS isOnsite,
             so.`parent_id` AS parentId,
             so.`order_class` AS orderClass,
