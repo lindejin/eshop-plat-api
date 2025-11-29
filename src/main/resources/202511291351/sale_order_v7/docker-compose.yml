@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  logstash:
+    image: thebizark/logstash-with-plugins:latest
+    container_name: sale_order_v7
+    network_mode: host   # 使用宿主机网络
+    volumes:
+      - ./etc/pipeline:/usr/share/logstash/pipeline
+      - ./etc/config:/usr/share/logstash/config
+      - ./data:/usr/share/logstash/data
+      - ./logs:/usr/share/logstash/logs
+      - /opt/logstash/drivers/mysql-connector-java-8.0.28.jar:/usr/share/logstash/drivers/mysql-connector-java-8.0.28.jar
+    environment:
+      - XPACK_MONITORING_ENABLED=false  # 禁用 X-Pack 监控（可选）
+    restart: unless-stopped  # 容器意外停止时重启
+    command: logstash -f /usr/share/logstash/pipeline/saleOrder_logstash_v7.conf
