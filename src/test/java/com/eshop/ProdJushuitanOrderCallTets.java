@@ -43,7 +43,9 @@ public class ProdJushuitanOrderCallTets {
         //modified_end	string	否	2021-12-09 10:26:25	结束时间，和起始时间必须同时存在，时间间隔不能超过七天，与线上单号，内部单号不能同时为空
 //        String modified_end = "2025-11-24 10:26:25";
 
-        List<String> so_ids = Collections.singletonList("3074543403833306664");
+//        List<String> so_ids = Collections.singletonList("3074543403833306664");
+        List<String> so_ids = Collections.singletonList("P780067065214122851");
+
         JushuitanSaleOrderListReqDTO reqDTO = new JushuitanSaleOrderListReqDTO();
         reqDTO.setSo_ids(so_ids);
 //        reqDTO.setModified_begin(modified_begin);
