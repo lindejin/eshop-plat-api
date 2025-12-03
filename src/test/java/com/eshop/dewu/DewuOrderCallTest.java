@@ -1,0 +1,76 @@
+package com.eshop.dewu;
+
+import com.alibaba.fastjson.JSON;
+import com.eshop.util.platform.api.client.dewu.request.DewuAppClientDTO;
+import com.eshop.util.platform.api.client.xiaohongshu.request.XiaohongshuAppClientDTO;
+import com.eshop.util.platform.api.service.order.dewu.DewuOrderCall;
+import com.eshop.util.platform.api.service.order.dewu.dto.DewuOrderDetailReqDTO;
+import com.eshop.util.platform.api.service.order.dewu.vo.DewuOrderDetailRespVO;
+import com.eshop.util.platform.api.service.order.xiaohongshu.dto.XiaohongshuOrderDetailReqDTO;
+import com.eshop.util.platform.api.service.order.xiaohongshu.vo.XiaohongshuOrderDetailRespVO;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+
+
+@SpringBootTest
+public class DewuOrderCallTest {
+
+    @Autowired
+    private DewuOrderCall dewuOrderCall;
+
+
+    //沙箱查看App secret
+    //
+    //沙箱App Key：ed603a64b8ee408594cc66a937a01946
+    //沙箱App Secret：a4e98e7896084da6b80743e515bc8d90
+    @Test
+    public void getExpressSheetSandbox() throws Exception {
+        String apiUrl = "https://openapi-sandbox.dewu.com";
+        String appKey = "ed603a64b8ee408594cc66a937a01946";
+        String appSecret = "a4e98e7896084da6b80743e515bc8d90";
+        String accessToken = "token-a67156322938498fbb24aba54d62069f-cc7df12b41c14602976fd45b130d2341";
+        DewuAppClientDTO appDTO = new DewuAppClientDTO();
+        appDTO.setAppKey(appKey);
+        appDTO.setAppSecret(appSecret);
+        appDTO.setApiUrl(apiUrl);
+        appDTO.setAccessToken(accessToken);
+
+        String order_no = "110189372461873406";
+        DewuOrderDetailReqDTO reqDTO = new DewuOrderDetailReqDTO();
+        reqDTO.setOrder_no(order_no);
+        DewuOrderDetailRespVO respVO = dewuOrderCall.getExpressSheet(appDTO, reqDTO);
+        System.out.println(respVO.getRespBody());
+        System.out.println(JSON.toJSONString(respVO));
+
+        //
+    }
+
+
+    //查看App secret
+    //
+    //App Key：75881da49c8b41caa2448c3fef771595
+    //App Secret：5f44031fef3f41119f2324ac3fbeb9aaaf6a9d9fb4024455809bdaee3e30804c
+    @Test
+    public void getExpressSheet() throws Exception {
+        String apiUrl = "https://openapi.dewu.com";
+        String appKey = "75881da49c8b41caa2448c3fef771595";
+        String appSecret = "5f44031fef3f41119f2324ac3fbeb9aaaf6a9d9fb4024455809bdaee3e30804c";
+        String accessToken = "8xlxEJkjgf1WAaO39Cpy3c8MfqTpxKJeYm01Q5847U03Gk992oIsT3eYAZGWApTZ";
+        DewuAppClientDTO appDTO = new DewuAppClientDTO();
+        appDTO.setAppKey(appKey);
+        appDTO.setAppSecret(appSecret);
+        appDTO.setApiUrl(apiUrl);
+        appDTO.setAccessToken(accessToken);
+
+        String order_no = "110189372461873406";
+        DewuOrderDetailReqDTO reqDTO = new DewuOrderDetailReqDTO();
+        reqDTO.setOrder_no(order_no);
+        DewuOrderDetailRespVO respVO = dewuOrderCall.getExpressSheet(appDTO, reqDTO);
+        System.out.println(respVO.getRespBody());
+        System.out.println(JSON.toJSONString(respVO));
+
+        //{"code":200,"msg":null,"data":[{"version":1,"mask_order_no":"************873406","consignment_name":"箱包","printing_time":"2025-12-03 17:10:25","waybill_no":"SF3262099446315","sub_waybill_no_list":["SF3262099446315"],"logistics_code":"SF","logistics_product_code":"SFDSBK","transport_code":"LY","logistics_transport":null,"dest_address":{"detailed_address":"大学路***号汕头大学桑浦山校区","province":"广东省","city":"汕头市","region":"金平区","country":null,"street":null,"post_code":null},"dest_name":"卓**","dest_mobile":"*******1180","dest_tel":"","make_waybill_time":"2025-12-03 14:16:50","site_info":{"source_sort_center_name":null,"original_cross_code":null,"original_table_trolley_code":null,"target_sort_center_name":null,"destination_cross_code":null,"destination_table_trolley_code":null,"site_name":null,"road":null,"limit_type_code":"T68","pro_code":"电商标快","dest_deptCode":"754AC","coding_mapping":"O212","two_dimension_code":"MMM={'k1':'754','k2':'754AC','k3':'088','k4':'T6','k5':'SF3262099446315','k6':'','k7':'226a6ad0'}","dest_route_label":"754-754AC-088店"},"dest_code":"754","zone_code":"","gathering_place":"","air_embargo":0,"sub_waybill_flag":null,"insure_value":0,"pay_method":"JFYJ","article_number":"BM0301094AC","specification":"黑色","logistics_product_name":"电商标快","sheet_type":1,"total_number":null,"sequence_number":null,"mother_waybill_no":null,"pdf_token":null,"pdf_url":null,"merge_delivery_flag":false,"merge_delivery_num":null,"package_warnings":["VIP"],"privacy_num":{"num":"15280136468","ext_num":"9210"},"new_electron_sheet_data":"{\"address\":\"广东省 汕头市 金平区 鮀江街道 大学路***号汕头大学桑浦山校区\",\"airEmbargo\":false,\"bizScene\":\"P2B\",\"customsInspectionTags\":[],\"destMobile\":\"134****1180\",\"destName\":\"卓**\",\"dewuDeliverySign\":\"duzp\",\"ext\":{\"sfProName\":\"\",\"sfCodingMapping\":\"O212\",\"sfExpressTypeCode\":\"电商标快\",\"sfQRCodeK4\":\"T6\"},\"face2FaceFlag\":false,\"goodsAmount\":1,\"goodsName\":\"箱包\",\"hideDwElement\":false,\"insureValue\":false,\"itemNumber\":\"BM0301094AC\",\"logisticsCode\":\"SF\",\"logisticsProductCode\":\"SFDSBK\",\"logisticsProductName\":\"电商标快\",\"orderNo\":\"*********461873406\",\"originDestAddress\":\"广东省 汕头市 金平区 鮀江街道 大学路***号汕头大学桑浦山校区\",\"originDestMobile\":\"134****1180\",\"originDestName\":\"卓**\",\"originName\":\"得物App白冰冰\",\"originOrderNo\":\"*********461873406\",\"originRepositoryCode\":\"DTC\",\"packageWarnings\":[\"VIP\"],\"payType\":\"JFYJ\",\"printDate\":1764753025000,\"privacyNumber\":\"15280136468-9210\",\"qrCode\":\"MMM={'k1':'754','k2':'754AC','k3':'088','k4':'T6','k5':'SF3262099446315','k6':'','k7':'226a6ad0'}\",\"remark\":\"\",\"routeCode\":\"754-754AC-088店\",\"specification\":\"黑色\",\"subWaybillList\":[{\"qrCode\":\"MMM={'k1':'754','k2':'754AC','k3':'088','k4':'T6','k5':'SF3262099446315','k6':'','k7':'226a6ad0'}\",\"subWaybillNo\":\"SF3262099446315\"}],\"templateKey\":\"SFP2B\",\"volume\":0,\"waybillNo\":\"SF3262099446315\",\"waybillNoWithBar\":\"SF3262099446315\",\"weight\":3.00}"}],"trace_id":"0aec379d692ffe81235d3942c66021a8"}
+        //{"respBody":"{\"code\":200,\"msg\":null,\"data\":[{\"version\":1,\"mask_order_no\":\"************873406\",\"consignment_name\":\"箱包\",\"printing_time\":\"2025-12-03 17:10:25\",\"waybill_no\":\"SF3262099446315\",\"sub_waybill_no_list\":[\"SF3262099446315\"],\"logistics_code\":\"SF\",\"logistics_product_code\":\"SFDSBK\",\"transport_code\":\"LY\",\"logistics_transport\":null,\"dest_address\":{\"detailed_address\":\"大学路***号汕头大学桑浦山校区\",\"province\":\"广东省\",\"city\":\"汕头市\",\"region\":\"金平区\",\"country\":null,\"street\":null,\"post_code\":null},\"dest_name\":\"卓**\",\"dest_mobile\":\"*******1180\",\"dest_tel\":\"\",\"make_waybill_time\":\"2025-12-03 14:16:50\",\"site_info\":{\"source_sort_center_name\":null,\"original_cross_code\":null,\"original_table_trolley_code\":null,\"target_sort_center_name\":null,\"destination_cross_code\":null,\"destination_table_trolley_code\":null,\"site_name\":null,\"road\":null,\"limit_type_code\":\"T68\",\"pro_code\":\"电商标快\",\"dest_deptCode\":\"754AC\",\"coding_mapping\":\"O212\",\"two_dimension_code\":\"MMM={'k1':'754','k2':'754AC','k3':'088','k4':'T6','k5':'SF3262099446315','k6':'','k7':'226a6ad0'}\",\"dest_route_label\":\"754-754AC-088店\"},\"dest_code\":\"754\",\"zone_code\":\"\",\"gathering_place\":\"\",\"air_embargo\":0,\"sub_waybill_flag\":null,\"insure_value\":0,\"pay_method\":\"JFYJ\",\"article_number\":\"BM0301094AC\",\"specification\":\"黑色\",\"logistics_product_name\":\"电商标快\",\"sheet_type\":1,\"total_number\":null,\"sequence_number\":null,\"mother_waybill_no\":null,\"pdf_token\":null,\"pdf_url\":null,\"merge_delivery_flag\":false,\"merge_delivery_num\":null,\"package_warnings\":[\"VIP\"],\"privacy_num\":{\"num\":\"15280136468\",\"ext_num\":\"9210\"},\"new_electron_sheet_data\":\"{\\\"address\\\":\\\"广东省 汕头市 金平区 鮀江街道 大学路***号汕头大学桑浦山校区\\\",\\\"airEmbargo\\\":false,\\\"bizScene\\\":\\\"P2B\\\",\\\"customsInspectionTags\\\":[],\\\"destMobile\\\":\\\"134****1180\\\",\\\"destName\\\":\\\"卓**\\\",\\\"dewuDeliverySign\\\":\\\"duzp\\\",\\\"ext\\\":{\\\"sfProName\\\":\\\"\\\",\\\"sfCodingMapping\\\":\\\"O212\\\",\\\"sfExpressTypeCode\\\":\\\"电商标快\\\",\\\"sfQRCodeK4\\\":\\\"T6\\\"},\\\"face2FaceFlag\\\":false,\\\"goodsAmount\\\":1,\\\"goodsName\\\":\\\"箱包\\\",\\\"hideDwElement\\\":false,\\\"insureValue\\\":false,\\\"itemNumber\\\":\\\"BM0301094AC\\\",\\\"logisticsCode\\\":\\\"SF\\\",\\\"logisticsProductCode\\\":\\\"SFDSBK\\\",\\\"logisticsProductName\\\":\\\"电商标快\\\",\\\"orderNo\\\":\\\"*********461873406\\\",\\\"originDestAddress\\\":\\\"广东省 汕头市 金平区 鮀江街道 大学路***号汕头大学桑浦山校区\\\",\\\"originDestMobile\\\":\\\"134****1180\\\",\\\"originDestName\\\":\\\"卓**\\\",\\\"originName\\\":\\\"得物App白冰冰\\\",\\\"originOrderNo\\\":\\\"*********461873406\\\",\\\"originRepositoryCode\\\":\\\"DTC\\\",\\\"packageWarnings\\\":[\\\"VIP\\\"],\\\"payType\\\":\\\"JFYJ\\\",\\\"printDate\\\":1764753025000,\\\"privacyNumber\\\":\\\"15280136468-9210\\\",\\\"qrCode\\\":\\\"MMM={'k1':'754','k2':'754AC','k3':'088','k4':'T6','k5':'SF3262099446315','k6':'','k7':'226a6ad0'}\\\",\\\"remark\\\":\\\"\\\",\\\"routeCode\\\":\\\"754-754AC-088店\\\",\\\"specification\\\":\\\"黑色\\\",\\\"subWaybillList\\\":[{\\\"qrCode\\\":\\\"MMM={'k1':'754','k2':'754AC','k3':'088','k4':'T6','k5':'SF3262099446315','k6':'','k7':'226a6ad0'}\\\",\\\"subWaybillNo\\\":\\\"SF3262099446315\\\"}],\\\"templateKey\\\":\\\"SFP2B\\\",\\\"volume\\\":0,\\\"waybillNo\\\":\\\"SF3262099446315\\\",\\\"waybillNoWithBar\\\":\\\"SF3262099446315\\\",\\\"weight\\\":3.00}\"}],\"trace_id\":\"0aec379d692ffe81235d3942c66021a8\"}"}
+    }
+}
