@@ -20,7 +20,7 @@ import java.util.Map;
  */
 @Slf4j
 @Service
-public class DouyinClient {
+public class DouyinTokenClient {
 
     @Autowired
     private OkHttpClient client;
@@ -42,12 +42,9 @@ public class DouyinClient {
         String urlPath = jstRequest.getUrlPath();
         String version = jstRequest.getVersion();
 
-        String accessToken = appDTO.getAccessToken();
-
         //时间戳，格式为UNIX时间（秒） ，长度10位，当前时间-300秒<=入参时间<=当前时间+300秒
         long timestamp = System.currentTimeMillis() / 1000;
         String paramJson = jstRequest.getParamJson();
-        String paramJsonNot = jstRequest.getParamJsonNot();
         //公共参数
         Map<String, String> params = new HashMap<>();
         params.put("method", method);
@@ -57,21 +54,18 @@ public class DouyinClient {
         params.put("v", version);
         params.put("sign_method", "md5");
 
-        params.put("access_token", accessToken);
-
-
         //md5加密签名
-        String sign = DouyinSignUtil.sign(appKey, appSecret, method, timestamp+"", paramJsonNot, "2");
+        String sign = DouyinSignUtil.sign(appKey, appSecret, method, timestamp+"", jstRequest.getParamJsonNot(), "2");
         params.put("sign", sign);
         System.out.println("sign:"+sign);
 
         log.info("douyin请求参数: {}", JSON.toJSONString(params));
-
         // 构建表单请求体
         FormBody.Builder formBuilder = new FormBody.Builder();
 
         // 添加所有参数
         for (Map.Entry<String, String> entry : params.entrySet()) {
+            System.out.println(entry.getKey()+":"+entry.getValue());
             formBuilder.add(entry.getKey(), entry.getValue());
         }
         // 构建请求体
@@ -102,6 +96,7 @@ public class DouyinClient {
 
                 try (Response response = client.newCall(request).execute()) {
                     if (!response.isSuccessful()) {
+
                         String msg = response.body() != null ? response.body().string() : "";
                         String exceptionMsg = "HTTP " + response.code() + ": " + response.message();
                         if (msg != null && !msg.isEmpty()) {
@@ -148,7 +143,6 @@ public class DouyinClient {
 
         String apiUrl = appDTO.getApiUrl();
 
-        String accessToken = appDTO.getAccessToken();
         String appKey = appDTO.getAppKey();
         String appSecret = appDTO.getAppSecret();
         String method = jstRequest.getMethod();
@@ -162,9 +156,7 @@ public class DouyinClient {
         if (StringUtils.isBlank(appSecret)) {
             throw new AppRuntimeException("jushuitan appSecret is null.");
         }
-        if (StringUtils.isBlank(accessToken)) {
-            throw new AppRuntimeException("jushuitan accessToken is null.");
-        }
+
         if (StringUtils.isBlank(method)) {
             throw new AppRuntimeException("jushuitan method is null.");
         }

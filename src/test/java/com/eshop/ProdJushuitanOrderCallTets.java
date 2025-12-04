@@ -44,7 +44,7 @@ public class ProdJushuitanOrderCallTets {
 //        String modified_end = "2025-11-24 10:26:25";
 
 //        List<String> so_ids = Collections.singletonList("3074543403833306664");
-        List<String> so_ids = Collections.singletonList("P780067065214122851");
+        List<String> so_ids = Collections.singletonList("3101267748866214568");
 
         JushuitanSaleOrderListReqDTO reqDTO = new JushuitanSaleOrderListReqDTO();
         reqDTO.setSo_ids(so_ids);
