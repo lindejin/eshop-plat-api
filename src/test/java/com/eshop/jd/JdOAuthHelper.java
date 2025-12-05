@@ -1,12 +1,7 @@
 package com.eshop.jd;
 
-import com.eshop.util.platform.api.client.jd.JdClient;
 import okhttp3.HttpUrl;
 import org.springframework.boot.test.context.SpringBootTest;
-
-import javax.servlet.http.HttpSession;
-import java.security.SecureRandom;
-import java.util.Base64;
 
 @SpringBootTest
 public class JdOAuthHelper {
@@ -26,7 +21,6 @@ public class JdOAuthHelper {
                 "https://uat-oauth.jdl.com/oauth/authorize";
 
         String state = "ccc";
-
         // 使用OkHttp的HttpUrl.Builder确保URL安全构建
         HttpUrl url = new HttpUrl.Builder()
                 .scheme("https")
