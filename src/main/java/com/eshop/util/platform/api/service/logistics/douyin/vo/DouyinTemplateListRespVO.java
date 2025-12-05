@@ -5,7 +5,7 @@ import com.eshop.util.platform.api.structure.BaseResponseVO;
 
 @lombok.Getter
 @lombok.Setter
-public class DouyinWaybillApplyRespVO extends BaseResponseVO {
+public class DouyinTemplateListRespVO extends BaseResponseVO {
     //    "code": 10000,
     private Integer code;
     //    "msg": "success",
@@ -17,5 +17,6 @@ public class DouyinWaybillApplyRespVO extends BaseResponseVO {
     //    "log_id": "202512041756193F188E2A6C7F76DAC003"
     private String log_id;
     //    "data": { },
-    private DouyinWaybillApplyDataVO data;
+    private DouyinTemplateDataVO data;
+
 }

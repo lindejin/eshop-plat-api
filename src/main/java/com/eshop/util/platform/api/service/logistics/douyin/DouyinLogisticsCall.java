@@ -2,7 +2,9 @@ package com.eshop.util.platform.api.service.logistics.douyin;
 
 import com.eshop.util.platform.api.client.douyin.DouyinApiInvoker;
 import com.eshop.util.platform.api.client.douyin.request.DouyinAppClientDTO;
+import com.eshop.util.platform.api.service.logistics.douyin.dto.DouyinTemplateListReqDTO;
 import com.eshop.util.platform.api.service.logistics.douyin.dto.DouyinWaybillApplyReqDTO;
+import com.eshop.util.platform.api.service.logistics.douyin.vo.DouyinTemplateListRespVO;
 import com.eshop.util.platform.api.service.logistics.douyin.vo.DouyinWaybillApplyRespVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -16,7 +18,7 @@ public class DouyinLogisticsCall {
 
     /**
      * 查询面单
-     * express.queryEbillOrder
+     * /logistics/waybillApply
      *
      */
     public DouyinWaybillApplyRespVO waybillApply(DouyinAppClientDTO temuAcDTO, DouyinWaybillApplyReqDTO reqDTO) throws Exception {
@@ -29,6 +31,26 @@ public class DouyinLogisticsCall {
                 version,
                 urlPath,
                 DouyinWaybillApplyRespVO.class,
+                reqDTO
+        );
+    }
+
+    /**
+     * /logistics/templateList
+     * 获取商家所有标准模版信息
+     * 查询物流商的标准模板。
+     * 注意：物流商模板平台会定期更新或新增，请开发者定期扫描该接口，保持和平台数据一致
+     */
+    public DouyinTemplateListRespVO templateList(DouyinAppClientDTO temuAcDTO, DouyinTemplateListReqDTO reqDTO) throws Exception {
+        String method = "logistics.templateList";
+        String version = "2";
+        String urlPath ="/logistics/templateList";
+        return douyinApiInvoker.execute(
+                temuAcDTO,
+                method,
+                version,
+                urlPath,
+                DouyinTemplateListRespVO.class,
                 reqDTO
         );
     }
