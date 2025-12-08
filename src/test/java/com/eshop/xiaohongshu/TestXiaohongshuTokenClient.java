@@ -5,8 +5,6 @@ import com.eshop.util.platform.api.client.xiaohongshu.XiaohongshuTokenClient;
 import com.eshop.util.platform.api.client.xiaohongshu.request.XiaohongshuAppClientDTO;
 import com.eshop.util.platform.api.client.xiaohongshu.request.XiaohongshuRequest;
 import com.eshop.util.platform.api.client.xiaohongshu.response.XiaohongshuResponse;
-import com.eshop.util.platform.api.service.order.jushuitan.JushuitanOrderCall;
-import io.lettuce.core.output.ScanOutput;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -22,7 +20,7 @@ public class TestXiaohongshuTokenClient {
 
 
     @Test
-    void getOrderDetailV2() throws Exception {
+    void getAccessToken() throws Exception {
         String code = "code-043b214cbe0043a7ad1d3d842a407724-8e859bb48f0744c78554de86898b04e7";
 
         String method = "oauth.getAccessToken";
@@ -38,7 +36,7 @@ public class TestXiaohongshuTokenClient {
         appDTO.setAppId(appId);
         appDTO.setAppSecret(appSecret);
         appDTO.setApiUrl(apiUrl);
-        XiaohongshuResponse accessToken = xiaohongshuTokenClient.getAccessToken(code,request, appDTO);
+        XiaohongshuResponse accessToken = xiaohongshuTokenClient.getAccessToken(code, request, appDTO);
         System.out.println(accessToken.getGopResponseBody());
         //{"error_code":0,"data":{"accessToken":"token-a67156322938498fbb24aba54d62069f-cc7df12b41c14602976fd45b130d2341","accessTokenExpiresAt":1765269760308,"refreshToken":"refresh-7dce08b332794418b0dea60556d7f30b-67755d70491e435fb290d7724f43b6e3","refreshTokenExpiresAt":1765874560309,"sellerId":"5f0d2c34cac48d0001a6ed62","sellerName":"BAGSMART旗舰店"},"success":true}
 

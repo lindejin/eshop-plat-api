@@ -62,9 +62,12 @@ public class JdLogisticsTokenClient {
 
         String url = urlBuilder.build().toString();
 
+        log.info("京东物流请求参数 apiUrl: {} ", url);
         // 5. 发送请求
 
         String responseStr = executeGetWithRetry(url);
+
+        log.info("京东物流获得响应: {}", responseStr);
         JdLogisticsResponse response = new JdLogisticsResponse();
         response.setGopResponseBody(responseStr);
         return response;

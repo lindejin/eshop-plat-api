@@ -1,6 +1,5 @@
 package com.eshop.util.platform.api.client.dewu;
 
-import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.eshop.util.platform.api.client.dewu.request.DewuAppClientDTO;
 import com.eshop.util.platform.api.client.dewu.request.DewuRequest;

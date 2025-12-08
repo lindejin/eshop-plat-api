@@ -115,7 +115,7 @@ public class DewuClient {
             }
         }
 
-        throw new IOException("请求得物API重试 " + MAX_RETRIES + " 次后仍然失败", lastException);
+        throw new IOException("请求API重试 " + MAX_RETRIES + " 次后仍然失败", lastException);
     }
 
     /**
@@ -123,11 +123,11 @@ public class DewuClient {
      */
     private void checkParams(DewuRequest request, DewuAppClientDTO appDTO) {
         if (request == null) {
-            throw new AppRuntimeException("Dewu request is null.");
+            throw new AppRuntimeException("得物 request is null.");
         }
 
         if (appDTO == null) {
-            throw new AppRuntimeException("DewuAppClientDTO is null.");
+            throw new AppRuntimeException("得物 AppClientDTO is null.");
         }
 
         String apiUrl = appDTO.getApiUrl();
@@ -135,7 +135,7 @@ public class DewuClient {
         String appSecret = appDTO.getAppSecret();
 
         if (StringUtils.isBlank(apiUrl)) {
-            throw new AppRuntimeException("得物apiUrl不能为空");
+            throw new AppRuntimeException("得物 apiUrl不能为空");
         }
 
         if (StringUtils.isBlank(appKey)) {

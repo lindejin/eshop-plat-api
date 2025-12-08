@@ -2,12 +2,8 @@ package com.eshop.util.platform.api.service.order.dewu;
 
 import com.eshop.util.platform.api.client.dewu.DewuApiInvoker;
 import com.eshop.util.platform.api.client.dewu.request.DewuAppClientDTO;
-import com.eshop.util.platform.api.client.xiaohongshu.XiaohongshuApiInvoker;
-import com.eshop.util.platform.api.client.xiaohongshu.request.XiaohongshuAppClientDTO;
-import com.eshop.util.platform.api.service.order.dewu.dto.DewuOrderDetailReqDTO;
-import com.eshop.util.platform.api.service.order.dewu.vo.DewuOrderDetailRespVO;
-import com.eshop.util.platform.api.service.order.xiaohongshu.dto.XiaohongshuOrderDetailReqDTO;
-import com.eshop.util.platform.api.service.order.xiaohongshu.vo.XiaohongshuOrderDetailRespVO;
+import com.eshop.util.platform.api.service.order.dewu.dto.DewuExpressSheetReqDTO;
+import com.eshop.util.platform.api.service.order.dewu.vo.DewuExpressSheetRespVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -23,12 +19,12 @@ public class DewuOrderCall {
      * /dop/api/v2/order/brand_deliver/express_sheet
      *
      */
-    public DewuOrderDetailRespVO getExpressSheet(DewuAppClientDTO acDTO, DewuOrderDetailReqDTO reqDTO) throws Exception {
+    public DewuExpressSheetRespVO getExpressSheet(DewuAppClientDTO acDTO, DewuExpressSheetReqDTO reqDTO) throws Exception {
         String method = "/dop/api/v2/order/brand_deliver/express_sheet";
         return dewuApiInvoker.execute(
                 acDTO,
                 method,
-                DewuOrderDetailRespVO.class,
+                DewuExpressSheetRespVO.class,
                 reqDTO
         );
     }

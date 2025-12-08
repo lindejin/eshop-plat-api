@@ -1,11 +1,7 @@
 package com.eshop.util.platform.api.service.logistics.jdl;
 
-import com.eshop.util.platform.api.client.douyin.DouyinApiInvoker;
-import com.eshop.util.platform.api.client.douyin.request.DouyinAppClientDTO;
 import com.eshop.util.platform.api.client.jd.JdLogisticsApiInvoker;
 import com.eshop.util.platform.api.client.jd.request.JdLogisticsAppClientDTO;
-import com.eshop.util.platform.api.service.logistics.douyin.dto.DouyinWaybillApplyReqDTO;
-import com.eshop.util.platform.api.service.logistics.douyin.vo.DouyinWaybillApplyRespVO;
 import com.eshop.util.platform.api.service.logistics.jdl.dto.JdlGetTemplatesReqDTO;
 import com.eshop.util.platform.api.service.logistics.jdl.dto.JdlJdlPullDataReqDTO;
 import com.eshop.util.platform.api.service.logistics.jdl.vo.JdlGetTemplatesRespVO;
@@ -44,7 +40,7 @@ public class JdlLogisticsCall {
 
 
     /**
-     * 获取打印模板列表
+     * 获取电子面单加密打印数据
      * /PullDataService/pullData
      *
      */

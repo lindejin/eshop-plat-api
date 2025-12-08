@@ -16,7 +16,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * 奇门api接口调用通用客户端
+ * 抖音
+ * api接口调用通用客户端
  */
 @Slf4j
 @Service
@@ -65,7 +66,7 @@ public class DouyinClient {
         params.put("sign", sign);
         System.out.println("sign:"+sign);
 
-        log.info("douyin请求参数: {}", JSON.toJSONString(params));
+        log.info("抖音请求参数: {}", JSON.toJSONString(params));
 
         // 构建表单请求体
         FormBody.Builder formBuilder = new FormBody.Builder();
@@ -78,7 +79,7 @@ public class DouyinClient {
         RequestBody body = formBuilder.build();
 
         String jsonStr = executePostWithRetry(apiUrl + urlPath, body);
-        log.info("douyin响应: {}", jsonStr);
+        log.info("抖音响应: {}", jsonStr);
 
         DouyinResponse response = new DouyinResponse();
         response.setGopResponseBody(jsonStr);
@@ -115,7 +116,7 @@ public class DouyinClient {
 
             } catch (IOException e) {
                 lastException = e;
-                System.out.println("请求失败，第 " + (i + 1) + " 次重试");
+                System.out.println("api请求抖音失败，第 " + (i + 1) + " 次重试");
 
                 // 如果不是最后一次，等待后重试
                 if (i < MAX_RETRIES - 1) {
@@ -139,11 +140,11 @@ public class DouyinClient {
      */
     private void checkParams(DouyinRequest jstRequest, DouyinAppClientDTO appDTO) throws Exception {
         if (jstRequest == null) {
-            throw new AppRuntimeException("DouyinRequest is null.");
+            throw new AppRuntimeException("抖音 Request is null.");
 
         }
         if (appDTO == null) {
-            throw new AppRuntimeException("DouyinAppClientDTO is null.");
+            throw new AppRuntimeException("抖音 AppClientDTO is null.");
         }
 
         String apiUrl = appDTO.getApiUrl();
@@ -154,19 +155,19 @@ public class DouyinClient {
         String method = jstRequest.getMethod();
 
         if (StringUtils.isBlank(apiUrl)) {
-            throw new AppRuntimeException("jushuitan apiUrl is null.");
+            throw new AppRuntimeException("抖音 apiUrl is null.");
         }
         if (StringUtils.isBlank(appKey)) {
-            throw new AppRuntimeException("jushuitan appKey is null.");
+            throw new AppRuntimeException("抖音 appKey is null.");
         }
         if (StringUtils.isBlank(appSecret)) {
-            throw new AppRuntimeException("jushuitan appSecret is null.");
+            throw new AppRuntimeException("抖音 appSecret is null.");
         }
         if (StringUtils.isBlank(accessToken)) {
-            throw new AppRuntimeException("jushuitan accessToken is null.");
+            throw new AppRuntimeException("抖音 accessToken is null.");
         }
         if (StringUtils.isBlank(method)) {
-            throw new AppRuntimeException("jushuitan method is null.");
+            throw new AppRuntimeException("抖音 method is null.");
         }
     }
 }

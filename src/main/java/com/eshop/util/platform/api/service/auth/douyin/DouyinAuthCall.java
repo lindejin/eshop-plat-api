@@ -21,7 +21,7 @@ public class DouyinAuthCall {
     private DouyinTokenClient douyinTokenClient;
 
     /**
-     * 得物
+     * 抖音
      * 获取访问令牌（accessToken）
      */
     public DouyinTokenCreateVO tokenCreate(DouyinAppClientDTO acDTO, DouyinTokenCreateDTO reqDTO) throws Exception {
@@ -50,13 +50,24 @@ public class DouyinAuthCall {
     }
 
     /**
-     * 得物
+     * 抖音
      * 刷新访问令牌（refreshToken）
      */
     public DouyinTokenRefreshVO tokenRefresh(DouyinAppClientDTO acDTO, DouyinTokenRefreshDTO reqDTO) throws Exception {
-        String method = "/api/v1/h5/passport/v1/oauth2/refresh_token";
+        String method = "token.refresh";
+        String version = "2";
+        String urlPath = "/token/refresh";
+
+
+        String paramJson = ApiSigner.serializeParamsPlain(reqDTO);
+        String paramJsonNot = ApiSigner.serializeParams(reqDTO);
+
         DouyinRequest request = new DouyinRequest();
+        request.setVersion(version);
         request.setMethod(method);
+        request.setUrlPath(urlPath);
+        request.setParamJson(paramJson);
+        request.setParamJsonNot(paramJsonNot);
 
         DouyinResponse response = douyinTokenClient.execute(request, acDTO);
         String respBody = response.getGopResponseBody();

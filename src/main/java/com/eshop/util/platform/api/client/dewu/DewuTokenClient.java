@@ -110,11 +110,11 @@ public class DewuTokenClient {
      */
     private void checkParams(DewuRequest request, DewuAppClientDTO appDTO) {
         if (request == null) {
-            throw new AppRuntimeException("Dewu request is null.");
+            throw new AppRuntimeException("得物 request is null.");
         }
 
         if (appDTO == null) {
-            throw new AppRuntimeException("DewuAppClientDTO is null.");
+            throw new AppRuntimeException("得物 AppClientDTO is null.");
         }
 
         String apiUrl = appDTO.getApiUrl();
@@ -150,14 +150,14 @@ public class DewuTokenClient {
         // 构建请求参数
         Map<String, Object> params = buildRequestParamsByRefresh(refreshToken, appKey, appSecret);
 
-        log.info("小红书请求参数: {}", JSON.toJSONString(params));
+        log.info("得物 请求参数: {}", JSON.toJSONString(params));
 
         // 构建JSON请求体
         RequestBody body = RequestBody.create(JSON.toJSONString(params), JSON_MEDIA_TYPE);
 
         // 执行请求
         String responseStr = executePostWithRetry(apiUrl + method, body);
-        log.info("小红书获响应: {}", responseStr);
+        log.info("得物 获响应: {}", responseStr);
         DewuResponse response = new DewuResponse();
         response.setResponseBody(responseStr);
         return response;
@@ -168,11 +168,11 @@ public class DewuTokenClient {
      */
     private void checkParamsByRefresh(String refreshToken, DewuRequest request, DewuAppClientDTO appDTO) {
         if (request == null) {
-            throw new AppRuntimeException("Dewu request is null.");
+            throw new AppRuntimeException("得物 request is null.");
         }
 
         if (appDTO == null) {
-            throw new AppRuntimeException("DewuAppClientDTO is null.");
+            throw new AppRuntimeException("得物 AppClientDTO is null.");
         }
 
         String apiUrl = appDTO.getApiUrl();
