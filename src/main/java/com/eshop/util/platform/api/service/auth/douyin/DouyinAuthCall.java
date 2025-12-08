@@ -1,20 +1,11 @@
 package com.eshop.util.platform.api.service.auth.douyin;
 
 import com.alibaba.fastjson.JSONObject;
-import com.eshop.util.platform.api.client.dewu.DewuTokenClient;
-import com.eshop.util.platform.api.client.dewu.request.DewuAppClientDTO;
-import com.eshop.util.platform.api.client.dewu.request.DewuRequest;
-import com.eshop.util.platform.api.client.dewu.response.DewuResponse;
-import com.eshop.util.platform.api.client.douyin.DouyinClient;
 import com.eshop.util.platform.api.client.douyin.DouyinTokenClient;
 import com.eshop.util.platform.api.client.douyin.request.DouyinAppClientDTO;
 import com.eshop.util.platform.api.client.douyin.request.DouyinRequest;
 import com.eshop.util.platform.api.client.douyin.response.DouyinResponse;
 import com.eshop.util.platform.api.client.douyin.util.ApiSigner;
-import com.eshop.util.platform.api.service.auth.dewu.dto.DewuTokenCreateDTO;
-import com.eshop.util.platform.api.service.auth.dewu.dto.DewuTokenRefreshDTO;
-import com.eshop.util.platform.api.service.auth.dewu.vo.DewuTokenCreateVO;
-import com.eshop.util.platform.api.service.auth.dewu.vo.DewuTokenRefreshVO;
 import com.eshop.util.platform.api.service.auth.douyin.dto.DouyinTokenCreateDTO;
 import com.eshop.util.platform.api.service.auth.douyin.dto.DouyinTokenRefreshDTO;
 import com.eshop.util.platform.api.service.auth.douyin.vo.DouyinTokenCreateVO;
@@ -23,7 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-public class DouyinAuthCallService {
+public class DouyinAuthCall {
 
 
     @Autowired

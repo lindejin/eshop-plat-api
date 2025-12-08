@@ -2,10 +2,9 @@ package com.eshop.douyin;
 
 import com.alibaba.fastjson.JSON;
 import com.eshop.util.platform.api.client.douyin.request.DouyinAppClientDTO;
-import com.eshop.util.platform.api.service.auth.douyin.DouyinAuthCallService;
+import com.eshop.util.platform.api.service.auth.douyin.DouyinAuthCall;
 import com.eshop.util.platform.api.service.auth.douyin.dto.DouyinTokenCreateDTO;
 import com.eshop.util.platform.api.service.auth.douyin.vo.DouyinTokenCreateVO;
-import com.eshop.util.platform.api.service.order.jushuitan.JushuitanOrderCall;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -15,7 +14,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 public class TestDouyinAuthCallService {
 
     @Autowired
-    private DouyinAuthCallService douyinAuthCallService;
+    private DouyinAuthCall douyinAuthCallService;
 
 
     @Test

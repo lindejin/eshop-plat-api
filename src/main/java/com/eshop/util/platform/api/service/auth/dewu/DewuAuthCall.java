@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component;
 
 
 @Component
-public class DewuAuthCallService {
+public class DewuAuthCall {
 
     @Autowired
     private DewuTokenClient dewuTokenClient;

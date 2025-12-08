@@ -2,7 +2,7 @@ package com.eshop.dewu;
 
 import com.alibaba.fastjson.JSON;
 import com.eshop.util.platform.api.client.dewu.request.DewuAppClientDTO;
-import com.eshop.util.platform.api.service.auth.dewu.DewuAuthCallService;
+import com.eshop.util.platform.api.service.auth.dewu.DewuAuthCall;
 import com.eshop.util.platform.api.service.auth.dewu.dto.DewuTokenCreateDTO;
 import com.eshop.util.platform.api.service.auth.dewu.dto.DewuTokenRefreshDTO;
 import com.eshop.util.platform.api.service.auth.dewu.vo.DewuTokenCreateVO;
@@ -13,10 +13,10 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 
 @SpringBootTest
-public class TestDewuAuthCallService {
+public class TestDewuAuthCall {
 
     @Autowired
-    private DewuAuthCallService dewuAuthCallService;
+    private DewuAuthCall dewuAuthCall;
 
 
     //https://open-dev-boss-api.worthfind.com/auth/authorize/tiktok/authcallback?code=lFhwaLJcZRF2&state=random_string_1764751192239
@@ -34,7 +34,7 @@ public class TestDewuAuthCallService {
         String code = "lFhwaLJcZRF2";
         DewuTokenCreateDTO reqDTO = new DewuTokenCreateDTO();
         reqDTO.setCode(code);
-        DewuTokenCreateVO respVO = dewuAuthCallService.tokenCreate(appDTO, reqDTO);
+        DewuTokenCreateVO respVO = dewuAuthCall.tokenCreate(appDTO, reqDTO);
         System.out.println(respVO.getRespBody());
         System.out.println(JSON.toJSONString(respVO));
 
@@ -60,7 +60,7 @@ public class TestDewuAuthCallService {
         String refreshToken = "LNTdLO8JaNgBxv6RAdpXX7L3e41M1KDXNfxKipw6uCTQj0rVyZEq4W6J79IdiJCr";
         DewuTokenRefreshDTO reqDTO = new DewuTokenRefreshDTO();
         reqDTO.setRefreshToken(refreshToken);
-        DewuTokenRefreshVO respVO = dewuAuthCallService.tokenRefresh(appDTO, reqDTO);
+        DewuTokenRefreshVO respVO = dewuAuthCall.tokenRefresh(appDTO, reqDTO);
         System.out.println(respVO.getRespBody());
         System.out.println(JSON.toJSONString(respVO));
 

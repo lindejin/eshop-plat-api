@@ -2,7 +2,7 @@ package com.eshop.xiaohongshu;
 
 import com.alibaba.fastjson.JSON;
 import com.eshop.util.platform.api.client.xiaohongshu.request.XiaohongshuAppClientDTO;
-import com.eshop.util.platform.api.service.auth.xiaohongshu.XiaohongshuAuthCallService;
+import com.eshop.util.platform.api.service.auth.xiaohongshu.XiaohongshuAuthCall;
 import com.eshop.util.platform.api.service.auth.xiaohongshu.dto.XiaohongshuTokenCreateDTO;
 import com.eshop.util.platform.api.service.auth.xiaohongshu.dto.XiaohongshuTokenRefreshDTO;
 import com.eshop.util.platform.api.service.auth.xiaohongshu.vo.XiaohongshuTokenCreateVO;
@@ -16,7 +16,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 public class TestXiaohongshuAuthCallService {
 
     @Autowired
-    private XiaohongshuAuthCallService xiaohongshuAuthCallService;
+    private XiaohongshuAuthCall xiaohongshuAuthCallService;
 
 
     @Test
