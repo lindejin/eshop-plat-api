@@ -2,21 +2,25 @@ package com.eshop.util.platform.api.service.auth.jdl.vo;
 
 import com.eshop.util.platform.api.structure.BaseResponseVO;
 
+
 @lombok.Getter
 @lombok.Setter
-public class JdLogisticsTokenRefreshVO extends BaseResponseVO {
-
-    //    "code": 1000,
-    private Integer code;
-    //    "message": "success",
-    private String message;
-    //    "enMessage": null,
-    private String enMessage;
-
-    private JdLogisticsTokenVO data;
+public class JdLogisticsTokenCreateVO extends BaseResponseVO {
 
     /**
      * 提取到外面方便处理
+     */
+
+    /**
+     * "{
+     * "accessExpire":"2022-11-30 16:09:18",
+     * "accessToken":"85c8bb203a5d4afe873aec7fff8a46fb",
+     * "clientId":"514827fb288844d0a87bc106da4bc676",
+     * "code":"569baa267f1746f8a7c36dcb183d56d7",
+     * "refreshExpire":"2022-11-30 16:09:18",
+     * "refreshToken":"d2be7f5aef8043b9b40338aebfab3223",
+     * "sellerId":"forever_swh"
+     * }"
      */
     //参数名称	说明
     //accessExpire	当前accessToken过期时间

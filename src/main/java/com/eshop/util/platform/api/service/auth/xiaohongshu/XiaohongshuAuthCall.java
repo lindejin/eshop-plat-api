@@ -9,6 +9,7 @@ import com.eshop.util.platform.api.service.auth.xiaohongshu.dto.XiaohongshuToken
 import com.eshop.util.platform.api.service.auth.xiaohongshu.dto.XiaohongshuTokenRefreshDTO;
 import com.eshop.util.platform.api.service.auth.xiaohongshu.vo.XiaohongshuTokenCreateVO;
 import com.eshop.util.platform.api.service.auth.xiaohongshu.vo.XiaohongshuTokenRefreshVO;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -35,6 +36,14 @@ public class XiaohongshuAuthCall {
         if (respVO == null) {
             respVO = new XiaohongshuTokenCreateVO();
         }
+        if (respVO.getData() != null && StringUtils.isNotBlank(respVO.getData().getAccessToken())) {
+            respVO.setAccessToken(respVO.getData().getAccessToken());
+            respVO.setAccessTokenExpiresAt(respVO.getData().getAccessTokenExpiresAt());
+            respVO.setRefreshToken(respVO.getData().getRefreshToken());
+            respVO.setRefreshTokenExpiresAt(respVO.getData().getRefreshTokenExpiresAt());
+            respVO.setSellerId(respVO.getData().getSellerId());
+            respVO.setSellerName(respVO.getData().getSellerName());
+        }
         respVO.setRespBody(respBody);
         return respVO;
     }
@@ -55,6 +64,14 @@ public class XiaohongshuAuthCall {
         XiaohongshuTokenRefreshVO respVO = JSONObject.parseObject(respBody, XiaohongshuTokenRefreshVO.class);
         if (respVO == null) {
             respVO = new XiaohongshuTokenRefreshVO();
+        }
+        if (respVO.getData() != null && StringUtils.isNotBlank(respVO.getData().getAccessToken())) {
+            respVO.setAccessToken(respVO.getData().getAccessToken());
+            respVO.setAccessTokenExpiresAt(respVO.getData().getAccessTokenExpiresAt());
+            respVO.setRefreshToken(respVO.getData().getRefreshToken());
+            respVO.setRefreshTokenExpiresAt(respVO.getData().getRefreshTokenExpiresAt());
+            respVO.setSellerId(respVO.getData().getSellerId());
+            respVO.setSellerName(respVO.getData().getSellerName());
         }
         respVO.setRespBody(respBody);
         return respVO;

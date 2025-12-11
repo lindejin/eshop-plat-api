@@ -28,6 +28,48 @@ public class JdLogisticsTokenClient {
     @Autowired
     private OkHttpClient client;
 
+    public JdLogisticsResponse tokenCreate(String code, String oauthUrl, JdLogisticsAppClientDTO appDTO) throws Exception {
+        String appKey = appDTO.getAppKey();
+        String appSecret = appDTO.getAppSecret();
+
+        // 1. 生成东八区时间戳
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        sdf.setTimeZone(TimeZone.getTimeZone("GMT+8"));
+        String timestamp = sdf.format(new Date());
+
+        // 2. 构建参数
+        Map<String, String> params = new TreeMap<>();
+        //URL参数名	是否必选	说明
+        //code	是	第3步获取的授权码code，不会过期，但使用一次后失效
+        params.put("code", code);
+        //client_id	是	应用的AppKey，可从【控制台--应用概览】查看
+        params.put("client_id", appKey);
+        //client_secret	是	应用的AppSecret，可从【控制台--应用概览】查看
+        params.put("client_secret", appSecret);
+
+        // 4. 使用HttpUrl.Builder构建规范URL
+        String baseUrl = oauthUrl;
+        HttpUrl.Builder urlBuilder = HttpUrl.parse(baseUrl + "/oauth/token").newBuilder();
+
+        // 添加查询参数（自动处理编码）
+        for (Map.Entry<String, String> param : params.entrySet()) {
+            urlBuilder.addQueryParameter(param.getKey(), param.getValue());
+        }
+
+        String url = urlBuilder.build().toString();
+
+        log.info("京东物流请求参数 apiUrl: {} ", url);
+        // 5. 发送请求
+
+        String responseStr = executeGetWithRetry(url);
+
+        log.info("京东物流获得响应: {}", responseStr);
+        JdLogisticsResponse response = new JdLogisticsResponse();
+        response.setGopResponseBody(responseStr);
+        return response;
+
+    }
+
     public JdLogisticsResponse tokenRefresh(String refreshToken, String oauthUrl, JdLogisticsAppClientDTO appDTO) throws Exception {
         String appKey = appDTO.getAppKey();
         String appSecret = appDTO.getAppSecret();
