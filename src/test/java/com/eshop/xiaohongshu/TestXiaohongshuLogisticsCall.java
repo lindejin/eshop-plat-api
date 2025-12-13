@@ -69,7 +69,7 @@ public class TestXiaohongshuLogisticsCall {
         String appId = "698f0fae6fd04676aedd";
         String appSecret = "ea1ff5772da8a2d363976130c9199c62";
         String accessToken = "token-a67156322938498fbb24aba54d62069f-cc7df12b41c14602976fd45b130d2341";
-        accessToken = "token-a67156322938498fbb24aba54d62069f-cc7df12b41c14602976fd45b130d2341";
+        accessToken = "token-1bb6e0aa005e46b6b6e1cdf7c734701b-7917010aef564b30b10f3ced7b5dd068";
 
         XiaohongshuAppClientDTO appDTO = new XiaohongshuAppClientDTO();
         appDTO.setAppId(appId);
@@ -86,5 +86,6 @@ public class TestXiaohongshuLogisticsCall {
         System.out.println(respVO.getRespBody());
         System.out.println(JSON.toJSONString(respVO));
 
+        //
        }
 }
