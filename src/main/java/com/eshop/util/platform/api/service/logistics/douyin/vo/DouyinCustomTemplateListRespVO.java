@@ -2,10 +2,11 @@ package com.eshop.util.platform.api.service.logistics.douyin.vo;
 
 import com.eshop.util.platform.api.structure.BaseResponseVO;
 
-
 @lombok.Getter
 @lombok.Setter
-public class DouyinTemplateListRespVO extends BaseResponseVO {
+public class DouyinCustomTemplateListRespVO extends BaseResponseVO {
+    //字段名称 类型 说明
+    //------------ -------- ----------------------------------------------------------------------
 
     //code Number 主错误码：code=10000 调用成功；code!=10000 调用失败，具体错误码参见下表
     private Integer code;
@@ -18,7 +19,10 @@ public class DouyinTemplateListRespVO extends BaseResponseVO {
     //log_id String 每一条日志的唯一标识
     private String log_id;
 
+    //err_no Number 【即将废弃】老版错误码：err_no=0 调用成功；err_no!=0 调用失败
+    //message String 【即将废弃】老版错误信息
+
     //data String 具体业务信息，json格式
-    private DouyinTemplateDataVO data;
+    private DouyinCustomTemplateDataResultVO data;
 
 }

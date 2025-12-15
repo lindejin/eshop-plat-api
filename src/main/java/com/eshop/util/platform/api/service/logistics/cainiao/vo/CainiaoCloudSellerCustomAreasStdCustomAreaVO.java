@@ -4,7 +4,7 @@ import java.util.List;
 
 @lombok.Getter
 @lombok.Setter
-public class CainiaoCloudSellerStdCustomAreaVO {
+public class CainiaoCloudSellerCustomAreasStdCustomAreaVO {
 
     //cpCode	string	32	true	YTO	cp code
     //customAreas	List<CustomArea>	- -	true	- -	自定义区列表

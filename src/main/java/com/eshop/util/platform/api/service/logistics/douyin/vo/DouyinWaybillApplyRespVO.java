@@ -6,16 +6,18 @@ import com.eshop.util.platform.api.structure.BaseResponseVO;
 @lombok.Getter
 @lombok.Setter
 public class DouyinWaybillApplyRespVO extends BaseResponseVO {
-    //    "code": 10000,
+
+    //code Number 主错误码：code=10000 调用成功；code!=10000 调用失败，具体错误码参见下表
     private Integer code;
-    //    "msg": "success",
+    //msg String 主错误信息
     private String msg;
-    //    "sub_code": "",
+    //sub_code String 子错误码
     private String sub_code;
-    //    "sub_msg": "",
+    //sub_msg String 子错误信息
     private String sub_msg;
-    //    "log_id": "202512041756193F188E2A6C7F76DAC003"
+    //log_id String 每一条日志的唯一标识
     private String log_id;
-    //    "data": { },
+
+    //data String 具体业务信息，json格式
     private DouyinWaybillApplyDataVO data;
 }

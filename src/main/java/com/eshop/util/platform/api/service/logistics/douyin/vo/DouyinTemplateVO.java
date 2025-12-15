@@ -7,12 +7,13 @@ import java.util.List;
 public class DouyinTemplateVO {
 
     /**
+     * 物流公司
+     */
+    private String logistics_code;
+
+    /**
      * 模板信息
      */
     private List<DouyinTemplateInfoVO> template_infos;
 
-    /**
-     * 物流公司
-     */
-    private String logistics_code;
 }

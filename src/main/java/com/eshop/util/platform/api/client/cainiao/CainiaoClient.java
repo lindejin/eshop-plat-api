@@ -142,15 +142,15 @@ public class CainiaoClient {
         String appSecret = appDTO.getAppSecret();
 
         if (StringUtils.isBlank(apiUrl)) {
-            throw new AppRuntimeException("菜鸟 apiUrl不能为空");
+            throw new AppRuntimeException("菜鸟 apiUrl 不能为空");
         }
 
         if (StringUtils.isBlank(appKey)) {
-            throw new AppRuntimeException("菜鸟appKey不能为空");
+            throw new AppRuntimeException("菜鸟 appKey 不能为空");
         }
 
         if (StringUtils.isBlank(appSecret)) {
-            throw new AppRuntimeException("菜鸟appSecret不能为空");
+            throw new AppRuntimeException("菜鸟 appSecret 不能为空");
         }
     }
 }

@@ -16,4 +16,9 @@ public class CainiaoRequest {
      * 请求报文
      */
     private String requestContent;
+
+    /**
+     * 请求路径
+     */
+    private String urlPath;
 }
