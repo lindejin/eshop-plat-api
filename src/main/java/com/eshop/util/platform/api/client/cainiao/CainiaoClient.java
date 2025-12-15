@@ -40,7 +40,7 @@ public class CainiaoClient {
         String accessToken = appDTO.getAccessToken();
 
         // 构建请求参数
-        Map<String, String> params = buildRequestParams(request, accessToken, appKey);
+        Map<String, String> params = buildRequestParams(request, accessToken, appSecret);
 
         log.info("菜鸟请求参数: {}", JSON.toJSONString(params));
 
@@ -65,9 +65,9 @@ public class CainiaoClient {
     /**
      * 构建请求参数
      */
-    private Map<String, String> buildRequestParams(CainiaoRequest request, String accessToken, String appKey) {
+    private Map<String, String> buildRequestParams(CainiaoRequest request, String accessToken, String appSecret) {
         // 生成签名
-        String digest = CainiaoSignUtil.doSign(request.getRequestContent(), CHARSET, appKey);
+        String digest = CainiaoSignUtil.doSign(request.getRequestContent(), CHARSET, appSecret);
 
         Map<String, String> params = new HashMap<>();
         //公共参数
