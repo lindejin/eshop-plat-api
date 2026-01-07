@@ -27,6 +27,17 @@ public class DouyinSignUtil {
         String signPattern = appSecret + "app_key" + appKey + "method" + method + "param_json" + sortedParamStr + "timestamp" + timestamp + "v" + v + appSecret;
         return stringToMD5(signPattern);
     }
+    public static String signHmac(String appKey, String appSecret, String method, String timestamp, String paramJsonNot, String v) {
+        String sortedParamStr = null;
+        if (paramJsonNot != null) {
+            sortedParamStr = paramJsonNot;
+        } else {
+            sortedParamStr = "{}";
+        }
+        String signPattern = appSecret + "app_key" + appKey + "method" + method + "param_json" + sortedParamStr + "timestamp" + timestamp + "v" + v + appSecret;
+        return stringToHmac(signPattern,appSecret);
+    }
+
 
 //    public static String spiSign(String appKey, String appSecret, String timestamp, String paramJson, Integer signMethod) {
 //        String sortedParamStr = "";
