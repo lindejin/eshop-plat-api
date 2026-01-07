@@ -26,7 +26,7 @@ public class TestXiaohongshuOrderCall {
         String appId = "698f0fae6fd04676aedd";
         String appSecret = "ea1ff5772da8a2d363976130c9199c62";
         String accessToken = "token-a67156322938498fbb24aba54d62069f-cc7df12b41c14602976fd45b130d2341";
-        accessToken = "token-a67156322938498fbb24aba54d62069f-cc7df12b41c14602976fd45b130d2341";
+        accessToken = "token-6351295bdbdc4975b0384f1699085102-bbfd2b4998594339b4d9005e2c3f7278";
         XiaohongshuAppClientDTO appDTO = new XiaohongshuAppClientDTO();
         appDTO.setAppId(appId);
         appDTO.setAppSecret(appSecret);
