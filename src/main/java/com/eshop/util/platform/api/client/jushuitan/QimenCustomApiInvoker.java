@@ -37,7 +37,7 @@ public class QimenCustomApiInvoker {
     /**
      * 签名的摘要算法，可选值为：hmac，md5，hmac-sha256。
      */
-    private static final String SIGN_METHOD = "md5";
+    private static final String SIGN_METHOD = "hmac";
     ;
 
     /**
@@ -106,7 +106,7 @@ public class QimenCustomApiInvoker {
 
                 // 处理属性值
                 if (value == null) {
-                    resultMap.put(key, null);
+//                    resultMap.put(key, null);
                 } else if (isStrictSimpleType(value)) {
                     // 基本类型直接转为字符串
                     resultMap.put(key, String.valueOf(value));

@@ -26,7 +26,7 @@ public class ProdJushuitanOrderCallTets {
     void getSaleOrderList() throws Exception {
         String appKey = "ba0c1a5cd17a4d41a1e8d48e3c867419";
         String appSecret = "3381fe28080a469ab684f4e291d4f823";
-        String accessToken = "d494f28be7624f72be1df6c5fce55c87";
+        String accessToken = "9a5a8b4dfa8e46bfbb7c9b01612aa711";
 
         String apiUrl= "https://openapi.jushuitan.com";
 //        String apiUrl = "https://dev-api.jushuitan.com";
@@ -44,7 +44,7 @@ public class ProdJushuitanOrderCallTets {
 //        String modified_end = "2025-11-24 10:26:25";
 
 //        List<String> so_ids = Collections.singletonList("3074543403833306664");
-        List<String> so_ids = Collections.singletonList("3101267748866214568");
+        List<String> so_ids = Collections.singletonList("110192153638555506");
 
         JushuitanSaleOrderListReqDTO reqDTO = new JushuitanSaleOrderListReqDTO();
         reqDTO.setSo_ids(so_ids);
@@ -60,7 +60,7 @@ public class ProdJushuitanOrderCallTets {
     void getOrderDetailV2() throws Exception {
         String appKey = "ba0c1a5cd17a4d41a1e8d48e3c867419";
         String appSecret = "3381fe28080a469ab684f4e291d4f823";
-        String accessToken = "d494f28be7624f72be1df6c5fce55c87";
+        String accessToken = "9a5a8b4dfa8e46bfbb7c9b01612aa711";
 
         String apiUrl= "https://openapi.jushuitan.com";
         JushuitanAppClientDTO temuAcDTO = new JushuitanAppClientDTO();

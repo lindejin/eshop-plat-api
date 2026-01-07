@@ -63,12 +63,11 @@ public class JushuitanOrderCallTets {
 
     @Test
     void getSaleOrderList() throws Exception {
-        String appKey = "2f411678338d4ef9ab102fbe7c549da3";
-        String appSecret= "a765af900ce74ebe975b2416fcbeaecb";
-        String accessToken= "b2968310b7b4451c969013c5067f952d";
+        String appKey = "ba0c1a5cd17a4d41a1e8d48e3c867419";
+        String appSecret = "3381fe28080a469ab684f4e291d4f823";
+        String accessToken = "9a5a8b4dfa8e46bfbb7c9b01612aa711";
 
-//        String apiUrl= "https://openapi.jushuitan.com";
-        String apiUrl= "https://dev-api.jushuitan.com";
+        String apiUrl= "https://openapi.jushuitan.com";
         JushuitanAppClientDTO temuAcDTO = new JushuitanAppClientDTO();
         temuAcDTO.setAppKey(appKey);
         temuAcDTO.setAppSecret(appSecret);
@@ -77,10 +76,10 @@ public class JushuitanOrderCallTets {
 
         //与时间条件，内部单号不能同时为空，最大限制20条
         //modified_begin	string	否	2021-12-02 10:26:25	起始时间，和结束时间必须同时存在，时间间隔不能超过七天，与线上单号，内部单号不能同时为空;tips:用时间条件查询由于查询中数据存在变动的可能会由于排序问题引发分页查询漏单的问题，建议使用ts时间戳增量查询的方式
-        String modified_begin = "2021-12-02 10:26:25";
+        String modified_begin = "2025-11-20 10:26:25";
 
         //modified_end	string	否	2021-12-09 10:26:25	结束时间，和起始时间必须同时存在，时间间隔不能超过七天，与线上单号，内部单号不能同时为空
-        String modified_end = "2021-12-09 10:26:25";
+        String modified_end = "2025-11-24 10:26:25";
         JushuitanSaleOrderListReqDTO reqDTO = new JushuitanSaleOrderListReqDTO();
         reqDTO.setModified_begin(modified_begin);
         reqDTO.setModified_end(modified_end);

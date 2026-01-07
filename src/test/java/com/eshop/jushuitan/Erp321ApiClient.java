@@ -137,7 +137,7 @@ public class Erp321ApiClient {
         Erp321ApiClient client = new Erp321ApiClient(
                 "ba0c1a5cd17a4d41a1e8d48e3c867419",
                 "d494f28be7624f72be1df6c5fce55c87",
-                true // 使用沙箱环境
+                false // 使用沙箱环境
         );
 
         try {
