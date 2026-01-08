@@ -1,6 +1,7 @@
 package com.eshop.douyin;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.eshop.util.platform.api.client.douyin.DouyinSignUtil;
 import com.eshop.util.platform.api.client.douyin.util.GsonUtil;
 import com.eshop.util.platform.api.client.douyin.util.SignUtil;
@@ -25,13 +26,16 @@ public class tets {
 // 序列化参数
         String paramJson = GsonUtil.marshal(JSON.parseObject("{}"));
         String signsss = SignUtil.sign(appKey, appSecret, method, timestamp, paramJson);
-        String params = "access_token="+accessToken+"&app_key="+appKey+"&method=logistics.getShopKey&param_json={}&timestamp="+timestamp+"&v=2&sign="+signsss+"&sign_method=hmac-sha256";
+        String params = "access_token=" + accessToken + "&app_key=" + appKey + "&method=logistics.getShopKey&param_json={}&timestamp=" + timestamp + "&v=2&sign=" + signsss + "&sign_method=hmac-sha256";
+        JSONObject json = JSON.parseObject("{}");
 
-        System.out.println(params);
+        json.put("params",params);
+        json.put("timestamp",timestamp);
+        System.out.println(json);
     }
 
     // 下面是一个批量加密接口的示例
-    public static void mai2n(String[] args){
+    public static void mai2n(String[] args) {
         // 收集参数
         String appKey = "*"; //  替换成你的app_key
         String appSecret = "*"; // 替换成你的app_secret

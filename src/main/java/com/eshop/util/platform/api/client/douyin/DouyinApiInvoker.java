@@ -5,6 +5,7 @@ import com.eshop.util.platform.api.client.douyin.request.DouyinAppClientDTO;
 import com.eshop.util.platform.api.client.douyin.request.DouyinRequest;
 import com.eshop.util.platform.api.client.douyin.response.DouyinResponse;
 import com.eshop.util.platform.api.client.douyin.util.ApiSigner;
+import com.eshop.util.platform.api.client.douyin.util.GsonUtil;
 import com.eshop.util.platform.api.structure.BaseResponseVO;
 import org.springframework.stereotype.Component;
 
@@ -34,7 +35,7 @@ public class DouyinApiInvoker {
             Object dto
     ) throws Exception {
 
-        String paramJson = ApiSigner.serializeParamsPlain(dto);
+        String paramJson = GsonUtil.marshal(dto);
         String paramJsonNot = ApiSigner.serializeParams(dto);
         // 构建请求
         DouyinRequest request = new DouyinRequest();

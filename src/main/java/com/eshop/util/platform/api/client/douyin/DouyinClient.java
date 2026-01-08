@@ -5,6 +5,7 @@ import com.eshop.exception.AppRuntimeException;
 import com.eshop.util.platform.api.client.douyin.request.DouyinAppClientDTO;
 import com.eshop.util.platform.api.client.douyin.request.DouyinRequest;
 import com.eshop.util.platform.api.client.douyin.response.DouyinResponse;
+import com.eshop.util.platform.api.client.douyin.util.SignUtil;
 import lombok.extern.slf4j.Slf4j;
 import okhttp3.*;
 import org.apache.commons.lang3.StringUtils;
@@ -48,7 +49,6 @@ public class DouyinClient {
         //时间戳，格式为UNIX时间（秒） ，长度10位，当前时间-300秒<=入参时间<=当前时间+300秒
         long timestamp = System.currentTimeMillis() / 1000;
         String paramJson = jstRequest.getParamJson();
-        String paramJsonNot = jstRequest.getParamJsonNot();
         //公共参数
         Map<String, String> params = new HashMap<>();
         params.put("method", method);
@@ -56,15 +56,14 @@ public class DouyinClient {
         params.put("param_json",paramJson);
         params.put("timestamp", timestamp+"");
         params.put("v", version);
-        params.put("sign_method", "md5");
+        params.put("sign_method", "hmac-sha256");
 
         params.put("access_token", accessToken);
 
 
         //md5加密签名
-        String sign = DouyinSignUtil.sign(appKey, appSecret, method, timestamp+"", paramJsonNot, "2");
+        String sign = SignUtil.sign(appKey, appSecret, method, timestamp, paramJson);
         params.put("sign", sign);
-        System.out.println("sign:"+sign);
 
         log.info("抖音请求参数: {}", JSON.toJSONString(params));
 
