@@ -17,6 +17,9 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.Collections;
+import java.util.List;
+
 
 @SpringBootTest
 public class JushuitanTaoOrderCallTest {
@@ -152,6 +155,8 @@ public class JushuitanTaoOrderCallTest {
         reqDTO.setPage_index(page_index);
         reqDTO.setPage_size(page_size);
         String so_ids = "3168479786331150357,3168890472371444265";
+        so_ids = "5002481413101693913";
+
         reqDTO.setSo_ids(so_ids);
         JushuitanTaoSaleOrderListRespVO respVO = jushuitanTaoOrderCall.getSaleOrderList(appDTO, reqDTO);
         System.out.println(respVO.getRespBody());

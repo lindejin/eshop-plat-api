@@ -64,11 +64,17 @@ public class JushuitanTaoOrderCall {
      */
     public JushuitanTaoConfirmDeliveryOrderRespVO confirmDeliveryOrder(QimenCustomAppClientDTO acDTO, JushuitanTaoConfirmDeliveryOrderReqDTO reqDTO) throws Exception {
         String method = "taobao.qimen.deliveryorder.confirm";
-        return qimenCustomApiInvoker.execute(
+        JushuitanTaoConfirmDeliveryOrderRespVO respVO = qimenCustomApiInvoker.execute(
                 acDTO,
                 method,
                 JushuitanTaoConfirmDeliveryOrderRespVO.class,
                 reqDTO
         );
+        if (respVO != null && respVO.getResponse() !=null) {
+            respVO.setCode(respVO.getResponse().getCode());
+            respVO.setMessage(respVO.getResponse().getMessage());
+            respVO.setFlag(respVO.getResponse().getFlag());
+        }
+        return respVO;
     }
 }

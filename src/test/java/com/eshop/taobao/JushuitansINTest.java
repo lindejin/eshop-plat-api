@@ -1,243 +1,28 @@
 package com.eshop.taobao;
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
-import com.eshop.util.platform.api.client.jushuitan.QimenCustomApiClient;
-import com.eshop.util.platform.api.client.jushuitan.QimenTaoApiClient;
-import com.eshop.util.platform.api.client.jushuitan.request.QimenCustomAppClientDTO;
-import com.eshop.util.platform.api.client.jushuitan.request.QimenCustomRequest;
-import com.eshop.util.platform.api.client.jushuitan.response.QimenCustomResponse;
-import com.eshop.util.platform.api.client.taobao.request.TaoBaoAppClientDTO;
-import com.eshop.util.platform.api.service.logistics.taobao.TaoBaoLogisticsCall;
-import com.eshop.util.platform.api.service.logistics.taobao.dto.*;
-import com.eshop.util.platform.api.service.logistics.taobao.vo.*;
-import org.apache.commons.collections4.CollectionUtils;
-import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.apache.commons.lang3.StringUtils;
 
-import javax.annotation.Resource;
-import java.util.*;
+import javax.crypto.Mac;
+import javax.crypto.SecretKey;
+import javax.crypto.spec.SecretKeySpec;
+import java.io.IOException;
+import java.security.GeneralSecurityException;
+import java.security.MessageDigest;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @program: eshop-plat-api
  * @description:
  * @author: lindz
- * @create: 2026-01-08 11:15
+ * @create: 2026-01-18 18:09
  **/
-@SpringBootTest
-public class TaoBaoLogisticsCallTest {
-
-    @Autowired
-    private TaoBaoLogisticsCall taoBaoLogisticsCall;
-
-
-    @Test
-    void queryEcBillTemplates() throws Exception {
-        String apiUrl = "https://gw.api.taobao.com/router/rest";
-        String appKey = "34124006";
-        String appSecret = "4a921fb19d69fca3db1becf7d96c00ca";
-        String sessionKey = "6100506c11ee151a6f033ab9d649f6aa2e5ba207a1360ac2206890150985";
-        TaoBaoAppClientDTO appDTO = new TaoBaoAppClientDTO();
-        appDTO.setAppKey(appKey);
-        appDTO.setAppSecret(appSecret);
-        appDTO.setSessionKey(sessionKey);
-//        appDTO.setTargetAppKey(targetAppKey);
-        appDTO.setApiUrl(apiUrl);
-
-        TaoBaoEbillTemplatesReqDTO reqDTO = new TaoBaoEbillTemplatesReqDTO();
-
-        TaoBaoEbillTemplatesRespVO xiaohongshuTokenCreateVO = taoBaoLogisticsCall.queryEcBillTemplates(appDTO, reqDTO);
-        System.out.println(xiaohongshuTokenCreateVO.getRespBody());
-        System.out.println(JSON.toJSONString(xiaohongshuTokenCreateVO));
-
-        //第一次
-
-
-    }
-
-    @Test
-    void queryEcBillOrder() throws Exception {
-        String apiUrl = "https://gw.api.taobao.com/router/rest";
-        String appKey = "34124006";
-        String appSecret = "4a921fb19d69fca3db1becf7d96c00ca";
-        String sessionKey = "6100506c11ee151a6f033ab9d649f6aa2e5ba207a1360ac2206890150985";
-        TaoBaoAppClientDTO appDTO = new TaoBaoAppClientDTO();
-        appDTO.setAppKey(appKey);
-        appDTO.setAppSecret(appSecret);
-        appDTO.setSessionKey(sessionKey);
-//        appDTO.setTargetAppKey(targetAppKey);
-        appDTO.setApiUrl(apiUrl);
-
-
-        String objectId = UUID.randomUUID().toString();
-        //  cp_code	String	true	POSTB	快递公司code（如：POSTB=邮政）
-        String cp_code = "SF";
-        //  object_id	String	true	1	请求id（用于幂等性控制）
-        String object_id = objectId;
-        //  waybill_code	String	true	9890000066001	电子面单号（运单号）
-        String waybill_code = "SF3265715279801";
-        TaoBaoEbillOrderWaybillDetailQueryByWaybillCodeRequest row = new TaoBaoEbillOrderWaybillDetailQueryByWaybillCodeRequest();
-        row.setCp_code(cp_code);
-        row.setObject_id(object_id);
-        row.setWaybill_code(waybill_code);
-        List<TaoBaoEbillOrderWaybillDetailQueryByWaybillCodeRequest> list = new ArrayList<>();
-        list.add(row);
-        TaoBaoEbillOrderReqDTO reqDTO = new TaoBaoEbillOrderReqDTO();
-        reqDTO.setParam_list(list);
-
-
-        TaoBaoEbillOrderRespVO respVO = taoBaoLogisticsCall.queryEcBillOrder(appDTO, reqDTO);
-        System.out.println(respVO.getRespBody());
-        System.out.println(JSON.toJSONString(respVO));
-        //第一次
-        //{"cainiao_waybill_ii_query_by_waybillcode_response":{"modules":{"waybill_cloud_print_with_result_desc_response":[{"object_id":"2e8f005d-7bb7-4b26-bd76-4273a203a8e5","success":true,"waybill_cloud_print_response":{"print_data":"{\"encryptedData\":\"AES:rU904rj6UH2oqfSUb43+Z199vDU2GZtH5\/LVIEq0ppUJuwjq7qZ58JRvDHOQ\/f2QhqdsWiYYFqp6z96+fPLupxENx4gZUSA\/zYJbbdwevCzeI+22t7hONi0e8k4pytGn0cs+O\/SQI1why\/dhaLeykWnnlGU0C0H6rLb9Myr8u1LJAYfQ7SsjVBRaWlssLiH1kWSfGOTZIOkh5WTnbdxPi08HJV+ZEEBVCoPXVHJDpcK1R5+aEFHTaaPA8hdfslZFbDRsR2HRygU1aH9gkxrtOJOgL2h8xN4FxaScOFAueeM02fE0M6R5OW3\/tG2db\/uSO1LeFpLhsvAAavywxPYKKAqAWH\/W\/1cfllrQ8zk3ZeOZj+EAnpCyMNgmN0mEaeYUT6ZPB62QmecrMlnnX9yrigewlb7NEw880iGKoy8xTrIDaMETvoNsS+cN9QYsmFOykkurZ0nHhfE35xXhA\/t2L3889OFflzf5KaoBVcTynldKwDBAwWIVRTBRNdzqf5rMyp2qt\/j2QRkNt0ufBJ+O8F21ji1F90qUuc2yV0A4gX8\/bYk4hVP0FnpKEF4tS\/+2aM8Ki55L0B4cM65hZHsqSWEQzJICbsIcnohyWH8DTp1Z6dcnfquU113K6dgd8tw43Vdc5h5+vva7NAh7ohJfEpzwAc0DukUHMl0gu0mecn6Q7g0s7GQ5u0hKjLG2RATMR5v0jcpuzU1dhPbGdHiUzn1NT7xSnb317qiXw9Hcp8V26OUT8DIfsUP4wFyXkcUit3QdepO3kc34G0BlkDyvd5pArU+HUoGoxN4Rs0XswY69SexkoDFLlvKtpvGcOBIoloiXtdpYAqzEBWGNdKLNjPL2v\/GYUsIo+2+LsV5fjYzNcj5NMweNe8rzaz4p\/z0OrIzBqHyurLlDLTJ6mkQMF7Zn5E\/y\/\/A+GaSCXay2DNVoC1w349AA7vPkHzA7FirVYYbm0lAxO0z\/Iw0b\/WA0OQ4KggaIBACcP47qOW8kynrpAUkiaHiAlfLLajDqoKkHVaYvanMKvJOpMnQOWYOd0ORmjtYBfQiivGadgq+zGld91EUn7ItRenTAm628cZIJ0GihcHLgJul\/DZJOXgRmI96bwP3V\/UChZXaoxiEPadvBuD2\/UMgwGoCatbk6DLhDWxR+wz+E9bCOxAbWvmmAGsVBo37Jz7b3zinok87yo9g8txTc\/gx4xEYKNdY0Xzx2eCs+gOzZLov\/pA5lL2kwVlsD4Lh6zv01IDu7erR3yJVot+k5oE1tNr0f5FBnd2OTAa\/utVcOrKm8nVO6SEDxZNYwL+Vu0JiKFn469HM2htzVLKMaAn7noHrda25Y+uJGckS94q\/nPqpE9NHSvg+VN6zlQ1jSReTT8WOu2U9IKqpaswdg8mUeUuQn8Va\/wIKY3pWflnjN8A0NctEYYZ8Tslqw40UTIzyNA9I7\/NFHV3u+DJVgeeJ0L8\/Sqbfk+taK8NZrXCwsXS6J+MA8DihtZaxrb1Bu68Mftf\/cJmRpvo5YOx+dFuy3ioZTNSaAd1qTFS04N+GOgF42\/PSqqjU+B99ERMVWmjMrbrBkpMKlHEKeH++pPEO6pYzTV9ob4t0Cavd3xEgMXhM3wh98OWeTMbs3KO3Oh3VT9IDIXlEwX693rWOjg1dz1DYTOk6XeaahRi7RuZRQPDEaHNfKVp91A01j2J9T3TJP+OYMlS0+U99cZMXgmmUV+597VyxwihbF93\/LOO3ASvvQuuZdFC5OgosrZObt2caWFemDrVGZ3UqqHv+PA22dO825ZvFdoWZ+Cwl9NUYpqa1CARXAcHW9k9FSAAbODxXu+lO\/CvZ87igCp3zTMRtvBQfPEIiyJj7Rh0lwaH0gAOPmOPNg7qalpFck1tKVCV8ZO1CLJf+3kcmbnCcqcoGY12yJigbHTU\/Hn9kORMJOEZOChNPOUGjVhs1dtacrjTh0DaWfE5L81ecLiOepR7RoHARK57iF1751uiKXmq73DYO\/Cz9f4sfsOa7o64JKo+guIR4OJopaNrW8r1Mxyym9rqNrZDXWRtBiAFts9L7Of8lawxNlMJhEBKTwC+6ciIeSiK4+B3OPF2x7nWQwo3LpspN\/CMLum4lrQ9oFCqNWf79UtQvKEKuIRRKlMwO7YH3oELo7xJuJBjivAOjz8OamEvVkHSSGSCr9BpU59uM1gMbybDYkTOvYJHefXrLWzJVYxKqHc6NLXaPTedTQnOLyNodpWCtBHDA\/mw5+co\/movnIkWzxjaTZQMpB9b\/KPo3wCaYWXw0fVqA9A4Ll8m4ofI7SlK2r\/iphfB\/keGNQx1SzioMJkw65WfmoCNyk5khtZzzPiB8ihChBYzveb2VHK04HKmM8oNePp9rvU7pYioYfPi2GgLf3+imrux4I6pw69ra6K1Jo9nYjWhAk0shTgMXNwInJRce4k04tcXk7EooEST4H57FaJw==\",\"signature\":\"MD:EksqcqnCVyCS\/rBtOQlzSQ==\",\"templateURL\":\"http:\/\/cloudprint.cainiao.com\/template\/standard\/290659\",\"ver\":\"waybill_print_secret_version_1\"}","waybill_code":"YT7596382757695"}}]},"request_id":"16ms4tudox3u6"}}
-        //{"respBody":"{\"cainiao_waybill_ii_query_by_waybillcode_response\":{\"modules\":{\"waybill_cloud_print_with_result_desc_response\":[{\"object_id\":\"2e8f005d-7bb7-4b26-bd76-4273a203a8e5\",\"success\":true,\"waybill_cloud_print_response\":{\"print_data\":\"{\\\"encryptedData\\\":\\\"AES:rU904rj6UH2oqfSUb43+Z199vDU2GZtH5\\/LVIEq0ppUJuwjq7qZ58JRvDHOQ\\/f2QhqdsWiYYFqp6z96+fPLupxENx4gZUSA\\/zYJbbdwevCzeI+22t7hONi0e8k4pytGn0cs+O\\/SQI1why\\/dhaLeykWnnlGU0C0H6rLb9Myr8u1LJAYfQ7SsjVBRaWlssLiH1kWSfGOTZIOkh5WTnbdxPi08HJV+ZEEBVCoPXVHJDpcK1R5+aEFHTaaPA8hdfslZFbDRsR2HRygU1aH9gkxrtOJOgL2h8xN4FxaScOFAueeM02fE0M6R5OW3\\/tG2db\\/uSO1LeFpLhsvAAavywxPYKKAqAWH\\/W\\/1cfllrQ8zk3ZeOZj+EAnpCyMNgmN0mEaeYUT6ZPB62QmecrMlnnX9yrigewlb7NEw880iGKoy8xTrIDaMETvoNsS+cN9QYsmFOykkurZ0nHhfE35xXhA\\/t2L3889OFflzf5KaoBVcTynldKwDBAwWIVRTBRNdzqf5rMyp2qt\\/j2QRkNt0ufBJ+O8F21ji1F90qUuc2yV0A4gX8\\/bYk4hVP0FnpKEF4tS\\/+2aM8Ki55L0B4cM65hZHsqSWEQzJICbsIcnohyWH8DTp1Z6dcnfquU113K6dgd8tw43Vdc5h5+vva7NAh7ohJfEpzwAc0DukUHMl0gu0mecn6Q7g0s7GQ5u0hKjLG2RATMR5v0jcpuzU1dhPbGdHiUzn1NT7xSnb317qiXw9Hcp8V26OUT8DIfsUP4wFyXkcUit3QdepO3kc34G0BlkDyvd5pArU+HUoGoxN4Rs0XswY69SexkoDFLlvKtpvGcOBIoloiXtdpYAqzEBWGNdKLNjPL2v\\/GYUsIo+2+LsV5fjYzNcj5NMweNe8rzaz4p\\/z0OrIzBqHyurLlDLTJ6mkQMF7Zn5E\\/y\\/\\/A+GaSCXay2DNVoC1w349AA7vPkHzA7FirVYYbm0lAxO0z\\/Iw0b\\/WA0OQ4KggaIBACcP47qOW8kynrpAUkiaHiAlfLLajDqoKkHVaYvanMKvJOpMnQOWYOd0ORmjtYBfQiivGadgq+zGld91EUn7ItRenTAm628cZIJ0GihcHLgJul\\/DZJOXgRmI96bwP3V\\/UChZXaoxiEPadvBuD2\\/UMgwGoCatbk6DLhDWxR+wz+E9bCOxAbWvmmAGsVBo37Jz7b3zinok87yo9g8txTc\\/gx4xEYKNdY0Xzx2eCs+gOzZLov\\/pA5lL2kwVlsD4Lh6zv01IDu7erR3yJVot+k5oE1tNr0f5FBnd2OTAa\\/utVcOrKm8nVO6SEDxZNYwL+Vu0JiKFn469HM2htzVLKMaAn7noHrda25Y+uJGckS94q\\/nPqpE9NHSvg+VN6zlQ1jSReTT8WOu2U9IKqpaswdg8mUeUuQn8Va\\/wIKY3pWflnjN8A0NctEYYZ8Tslqw40UTIzyNA9I7\\/NFHV3u+DJVgeeJ0L8\\/Sqbfk+taK8NZrXCwsXS6J+MA8DihtZaxrb1Bu68Mftf\\/cJmRpvo5YOx+dFuy3ioZTNSaAd1qTFS04N+GOgF42\\/PSqqjU+B99ERMVWmjMrbrBkpMKlHEKeH++pPEO6pYzTV9ob4t0Cavd3xEgMXhM3wh98OWeTMbs3KO3Oh3VT9IDIXlEwX693rWOjg1dz1DYTOk6XeaahRi7RuZRQPDEaHNfKVp91A01j2J9T3TJP+OYMlS0+U99cZMXgmmUV+597VyxwihbF93\\/LOO3ASvvQuuZdFC5OgosrZObt2caWFemDrVGZ3UqqHv+PA22dO825ZvFdoWZ+Cwl9NUYpqa1CARXAcHW9k9FSAAbODxXu+lO\\/CvZ87igCp3zTMRtvBQfPEIiyJj7Rh0lwaH0gAOPmOPNg7qalpFck1tKVCV8ZO1CLJf+3kcmbnCcqcoGY12yJigbHTU\\/Hn9kORMJOEZOChNPOUGjVhs1dtacrjTh0DaWfE5L81ecLiOepR7RoHARK57iF1751uiKXmq73DYO\\/Cz9f4sfsOa7o64JKo+guIR4OJopaNrW8r1Mxyym9rqNrZDXWRtBiAFts9L7Of8lawxNlMJhEBKTwC+6ciIeSiK4+B3OPF2x7nWQwo3LpspN\\/CMLum4lrQ9oFCqNWf79UtQvKEKuIRRKlMwO7YH3oELo7xJuJBjivAOjz8OamEvVkHSSGSCr9BpU59uM1gMbybDYkTOvYJHefXrLWzJVYxKqHc6NLXaPTedTQnOLyNodpWCtBHDA\\/mw5+co\\/movnIkWzxjaTZQMpB9b\\/KPo3wCaYWXw0fVqA9A4Ll8m4ofI7SlK2r\\/iphfB\\/keGNQx1SzioMJkw65WfmoCNyk5khtZzzPiB8ihChBYzveb2VHK04HKmM8oNePp9rvU7pYioYfPi2GgLf3+imrux4I6pw69ra6K1Jo9nYjWhAk0shTgMXNwInJRce4k04tcXk7EooEST4H57FaJw==\\\",\\\"signature\\\":\\\"MD:EksqcqnCVyCS\\/rBtOQlzSQ==\\\",\\\"templateURL\\\":\\\"http:\\/\\/cloudprint.cainiao.com\\/template\\/standard\\/290659\\\",\\\"ver\\\":\\\"waybill_print_secret_version_1\\\"}\",\"waybill_code\":\"YT7596382757695\"}}]},\"request_id\":\"16ms4tudox3u6\"}}"}
-
-        //结构化
-        CainiaoWaybillIiQueryByWaybillcodeWaybillCloudPrintResponse waybill_cloud_print_response = Optional.ofNullable(respVO)
-                .map(TaoBaoEbillOrderRespVO::getCainiao_waybill_ii_query_by_waybillcode_response)
-                .map(CainiaoWaybillIiQueryByWaybillcodeResponse::getModules)
-                .map(CainiaoWaybillIiQueryByWaybillcodeWaybillCloudPrintWithResultDescResponse::getWaybill_cloud_print_with_result_desc_response)
-                .filter(CollectionUtils::isNotEmpty)
-                .map(p -> p.get(0))
-                .map(CainiaoWaybillIiQueryByWaybillcodeWaybillCloudPrintWithResultDescStdResponse::getWaybill_cloud_print_response)
-                .orElse(null);
-        System.out.println(JSON.toJSONString(waybill_cloud_print_response));
-    }
-
-
-    @Test
-    void cainiaoCloudprintIsvResourcesGet() throws Exception {
-        String apiUrl = "https://eco.taobao.com/router/rest";
-        String appKey = "34124006";
-        String appSecret = "4a921fb19d69fca3db1becf7d96c00ca";
-        String sessionKey = "6100506c11ee151a6f033ab9d649f6aa2e5ba207a1360ac2206890150985";
-        TaoBaoAppClientDTO appDTO = new TaoBaoAppClientDTO();
-        appDTO.setAppKey(appKey);
-        appDTO.setAppSecret(appSecret);
-        appDTO.setSessionKey(sessionKey);
-//        appDTO.setTargetAppKey(targetAppKey);
-        appDTO.setApiUrl(apiUrl);
-
-        CainiaoCloudprintIsvResourcesGetReqDTO reqDTO = new CainiaoCloudprintIsvResourcesGetReqDTO();
-        reqDTO.setIsv_resource_type("TEMPLATE");
-        CainiaoCloudprintIsvResourcesGetRespVO xiaohongshuTokenCreateVO = taoBaoLogisticsCall.cainiaoCloudprintIsvResourcesGet(appDTO, reqDTO);
-        System.out.println(xiaohongshuTokenCreateVO.getRespBody());
-        System.out.println(JSON.toJSONString(xiaohongshuTokenCreateVO));
-
-        //第一次
-        //{"cainiao_cloudprint_isv_resources_get_response":{"result":{"error_code":"0","resource_list":{},"success":true},"request_id":"16kye9rmz0dl3"}}
-        //{"respBody":"{\"cainiao_cloudprint_isv_resources_get_response\":{\"result\":{\"error_code\":\"0\",\"resource_list\":{},\"success\":true},\"request_id\":\"16kye9rmz0dl3\"}}"}
-
-        //结构化
-        //{"cainiao_cloudprint_isv_resources_get_response":{"result":{"error_code":"0","resource_list":{},"success":true},"request_id":"16l86lm45rd1h"}}
-        //{"cainiao_cloudprint_isv_resources_get_response":{"result":{"error_code":"0","resource_list":[{}],"success":true}},"respBody":"{\"cainiao_cloudprint_isv_resources_get_response\":{\"result\":{\"error_code\":\"0\",\"resource_list\":{},\"success\":true},\"request_id\":\"16l86lm45rd1h\"}}"}
-
-    }
-
-    @Test
-    void cainiaoCloudprintIsvtemplatesGet() throws Exception {
-        String apiUrl = "https://eco.taobao.com/router/rest";
-        String appKey = "34124006";
-        String appSecret = "4a921fb19d69fca3db1becf7d96c00ca";
-        String sessionKey = "6100506c11ee151a6f033ab9d649f6aa2e5ba207a1360ac2206890150985";
-        TaoBaoAppClientDTO appDTO = new TaoBaoAppClientDTO();
-        appDTO.setAppKey(appKey);
-        appDTO.setAppSecret(appSecret);
-        appDTO.setSessionKey(sessionKey);
-//        appDTO.setTargetAppKey(targetAppKey);
-        appDTO.setApiUrl(apiUrl);
-
-        CainiaoCloudprintIsvtemplatesGetReqDTO reqDTO = new CainiaoCloudprintIsvtemplatesGetReqDTO();
-        CainiaoCloudprintIsvtemplatesGetRespVO xiaohongshuTokenCreateVO = taoBaoLogisticsCall.cainiaoCloudprintIsvtemplatesGet(appDTO, reqDTO);
-        System.out.println(xiaohongshuTokenCreateVO.getRespBody());
-        System.out.println(JSON.toJSONString(xiaohongshuTokenCreateVO));
-
-        //第一次
-        //{"cainiao_cloudprint_isvtemplates_get_response":{"result":{"datas":{},"error_code":"0","success":true},"request_id":"16moo2xa6lal9"}}
-        //{"cainiao_cloudprint_isvtemplates_get_response":{"result":{"datas":[{}],"error_code":"0","success":true}},"respBody":"{\"cainiao_cloudprint_isvtemplates_get_response\":{\"result\":{\"datas\":{},\"error_code\":\"0\",\"success\":true},\"request_id\":\"16moo2xa6lal9\"}}"}
-
-        //结构化
-        //{"cainiao_cloudprint_isvtemplates_get_response":{"result":{"datas":{},"error_code":"0","success":true},"request_id":"16moo2xa6lal9"}}
-        //{"cainiao_cloudprint_isvtemplates_get_response":{"result":{"datas":[{}],"error_code":"0","success":true}},"respBody":"{\"cainiao_cloudprint_isvtemplates_get_response\":{\"result\":{\"datas\":{},\"error_code\":\"0\",\"success\":true},\"request_id\":\"16moo2xa6lal9\"}}"}
-
-
-    }
-
-
-    @Test
-    void cainiaoCloudprintMystdtemplatesGet() throws Exception {
-        String apiUrl = "https://eco.taobao.com/router/rest";
-        String appKey = "34124006";
-        String appSecret = "4a921fb19d69fca3db1becf7d96c00ca";
-        String sessionKey = "6100506c11ee151a6f033ab9d649f6aa2e5ba207a1360ac2206890150985";
-        TaoBaoAppClientDTO appDTO = new TaoBaoAppClientDTO();
-        appDTO.setAppKey(appKey);
-        appDTO.setAppSecret(appSecret);
-        appDTO.setSessionKey(sessionKey);
-//        appDTO.setTargetAppKey(targetAppKey);
-        appDTO.setApiUrl(apiUrl);
-
-        CainiaoCloudprintMystdtemplatesGetReqDTO reqDTO = new CainiaoCloudprintMystdtemplatesGetReqDTO();
-        CainiaoCloudprintMystdtemplatesGetRespVO xiaohongshuTokenCreateVO = taoBaoLogisticsCall.cainiaoCloudprintMystdtemplatesGet(appDTO, reqDTO);
-        System.out.println(xiaohongshuTokenCreateVO.getRespBody());
-        System.out.println(JSON.toJSONString(xiaohongshuTokenCreateVO));
-
-        //第一次
-        //{"cainiao_cloudprint_mystdtemplates_get_response":{"result":{"datas":{},"error_code":"0","success":true},"request_id":"15r7aixbed0wq"}}
-        //{"cainiao_cloudprint_mystdtemplates_get_response":{"result":{"datas":[{}],"error_code":"0","success":true}},"respBody":"{\"cainiao_cloudprint_mystdtemplates_get_response\":{\"result\":{\"datas\":{},\"error_code\":\"0\",\"success\":true},\"request_id\":\"15r7aixbed0wq\"}}"}
-
-        //结构化
-        //{"cainiao_cloudprint_mystdtemplates_get_response":{"result":{"datas":{},"error_code":"0","success":true},"request_id":"15r7aixbed0wq"}}
-        //{"cainiao_cloudprint_mystdtemplates_get_response":{"result":{"datas":[{}],"error_code":"0","success":true}},"respBody":"{\"cainiao_cloudprint_mystdtemplates_get_response\":{\"result\":{\"datas\":{},\"error_code\":\"0\",\"success\":true},\"request_id\":\"15r7aixbed0wq\"}}"}
-
-        //{"cainiao_cloudprint_mystdtemplates_get_response":{"result":{"datas":{"user_template_result":[{"cp_code":"FEDEX","user_std_templates":{"user_template_do":[{"brand_code":"default","keys":{},"user_std_template_id":66260731,"user_std_template_name":"1","user_std_template_url":"https:\/\/cloudprint.cainiao.com\/template\/standard\/261503\/4"}]}}]},"error_code":"0","success":true},"request_id":"15qsnmdwe09vb"}}
-        //{"cainiao_cloudprint_mystdtemplates_get_response":{"result":{"datas":[{}],"error_code":"0","success":true}},"respBody":"{\"cainiao_cloudprint_mystdtemplates_get_response\":{\"result\":{\"datas\":{\"user_template_result\":[{\"cp_code\":\"FEDEX\",\"user_std_templates\":{\"user_template_do\":[{\"brand_code\":\"default\",\"keys\":{},\"user_std_template_id\":66260731,\"user_std_template_name\":\"1\",\"user_std_template_url\":\"https:\\/\\/cloudprint.cainiao.com\\/template\\/standard\\/261503\\/4\"}]}}]},\"error_code\":\"0\",\"success\":true},\"request_id\":\"15qsnmdwe09vb\"}}"}
-
-        //{"cainiao_cloudprint_mystdtemplates_get_response":{"result":{"datas":{"user_template_result":[{"cp_code":"FEDEX","user_std_templates":{"user_template_do":[{"brand_code":"default","keys":{},"user_std_template_id":66260731,"user_std_template_name":"1","user_std_template_url":"https:\/\/cloudprint.cainiao.com\/template\/standard\/261503\/4"}]}},{"cp_code":"YTO","user_std_templates":{"user_template_do":[{"brand_code":"default","keys":{},"user_std_template_id":66262319,"user_std_template_name":"圆通自定义","user_std_template_url":"https:\/\/cloudprint.cainiao.com\/template\/standard\/101\/642"}]}}]},"error_code":"0","success":true},"request_id":"15quh3kjxozlm"}}
-        //{"cainiao_cloudprint_mystdtemplates_get_response":{"result":{"datas":[{}],"error_code":"0","success":true}},"respBody":"{\"cainiao_cloudprint_mystdtemplates_get_response\":{\"result\":{\"datas\":{\"user_template_result\":[{\"cp_code\":\"FEDEX\",\"user_std_templates\":{\"user_template_do\":[{\"brand_code\":\"default\",\"keys\":{},\"user_std_template_id\":66260731,\"user_std_template_name\":\"1\",\"user_std_template_url\":\"https:\\/\\/cloudprint.cainiao.com\\/template\\/standard\\/261503\\/4\"}]}},{\"cp_code\":\"YTO\",\"user_std_templates\":{\"user_template_do\":[{\"brand_code\":\"default\",\"keys\":{},\"user_std_template_id\":66262319,\"user_std_template_name\":\"圆通自定义\",\"user_std_template_url\":\"https:\\/\\/cloudprint.cainiao.com\\/template\\/standard\\/101\\/642\"}]}}]},\"error_code\":\"0\",\"success\":true},\"request_id\":\"15quh3kjxozlm\"}}"}
-
-    }
-
-
-    @Test
-    void cainiaoCloudprintCustomaresGet() throws Exception {
-        String apiUrl = "https://eco.taobao.com/router/rest";
-        String appKey = "34124006";
-        String appSecret = "4a921fb19d69fca3db1becf7d96c00ca";
-        String sessionKey = "6100506c11ee151a6f033ab9d649f6aa2e5ba207a1360ac2206890150985";
-        TaoBaoAppClientDTO appDTO = new TaoBaoAppClientDTO();
-        appDTO.setAppKey(appKey);
-        appDTO.setAppSecret(appSecret);
-        appDTO.setSessionKey(sessionKey);
-//        appDTO.setTargetAppKey(targetAppKey);
-        appDTO.setApiUrl(apiUrl);
-
-        Long template_id = Long.valueOf("66260731");
-        //66262319
-        template_id = Long.valueOf("66263123");
-        CainiaoCloudprintCustomaresGetReqDTO reqDTO = new CainiaoCloudprintCustomaresGetReqDTO();
-        reqDTO.setTemplate_id(template_id);
-        CainiaoCloudprintCustomaresGetGetRespVO xiaohongshuTokenCreateVO = taoBaoLogisticsCall.cainiaoCloudprintCustomaresGet(appDTO, reqDTO);
-        System.out.println(xiaohongshuTokenCreateVO.getRespBody());
-        System.out.println(JSON.toJSONString(xiaohongshuTokenCreateVO));
-
-        //第一次
-        //{"error_response":{"code":15,"msg":"Remote service error","sub_code":"2401","sub_msg":"资源不存在","request_id":"16kksr4el1bs0"}}
-        //{"error_response":{"code":15,"msg":"Remote service error","request_id":"16kksr4el1bs0","sub_code":"2401","sub_msg":"资源不存在"},"respBody":"{\"error_response\":{\"code\":15,\"msg\":\"Remote service error\",\"sub_code\":\"2401\",\"sub_msg\":\"资源不存在\",\"request_id\":\"16kksr4el1bs0\"}}"}
-
-
-        //结构化
-        //{"cainiao_cloudprint_customares_get_response":{"result":{"datas":{"custom_area_result":[{"custom_area_id":69787940,"custom_area_url":"https:\/\/cloudprint.cainiao.com\/template\/customArea\/69787940\/1","keys":{}}]},"error_code":"0","success":true},"request_id":"16mevs6y2xyto"}}
-        //{"cainiao_cloudprint_customares_get_response":{"result":{"datas":[{}],"error_code":"0","success":true}},"respBody":"{\"cainiao_cloudprint_customares_get_response\":{\"result\":{\"datas\":{\"custom_area_result\":[{\"custom_area_id\":69787940,\"custom_area_url\":\"https:\\/\\/cloudprint.cainiao.com\\/template\\/customArea\\/69787940\\/1\",\"keys\":{}}]},\"error_code\":\"0\",\"success\":true},\"request_id\":\"16mevs6y2xyto\"}}"}
-
-
-        //{"cainiao_cloudprint_customares_get_response":{"result":{"datas":{"custom_area_result":[{"custom_area_id":69789725,"custom_area_url":"https:\/\/cloudprint.cainiao.com\/template\/customArea\/69789725\/1","keys":{}}]},"error_code":"0","success":true},"request_id":"15r1u4ih81sse"}}
-        //{"cainiao_cloudprint_customares_get_response":{"result":{"datas":[{}],"error_code":"0","success":true}},"respBody":"{\"cainiao_cloudprint_customares_get_response\":{\"result\":{\"datas\":{\"custom_area_result\":[{\"custom_area_id\":69789725,\"custom_area_url\":\"https:\\/\\/cloudprint.cainiao.com\\/template\\/customArea\\/69789725\\/1\",\"keys\":{}}]},\"error_code\":\"0\",\"success\":true},\"request_id\":\"15r1u4ih81sse\"}}"}
-
-    }
-
+public class JushuitansINTest {
+    private static final String SIGN_METHOD_MD5 = "md5";
+    private static final String SIGN_METHOD_HMAC = "hmac";
+    private static final String CHARSET_UTF8 = "utf-8";
+    private static final String CONTENT_ENCODING_GZIP = "gzip";
     private static final String str = "{\n" +
             "  \"orderLines\": {\n" +
             "    \"snCode\": \"货品sn编码\",\n" +
@@ -875,29 +660,9 @@ public class TaoBaoLogisticsCallTest {
             "    \"height\": \"12.0\"\n" +
             "  }\n" +
             "}";
+    public static void main(String[] args) throws IOException {
 
-    @Resource
-    private QimenCustomApiClient qimenCustomApiClient;
-
-    @Resource
-    private QimenTaoApiClient qimenTaoApiClient;
-
-    /**
-     * 返回内容响应格式。不传默认为xml格式，可选值：xml，json。
-     */
-    private static final String FORMAT = "json";
-
-    /**
-     * API协议版本，可选值：2.0
-     */
-    private static final String VERSION = "2.0";
-
-    /**
-     * 签名的摘要算法，可选值为：hmac，md5，hmac-sha256。
-     */
-    private static final String SIGN_METHOD = "md5";
-    @Test
-    void tes00() throws Exception {
+        // 定义必要的参数变量
         String method = "taobao.qimen.deliveryorder.confirm";
         String appKey = "12129701";
         String sessionKey = null; // 根据实际情况设置
@@ -908,38 +673,116 @@ public class TaoBaoLogisticsCallTest {
         String targetAppKey = null; // 根据实际情况设置
         String customerId = null; // 根据实际情况设置
         String appSecret = "12129701"; // 替换为你的app secret
-        // 公钥私钥
 
-        QimenCustomAppClientDTO appDTO = new QimenCustomAppClientDTO();
-        appDTO.setAppKey(appKey);
-        appDTO.setAppSecret(appSecret);
-        appDTO.setSessionKey(sessionKey);
-        appDTO.setTargetAppKey(targetAppKey);
-        appDTO.setCustomerId(customerId);
-        appDTO.setApiUrl("33");
+        Map<String, String> param = new HashMap<>();
+        param.put("request", str);
 
-        // 构建请求
-        QimenCustomRequest request = new QimenCustomRequest();
-        request.setMethod(method);
-        request.setFormat(FORMAT);
-        request.setVersion(VERSION);
-        request.setSignMethod(SIGN_METHOD);
+        // 添加API系统参数
+        param.put("method", method);
+        param.put("app_key", appKey);
+        param.put("session", sessionKey != null ? sessionKey : ""); // 非必填
+        param.put("timestamp", timestamp);
+        param.put("format", format);
+        param.put("v", version);
+        param.put("sign_method", signMethod);
+        param.put("partner_id", "top-apitools"); // 添加示例中出现的partner_id参数
 
-        JSONObject jsonObject = JSON.parseObject(str);
-        String requestJson = jsonObject.getString("request");
-        Map<String, String> params = new HashMap<>();
-        params.put("request", requestJson);
-        params.put("partner_id", "top-apitools");
-        request.setParams(params);
+        // 申请奇门自定义场景的参数
+        if (targetAppKey != null && !targetAppKey.trim().isEmpty()) {
+            param.put("target_app_key", targetAppKey);
+        }
+        if (customerId != null && !customerId.trim().isEmpty()) {
+            param.put("customer_id", customerId);
+        }
 
-
-        // 执行请求
-        QimenCustomResponse response = null;
-        response = qimenTaoApiClient.executeTaoBao(request, appDTO);
-
-        String respBody = response.getGopResponseBody();
+        // 签名参数
+        String s = signTopRequest(param, appSecret, SIGN_METHOD_MD5);
+        System.out.println(s);
+        param.put("sign", signTopRequest(param, appSecret, SIGN_METHOD_MD5));
     }
 
+    /**
+     * 对TOP请求进行签名。
+     */
+    private static String signTopRequest(Map<String, String> params, String secret, String signMethod) throws IOException {
+        // 第一步：检查参数是否已经排序
+        String[] keys = params.keySet().toArray(new String[0]);
+        Arrays.sort(keys);
 
+        // 第二步：把所有参数名和参数值串在一起
+        StringBuilder query = new StringBuilder();
+        if (SIGN_METHOD_MD5.equals(signMethod)) {
+            query.append(secret);
+        }
+        for (String key : keys) {
+            String value = params.get(key);
+            if (StringUtils.isNotEmpty(key) && StringUtils.isNotEmpty(value)) {
+                query.append(key).append(value);
+            }
+        }
 
+        // 第三步：使用MD5/HMAC加密
+        byte[] bytes;
+        if (SIGN_METHOD_HMAC.equals(signMethod)) {
+            bytes = encryptHMAC(query.toString(), secret);
+        } else {
+            query.append(secret);
+            bytes = encryptMD5(query.toString());
+        }
+
+        // 第四步：把二进制转化为大写的十六进制
+        return byte2hex(bytes);
+    }
+
+    /**
+     * 对字节流进行HMAC_MD5摘要。
+     */
+    private static byte[] encryptHMAC(String data, String secret) throws IOException {
+        byte[] bytes = null;
+        try {
+            SecretKey secretKey = new SecretKeySpec(secret.getBytes(CHARSET_UTF8), "HmacMD5");
+            Mac mac = Mac.getInstance(secretKey.getAlgorithm());
+            mac.init(secretKey);
+            bytes = mac.doFinal(data.getBytes(CHARSET_UTF8));
+        } catch (GeneralSecurityException gse) {
+            throw new IOException(gse.toString());
+        }
+        return bytes;
+    }
+
+    /**
+     * 对字符串采用UTF-8编码后，用MD5进行摘要。
+     */
+    private static byte[] encryptMD5(String data) throws IOException {
+        return encryptMD5(data.getBytes(CHARSET_UTF8));
+    }
+
+    /**
+     * 对字节流进行MD5摘要。
+     */
+    private static byte[] encryptMD5(byte[] data) throws IOException {
+        byte[] bytes = null;
+        try {
+            MessageDigest md = MessageDigest.getInstance("MD5");
+            bytes = md.digest(data);
+        } catch (GeneralSecurityException gse) {
+            throw new IOException(gse.toString());
+        }
+        return bytes;
+    }
+
+    /**
+     * 把字节流转换为十六进制表示方式。
+     */
+    private static String byte2hex(byte[] bytes) {
+        StringBuilder sign = new StringBuilder();
+        for (int i = 0; i < bytes.length; i++) {
+            String hex = Integer.toHexString(bytes[i] & 0xFF);
+            if (hex.length() == 1) {
+                sign.append("0");
+            }
+            sign.append(hex.toUpperCase());
+        }
+        return sign.toString();
+    }
 }
