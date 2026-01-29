@@ -3,9 +3,11 @@ package com.eshop.util.platform.api.service.logistics.douyin;
 import com.eshop.util.platform.api.client.douyin.DouyinApiInvoker;
 import com.eshop.util.platform.api.client.douyin.request.DouyinAppClientDTO;
 import com.eshop.util.platform.api.service.logistics.douyin.dto.DouyinCustomTemplateListReqDTO;
+import com.eshop.util.platform.api.service.logistics.douyin.dto.DouyinCustomTemplateListV2ReqDTO;
 import com.eshop.util.platform.api.service.logistics.douyin.dto.DouyinTemplateListReqDTO;
 import com.eshop.util.platform.api.service.logistics.douyin.dto.DouyinWaybillApplyReqDTO;
 import com.eshop.util.platform.api.service.logistics.douyin.vo.DouyinCustomTemplateListRespVO;
+import com.eshop.util.platform.api.service.logistics.douyin.vo.DouyinCustomTemplateListV2RespVO;
 import com.eshop.util.platform.api.service.logistics.douyin.vo.DouyinTemplateListRespVO;
 import com.eshop.util.platform.api.service.logistics.douyin.vo.DouyinWaybillApplyRespVO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -71,6 +73,24 @@ public class DouyinLogisticsCall {
                 version,
                 urlPath,
                 DouyinCustomTemplateListRespVO.class,
+                reqDTO
+        );
+    }
+
+    /**
+     * 查询商家自定义区域数据
+     */
+    ///logistics/customTemplateList
+    public DouyinCustomTemplateListV2RespVO customTemplateList(DouyinAppClientDTO temuAcDTO, DouyinCustomTemplateListV2ReqDTO reqDTO) throws Exception {
+        String method = "logistics.customTemplateList";
+        String version = "2";
+        String urlPath ="/logistics/customTemplateList";
+        return douyinApiInvoker.execute(
+                temuAcDTO,
+                method,
+                version,
+                urlPath,
+                DouyinCustomTemplateListV2RespVO.class,
                 reqDTO
         );
     }

@@ -19,7 +19,7 @@ public class CainiaoCloudprintMystdtemplatesGetCloudPrintBaseResult {
     //success	Boolean	true	是否成功
 
     //
-    private List<CainiaoCloudprintMystdtemplatesGetUserTemplateResult> datas;
+    private CainiaoCloudprintMystdtemplatesGetUserTemplateResult datas;
     private String error_code;
     private String error_message;
     private Boolean success;

@@ -27,6 +27,8 @@ public class tets {
         String paramJson = GsonUtil.marshal(JSON.parseObject("{}"));
         String signsss = SignUtil.sign(appKey, appSecret, method, timestamp, paramJson);
         String params = "access_token=" + accessToken + "&app_key=" + appKey + "&method=logistics.getShopKey&param_json={}&timestamp=" + timestamp + "&v=2&sign=" + signsss + "&sign_method=hmac-sha256";
+
+
         JSONObject json = JSON.parseObject("{}");
 
         json.put("params",params);

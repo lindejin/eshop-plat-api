@@ -72,11 +72,11 @@ public class TaoBaoLogisticsCallTest {
 
         String objectId = UUID.randomUUID().toString();
         //  cp_code	String	true	POSTB	快递公司code（如：POSTB=邮政）
-        String cp_code = "SF";
+        String cp_code = "YTO";
         //  object_id	String	true	1	请求id（用于幂等性控制）
         String object_id = objectId;
         //  waybill_code	String	true	9890000066001	电子面单号（运单号）
-        String waybill_code = "SF3265715279801";
+        String waybill_code = "YT7600066683612";
         TaoBaoEbillOrderWaybillDetailQueryByWaybillCodeRequest row = new TaoBaoEbillOrderWaybillDetailQueryByWaybillCodeRequest();
         row.setCp_code(cp_code);
         row.setObject_id(object_id);
@@ -104,6 +104,18 @@ public class TaoBaoLogisticsCallTest {
                 .map(CainiaoWaybillIiQueryByWaybillcodeWaybillCloudPrintWithResultDescStdResponse::getWaybill_cloud_print_response)
                 .orElse(null);
         System.out.println(JSON.toJSONString(waybill_cloud_print_response));
+
+
+        String print_data = Optional.ofNullable(respVO)
+                .map(TaoBaoEbillOrderRespVO::getCainiao_waybill_ii_query_by_waybillcode_response)
+                .map(CainiaoWaybillIiQueryByWaybillcodeResponse::getModules)
+                .map(CainiaoWaybillIiQueryByWaybillcodeWaybillCloudPrintWithResultDescResponse::getWaybill_cloud_print_with_result_desc_response)
+                .filter(CollectionUtils::isNotEmpty)
+                .map(p -> p.get(0))
+                .map(CainiaoWaybillIiQueryByWaybillcodeWaybillCloudPrintWithResultDescStdResponse::getWaybill_cloud_print_response)
+                .map(CainiaoWaybillIiQueryByWaybillcodeWaybillCloudPrintResponse::getPrint_data)
+                .orElse(null);
+        System.out.println(JSON.parseObject(print_data));
     }
 
 

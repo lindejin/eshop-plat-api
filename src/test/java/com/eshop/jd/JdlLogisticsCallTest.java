@@ -70,11 +70,11 @@ public class JdlLogisticsCallTest {
         acDTO.setApiUrl(baseUri);
         acDTO.setAccessToken(accessToken);
 
-        String cpCode = "JDKY";
+        String cpCode = "JD";
          Integer popFlag = 1;
-         String orderNo = "3377435010892192";
+         String orderNo = "3389469006024998";
         //jdWayBillCode	String	条件	JDVC12044009714	京东物流运单号，cpCode为JD（京东快递）、JDKY（京东快运）、JDDJ（京东大件）、ZY（众邮快递）时必填。长度15-30
-         String jdWayBillCode = "JDVC34377767083";
+         String jdWayBillCode = "JDVC34585897824";
         JdlWayBillInfoDTO  infoDTO = new JdlWayBillInfoDTO();
         infoDTO.setPopFlag(popFlag);
         infoDTO.setOrderNo(orderNo);

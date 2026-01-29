@@ -26,7 +26,7 @@ public class TestXiaohongshuLogisticsCall {
         String appSecret = "ea1ff5772da8a2d363976130c9199c62";
         String accessToken = "token-a67156322938498fbb24aba54d62069f-cc7df12b41c14602976fd45b130d2341";
         accessToken = "token-a67156322938498fbb24aba54d62069f-cc7df12b41c14602976fd45b130d2341";
-        accessToken = "token-0cc81eb0e17c41598dd534d84e53e306-c3dffc84ec004594b74e893e7b955783";
+        accessToken = "token-d51658b29a5e4f72b88e59704533aa99-2a01232750604c51b707c6bb68cf519a";
 
         XiaohongshuAppClientDTO appDTO = new XiaohongshuAppClientDTO();
         appDTO.setAppId(appId);
@@ -35,7 +35,7 @@ public class TestXiaohongshuLogisticsCall {
         appDTO.setAccessToken(accessToken);
 
         String waybillCode = "SF3262394347823";
-        waybillCode = "SF5106441691082";
+        waybillCode = "SF5120640091734";
         String cpCode = "shunfeng";
         Integer billVersion = 2;
         XiaohongshuEbillOrderReqDTO reqDTO = new XiaohongshuEbillOrderReqDTO();
@@ -72,7 +72,7 @@ public class TestXiaohongshuLogisticsCall {
         String appId = "698f0fae6fd04676aedd";
         String appSecret = "ea1ff5772da8a2d363976130c9199c62";
         String accessToken = "token-a67156322938498fbb24aba54d62069f-cc7df12b41c14602976fd45b130d2341";
-        accessToken = "token-1bb6e0aa005e46b6b6e1cdf7c734701b-7917010aef564b30b10f3ced7b5dd068";
+        accessToken = "token-d51658b29a5e4f72b88e59704533aa99-2a01232750604c51b707c6bb68cf519a";
 
         XiaohongshuAppClientDTO appDTO = new XiaohongshuAppClientDTO();
         appDTO.setAppId(appId);
