@@ -65,7 +65,7 @@ public class TestXiaohongshuLogisticsCall2 {
         String appId = "698f0fae6fd04676aedd";
         String appSecret = "ea1ff5772da8a2d363976130c9199c62";
         String accessToken = "token-a67156322938498fbb24aba54d62069f-cc7df12b41c14602976fd45b130d2341";
-        accessToken = "token-a11989065f264df18016b221889c1de9-598c178b43b6419083cffb512991cc4f";
+        accessToken = "token-d49f53711e2044689287ca475530f5fc-c71b7ce19e7d4be19de36985fe10dc52";
 
         XiaohongshuAppClientDTO appDTO = new XiaohongshuAppClientDTO();
         appDTO.setAppId(appId);
@@ -76,9 +76,11 @@ public class TestXiaohongshuLogisticsCall2 {
 //        String cpCode = "shunfeng";
         Integer billVersion = 2;
         String type = "ark";
+        Integer templateCustomerType = 10;
         XiaohongshuEbillTemplatesReqDTO reqDTO = new XiaohongshuEbillTemplatesReqDTO();
 //        reqDTO.setCpCode(cpCode);
         reqDTO.setType(type);
+//        reqDTO.setTemplateCustomerType(templateCustomerType);
         reqDTO.setBillVersion(billVersion);
         XiaohongshuEbillTemplatesRespVO respVO = xiaohongshuLogisticsCall.queryEbillTemplates(appDTO, reqDTO);
         System.out.println(respVO.getRespBody());

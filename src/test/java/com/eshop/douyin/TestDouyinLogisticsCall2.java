@@ -64,7 +64,7 @@ public class TestDouyinLogisticsCall2 {
         String apiUrl = "https://openapi-fxg.jinritemai.com";
         String appKey = "7564242597683381811";
         String appSecret = "00c66ba7-ea59-42ad-9b34-b105483151b3";
-        String accessToken = "mu27hkymwl1lgwk7oxkf6er00001ri95-11";
+        String accessToken = "fuc97skyc61lgwk7oxkf6er00001ri95-11";
         DouyinAppClientDTO acDTO = new DouyinAppClientDTO();
         acDTO.setAppKey(appKey);
         acDTO.setAppSecret(appSecret);
@@ -88,7 +88,7 @@ public class TestDouyinLogisticsCall2 {
         String apiUrl = "https://openapi-fxg.jinritemai.com";
         String appKey = "7564242597683381811";
         String appSecret = "00c66ba7-ea59-42ad-9b34-b105483151b3";
-        String accessToken = "mu27hkymwl1lgwk7oxkf6er00001ri95-11";
+        String accessToken = "fuc97skyc61lgwk7oxkf6er00001ri95-11";
         DouyinAppClientDTO acDTO = new DouyinAppClientDTO();
         acDTO.setAppKey(appKey);
         acDTO.setAppSecret(appSecret);
@@ -97,7 +97,7 @@ public class TestDouyinLogisticsCall2 {
 
 
         DouyinCustomTemplateListReqDTO reqDTO = new DouyinCustomTemplateListReqDTO();
-        reqDTO.setLogistics_code("shunfeng");
+//        reqDTO.setLogistics_code("shunfeng");
         DouyinCustomTemplateListRespVO respVO = douyinLogisticsCall.getCustomTemplateList(acDTO, reqDTO);
 
         System.out.println(respVO.getRespBody());
@@ -109,7 +109,7 @@ public class TestDouyinLogisticsCall2 {
         String apiUrl = "https://openapi-fxg.jinritemai.com";
         String appKey = "7564242597683381811";
         String appSecret = "00c66ba7-ea59-42ad-9b34-b105483151b3";
-        String accessToken = "mu27hkymwl1lgwk7oxkf6er00001ri95-11";
+        String accessToken = "fuc97skyc61lgwk7oxkf6er00001ri95-11";
         DouyinAppClientDTO acDTO = new DouyinAppClientDTO();
         acDTO.setAppKey(appKey);
         acDTO.setAppSecret(appSecret);
