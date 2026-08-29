@@ -31,3 +31,6 @@ build/
 
 ### VS Code ###
 .vscode/
+
+# Local Shopee live-test credentials
+/src/test/resources/shopee-live.properties
