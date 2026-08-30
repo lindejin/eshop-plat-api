@@ -52,6 +52,12 @@
             <scope>test</scope>
         </dependency>
         <dependency>
+            <groupId>com.kingdee.k3cloud</groupId>
+            <artifactId>k3cloud-webapi-sdk</artifactId>
+            <version>8.2.0</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>fastjson</artifactId>
             <version>1.2.80</version>
