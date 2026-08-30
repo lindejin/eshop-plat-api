@@ -34,3 +34,6 @@ build/
 
 # Local Shopee live-test credentials
 /src/test/resources/shopee-live.properties
+
+# Local Kingdee Stage probe credentials
+/src/test/resources/kingdee-probe.properties

@@ -1,0 +1,13 @@
+# Copy this file to kingdee-probe.properties and fill in the Stage credentials.
+# kingdee-probe.properties is ignored by Git.
+
+spring.datasource.dashboard.url=jdbc:mysql://host:3306/dashboard
+spring.datasource.dashboard.username=
+spring.datasource.dashboard.password=
+
+X-KDApi-AcctID=
+X-KDApi-AppID=
+X-KDApi-AppSec=
+X-KDApi-UserName=
+X-KDApi-LCID=2052
+X-KDApi-ServerUrl=
